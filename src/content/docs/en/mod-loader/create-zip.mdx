@@ -1,0 +1,166 @@
+---
+title: How to create a Mod.zip file
+description: How to create a Mod.zip file
+sidebar:
+    order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+- Name your own mod.
+- Organize your mod with the mod's name.
+- Write the boot description file boot.json for your mod.
+- The format is as follows (sample src/insertTools/MyMod/boot.json):
+
+```json5
+{
+  "name": "MyMod",    // （必须存在） mod名字
+  "version": "1.0.0", // （必须存在） mod版本
+  "scriptFileList_inject_early": [  // （可选） 提前注入的 js 脚本 ， 会在当前mod加载后立即插入到dom中由浏览器按照script的标注执行方式执行
+    "MyMod_script_inject_early_example.js"
+  ],
+  "scriptFileList_earlyload": [     // （可选） 提前加载的 js 脚本 ， 会在当前mod加载后，inject_early脚本全部插入完成后，由modloader执行并等待异步指令返回，可以在这里读取到未修改的Passage的内容
+    "MyMod_script_earlyload_example.js"
+  ],
+  "scriptFileList_preload": [     // （可选） 预加载的 js 脚本文件 ， 会在引擎初始化前、mod的数据文件全部加载并合并到html的tw-storydata中后，由modloader执行并等待异步指令返回， 可以在此处调用modloader的API读取最新的Passage数据并动态修改覆盖Passage的内容
+    "MyMod_script_preload_example.js"     // 注意 scriptFileList_preload 文件有固定的格式，参见样例 src/insertTools/MyMod/MyMod_script_preload_example.js
+  ],
+  "styleFileList": [      // （必须存在） css 样式文件
+    "MyMod_style_1.css",
+    "MyMod_style_2.css"
+  ],
+  "scriptFileList": [     // （必须存在） js 脚本文件，这是游戏的一部分
+    "MyMod_script_1.js",
+    "MyMod_script_2.js"
+  ],
+  "tweeFileList": [       // （必须存在） twee 剧本文件
+    "MyMod_Passage1.twee",
+    "MyMod_Passage2.twee"
+  ],
+  "imgFileList": [        // （必须存在） 图片文件，尽可能不要用容易与文件中其他字符串混淆的文件路径，否则会意外破坏文件内容
+    "MyMod_Image/typeAImage/111.jpg",
+    "MyMod_Image/typeAImage/222.png",
+    "MyMod_Image/typeAImage/333.gif",
+    "MyMod_Image/typeBImage/111.jpg",
+    "MyMod_Image/typeBImage/222.png",
+    "MyMod_Image/typeBImage/333.gif"
+  ],
+  "additionFile": [     // （必须存在） 附加文件列表，额外打包到zip中的文件，此列表中的文件不会被加载，仅作为附加文件存在。
+                        //  请注意，这里的文件会以被当作文本文件以utf-8编码读取并保存
+    "readme.txt"      // 第一个以readme(不区分大小写)开头的文件会被作为mod的说明文件，会在mod管理器中显示
+  ],
+  "additionBinaryFile": [   // （可选） 附加二进制文件
+    "xxxx.zip"          // 如果有需要附加的二进制文件，编写在这里时 `packModZip.ts` 会将其以二进制格式保存
+  ],
+  "additionDir": [    // （可选） 附加文件夹
+    "xxxx"            // 如果有需要附加的文件夹，编写在这里时 `packModZip.ts` 会将其下所有文件以二进制格式保存
+  ],
+  "addonPlugin": [      // （可选） 依赖的插件列表，在此声明本mod依赖哪些插件，在此处声明后会调用对应的插件，不满足的依赖会在加载日志中产生警告
+    {           //  需要首先由提供插件的mod在EarlyLoad阶段注册插件，否则会找不到插件
+      "modName": "MyMod2",    // 插件来自哪个mod
+      "addonName": "addon1",   // 在那个mod中的插件名
+      "modVersion": "1.0.0",    // 插件所在mod的版本
+      "params": []              // （可选） 插件参数
+    }
+  ],
+  "dependenceInfo": [     // （可选） 依赖的mod列表，可以在此声明此mod依赖哪些前置mod，不满足的依赖会在加载日志中产生警告
+    {
+      "modName": "ModLoader DoL ImageLoaderHook",   // 依赖的mod名字
+      "version": "^2.0.0"                           // 依赖的mod版本
+      // 对于版本号声明格式的简单说明：
+      //    版本号是以逗号为分隔的数字，比较时从左往右逐个逗号进行比较。
+      //    通常是3个数字组成，第一个数字表示大版本，出现破坏性（不向前兼容的）变更时数值加一，第二个数字表示小版本，有新功能时数值加一，第三个数字表示修订版本，修复bug时数值加一。
+      //    以"^"开头表示从此大版本开始到下一个大版本结束的范围，这是推荐的默认依赖写法。
+      //    以"="或不带任何前缀表示只依赖指定的版本号。
+      //    以"> < >= <="这种不等式写法符合对应的数学语义。
+      //    
+    },
+    {
+      "modName": "ModLoaderGui",
+      "version": "^1.0.8"                          // 依赖的mod版本，使用(https://www.npmjs.com/package/semver)检查版本号，符合`语义化版本控制规范` (https://semver.org/lang/zh-CN/)
+    },
+    // 除了以上的方法可以声明对普通Mod的依赖，还有下面两个特殊的对 ModLoader 版本和 游戏版本 的依赖声明
+    {
+      "modName": "ModLoader",     // 部分Mod可能需要依赖从特定ModLoader版本开始才添加进ModLoader的API，例如大部分AddonMod，可以像这样声明对ModLoader版本的依赖
+      "version": "^1.6.0"
+    },
+    {
+      "modName": "GameVersion",   // 部分Mod只能在特定游戏版本下才能正常工作，可以像这样声明对游戏版本的依赖。特别注意这里以等号开头表示只匹配特定版本的游戏。此处比较时只会比较游戏的本体版本号，忽略第一个"-"开始的所有后缀。
+      "version": "=0.4.2.7"
+    }
+  ]
+}
+
+```
+
+Minimum boot.json file example:
+```json5
+{
+  "name": "EmptyMod",
+  "version": "1.0.0",
+  "styleFileList": [
+  ],
+  "scriptFileList": [
+  ],
+  "tweeFileList": [
+  ],
+  "imgFileList": [
+  ],
+  "additionFile": [
+    "readme.txt"
+  ]
+}
+```
+
+### Please note
+<Steps>
+1. Paths in the boot.json file are all relative paths, relative to the root directory of the zip file.
+2. The paths to image files are relative to the root directory of the zip file.
+3. File names within the same mod must not be duplicated, and it's advisable to avoid naming conflicts with the original game or other mods. Parts that overlap with the original game will overwrite game source files.
+4. Specifically, mods are loaded in the order they appear in the mod list. Mods further down the list will overwrite passage files with the same name from mods higher up the list. Files with the same name in CSS and JS between mods will have their contents concatenated, so they won't overwrite each other.
+5. During loading, mod overlaps are calculated first (overlapping passage paragraphs from different mods, concatenating same-named js/css), and the result is overlaid onto the original game (overwriting same-named passage/js/css of the original game).
+6. The current version of the mod loader works by directly inserting CSS/JS/Twee files into the HTML file in the original SC2 format.
+</Steps>
+
+---
+
+对于一个想要修改passage的mod，有这么4个可以修改的地方
+
+<Steps>
+1. `scriptFileList_inject_early`: This is inserted "immediately" after the current mod is loaded. It is executed by the browser following the standard of script tags. You can call the ModLoader's API here and read unmodified SC2 data, including the original passages.
+2. `scriptFileList_earlyload`: This is executed after the current mod is loaded and inject_early scripts are inserted. ModLoader executes this and waits for asynchronous instructions to return. You can call the ModLoader's API here, perform asynchronous operations, such as remote loading, and also read unmodified SC2 data, including the original passages.
+3. `tweeFileList`: This is the main part of the mod and is applied to the original SC2 data by ModLoader after it reads all mods. It goes through a process of combining all appended data from mods and then overlaying the combined result onto the original game's SC2 data. This is where you apply modifications to the original passages.
+4. `scriptFileList_preload`: This is executed by ModLoader after all mod files have been applied to the SC2 data. It waits for asynchronous operations to return. Here, you can perform asynchronous tasks similar to earlyload and read the SC2 data after mod application.
+</Steps>
+
+After these steps are completed, the SC2 engine starts, reads the SC2 data, and begins the game. The entire process takes place during the loading screen (the spinning wheel).
+
+---
+
+Additionally, since the SC2 engine itself triggers certain events, you can use jQuery to listen to these events to monitor changes in the game.
+
+```text
+// 游戏完全启动完毕
+:storyready
+// 一个新的 passage 上下文开始初始化
+:passageinit
+// 一个新的 passage 开始渲染
+:passagestart
+// 一个新的 passage 渲染结束
+:passagerender
+// 一个新的 passage 准备插入到HTML
+:passagedisplay
+// 一个新的 passage 已经处理结束
+:passageend
+```
+
+可以以下方法监听jQuery事件
+
+```javascript
+$(document).one(":storyready", () => {
+   // ....... 触发一次
+});
+$(document).on(":storyready", () => {
+   // ....... 触发多次
+});
+```

@@ -1,0 +1,16 @@
+---
+title: 简介
+description: 此项目是为 SugarCube-2 引擎编写的Mod加载器
+sidebar:
+  order: 1
+---
+
+此项目是为 SugarCube-2 引擎编写的Mod加载器，初衷是为 \[Degrees-of-Lewdity\] 设计一个支持Mod加载和管理的Mod框架，支持加载本地Mod、远程Mod、旁加载Mod（从IndexDB中加载）。
+
+本项目的目的是为了方便制作Mod以及加载Mod，同时也为了方便制作Mod的开发者，提供了一些API来方便读取和修改游戏数据。
+
+本项目由于需要在SC2引擎启动前注入Mod，故对SC2引擎做了部分修改，添加了ModLoader的引导点，以便在引擎启动前完成Mod的各项注入工作。
+
+修改过的 SC2 在此处：[sugarcube-2](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir) ，使用此ModLoader的游戏需要使用此版本的SC2引擎才能引导本ModLoader。
+
+具体有关如何打包一个带有ModLoader的游戏本体的方法，详见 [ModLoader开发及修改方法]() 。

@@ -1,0 +1,16 @@
+---
+title: Introduction
+description: This project is a ModLoader written for the SugarCube-2 engine.
+sidebar:
+    order: 1
+---
+
+This project is a ModLoader written for the SugarCube-2 engine. The original intention was to design a mod framework that supports mod loading and management for \[Degrees-of-Lewdity\], which includes support for loading local mods, remote mods, and side-loaded mods (load from IndexDB).
+
+The purpose of this project is to facilitate the creation and loading of mods, as well as to provide convenience for mod developers. It includes some APIs to easily access and modify game data.
+
+This project has made some modifications to the SC2 engine because it needs to inject mods before the SC2 engine starts. It has added entry points for the ModLoader to ensure that all mod injection tasks are completed before the engine starts.
+
+The modified SC2 engine can be found here: [sugarcube-2](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir). To use this ModLoader for games, you need to use this version of the SC2 engine in order to properly load the ModLoader.
+
+For specific instructions on how to package a game with the ModLoader, please refer to the details provided in the section titled "ModLoader Development and Modification Methods" under ModLoader Development and [Modification Methods]().
