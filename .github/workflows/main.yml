@@ -32,4 +32,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.ACCOUNT_ID }}
-          command: pages deploy dist --project-name=modloader --branch master
+          command: pages deploy dist --project-name=modloader
