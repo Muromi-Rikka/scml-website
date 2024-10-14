@@ -1,16 +1,16 @@
 ---
-title: How to create a Mod.zip file
-description: How to create a Mod.zip file
+title: 制作 Mod.zip
+description: 如何制作 Mod.zip 文件
 sidebar:
-    order: 3
+  order: 3
 ---
 
 import { Steps } from '@astrojs/starlight/components';
 
-- Name your own mod.
-- Organize your mod with the mod's name.
-- Write the boot description file boot.json for your mod.
-- The format is as follows (sample src/insertTools/MyMod/boot.json):
+- 给自己的mod命名
+- 以mod名字组织自己的mod
+- 编写mod的引导描述文件 boot.json 文件
+- 格式如下（样例 src/insertTools/MyMod/boot.json）：
 
 ```json5
 {
@@ -93,7 +93,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 ```
 
-Minimum boot.json file example:
+最小 boot.json 文件样例：
 ```json5
 {
   "name": "EmptyMod",
@@ -112,14 +112,14 @@ Minimum boot.json file example:
 }
 ```
 
-### Please note
+### 注意事项
 <Steps>
-1. Paths in the boot.json file are all relative paths, relative to the root directory of the zip file.
-2. The paths to image files are relative to the root directory of the zip file.
-3. File names within the same mod must not be duplicated, and it's advisable to avoid naming conflicts with the original game or other mods. Parts that overlap with the original game will overwrite game source files.
-4. Specifically, mods are loaded in the order they appear in the mod list. Mods further down the list will overwrite passage files with the same name from mods higher up the list. Files with the same name in CSS and JS between mods will have their contents concatenated, so they won't overwrite each other.
-5. During loading, mod overlaps are calculated first (overlapping passage paragraphs from different mods, concatenating same-named js/css), and the result is overlaid onto the original game (overwriting same-named passage/js/css of the original game).
-6. The current version of the mod loader works by directly inserting CSS/JS/Twee files into the HTML file in the original SC2 format.
+1. boot.json 文件内的路径都是相对路径，相对于zip文件根目录的路径。
+2. 图片文件的路径是相对于zip文件根目录的路径。
+3. 同一个mod内的文件名不能重复，也尽量不要和原游戏或其他mod重复。与原游戏重复的部分会覆盖游戏源文件。
+4. 具体的来说，mod会按照mod列表中的顺序加载，靠后的mod会覆盖靠前的mod的passage同名文件，mod之间的同名css/js文件会直接将内容concat到一起，故不会覆盖css/js等同名文件。
+5. 加载时首先计算mod之间的覆盖，（互相覆盖同名passage段落，将同名js/css连接在一起），然后将结果覆盖到原游戏中（覆盖原版游戏的同名passage/js/css）
+6. 当前版本的mod加载器的工作方式是直接将css/js/twee文件按照原版sc2的格式插入到html文件中。
 </Steps>
 
 ---
@@ -127,17 +127,17 @@ Minimum boot.json file example:
 对于一个想要修改passage的mod，有这么4个可以修改的地方
 
 <Steps>
-1. `scriptFileList_inject_early`: This is inserted "immediately" after the current mod is loaded. It is executed by the browser following the standard of script tags. You can call the ModLoader's API here and read unmodified SC2 data, including the original passages.
-2. `scriptFileList_earlyload`: This is executed after the current mod is loaded and inject_early scripts are inserted. ModLoader executes this and waits for asynchronous instructions to return. You can call the ModLoader's API here, perform asynchronous operations, such as remote loading, and also read unmodified SC2 data, including the original passages.
-3. `tweeFileList`: This is the main part of the mod and is applied to the original SC2 data by ModLoader after it reads all mods. It goes through a process of combining all appended data from mods and then overlaying the combined result onto the original game's SC2 data. This is where you apply modifications to the original passages.
-4. `scriptFileList_preload`: This is executed by ModLoader after all mod files have been applied to the SC2 data. It waits for asynchronous operations to return. Here, you can perform asynchronous tasks similar to earlyload and read the SC2 data after mod application.
+1. `scriptFileList_inject_early` ， 这个会在当前mod读取之后，“立即”插入到script脚本由浏览器按照script标签的标准执行，这里可以调用ModLoader的API，可以读取未经修改的SC2 data （包括原始的passage）
+2. `scriptFileList_earlyload` ，这个会在当前mod读取之后，inject_early 脚本插入完之后，由modloader执行并等待异步指令返回，这里可以调用ModLoader的API，可以执行异步操作，干一些远程加载之类的活，也可以在这里读取未经修改的SC2 data（包括原始的passage）
+3. `tweeFileList` ，这个是mod的主体，会在modloader读取所有mod之后，做【1 合并所有mod追加的数据，2 将合并结果覆盖到原始游戏】的过程应用修改到原始游戏SC2 data上
+4. `scriptFileList_preload` ， 这个会在mod文件全部应用到SC2 data之后由modloader执行并等待异步操作返回，这里可以像earlyload一样做异步工作，也可以读取到mod应用之后的SC2 data
 </Steps>
 
-After these steps are completed, the SC2 engine starts, reads the SC2 data, and begins the game. The entire process takes place during the loading screen (the spinning wheel).
+上面的步骤结束之后SC2引擎才会开始启动，读取SC2 data，然后开始游戏，整个步骤都是在加载屏幕（那个转圈圈）完成的。
 
 ---
 
-Additionally, since the SC2 engine itself triggers certain events, you can use jQuery to listen to these events to monitor changes in the game.
+另，由于SC2引擎本身会触发以下的一些事件，故可以使用jQuery监听这些事件来监测游戏的变化
 
 ```text
 // 游戏完全启动完毕
