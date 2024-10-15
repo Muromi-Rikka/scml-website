@@ -1,4 +1,6 @@
+import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
+
 import starlight from '@astrojs/starlight'
 
 import tailwind from '@astrojs/tailwind'
@@ -9,11 +11,11 @@ import { defineConfig } from 'astro/config'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://modloader.pages.dev',
-  integrations: [starlight(
-    {
+  integrations: [
+    starlight({
       title: 'SugarCube 2 ModLoader',
       social: {
-        github: 'https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader',
+        github: 'https://github.com/Muromi-Rikka/scml-website',
       },
       defaultLocale: 'zh-cn',
       locales: {
@@ -39,6 +41,9 @@ export default defineConfig({
           autogenerate: { directory: 'cot' },
         },
       ],
-    },
-  ), tailwind(), sitemap()],
+    }),
+    tailwind(),
+    sitemap(),
+    react(),
+  ],
 })
