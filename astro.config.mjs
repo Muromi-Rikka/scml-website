@@ -1,10 +1,10 @@
+import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
+
 import tailwind from '@astrojs/tailwind'
 
 // @ts-check
 import { defineConfig } from 'astro/config'
-
-import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,6 +29,14 @@ export default defineConfig({
         {
           label: 'ModLoader',
           autogenerate: { directory: 'mod-loader' },
+        },
+        {
+          label: 'Degrees of Lewdity',
+          autogenerate: { directory: 'dol' },
+        },
+        {
+          label: 'Course of Temptation',
+          autogenerate: { directory: 'cot' },
         },
       ],
     },
