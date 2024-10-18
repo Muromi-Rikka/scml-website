@@ -37,6 +37,10 @@ export default defineConfig({
           autogenerate: { directory: 'dol' },
         },
         {
+          label: 'DOL-Mod-Created-Helper',
+          autogenerate: { directory: 'dol-mch' },
+        },
+        {
           label: 'Course of Temptation',
           autogenerate: { directory: 'cot' },
         },
