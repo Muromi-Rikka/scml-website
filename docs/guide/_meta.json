@@ -1,6 +1,1 @@
-[
-  "index",
-  "architecture",
-  "loading-system",
-  "bundled-mods"
-]
+["index","architecture","loading-system","dependency-checking","bundled-mods"]

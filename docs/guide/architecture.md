@@ -1,5 +1,33 @@
 # 系统架构
 
+## 启动序列
+
+ModLoader 将原本的 `jQuery -> SC2` 启动顺序变为 `jQuery -> ModLoader -> SC2`：
+
+```mermaid
+flowchart LR
+  jQuery[JQuery] --> ModLoader[ModLoader]
+  ModLoader --> SC2[SugarCube2]
+```
+
+详细时序：
+
+```mermaid
+sequenceDiagram
+  participant Browser
+  participant jQuery
+  participant ModLoader
+  participant SC2
+  Browser->>jQuery: DOM ready
+  jQuery->>ModLoader: modSC2DataManager.startInit
+  ModLoader->>ModLoader: 加载 Mod、执行 earlyload
+  ModLoader->>ModLoader: 合并 tw-storydata
+  ModLoader->>ModLoader: jsPreloader.startLoad
+  ModLoader->>ModLoader: 执行 preload
+  ModLoader->>SC2: mainStart
+  SC2->>Browser: 游戏运行
+```
+
 ## ModLoader 如何接入 SugarCube2
 
 SugarCube2 是一个**全同步**的渲染引擎，它以完全同步的方式将游戏脚本（twee、JS、CSS）动态翻译为 HTML 并显示。这些游戏脚本以文本形式内嵌在编译后的网页 HTML 的 `tw-storydata` 节点中。
@@ -38,6 +66,56 @@ jQuery -> ModLoader -> SC2
 ```
 
 整个 Mod 加载过程（包括获取 zip 文件、执行早期脚本、合并 `tw-storydata`）都在 SugarCube2 读取任何游戏数据之前完成。
+
+## 核心组件关系
+
+```mermaid
+flowchart TB
+  subgraph core [核心协调]
+    SC2DataManager[SC2DataManager]
+  end
+  subgraph loaders [加载与解析]
+    ModLoader[ModLoader]
+    ModZipReader[ModZipReader]
+    JsPreloader[JsPreloader]
+  end
+  subgraph plugins [插件系统]
+    AddonPluginManager[AddonPluginManager]
+    ModLoadController[ModLoadController]
+    DependenceChecker[DependenceChecker]
+  end
+  SC2DataManager --> ModLoader
+  SC2DataManager --> ModZipReader
+  SC2DataManager --> JsPreloader
+  SC2DataManager --> AddonPluginManager
+  ModLoader --> ModZipReader
+  ModLoader --> AddonPluginManager
+  ModLoader --> ModLoadController
+  ModLoader --> DependenceChecker
+```
+
+## 四阶段脚本加载与数据可用性
+
+各脚本阶段可访问的数据类型：
+
+```mermaid
+flowchart LR
+  subgraph stages [脚本阶段]
+    inject_early["inject_early<br/>仅同步"]
+    earlyload["earlyload<br/>支持异步"]
+    preload["preload<br/>支持异步"]
+    main["scriptFileList<br/>游戏脚本"]
+  end
+  subgraph data [可访问数据]
+    raw["原始 tw-storydata"]
+    merged["合并后 tw-storydata"]
+    runtime["运行时游戏数据"]
+  end
+  inject_early --> raw
+  earlyload --> raw
+  preload --> merged
+  main --> runtime
+```
 
 ## 全局对象
 
@@ -82,6 +160,16 @@ ModLoader 向 Mod 脚本暴露三个全局对象：
 ### DependenceChecker
 
 在 Mod 加载时执行依赖检查，验证 `boot.json` 中 `dependenceInfo` 声明的版本约束是否满足。
+
+### SC2DataInfo 与 SC2DataInfoCache
+
+ModLoader 在启动时通过 `initSC2DataInfoCache()` 保存原始未修改的 `tw-storydata` 节点内容到 `SC2DataInfoCache`。每个 `SC2DataInfo` 实例封装了游戏数据的只读访问接口。
+
+**作用**：
+
+- 在 earlyload 和 preload 阶段，Mod 脚本可以读取原始或合并后的 Passage、CSS、JS 数据
+- earlyload 阶段访问的是原始数据，preload 阶段访问的是合并后的最终数据
+- 确保 Mod 在不同阶段能够正确获取所需数据，支持 TweeReplacer、ReplacePatch 等 Addon 的替换逻辑
 
 ## 整体结构
 

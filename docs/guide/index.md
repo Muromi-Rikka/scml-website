@@ -37,7 +37,7 @@ Mod 中的 `tweeFileList`、`styleFileList` 和 `scriptFileList` 内容会在 Su
 
 ### 依赖检查
 
-Mod 可在 `boot.json` 的 `dependenceInfo` 中声明对以下目标的版本约束：
+Mod 可在 `boot.json` 的 `dependenceInfo` 中声明对以下目标的版本约束，详见[依赖检查](./dependency-checking)：
 - 其他 Mod（普通依赖）
 - ModLoader 自身版本
 - 游戏版本（如 DoL 的版本号）

@@ -72,6 +72,8 @@ MyMod/
 
 ## 下一步
 
+- [示例 Mod 教程](./example-walkthrough) — 从零创建一个功能 Mod 的完整步骤
 - [boot.json 完整参考](./boot-json) — 了解所有可用字段
 - [脚本加载阶段](./script-stages) — 了解四个脚本执行阶段的区别
 - [打包方法](./packaging) — 了解手动和自动打包方式
+- [ModPack 格式](./modpack-format) — 了解 .modpack 二进制格式（可选）

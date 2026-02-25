@@ -1,6 +1,1 @@
-[
-  "index",
-  "build-system",
-  "sc2-engine",
-  "mod-encryption"
-]
+["index","build-system","insert-tools","ci-cd","sc2-engine","mod-encryption"]

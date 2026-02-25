@@ -29,6 +29,10 @@
 
 **7.** 使用 Mod 管理器加载 Mod。
 
+:::info
+除 `.mod.zip` 外，ModLoader 还支持 `.modpack` 二进制格式，详见 [ModPack 格式](./modpack-format)。
+:::
+
 :::danger 常见错误
 - `boot.json` 不在 zip 根目录（被包在了一层文件夹里）
 - `boot.json` 中的路径与 zip 内实际路径不匹配

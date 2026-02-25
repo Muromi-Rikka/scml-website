@@ -32,3 +32,7 @@ features:
     details: 连续三次加载失败后自动进入安全模式，禁用所有 Mod 以便恢复，防止故障 Mod 导致游戏无法启动。
     icon: 🛡️
 ---
+## 快速链接
+
+- [示例 Mod 教程](/creating-mods/example-walkthrough) — 从零创建一个功能 Mod 的完整步骤
+- [ModPack 格式](/creating-mods/modpack-format) — 了解 .modpack 二进制格式

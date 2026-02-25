@@ -30,7 +30,7 @@ ModLoader 从四个来源加载 Mod，按顺序为：
 
 ### 第一阶段：读取与注入
 
-**1.** 按照 local → remote → localStorage → IndexDB 的顺序加载 Mod。同时调用 `DependenceChecker.checkFor()` 执行依赖检查。
+**1.** 按照 local → remote → localStorage → IndexDB 的顺序加载 Mod。同时调用 `DependenceChecker.checkFor()` 执行依赖检查（参见[依赖检查](./dependency-checking)）。
 
 **2.** 使用 `ModZipReader` 读取 Mod 中的 `boot.json` 文件，解析 Mod 的结构声明。
 
