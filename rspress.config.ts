@@ -2,14 +2,33 @@ import * as path from "node:path";
 import { defineConfig } from "@rspress/core";
 import { pluginLlms } from "@rspress/plugin-llms";
 import { pluginSitemap } from "@rspress/plugin-sitemap";
+import pluginMermaid from "./plugin-mermaid/index";
 export default defineConfig({
   root: path.join(__dirname, "docs"),
   lang: "zh",
   locales: [
-    { lang: "zh", label: "简体中文", title: "ModLoader 文档", description: "SugarCube-2 Mod 加载框架文档" },
-    { lang: "en", label: "English", title: "ModLoader Docs", description: "SugarCube-2 Mod Loading Framework Documentation" },
+    {
+      lang: "zh",
+      label: "简体中文",
+      title: "ModLoader 文档",
+      description: "SugarCube-2 Mod 加载框架文档",
+    },
+    {
+      lang: "en",
+      label: "English",
+      title: "ModLoader Docs",
+      description: "SugarCube-2 Mod Loading Framework Documentation",
+    },
   ],
-  plugins: [pluginLlms(), pluginSitemap({ siteUrl: "https://modloader.pages.dev" })],
+  plugins: [
+    pluginLlms(),
+    pluginSitemap({ siteUrl: "https://modloader.pages.dev" }),
+    pluginMermaid({
+      themeLight: "solarized",
+      themeDark: "dracula",
+      transparent: true,
+    }),
+  ],
   title: "ModLoader 文档",
   icon: "/logo.png",
   logo: {
