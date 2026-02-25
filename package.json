@@ -1,0 +1,27 @@
+{
+  "name": "scml-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rspress build",
+    "dev": "rspress dev",
+    "preview": "rspress preview",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@rspress/core": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
+    "oxfmt": "^0.35.0",
+    "oxlint": "^1.50.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
