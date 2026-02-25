@@ -4,6 +4,8 @@ import { pluginLlms } from "@rspress/plugin-llms";
 import { pluginSitemap } from "@rspress/plugin-sitemap";
 import pluginMermaid from "./plugin-mermaid/index";
 import fileTree from "rspress-plugin-file-tree";
+import readingTime from "rspress-plugin-reading-time";
+
 export default defineConfig({
   root: path.join(__dirname, "docs"),
   lang: "zh",
@@ -30,6 +32,7 @@ export default defineConfig({
       transparent: true,
     }),
     fileTree(),
+    readingTime(),
   ],
   title: "ModLoader 文档",
   icon: "/logo.png",
