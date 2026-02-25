@@ -19,6 +19,7 @@
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
         "rspress-plugin-devkit": "^1.0.0",
+        "rspress-plugin-file-tree": "^1.0.4",
       },
     },
   },
@@ -566,6 +567,8 @@
     "remark-stringify": ["remark-stringify@11.0.0", "", { "dependencies": { "@types/mdast": "^4.0.0", "mdast-util-to-markdown": "^2.0.0", "unified": "^11.0.0" } }, "sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw=="],
 
     "rspress-plugin-devkit": ["rspress-plugin-devkit@1.0.0", "", { "dependencies": { "@types/estree-jsx": "^1.0.5", "@types/hast": "^3.0.4", "@types/mdast": "^4.0.4", "@types/node": "^25.0.3", "clsx": "^2.1.1", "lodash-es": "^4.17.22", "mdast-util-from-markdown": "^2.0.2", "mdast-util-mdx-jsx": "^3.2.0", "mdast-util-mdxjs-esm": "^2.0.1", "mdast-util-to-markdown": "^2.1.2", "mdast-util-to-string": "^4.0.0", "remark-mdc": "^3.10.0", "ts-morph": "^27.0.2", "unified": "^11.0.5", "unist-util-visit": "^5.0.0", "unist-util-visit-parents": "^6.0.2", "util-ts-types": "^1.0.0", "vfile": "^6.0.3", "vfile-reporter": "^8.1.1" }, "peerDependencies": { "@rspress/core": "^2.0.0-rc.4 || ^2.0.0" } }, "sha512-Xe+yxu9X9a+SBH8CSPZJSiqm0OtaIvx9FCXI1MQMpfmaK75/F+3Rvbz/zJw7nFxxpo5HsePb86ScGOYNIKNLFg=="],
+
+    "rspress-plugin-file-tree": ["rspress-plugin-file-tree@1.0.4", "", { "dependencies": { "rspress-plugin-devkit": "^1.0.0" }, "peerDependencies": { "@rspress/core": "^2.0.0-rc.4 || ^2.0.0" } }, "sha512-VItnE51w/EDOdvliEnLKBNz2VVmOFx1zdZr8HfjII7Tu8/GQg+BtShjZR0Z8oYtP6zyxheY2H81pe2J4Wdwh0g=="],
 
     "scheduler": ["scheduler@0.27.0", "", {}, "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="],
 

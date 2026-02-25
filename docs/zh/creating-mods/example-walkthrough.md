@@ -13,17 +13,17 @@
 
 ## 步骤一：创建项目结构
 
-创建以下目录结构：
+创建以下目录结构（`HelloMod_Image` 为可选的图片资源目录）：
 
-```
-HelloMod/
+```tree
+HelloMod
 ├── boot.json
 ├── readme.txt
 ├── HelloMod_style.css
 ├── HelloMod_script.js
 ├── HelloMod_passage.twee
-└── HelloMod_Image/          # 可选：图片资源
-    └── character/
+└── HelloMod_Image
+    └── character
         └── avatar.png
 ```
 

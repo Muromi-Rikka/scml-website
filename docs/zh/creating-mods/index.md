@@ -25,10 +25,10 @@
 
 以下是一个最简单的 Mod 结构：
 
-```
-MyMod/
-  boot.json
-  readme.txt
+```tree
+MyMod
+├── boot.json
+└── readme.txt
 ```
 
 对应的最小 `boot.json`：
@@ -49,16 +49,16 @@ MyMod/
 
 ## 典型 Mod 结构
 
-```
-MyMod/
-  boot.json
-  readme.txt
-  MyMod_style.css
-  MyMod_script.js
-  MyMod_passage.twee
-  MyMod_Image/
-    character/
-      avatar.png
+```tree
+MyMod
+├── boot.json
+├── readme.txt
+├── MyMod_style.css
+├── MyMod_script.js
+├── MyMod_passage.twee
+└── MyMod_Image
+    └── character
+        └── avatar.png
 ```
 
 ## 注意事项

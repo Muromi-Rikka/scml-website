@@ -13,17 +13,17 @@ Create a Mod named `HelloMod` that:
 
 ## Step 1: Project Structure
 
-Create this layout:
+Create this layout (`HelloMod_Image` is optional, for images):
 
-```
-HelloMod/
+```tree
+HelloMod
 ├── boot.json
 ├── readme.txt
 ├── HelloMod_style.css
 ├── HelloMod_script.js
 ├── HelloMod_passage.twee
-└── HelloMod_Image/          # Optional: images
-    └── character/
+└── HelloMod_Image
+    └── character
         └── avatar.png
 ```
 

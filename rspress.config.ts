@@ -3,6 +3,7 @@ import { defineConfig } from "@rspress/core";
 import { pluginLlms } from "@rspress/plugin-llms";
 import { pluginSitemap } from "@rspress/plugin-sitemap";
 import pluginMermaid from "./plugin-mermaid/index";
+import fileTree from "rspress-plugin-file-tree";
 export default defineConfig({
   root: path.join(__dirname, "docs"),
   lang: "zh",
@@ -28,6 +29,7 @@ export default defineConfig({
       themeDark: "dracula",
       transparent: true,
     }),
+    fileTree(),
   ],
   title: "ModLoader 文档",
   icon: "/logo.png",

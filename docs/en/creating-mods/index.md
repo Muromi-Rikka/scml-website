@@ -25,10 +25,10 @@ Each Mod is distributed as a `.mod.zip` archive (or `.modpack` binary format) co
 
 A minimal Mod structure:
 
-```
-MyMod/
-  boot.json
-  readme.txt
+```tree
+MyMod
+├── boot.json
+└── readme.txt
 ```
 
 Minimal `boot.json`:
@@ -49,16 +49,16 @@ Minimal `boot.json`:
 
 ## Typical Mod Structure
 
-```
-MyMod/
-  boot.json
-  readme.txt
-  MyMod_style.css
-  MyMod_script.js
-  MyMod_passage.twee
-  MyMod_Image/
-    character/
-      avatar.png
+```tree
+MyMod
+├── boot.json
+├── readme.txt
+├── MyMod_style.css
+├── MyMod_script.js
+├── MyMod_passage.twee
+└── MyMod_Image
+    └── character
+        └── avatar.png
 ```
 
 ## Notes
