@@ -4,6 +4,11 @@ import { pluginLlms } from "@rspress/plugin-llms";
 import { pluginSitemap } from "@rspress/plugin-sitemap";
 export default defineConfig({
   root: path.join(__dirname, "docs"),
+  lang: "zh",
+  locales: [
+    { lang: "zh", label: "简体中文", title: "ModLoader 文档", description: "SugarCube-2 Mod 加载框架文档" },
+    { lang: "en", label: "English", title: "ModLoader Docs", description: "SugarCube-2 Mod Loading Framework Documentation" },
+  ],
   plugins: [pluginLlms(), pluginSitemap({ siteUrl: "https://modloader.pages.dev" })],
   title: "ModLoader 文档",
   icon: "/logo.png",
@@ -12,6 +17,10 @@ export default defineConfig({
     dark: "/logo.png",
   },
   themeConfig: {
+    locales: [
+      { lang: "zh", outlineTitle: "大纲" },
+      { lang: "en", outlineTitle: "On this page" },
+    ],
     llmsUI: true,
     lastUpdated: true,
     enableContentAnimation: true,
