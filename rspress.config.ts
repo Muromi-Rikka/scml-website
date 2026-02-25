@@ -4,10 +4,10 @@ import { defineConfig } from "@rspress/core";
 export default defineConfig({
   root: path.join(__dirname, "docs"),
   title: "ModLoader 文档",
-  icon: "/rspress-icon.png",
+  icon: "/logo.png",
   logo: {
-    light: "/rspress-light-logo.png",
-    dark: "/rspress-dark-logo.png",
+    light: "/logo.png",
+    dark: "/logo.png",
   },
   themeConfig: {
     socialLinks: [
