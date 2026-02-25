@@ -1,1 +1,6 @@
-["index"]
+[
+  "index",
+  "architecture",
+  "loading-system",
+  "bundled-mods"
+]
