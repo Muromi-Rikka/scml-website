@@ -27,4 +27,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.ACCOUNT_ID }}
-          command: pages deploy doc_build --project-name=scml --branch main
+          command: pages deploy doc_build --project-name=modloader --branch main
