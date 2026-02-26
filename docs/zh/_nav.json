@@ -1,7 +1,7 @@
 [
-  {"text":"指南","link":"/guide/","activeMatch":"/guide/"},
-  {"text":"API 参考","link":"/api/","activeMatch":"/api/"},
-  {"text":"创建 Mod","link":"/creating-mods/","activeMatch":"/creating-mods/"},
-  {"text":"高级","link":"/advanced/","activeMatch":"/advanced/"},
-  {"text":"maplebirch 框架","link":"/maplebirch/","activeMatch":"/maplebirch/"}
+  { "text": "指南", "link": "/ml/guide/", "activeMatch": "/ml/guide/" },
+  { "text": "API 参考", "link": "/ml/api/", "activeMatch": "/ml/api/" },
+  { "text": "创建 Mod", "link": "/ml/creating-mods/", "activeMatch": "/ml/creating-mods/" },
+  { "text": "高级", "link": "/ml/advanced/", "activeMatch": "/ml/advanced/" },
+  { "text": "MapleBirch 框架", "link": "/maplebirch/", "activeMatch": "/maplebirch/" }
 ]

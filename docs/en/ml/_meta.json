@@ -1,7 +1,6 @@
 [
   { "type": "dir", "name": "guide", "label": "Guide" },
   { "type": "dir", "name": "api", "label": "API" },
-  { "type": "dir", "name": "advanced", "label": "Advanced" },
   { "type": "dir", "name": "creating-mods", "label": "Creating Mods" },
-  { "type": "dir", "name": "maplebirch", "label": "maplebirch Framework" }
+  { "type": "dir", "name": "advanced", "label": "Advanced" }
 ]
