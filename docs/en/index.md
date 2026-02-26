@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Getting Started
-      link: /guide/
+      link: /en/ml/guide/
     - theme: alt
       text: GitHub
       link: https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader
@@ -32,7 +32,8 @@ features:
     details: After three consecutive load failures, safe mode is entered automatically, disabling all Mods for recovery and preventing broken Mods from blocking game startup.
     icon: 🛡️
 ---
+
 ## Quick Links
 
-- [Example Mod Tutorial](/creating-mods/example-walkthrough) — Complete steps to build a functional Mod from scratch
-- [ModPack Format](/creating-mods/modpack-format) — Understanding the .modpack binary format
+- [Example Mod Tutorial](/en/ml/creating-mods/example-walkthrough) — Complete steps to build a functional Mod from scratch
+- [ModPack Format](/en/ml/creating-mods/modpack-format) — Understanding the .modpack binary format

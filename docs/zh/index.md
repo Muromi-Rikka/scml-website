@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /guide/
+      link: /ml/guide/
     - theme: alt
       text: GitHub
       link: https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader
@@ -32,7 +32,8 @@ features:
     details: 连续三次加载失败后自动进入安全模式，禁用所有 Mod 以便恢复，防止故障 Mod 导致游戏无法启动。
     icon: 🛡️
 ---
+
 ## 快速链接
 
-- [示例 Mod 教程](/creating-mods/example-walkthrough) — 从零创建一个功能 Mod 的完整步骤
-- [ModPack 格式](/creating-mods/modpack-format) — 了解 .modpack 二进制格式
+- [示例 Mod 教程](/ml/creating-mods/example-walkthrough) — 从零创建一个功能 Mod 的完整步骤
+- [ModPack 格式](/ml/creating-mods/modpack-format) — 了解 .modpack 二进制格式
