@@ -2,5 +2,6 @@
   {"text":"Guide","link":"/guide/","activeMatch":"/guide/"},
   {"text":"API","link":"/api/","activeMatch":"/api/"},
   {"text":"Creating Mods","link":"/creating-mods/","activeMatch":"/creating-mods/"},
-  {"text":"Advanced","link":"/advanced/","activeMatch":"/advanced/"}
+  {"text":"Advanced","link":"/advanced/","activeMatch":"/advanced/"},
+  {"text":"maplebirch Framework","link":"/maplebirch/","activeMatch":"/maplebirch/"}
 ]

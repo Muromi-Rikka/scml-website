@@ -2,5 +2,6 @@
   {"text":"指南","link":"/guide/","activeMatch":"/guide/"},
   {"text":"API 参考","link":"/api/","activeMatch":"/api/"},
   {"text":"创建 Mod","link":"/creating-mods/","activeMatch":"/creating-mods/"},
-  {"text":"高级","link":"/advanced/","activeMatch":"/advanced/"}
+  {"text":"高级","link":"/advanced/","activeMatch":"/advanced/"},
+  {"text":"maplebirch 框架","link":"/maplebirch/","activeMatch":"/maplebirch/"}
 ]
