@@ -7,27 +7,30 @@
 `MaplebirchCore` 是框架的中心对象，作为 `window.maplebirch` 的单例暴露。它在构造时实例化 6 个内置服务，并通过 `ModuleSystem` 注册 8 个功能模块。
 
 ```mermaid
-graph TD
-  subgraph services [内置服务]
-    Logger
-    EventEmitter
-    IndexedDBService
-    LanguageManager
-    ModuleSystem
-    GUIControl
+flowchart TB
+  Core["MaplebirchCore"]
+  subgraph components [核心组件]
+    direction TB
+    subgraph services [内置服务]
+      Logger
+      EventEmitter
+      IndexedDBService
+      LanguageManager
+      ModuleSystem
+      GUIControl
+    end
+    subgraph modules [功能模块]
+      AddonPlugin
+      DynamicManager
+      ToolCollection
+      AudioManager
+      Variables
+      Character
+      NPCManager
+      CombatManager
+    end
   end
-  subgraph modules [功能模块]
-    AddonPlugin
-    DynamicManager
-    ToolCollection
-    AudioManager
-    Variables
-    Character
-    NPCManager
-    CombatManager
-  end
-  Core["MaplebirchCore"] --> services
-  Core --> modules
+  Core --> components
 ```
 
 ### 服务初始化顺序

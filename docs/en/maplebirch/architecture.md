@@ -7,27 +7,30 @@ This document introduces the internal architecture of maplebirchFramework, inclu
 `MaplebirchCore` is the central object of the framework, exposed as a singleton via `window.maplebirch`. It instantiates 6 built-in services during construction and registers 8 functional modules through `ModuleSystem`.
 
 ```mermaid
-graph TD
-  subgraph services [Built-in Services]
-    Logger
-    EventEmitter
-    IndexedDBService
-    LanguageManager
-    ModuleSystem
-    GUIControl
+flowchart TB
+  Core["MaplebirchCore"]
+  subgraph components [Core Components]
+    direction TB
+    subgraph services [Built-in Services]
+      Logger
+      EventEmitter
+      IndexedDBService
+      LanguageManager
+      ModuleSystem
+      GUIControl
+    end
+    subgraph modules [Functional Modules]
+      AddonPlugin
+      DynamicManager
+      ToolCollection
+      AudioManager
+      Variables
+      Character
+      NPCManager
+      CombatManager
+    end
   end
-  subgraph modules [Functional Modules]
-    AddonPlugin
-    DynamicManager
-    ToolCollection
-    AudioManager
-    Variables
-    Character
-    NPCManager
-    CombatManager
-  end
-  Core["MaplebirchCore"] --> services
-  Core --> modules
+  Core --> components
 ```
 
 ### Service Initialization Order
