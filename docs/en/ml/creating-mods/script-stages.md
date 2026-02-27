@@ -116,3 +116,32 @@ All of this happens during the loading screen; SC2 starts the game afterward:
 4. [preload]       → Async run, read merged data
 5. [SC2 start]     → scriptFileList runs with game
 ```
+
+## After SC2 Starts
+
+All script stages above complete during the loading screen. After SC2 starts, the engine emits jQuery events that Mods can listen for to react to game state. These events include:
+
+| Event             | When Fired                            |
+| ----------------- | ------------------------------------- |
+| `:storyready`     | Game fully started                    |
+| `:passageinit`    | New Passage context initializing      |
+| `:passagestart`   | New Passage starting to render        |
+| `:passagerender`  | New Passage render complete           |
+| `:passagedisplay` | New Passage ready to insert into HTML |
+| `:passageend`     | New Passage handling complete         |
+
+See the [API Overview](../api/index) for full details and more examples.
+
+### Listening Example
+
+```js
+// One-shot
+$(document).one(":storyready", () => {
+  // Post-game-start logic
+});
+
+// Every passage
+$(document).on(":passageend", () => {
+  // Logic after each Passage render
+});
+```

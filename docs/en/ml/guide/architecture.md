@@ -213,3 +213,10 @@ ModLoader requires a modified SC2 engine ([repository](https://github.com/Lyoko-
 1. **Startup change**: Insert ModLoader’s async wait inside the jQuery closure
 2. **Wikifier changes**: Add `_lastPassageQ` and related data to track compilation; see `macrolib.js`, `parserlib.js`, `wikifier.js` (search for `passageObj`)
 3. **Image tag interception**: Intercept `img` and `svg` creation so all images can be loaded from memory (no server)
+
+## Further Reading
+
+For a more detailed technical breakdown of the 21-step loading flow and SC2 modification points:
+
+- [ModLoaderAndModLoadingProcess - EN](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader/blob/master/ModLoaderAndModLoadingProcess%20-%20EN%20-%20GPT.md)
+- [ModLoaderAndModLoadingProcess - CN](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader/blob/master/ModLoaderAndModLoadingProcess%20-%20CN.md)

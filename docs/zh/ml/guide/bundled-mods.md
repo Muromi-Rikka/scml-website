@@ -1,6 +1,6 @@
 # 内置 Mod 与子模块
 
-ModLoader 将与核心功能无关的功能分离为独立的 Mod，并将常用 Mod 以预置的方式提供。这些 Mod 在 `modList.json` 中定义，作为 Git 子模块位于 `mod/` 目录下，通过 `insert2html` 打包时作为 **local** 类型嵌入到游戏 HTML 中。
+ModLoader 将与核心功能无关的功能分离为独立的 Mod，并将常用 Mod 以预置的方式提供。这些 Mod 在 `modList.json` 中定义，作为 Git 子模块位于 `mod/` 目录下，通过 `insert2html` 打包时作为 **local** 类型嵌入到游戏 HTML 中。本列表与 [sugarcube-2-ModLoader README](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader) 保持一致。
 
 ## 核心基础设施
 

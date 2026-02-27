@@ -106,6 +106,18 @@
 - `tweeFileList` — Twee 文件列表
 - `imgFileList` — 图片文件列表
 
+## 路径规则
+
+- `boot.json` 中的所有路径均为**相对于 zip 根目录**的路径（即 `boot.json` 所在目录）。
+- `imgFileList` 中的图片路径相对于 zip 根目录解析。应避免与游戏文件中其他字符串冲突的路径，否则可能导致意外的内容覆盖。
+- 同一 Mod 内的文件名不能重复。尽量避免与本体游戏或其他 Mod 命名冲突；重叠路径会覆盖原有内容。
+
+## 变更记录 / 说明
+
+- **已删除**：`imgFileReplaceList` — 图片替换现由 ImageHookLoader 通过拦截图片请求实现。将图片列入 `imgFileList` 且路径与本体游戏相同时，会自动替换。
+- **新增** `addonPlugin` — 声明 Addon 插件依赖；未满足的依赖会在加载日志中产生警告。
+- **新增** `dependenceInfo` — 声明 Mod/ModLoader/游戏版本依赖；未满足的依赖会在加载日志中产生警告。
+
 ## 版本号约束语法
 
 `dependenceInfo` 中的 `version` 字段支持以下格式：

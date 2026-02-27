@@ -45,6 +45,10 @@ const myName = window.modUtils.getNowRunningModName();
 
 以下是 ModLoader 实例上的查询方法，通过 `window.modSC2DataManager` 间接访问。
 
+:::warning modOrder 已废弃（v2.0.0+）
+自 v2.0.0 起**禁止**直接访问 `modOrder`。其数据结构发生重大变化，为保证向后兼容，请使用下方 API。常用查询请使用 `getModByNameOne`、`getModZip` 和 `getModEarlyLoadCache`。
+:::
+
 ### ModLoader.getModByNameOne(modName)
 
 使用 Mod 名称查询 Mod 信息。

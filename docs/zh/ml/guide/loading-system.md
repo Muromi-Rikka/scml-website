@@ -24,6 +24,36 @@ ModLoader 从四个来源加载 Mod，按顺序为：
 
 **覆盖规则**：如果同名 Mod 存在于多个来源，后加载的覆盖先加载的。即 remote 覆盖 local，IndexedDB 覆盖 remote + local。
 
+## modList.json 格式
+
+`modList.json` 是一个 JSON 数组，列出 Mod zip 的路径。其用法因来源而异：
+
+### Local（insert2html）
+
+使用 `insert2html.js` 时，传入的 `modList.json` 列出 Mod zip 的路径，相对于该文件所在目录。这些 Mod 会以 **local** 类型嵌入到游戏 HTML 中。
+
+```json
+["mod1.zip", "mod2.zip"]
+```
+
+路径相对于 `modList.json` 所在目录解析。
+
+### Remote（RemoteLoader）
+
+当游戏通过 Web 服务器提供时，`RemoteLoader` 会从 HTML 所在目录获取 `modList.json`，并通过 `fetch` 加载其中列出的 Mod。路径必须对 `fetch` 有效：
+
+| 路径示例                    | 解析起点           |
+| --------------------------- | ------------------ |
+| `"aaa.mod.zip"`             | HTML 所在目录      |
+| `"/rrr.mod.zip"`            | Web 服务器根目录   |
+| `"./ddd/ccc.mod.zip"`       | HTML 所在目录      |
+| `"../../uuu.mod.zip"`       | HTML 所在目录上两级 |
+| `"http://example.com/mmm.mod.zip"` | 完整 URL   |
+
+### 覆盖优先级
+
+若同名 Mod 存在于多个来源：**remote** 覆盖 **local**，**IndexedDB** 覆盖两者。
+
 ## 详细加载步骤
 
 以下是完整的 Mod 加载流程（共 21 步）：

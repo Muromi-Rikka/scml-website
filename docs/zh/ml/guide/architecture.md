@@ -213,3 +213,10 @@ ModLoader 需要使用经过修改的 SC2 引擎（[仓库地址](https://github
 1. **修改启动点**：在 jQuery 闭包中插入 ModLoader 的异步等待
 2. **Wikifier 增强**：添加 `_lastPassageQ` 及对应数据操作来跟踪脚本编译过程，涉及 `macrolib.js`、`parserlib.js`、`wikifier.js`（可使用 `passageObj` 关键字查找）
 3. **图片标签拦截**：拦截 `img` 和 `svg` 标签，实现完全从内存加载所有图片（无需服务器）
+
+## 延伸阅读
+
+更详细的 21 步加载流程与 SC2 修改点说明：
+
+- [ModLoaderAndModLoadingProcess - EN](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader/blob/master/ModLoaderAndModLoadingProcess%20-%20EN%20-%20GPT.md)
+- [ModLoaderAndModLoadingProcess - CN](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader/blob/master/ModLoaderAndModLoadingProcess%20-%20CN.md)

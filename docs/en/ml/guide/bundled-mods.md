@@ -1,6 +1,6 @@
 # Built-in Mods and Submodules
 
-ModLoader splits non-core functionality into separate Mods and ships common ones as built-ins. These Mods are defined in `modList.json`, live as Git submodules under `mod/`, and are embedded as **local** type into the game HTML via `insert2html`.
+ModLoader splits non-core functionality into separate Mods and ships common ones as built-ins. These Mods are defined in `modList.json`, live as Git submodules under `mod/`, and are embedded as **local** type into the game HTML via `insert2html`. This list is aligned with the [sugarcube-2-ModLoader README](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader).
 
 ## Core Infrastructure
 

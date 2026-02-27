@@ -44,6 +44,10 @@ const myName = window.modUtils.getNowRunningModName();
 
 These are query methods on the ModLoader instance, accessed via `window.modSC2DataManager`.
 
+:::warning modOrder Deprecated (v2.0.0+)
+Direct access to `modOrder` is **not allowed** since v2.0.0. The data structure changed significantly; use the APIs below instead to ensure backward compatibility. Use `getModByNameOne`, `getModZip`, and `getModEarlyLoadCache` for common lookups.
+:::
+
 ### ModLoader.getModByNameOne(modName)
 
 Look up Mod info by name.

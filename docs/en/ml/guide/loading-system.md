@@ -24,6 +24,36 @@ ModLoader loads Mods from four sources, in this order:
 
 **Override rule**: If the same Mod exists in multiple sources, the later-loaded one wins. So remote overrides local, IndexedDB overrides remote and local.
 
+## modList.json Format
+
+`modList.json` is a JSON array of Mod zip paths. Its usage differs by source:
+
+### Local (insert2html)
+
+When using `insert2html.js`, pass a `modList.json` that lists Mod zips relative to the file's location. Mods are embedded into the game HTML as **local** type.
+
+```json
+["mod1.zip", "mod2.zip"]
+```
+
+Paths are resolved relative to the directory containing `modList.json`.
+
+### Remote (RemoteLoader)
+
+When the game is served via a web server, `RemoteLoader` fetches `modList.json` from the same directory as the HTML and loads listed Mods via `fetch`. Paths must be valid for `fetch`:
+
+| Path example            | Resolved from                     |
+| ----------------------- | --------------------------------- |
+| `"aaa.mod.zip"`         | Same directory as HTML            |
+| `"/rrr.mod.zip"`        | Web server root                   |
+| `"./ddd/ccc.mod.zip"`   | Same directory as HTML            |
+| `"../../uuu.mod.zip"`   | Two levels up from HTML           |
+| `"http://example.com/mmm.mod.zip"` | Full URL                     |
+
+### Override Priority
+
+If the same Mod name exists across sources: **remote** overrides **local**, and **IndexedDB** overrides both.
+
 ## Detailed Loading Steps
 
 Full Mod loading flow (21 steps):

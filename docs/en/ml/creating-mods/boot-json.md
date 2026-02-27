@@ -106,6 +106,18 @@ These fields **must exist** (even if empty arrays):
 - `tweeFileList` — Twee file list
 - `imgFileList` — Image file list
 
+## Path Rules
+
+- All paths in `boot.json` are **relative to the zip root** (the directory containing `boot.json`).
+- Image paths in `imgFileList` are resolved relative to the zip root. Avoid paths that might collide with other strings in game files, or image replacement may unexpectedly overwrite content.
+- File names within the same Mod must be unique. Avoid naming conflicts with the base game or other Mods where possible; overlapping paths will overwrite the original.
+
+## Changelog / Notes
+
+- **Removed**: `imgFileReplaceList` — Image replacement is now handled by ImageHookLoader, which intercepts image requests. Images that match base game paths are replaced automatically when listed in `imgFileList`.
+- **Added** `addonPlugin` — Declare Addon plugin dependencies; unsatisfied dependencies produce warnings in the load log.
+- **Added** `dependenceInfo` — Declare Mod/ModLoader/game version dependencies; unsatisfied dependencies produce warnings in the load log.
+
 ## Version Constraint Syntax
 
 `dependenceInfo` `version` supports:
