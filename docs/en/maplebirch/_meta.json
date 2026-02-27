@@ -9,8 +9,9 @@
   "variables",
   "character",
   "named-npc",
-  "combat-dynamic",
-  "tool-collection",
+  "combat",
+  { "type": "dir", "name": "dynamic", "label": "Dynamic Events" },
+  { "type": "dir", "name": "tool-collection", "label": "Tool Collection" },
   "gui-settings",
   "services",
   "build-system"

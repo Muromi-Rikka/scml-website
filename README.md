@@ -35,15 +35,15 @@ For ELK-based Mermaid layout, the build copies `elk.bundled.js` from `elkjs` int
 
 ## Scripts
 
-| Command           | Description |
-|-------------------|-------------|
-| `npm run dev`     | Start the dev server (copies ELK, then runs Rspress dev). |
-| `npm run build`   | Copy ELK and build the site for production. Output: `doc_build/`. |
-| `npm run preview` | Serve the production build locally. |
-| `npm run lint`    | Run [oxlint](https://github.com/oxc-project/oxlint). |
-| `npm run lint:fix`| Run oxlint with auto-fix. |
-| `npm run fmt`     | Format code with [oxfmt](https://github.com/oxc-project/oxfmt). |
-| `npm run fmt:check`| Check formatting only. |
+| Command             | Description                                                       |
+| ------------------- | ----------------------------------------------------------------- |
+| `npm run dev`       | Start the dev server (copies ELK, then runs Rspress dev).         |
+| `npm run build`     | Copy ELK and build the site for production. Output: `doc_build/`. |
+| `npm run preview`   | Serve the production build locally.                               |
+| `npm run lint`      | Run [oxlint](https://github.com/oxc-project/oxlint).              |
+| `npm run lint:fix`  | Run oxlint with auto-fix.                                         |
+| `npm run fmt`       | Format code with [oxfmt](https://github.com/oxc-project/oxfmt).   |
+| `npm run fmt:check` | Check formatting only.                                            |
 
 ## Project Structure
 

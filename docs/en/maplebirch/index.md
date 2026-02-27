@@ -86,18 +86,19 @@ The following convenience properties are also exposed:
 - [**Event Emitter**](./event-emitter) — Event publish/subscribe system
 - [**Language Manager**](./language-manager) — Internationalization and translation
 - [**Module System**](./module-system) — Module registration and lifecycle API
-- **Dynamic Events** ([Combat & Dynamic Events](./combat-dynamic))
-  - [State Events](./combat-dynamic#state-events)
-  - [Time Events](./combat-dynamic#time-events)
-  - [Weather Events](./combat-dynamic#weather-events)
-- **Tool Collection** ([Tool Collection](./tool-collection))
+- **Combat System** ([Combat](./combat)) — Combat actions, reactions, speech, buttons
+- **Dynamic Events** ([Dynamic Events](./dynamic/index))
+  - [State Events](./dynamic/state-events)
+  - [Time Events](./dynamic/time-events)
+  - [Weather Events](./dynamic/weather-events)
+- **Tool Collection** ([Tool Collection](./tool-collection/index))
   - [Variable Migration](./variables#variable-migration-system)
-  - [Random System](./tool-collection#randsystem-random-system)
-  - [HTML Tools](./tool-collection#htmltools-html-tools)
-  - [Zones Manager](./tool-collection#zonesmanager-zones-manager)
-  - [Traits Registration](./tool-collection#traits-registration)
-  - [Location Config](./tool-collection#location-config)
-  - [Bodywriting](./tool-collection#bodywriting)
+  - [Random System](./tool-collection/rand-system)
+  - [HTML Tools](./tool-collection/html-tools)
+  - [Zones Manager](./tool-collection/zones-manager)
+  - [Traits Registration](./tool-collection/traits)
+  - [Location Config](./tool-collection/location)
+  - [Bodywriting](./tool-collection/bodywriting)
 
 ## Next Steps
 

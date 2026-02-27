@@ -24,13 +24,13 @@ This document introduces the three core services of maplebirchFramework: EventEm
 maplebirch.on(
   ":passageend",
   () => {
-    // 每次 Passage 结束时执行
+    // Run on each passage end
   },
   "my handler",
 );
 
 maplebirch.once(":storyready", () => {
-  // 游戏启动后执行一次
+  // Run once after game starts
 });
 
 maplebirch.off(":passageend", "my handler");
@@ -68,16 +68,16 @@ maplebirch.off(":passageend", "my handler");
 Besides built-in events, you can register arbitrary custom events:
 
 ```js
-// 注册自定义事件监听
+// Register custom event listener
 maplebirch.on(
   ":myCustomEvent",
   (data) => {
-    console.log("收到数据:", data);
+    console.log("Received data:", data);
   },
   "my custom handler",
 );
 
-// 触发自定义事件
+// Trigger custom event
 await maplebirch.trigger(":myCustomEvent", { key: "value" });
 ```
 
@@ -87,27 +87,27 @@ await maplebirch.trigger(":myCustomEvent", { key: "value" });
 
 ### Log Levels
 
-| Level | Value | Tag      | Color  |
-| ----- | ----- | -------- | ------ |
-| DEBUG | 0     | `[调试]` | Gray   |
-| INFO  | 1     | `[信息]` | Green  |
-| WARN  | 2     | `[警告]` | Orange |
-| ERROR | 3     | `[错误]` | Red    |
+| Level | Value | Tag       | Color  |
+| ----- | ----- | --------- | ------ |
+| DEBUG | 0     | `[DEBUG]` | Gray   |
+| INFO  | 1     | `[INFO]`  | Green  |
+| WARN  | 2     | `[WARN]`  | Orange |
+| ERROR | 3     | `[ERROR]` | Red    |
 
 Default level is `INFO`. Set to `DEBUG` to see all debug logs.
 
 ### Usage
 
 ```js
-// 通过 maplebirch 便捷方法
-maplebirch.log("这是一条信息", "INFO");
-maplebirch.log("调试数据", "DEBUG", someObject);
-maplebirch.log("出现警告", "WARN");
-maplebirch.log("发生错误", "ERROR");
+// Via maplebirch convenience methods
+maplebirch.log("Info message", "INFO");
+maplebirch.log("Debug data", "DEBUG", someObject);
+maplebirch.log("Warning message", "WARN");
+maplebirch.log("Error message", "ERROR");
 
-// 设置日志级别
-maplebirch.LogLevel = "DEBUG"; // 显示所有日志
-maplebirch.LogLevel = "WARN"; // 仅显示警告和错误
+// Set log level
+maplebirch.LogLevel = "DEBUG"; // Show all logs
+maplebirch.LogLevel = "WARN"; // Show warnings and errors only
 ```
 
 ### Creating Module Logs
@@ -116,8 +116,8 @@ Use `createlog()` to create log functions with a prefix:
 
 ```js
 const log = maplebirch.tool.createlog("mymod");
-log("初始化完成"); // [maplebirch][信息] [mymod] 初始化完成
-log("详细信息", "DEBUG"); // [maplebirch][调试] [mymod] 详细信息
+log("Init complete"); // [maplebirch][INFO] [mymod] Init complete
+log("Details", "DEBUG"); // [maplebirch][DEBUG] [mymod] Details
 ```
 
 ### IDB Configuration
@@ -136,10 +136,10 @@ Log level is read from the IndexedDB `settings.DEBUG` key. If `DEBUG` is `true`,
 ### Translation API
 
 ```js
-// 按键翻译
+// Lookup by key
 const text = maplebirch.t("greeting"); // Returns translation for current language
 
-// 自动翻译（反向查找）
+// Auto translation (reverse lookup)
 const translated = maplebirch.auto("Hello"); // If current is CN, returns "你好"
 ```
 

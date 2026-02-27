@@ -19,7 +19,7 @@ modSC2DataManager.getModLoadController().addLifeTimeCircleHook("maplebirchFramew
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^2.7.0",
+      "modVersion": "^3.1.0",
       "params": {
         "script": ["mymod.js"],
         "language": true,

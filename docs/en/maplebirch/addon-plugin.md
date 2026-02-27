@@ -19,7 +19,7 @@ Other mods register with the framework via the `addonPlugin` field in `boot.json
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^2.7.0",
+      "modVersion": "^3.1.0",
       "params": {
         "script": ["mymod.js"],
         "language": true,

@@ -55,12 +55,12 @@ maplebirch.once(":IndexedDB", () => {
 #### Transaction Operations
 
 ```js
-// 读取数据
+// Read data
 const value = await maplebirch.idb.withTransaction(["my-store"], "readonly", async (tx) => {
   return await tx.objectStore("my-store").get("key");
 });
 
-// 写入数据
+// Write data
 await maplebirch.idb.withTransaction(["my-store"], "readwrite", async (tx) => {
   await tx.objectStore("my-store").put({ id: "key", value: "data" });
 });
