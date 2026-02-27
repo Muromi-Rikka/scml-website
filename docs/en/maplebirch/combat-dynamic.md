@@ -70,7 +70,7 @@ const macro = maplebirch.combat.ejaculation(npcIndex, "args");
 
 The DynamicManager module manages three types of dynamic events: time events, state events, and weather events.
 
-### Time Events
+## Time Events
 
 Register events that trigger at specific times:
 
@@ -97,7 +97,7 @@ maplebirch.dynamic.timeTravel({
 });
 ```
 
-### State Events
+## State Events
 
 Register events based on game state changes:
 
@@ -123,7 +123,7 @@ Trigger a state event:
 const result = maplebirch.dynamic.trigger("interrupt");
 ```
 
-### Weather Events
+## Weather Events
 
 Register weather-related events and custom weather types:
 
@@ -145,7 +145,7 @@ maplebirch.dynamic.addWeather({
 | `delWeatherEvent(eventId)`          | Unregister weather event              |
 | `addWeather(data)`                  | Add weather type or anomalous weather |
 
-### Module Initialization
+## Module Initialization
 
 DynamicManager registers a `:passagestart` listener during the `preInit` phase. On the first Passage start, it initializes three sub-managers:
 

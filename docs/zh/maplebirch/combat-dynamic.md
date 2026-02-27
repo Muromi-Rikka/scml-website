@@ -70,7 +70,7 @@ const macro = maplebirch.combat.ejaculation(npcIndex, "args");
 
 DynamicManager 模块管理三种类型的动态事件：时间事件、状态事件和天气事件。
 
-### 时间事件
+## 时间事件
 
 注册在特定时间触发的事件：
 
@@ -97,7 +97,7 @@ maplebirch.dynamic.timeTravel({
 });
 ```
 
-### 状态事件
+## 状态事件
 
 注册基于游戏状态变化的事件：
 
@@ -123,7 +123,7 @@ maplebirch.dynamic.regStateEvent("interrupt", "myStateEvent", {
 const result = maplebirch.dynamic.trigger("interrupt");
 ```
 
-### 天气事件
+## 天气事件
 
 注册天气相关事件和自定义天气类型：
 
@@ -145,7 +145,7 @@ maplebirch.dynamic.addWeather({
 | `delWeatherEvent(eventId)`          | 注销天气事件           |
 | `addWeather(data)`                  | 添加天气类型或异常天气 |
 
-### 模块初始化
+## 模块初始化
 
 DynamicManager 在 `preInit` 阶段注册 `:passagestart` 监听器，在首次 Passage 开始时初始化三个子管理器：
 

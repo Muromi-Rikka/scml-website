@@ -40,7 +40,7 @@ Register your Mod with maplebirch's AddonPlugin system via the `addonPlugin` fie
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^2.7.0",
+      "modVersion": "^3.1.0",
       "params": {
         "script": ["mymod_framework.js"]
       }
@@ -83,7 +83,7 @@ The following is a complete `boot.json` example that depends on maplebirch:
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^2.7.0",
+      "modVersion": "^3.1.0",
       "params": {
         "script": ["mymod.js"],
         "language": true

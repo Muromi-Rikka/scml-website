@@ -82,9 +82,22 @@ graph LR
 
 ## 模块与功能
 
-- [**EventEmitter**](./event-emitter) — 事件发布/订阅系统
-- [**LanguageManager**](./language-manager) — 国际化与翻译
-- [**ModuleSystem**](./module-system) — 模块注册与生命周期 API
+- [**工具函数**](./services) — 日志、事件与语言等核心服务（含 `maplebirch.tool.utils`）
+- [**事件发射器**](./event-emitter) — 事件发布/订阅系统
+- [**语言管理**](./language-manager) — 国际化与翻译
+- [**模块系统**](./module-system) — 模块注册与生命周期 API
+- **动态事件**（[战斗与动态事件](./combat-dynamic)）
+  - [状态事件](./combat-dynamic#状态事件)
+  - [时间事件](./combat-dynamic#时间事件)
+  - [天气事件](./combat-dynamic#天气事件)
+- **工具合集**（[工具集合](./tool-collection)）
+  - [变量迁徙](./variables#变量迁移系统)
+  - [随机数系统](./tool-collection#randsystem-随机系统)
+  - [文本工具](./tool-collection#htmltools-html-工具)
+  - [区域管理](./tool-collection#zonesmanager-区域管理器)
+  - [特质注册](./tool-collection#特质注册)
+  - [地点配置](./tool-collection#地点配置)
+  - [纹身注册](./tool-collection#纹身注册-bodywriting)
 
 ## 下一步
 

@@ -138,8 +138,8 @@ Called only when a save is loaded. Use to restore state from save data.
 
 ```js
 loadInit() {
-  if (State.variables.myData) {
-    this.data = State.variables.myData;
+  if (V.myData) {
+    this.data = V.myData;
   }
 }
 ```
@@ -177,8 +177,8 @@ class MyModule {
 
   loadInit() {
     console.log("MyModule loadInit");
-    if (State.variables.myModuleData) {
-      this.data = State.variables.myModuleData;
+    if (V.myModuleData) {
+      this.data = V.myModuleData;
     }
   }
 

@@ -138,7 +138,7 @@ const link = maplebirch.tool.link;
 
 ## otherTools（其他工具）
 
-包含特质管理、位置应用等杂项工具：
+包含特质管理、位置应用、纹身注册等杂项工具：
 
 ```js
 const other = maplebirch.tool.other;
@@ -158,6 +158,18 @@ other.applyLocation();
 // 应用身体文字逻辑
 other.applyBodywriting();
 ```
+
+### 特质注册
+
+通过 `other.addTraits()` 注册自定义特质，详见下方特质接口。
+
+### 地点配置
+
+通过 `other.applyLocation()` 应用游戏中地点相关逻辑。
+
+### 纹身注册（Bodywriting）
+
+通过 `maplebirch.tool.other.addBodywriting()` 添加自定义纹身图案；`other.applyBodywriting()` 用于应用身体文字相关逻辑。
 
 ### 特质接口
 

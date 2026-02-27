@@ -82,9 +82,22 @@ The following convenience properties are also exposed:
 
 ## Modules & Features
 
-- [**EventEmitter**](./event-emitter) — Event publish/subscribe system
-- [**LanguageManager**](./language-manager) — Internationalization and translation
-- [**ModuleSystem**](./module-system) — Module registration and lifecycle API
+- [**Utilities**](./services) — Core services: logging, events, language (includes `maplebirch.tool.utils`)
+- [**Event Emitter**](./event-emitter) — Event publish/subscribe system
+- [**Language Manager**](./language-manager) — Internationalization and translation
+- [**Module System**](./module-system) — Module registration and lifecycle API
+- **Dynamic Events** ([Combat & Dynamic Events](./combat-dynamic))
+  - [State Events](./combat-dynamic#state-events)
+  - [Time Events](./combat-dynamic#time-events)
+  - [Weather Events](./combat-dynamic#weather-events)
+- **Tool Collection** ([Tool Collection](./tool-collection))
+  - [Variable Migration](./variables#variable-migration-system)
+  - [Random System](./tool-collection#randsystem-random-system)
+  - [HTML Tools](./tool-collection#htmltools-html-tools)
+  - [Zones Manager](./tool-collection#zonesmanager-zones-manager)
+  - [Traits Registration](./tool-collection#traits-registration)
+  - [Location Config](./tool-collection#location-config)
+  - [Bodywriting](./tool-collection#bodywriting)
 
 ## Next Steps
 

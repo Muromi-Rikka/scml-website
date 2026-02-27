@@ -138,7 +138,7 @@ const link = maplebirch.tool.link;
 
 ## otherTools (Other Tools)
 
-Contains trait management, location application, and other miscellaneous tools:
+Contains trait management, location application, bodywriting registration, and other miscellaneous tools:
 
 ```js
 const other = maplebirch.tool.other;
@@ -158,6 +158,18 @@ other.applyLocation();
 // 应用身体文字逻辑
 other.applyBodywriting();
 ```
+
+### Traits Registration
+
+Register custom traits via `other.addTraits()`; see the Trait Interface below.
+
+### Location Config
+
+Apply in-game location logic via `other.applyLocation()`.
+
+### Bodywriting
+
+Add custom bodywriting patterns via `maplebirch.tool.other.addBodywriting()`; `other.applyBodywriting()` applies bodywriting-related logic.
 
 ### Trait Interface
 
