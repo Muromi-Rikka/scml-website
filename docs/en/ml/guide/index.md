@@ -58,12 +58,12 @@ If ModLoader fails to load three times in a row, it enters safe mode on the next
 
 For Mods that modify passages, these four points in `boot.json` offer different data access and timing:
 
-| Point        | boot.json Field               | Accessible Data     | Notes                  |
-| ------------ | ----------------------------- | ------------------- | ---------------------- |
-| inject_early | `scriptFileList_inject_early` | Raw SC2 data        | Sync only              |
-| earlyload    | `scriptFileList_earlyload`    | Raw SC2 data        | Async supported        |
-| tweeFileList | `tweeFileList`                | —                   | Merged into tw-storydata |
-| preload      | `scriptFileList_preload`      | Merged SC2 data     | Async supported        |
+| Point        | boot.json Field               | Accessible Data | Notes                    |
+| ------------ | ----------------------------- | --------------- | ------------------------ |
+| inject_early | `scriptFileList_inject_early` | Raw SC2 data    | Sync only                |
+| earlyload    | `scriptFileList_earlyload`    | Raw SC2 data    | Async supported          |
+| tweeFileList | `tweeFileList`                | —               | Merged into tw-storydata |
+| preload      | `scriptFileList_preload`      | Merged SC2 data | Async supported          |
 
 See [Script Stages](../creating-mods/script-stages) and [Lifecycle Hooks](../api/lifecycle-hooks) for details.
 

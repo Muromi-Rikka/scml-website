@@ -42,13 +42,13 @@ ModLoader 从四个来源加载 Mod，按顺序为：
 
 当游戏通过 Web 服务器提供时，`RemoteLoader` 会从 HTML 所在目录获取 `modList.json`，并通过 `fetch` 加载其中列出的 Mod。路径必须对 `fetch` 有效：
 
-| 路径示例                    | 解析起点           |
-| --------------------------- | ------------------ |
-| `"aaa.mod.zip"`             | HTML 所在目录      |
-| `"/rrr.mod.zip"`            | Web 服务器根目录   |
-| `"./ddd/ccc.mod.zip"`       | HTML 所在目录      |
-| `"../../uuu.mod.zip"`       | HTML 所在目录上两级 |
-| `"http://example.com/mmm.mod.zip"` | 完整 URL   |
+| 路径示例                           | 解析起点            |
+| ---------------------------------- | ------------------- |
+| `"aaa.mod.zip"`                    | HTML 所在目录       |
+| `"/rrr.mod.zip"`                   | Web 服务器根目录    |
+| `"./ddd/ccc.mod.zip"`              | HTML 所在目录       |
+| `"../../uuu.mod.zip"`              | HTML 所在目录上两级 |
+| `"http://example.com/mmm.mod.zip"` | 完整 URL            |
 
 ### 覆盖优先级
 

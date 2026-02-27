@@ -58,12 +58,12 @@ Mod 可在 `boot.json` 的 `dependenceInfo` 中声明对以下目标的版本约
 
 需要修改 passage 的 Mod，可以在 `boot.json` 中通过以下四个修改点，在不同时机访问不同数据：
 
-| 修改点       | boot.json 字段                | 可访问数据           | 说明                   |
-| ------------ | ----------------------------- | -------------------- | ---------------------- |
-| inject_early | `scriptFileList_inject_early` | 原始 SC2 data        | 仅同步                 |
-| earlyload    | `scriptFileList_earlyload`    | 原始 SC2 data        | 支持异步               |
-| tweeFileList | `tweeFileList`                | —                    | 合并到 tw-storydata    |
-| preload      | `scriptFileList_preload`      | 合并后 SC2 data      | 支持异步               |
+| 修改点       | boot.json 字段                | 可访问数据      | 说明                |
+| ------------ | ----------------------------- | --------------- | ------------------- |
+| inject_early | `scriptFileList_inject_early` | 原始 SC2 data   | 仅同步              |
+| earlyload    | `scriptFileList_earlyload`    | 原始 SC2 data   | 支持异步            |
+| tweeFileList | `tweeFileList`                | —               | 合并到 tw-storydata |
+| preload      | `scriptFileList_preload`      | 合并后 SC2 data | 支持异步            |
 
 详见[脚本阶段](../creating-mods/script-stages)与[生命周期钩子](../api/lifecycle-hooks)。
 

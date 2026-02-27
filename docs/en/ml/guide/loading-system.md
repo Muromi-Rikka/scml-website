@@ -42,13 +42,13 @@ Paths are resolved relative to the directory containing `modList.json`.
 
 When the game is served via a web server, `RemoteLoader` fetches `modList.json` from the same directory as the HTML and loads listed Mods via `fetch`. Paths must be valid for `fetch`:
 
-| Path example            | Resolved from                     |
-| ----------------------- | --------------------------------- |
-| `"aaa.mod.zip"`         | Same directory as HTML            |
-| `"/rrr.mod.zip"`        | Web server root                   |
-| `"./ddd/ccc.mod.zip"`   | Same directory as HTML            |
-| `"../../uuu.mod.zip"`   | Two levels up from HTML           |
-| `"http://example.com/mmm.mod.zip"` | Full URL                     |
+| Path example                       | Resolved from           |
+| ---------------------------------- | ----------------------- |
+| `"aaa.mod.zip"`                    | Same directory as HTML  |
+| `"/rrr.mod.zip"`                   | Web server root         |
+| `"./ddd/ccc.mod.zip"`              | Same directory as HTML  |
+| `"../../uuu.mod.zip"`              | Two levels up from HTML |
+| `"http://example.com/mmm.mod.zip"` | Full URL                |
 
 ### Override Priority
 

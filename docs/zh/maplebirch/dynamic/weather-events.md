@@ -56,6 +56,36 @@ maplebirch.dynamic.addWeather({
 });
 ```
 
+### addLayer(layerName, patch, mode?)
+
+修改天气图层的参数。
+
+```js
+maplebirch.dynamic.Weather.addLayer("clouds", { blur: 5, zIndex: 10 }).addLayer(
+  "rain",
+  { animation: { speed: 2 } },
+  "merge",
+);
+```
+
+- `mode`: 'concat'、'replace'（默认）、'merge'
+
+### addEffect(effectName, patch, mode?)
+
+修改天气效果的参数。
+
+```js
+maplebirch.dynamic.Weather.addEffect("lightning", { frequency: 0.5, intensity: 2 }).addEffect(
+  "thunder",
+  { volume: 0.8 },
+  "merge",
+);
+```
+
+### addWeatherData(data)
+
+添加自定义天气类型或天气例外（同 `addWeather`）。
+
 ## 事件配置选项
 
 | 参数        | 类型     | 说明                             |
@@ -65,3 +95,22 @@ maplebirch.dynamic.addWeather({
 | `onExit`    | function | 条件不再满足时退出事件，执行一次 |
 | `once`      | boolean  | 是否只触发一次                   |
 | `priority`  | number   | 优先级，数字越大越先执行         |
+
+## 自定义字段匹配
+
+可通过字段值匹配天气状态：
+
+```js
+maplebirch.dynamic.regWeatherEvent("coldNight", {
+  weather: ["clear", "partlyCloudy"],
+  temp: { max: 5 },
+  hour: { min: 20, max: 6 },
+  season: ["winter", "autumn"],
+  onEnter: () => {
+    V.feelsCold = true;
+  },
+  onExit: () => {
+    V.feelsCold = false;
+  },
+});
+```

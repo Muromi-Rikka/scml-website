@@ -86,7 +86,11 @@ graph LR
 - [**事件发射器**](./event-emitter) — 事件发布/订阅系统
 - [**语言管理**](./language-manager) — 国际化与翻译
 - [**模块系统**](./module-system) — 模块注册与生命周期 API
-- **战斗系统**（[战斗](./combat)）— 战斗动作、反应、语音、按钮
+- [**SugarCube 宏**](./sugar-cube-macro) — 多语言宏扩展
+- [**音频管理**](./audio) — 背景音乐、音效与播放列表
+- **角色管理**（[侧边栏图层](./character/)、[转化管理](./character/transformation)）
+- **NPC 管理**（[NPC 注册](./named-npc/)、[NPC 状态](./named-npc/npc-stats)、[NPC 日程](./named-npc/npc-schedule)、[NPC 服装](./named-npc/npc-clothes)、[NPC 侧边栏](./named-npc/npc-sidebar)）
+- **战斗管理**（[战斗按钮](./combat/actions)、[战斗反应](./combat/reaction)、[战斗语音](./combat/speech)）
 - **动态事件**（[动态事件](./dynamic/index)）
   - [状态事件](./dynamic/state-events)
   - [时间事件](./dynamic/time-events)

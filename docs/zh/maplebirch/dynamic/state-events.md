@@ -53,9 +53,66 @@ const result = maplebirch.dynamic.trigger("interrupt");
 | `extra.passage` | string[] | 仅在这些段落中触发                         |
 | `extra.exclude` | string[] | 在这些段落中不触发                         |
 
+## output 参数说明
+
+`output` 字符串对应您在 SugarCube 中自定义的 widget 宏名称。当事件触发时，框架会调用对应的 widget 宏。
+
+**Widget 定义示例**:
+
+```js
+<<widget 'banditEncounter'>>
+  你突然听到灌木丛中传来沙沙声...
+  一群盗贼跳了出来！<<link "战斗" "CombatBandit">> | <<link "逃跑" "RunAway">>
+<</widget>>
+```
+
+## 完整示例：中断事件
+
+```js
+// 1. 注册事件
+maplebirch.dynamic.regStateEvent('interrupt', 'forestBandit', {
+  output: 'banditEncounter',
+  cond: () => V.location === 'forest',
+  priority: 10,
+  once: false
+});
+
+// 2. 在游戏中定义对应的 widget
+<<widget 'banditEncounter'>>
+  <div class="encounter">
+    <strong>遭遇盗贼！</strong>
+    <p>一群凶恶的盗贼挡住了你的去路。</p>
+    <<link "战斗" "CombatBandit">>
+    <<link "谈判" "NegotiateBandit">>
+    <<link "逃跑" "RunFromBandit">>
+  </div>
+<</widget>>
+```
+
+## 完整示例：覆盖事件（状态提示）
+
+```js
+maplebirch.dynamic.regStateEvent('overlay', 'wetStatus', {
+  output: 'showWetStatus',
+  cond: () => V.wetness > 70,
+  priority: 3
+});
+
+<<widget 'showWetStatus'>>
+  <div class="status-overlay wet">你的衣服湿透了，行动变得迟缓。</div>
+<</widget>>
+```
+
 ## 事件类型
 
 | 类型        | 说明                                         |
 | ----------- | -------------------------------------------- |
 | `interrupt` | 段落开始时检查；第一个满足条件的事件中断执行 |
 | `overlay`   | 段落结束时检查；可同时触发多个，内容叠加     |
+
+## 注意事项
+
+1. **Widget 定义**：必须在游戏中定义与 `output` 同名的 widget
+2. **性能考虑**：widget 内容不应过于复杂，避免影响游戏性能
+3. **稳定性**：确保 widget 在各种情况下都能正确显示
+4. **错误处理**：如果找不到对应的 widget，框架会记录错误日志

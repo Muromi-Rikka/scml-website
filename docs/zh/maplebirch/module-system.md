@@ -113,7 +113,7 @@ console.log("依赖 addon 的模块:", graph.addon.dependents);
 
 ### preInit()
 
-预初始化方法，在 `:allModule` 事件后调用。用于轻量级初始化或资源预加载。
+在 `afterInjectEarlyLoad` 阶段调用。**每个模块只会执行一次**，用于资源预加载和基础设置。此时没有 setup 变量和 V 变量。
 
 ```js
 preInit() {
@@ -123,7 +123,7 @@ preInit() {
 
 ### Init()
 
-主初始化方法，在 `:passagestart` 事件时调用（仅首次）。用于模块主要功能初始化。
+在 `:passageinit` 事件后调用。**每个模块只会执行一次**，用于模块主初始化。此时已有 setup 变量和 V 变量。
 
 ```js
 Init() {
@@ -134,7 +134,7 @@ Init() {
 
 ### loadInit()
 
-存档初始化方法，仅在加载存档时调用。用于恢复存档状态。
+**仅在读取存档时调用**。每次读取存档时都会执行，用于恢复存档状态。此时有存档中的 V 变量。
 
 ```js
 loadInit() {
@@ -146,7 +146,7 @@ loadInit() {
 
 ### postInit()
 
-后初始化方法，在 `Init` 或 `loadInit` 完成后调用。用于清理或最终设置。
+在每个段落开始时调用，在 `Init` 和 `loadInit` 之后执行。**每个段落都会执行一次**，此时有当前 V 变量。
 
 ```js
 postInit() {
