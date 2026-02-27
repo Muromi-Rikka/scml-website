@@ -4,7 +4,7 @@
 
 ## EventEmitter 事件总线
 
-`EventEmitter`（通过 `maplebirch.tracer` 访问）提供事件发布/订阅机制，是框架内部模块间通信的基础。
+`EventEmitter`（通过 `maplebirch.tracer` 访问）提供事件发布/订阅机制，是框架内部模块间通信的基础。完整 API 参考见 [EventEmitter](./event-emitter)。
 
 ### API
 
@@ -118,7 +118,7 @@ log('详细信息', 'DEBUG'); // [maplebirch][调试] [mymod] 详细信息
 
 ## LanguageManager 国际化
 
-`LanguageManager`（通过 `maplebirch.lang` 访问）提供多语言翻译支持。
+`LanguageManager`（通过 `maplebirch.lang` 访问）提供多语言翻译支持。完整 API 与配置说明见 [LanguageManager](./language-manager)。
 
 ### 支持的语言
 

@@ -80,6 +80,12 @@ graph LR
 | `maplebirch.LogLevel` | 日志级别（getter/setter） |
 | `maplebirch.gameVersion` | 当前游戏版本 |
 
+## 模块与功能
+
+- [**EventEmitter**](./event-emitter) — 事件发布/订阅系统
+- [**LanguageManager**](./language-manager) — 国际化与翻译
+- [**ModuleSystem**](./module-system) — 模块注册与生命周期 API
+
 ## 下一步
 
 - [快速开始](./getting-started) — 如何让你的 Mod 依赖并使用框架

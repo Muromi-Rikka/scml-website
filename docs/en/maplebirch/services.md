@@ -4,7 +4,7 @@ This document introduces the three core services of maplebirchFramework: EventEm
 
 ## EventEmitter Event Bus
 
-`EventEmitter` (accessible via `maplebirch.tracer`) provides a publish/subscribe event mechanism and is the foundation for inter-module communication within the framework.
+`EventEmitter` (accessible via `maplebirch.tracer`) provides a publish/subscribe event mechanism and is the foundation for inter-module communication within the framework. For full API reference, see [EventEmitter](./event-emitter).
 
 ### API
 
@@ -118,7 +118,7 @@ Log level is read from the IndexedDB `settings.DEBUG` key. If `DEBUG` is `true`,
 
 ## LanguageManager Internationalization
 
-`LanguageManager` (accessible via `maplebirch.lang`) provides multi-language translation support.
+`LanguageManager` (accessible via `maplebirch.lang`) provides multi-language translation support. For full API reference and configuration options, see [LanguageManager](./language-manager).
 
 ### Supported Languages
 

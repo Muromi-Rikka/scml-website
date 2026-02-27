@@ -80,6 +80,12 @@ The following convenience properties are also exposed:
 | `maplebirch.LogLevel` | Log level (getter/setter) |
 | `maplebirch.gameVersion` | Current game version |
 
+## Modules & Features
+
+- [**EventEmitter**](./event-emitter) — Event publish/subscribe system
+- [**LanguageManager**](./language-manager) — Internationalization and translation
+- [**ModuleSystem**](./module-system) — Module registration and lifecycle API
+
 ## Next Steps
 
 - [Getting Started](./getting-started) — How to add framework dependency to your Mod and use it
