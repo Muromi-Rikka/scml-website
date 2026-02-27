@@ -13,21 +13,21 @@ const CombatAction = maplebirch.combat.CombatAction;
 
 // 注册战斗动作
 CombatAction.register({
-  action: 'myAction',
-  type: 'Default',
-  name: '自定义动作',
-  color: 'green',
-  difficulty: '<<myDifficultyWidget>>'
+  action: "myAction",
+  type: "Default",
+  name: "自定义动作",
+  color: "green",
+  difficulty: "<<myDifficultyWidget>>",
 });
 ```
 
 The `CombatAction` provides the following methods:
 
-| Method | Description |
-|--------|-------------|
+| Method                                         | Description                                         |
+| ---------------------------------------------- | --------------------------------------------------- |
 | `action(optionsTable, actionType, combatType)` | Inject custom actions into the combat options table |
-| `difficulty(action, combatType)` | Return the difficulty hint macro for custom actions |
-| `color(action, encounterType)` | Return the color for custom actions |
+| `difficulty(action, combatType)`               | Return the difficulty hint macro for custom actions |
+| `color(action, encounterType)`                 | Return the color for custom actions                 |
 
 ### Reaction System
 
@@ -62,7 +62,7 @@ The framework automatically registers `generateCombatAction` and `combatButtonAd
 The `ejaculation()` method provides custom ejaculation event macros for named NPCs:
 
 ```js
-const macro = maplebirch.combat.ejaculation(npcIndex, 'args');
+const macro = maplebirch.combat.ejaculation(npcIndex, "args");
 // Returns macro string like "<<ejaculation-robin args>>"
 ```
 
@@ -75,19 +75,19 @@ The DynamicManager module manages three types of dynamic events: time events, st
 Register events that trigger at specific times:
 
 ```js
-maplebirch.dynamic.regTimeEvent('daily', 'myEvent', {
+maplebirch.dynamic.regTimeEvent("daily", "myEvent", {
   // 时间事件配置
   callback: () => {
     // 事件逻辑
-  }
+  },
 });
 ```
 
-| Method | Description |
-|--------|-------------|
-| `regTimeEvent(type, eventId, options)` | Register time event |
-| `delTimeEvent(type, eventId)` | Unregister time event |
-| `timeTravel(options)` | Execute time travel |
+| Method                                 | Description           |
+| -------------------------------------- | --------------------- |
+| `regTimeEvent(type, eventId, options)` | Register time event   |
+| `delTimeEvent(type, eventId)`          | Unregister time event |
+| `timeTravel(options)`                  | Execute time travel   |
 
 ### Time Travel
 
@@ -102,25 +102,25 @@ maplebirch.dynamic.timeTravel({
 Register events based on game state changes:
 
 ```js
-maplebirch.dynamic.regStateEvent('interrupt', 'myStateEvent', {
+maplebirch.dynamic.regStateEvent("interrupt", "myStateEvent", {
   // 状态事件配置
   callback: () => {
     // 事件逻辑
-  }
+  },
 });
 ```
 
 State events support two types:
 
-| Type | Description |
-|------|-------------|
+| Type        | Description          |
+| ----------- | -------------------- |
 | `interrupt` | Interrupt-type event |
-| `overlay` | Overlay-type event |
+| `overlay`   | Overlay-type event   |
 
 Trigger a state event:
 
 ```js
-const result = maplebirch.dynamic.trigger('interrupt');
+const result = maplebirch.dynamic.trigger("interrupt");
 ```
 
 ### Weather Events
@@ -129,7 +129,7 @@ Register weather-related events and custom weather types:
 
 ```js
 // 注册天气事件
-maplebirch.dynamic.regWeatherEvent('myWeatherEvent', {
+maplebirch.dynamic.regWeatherEvent("myWeatherEvent", {
   // 天气事件配置
 });
 
@@ -139,11 +139,11 @@ maplebirch.dynamic.addWeather({
 });
 ```
 
-| Method | Description |
-|--------|-------------|
-| `regWeatherEvent(eventId, options)` | Register weather event |
-| `delWeatherEvent(eventId)` | Unregister weather event |
-| `addWeather(data)` | Add weather type or anomalous weather |
+| Method                              | Description                           |
+| ----------------------------------- | ------------------------------------- |
+| `regWeatherEvent(eventId, options)` | Register weather event                |
+| `delWeatherEvent(eventId)`          | Unregister weather event              |
+| `addWeather(data)`                  | Add weather type or anomalous weather |
 
 ### Module Initialization
 

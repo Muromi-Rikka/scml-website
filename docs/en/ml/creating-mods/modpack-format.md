@@ -4,12 +4,12 @@ Besides `.mod.zip`, ModLoader supports the `.modpack` binary format. `.modpack` 
 
 ## vs .mod.zip
 
-| Feature | .mod.zip | .modpack |
-|---------|----------|----------|
-| Format | Standard Zip | Custom binary |
+| Feature        | .mod.zip                                 | .modpack                      |
+| -------------- | ---------------------------------------- | ----------------------------- |
+| Format         | Standard Zip                             | Custom binary                 |
 | Human-readable | Can unpack and inspect with normal tools | Binary, needs dedicated tools |
-| Size | Depends on Zip compression | Can be tuned for Mod use |
-| Packaging | Manual or packModZip.js | ModLoader toolchain |
+| Size           | Depends on Zip compression               | Can be tuned for Mod use      |
+| Packaging      | Manual or packModZip.js                  | ModLoader toolchain           |
 
 ## Use Cases
 

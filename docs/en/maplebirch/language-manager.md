@@ -20,13 +20,13 @@ Get the translated text for a key in the current language.
 
 ```js
 // Basic usage
-maplebirch.t('ui_title'); // Returns 'Map Editor' when current language is CN
+maplebirch.t("ui_title"); // Returns 'Map Editor' when current language is CN
 
 // Append space in English
-maplebirch.t('game_start', true); // Returns 'Start ' when current language is EN
+maplebirch.t("game_start", true); // Returns 'Start ' when current language is EN
 
 // Missing key
-maplebirch.t('nonexistent_key'); // Returns '[nonexistent_key]'
+maplebirch.t("nonexistent_key"); // Returns '[nonexistent_key]'
 ```
 
 ### auto(text)
@@ -38,15 +38,15 @@ Auto-detect the given text and return its translation in the current language.
 
 ```js
 // Auto-translate from English to Chinese
-maplebirch.Language = 'CN';
-maplebirch.auto('Welcome to the game.'); // Returns '欢迎来到游戏。'
+maplebirch.Language = "CN";
+maplebirch.auto("Welcome to the game."); // Returns '欢迎来到游戏。'
 
 // Auto-translate from Chinese to English
-maplebirch.Language = 'EN';
-maplebirch.auto('欢迎来到游戏。'); // Returns 'Welcome to the game.'
+maplebirch.Language = "EN";
+maplebirch.auto("欢迎来到游戏。"); // Returns 'Welcome to the game.'
 
 // No translation available
-maplebirch.auto('Some unique untranslated text.'); // Returns original text
+maplebirch.auto("Some unique untranslated text."); // Returns original text
 ```
 
 ### Language property
@@ -58,11 +58,11 @@ Get or set the current system language. Setting the language triggers the `:lang
 const currentLang = maplebirch.Language;
 
 // Switch language (triggers page re-render)
-maplebirch.Language = 'JA';
+maplebirch.Language = "JA";
 
 // Listen for language switch
-maplebirch.on(':language', () => {
-  console.log('Language switched to:', maplebirch.Language);
+maplebirch.on(":language", () => {
+  console.log("Language switched to:", maplebirch.Language);
 });
 ```
 
@@ -176,11 +176,11 @@ my-mod/
 ### YAML / YML
 
 ```yaml
-ui_menu_start: 'Start Game'
-ui_menu_load: 'Load Game'
-ui_menu_settings: 'Settings'
-character_player_name: 'Alice'
-dialogue_merchant_greeting: 'Look at my wares, traveler!'
-item_potion_health_name: 'Health Potion'
-system_save_success: 'Game saved.'
+ui_menu_start: "Start Game"
+ui_menu_load: "Load Game"
+ui_menu_settings: "Settings"
+character_player_name: "Alice"
+dialogue_merchant_greeting: "Look at my wares, traveler!"
+item_potion_health_name: "Health Potion"
+system_save_success: "Game saved."
 ```

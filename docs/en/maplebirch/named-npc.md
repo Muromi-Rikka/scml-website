@@ -12,76 +12,76 @@ Register a named NPC via `maplebirch.npc.add()`:
 maplebirch.npc.add(
   // NPCData - NPC base data
   {
-    nam: 'MyNPC',
-    gender: 'f',
-    title: 'shopkeeper',
-    description: 'Shop owner',
-    type: 'human',
+    nam: "MyNPC",
+    gender: "f",
+    title: "shopkeeper",
+    description: "Shop owner",
+    type: "human",
     adult: 1,
-    eyeColour: 'green',
-    hairColour: 'brown',
+    eyeColour: "green",
+    hairColour: "brown",
     breastsize: 3,
-    outfits: ['femaleDefault']
+    outfits: ["femaleDefault"],
   },
   // NPCConfig - NPC configuration
   {
     love: { maxValue: 100 },
-    loveAlias: ['好感', 'Affection'],
+    loveAlias: ["好感", "Affection"],
     important: true,
     loveInterest: true,
-    romance: [() => V.mynpcRomance === 1]
+    romance: [() => V.mynpcRomance === 1],
   },
   // Translations - Translation data (optional)
   {
-    'MyNPC': { EN: 'MyNPC', CN: '我的NPC' }
-  }
+    MyNPC: { EN: "MyNPC", CN: "我的NPC" },
+  },
 );
 ```
 
 ### NPCData Interface
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `nam` | `string` | NPC name (required) |
-| `gender` | `'m' \| 'f' \| 'h' \| 'n' \| 'none'` | Gender |
-| `pronoun` | `'m' \| 'f' \| 'i' \| 'n' \| 't'` | Pronoun type |
-| `title` | `string` | Title |
-| `description` | `string` | Description |
-| `type` | `string` | Race type |
-| `adult` / `teen` | `number` | Adult/teen marker |
-| `eyeColour` | `string` | Eye colour |
-| `hairColour` | `string` | Hair colour |
-| `breastsize` | `number` | Breast size |
-| `penissize` | `number` | Penis size |
-| `bottomsize` | `number` | Bottom size |
-| `ballssize` | `number` | Testicles size |
-| `outfits` | `string[]` | Outfit list |
-| `pregnancy` | `object` | Pregnancy data |
+| Field            | Type                                 | Description         |
+| ---------------- | ------------------------------------ | ------------------- |
+| `nam`            | `string`                             | NPC name (required) |
+| `gender`         | `'m' \| 'f' \| 'h' \| 'n' \| 'none'` | Gender              |
+| `pronoun`        | `'m' \| 'f' \| 'i' \| 'n' \| 't'`    | Pronoun type        |
+| `title`          | `string`                             | Title               |
+| `description`    | `string`                             | Description         |
+| `type`           | `string`                             | Race type           |
+| `adult` / `teen` | `number`                             | Adult/teen marker   |
+| `eyeColour`      | `string`                             | Eye colour          |
+| `hairColour`     | `string`                             | Hair colour         |
+| `breastsize`     | `number`                             | Breast size         |
+| `penissize`      | `number`                             | Penis size          |
+| `bottomsize`     | `number`                             | Bottom size         |
+| `ballssize`      | `number`                             | Testicles size      |
+| `outfits`        | `string[]`                           | Outfit list         |
+| `pregnancy`      | `object`                             | Pregnancy data      |
 
 Unspecified fields will use random or default values.
 
 ### NPCConfig Interface
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `love` | `{ maxValue: number }` | Love/Like max value |
-| `loveAlias` | `[string, string] \| () => string` | Love/Like alias (CN/EN) |
-| `important` | `boolean \| () => boolean` | Whether the NPC is important |
-| `special` | `boolean \| () => boolean` | Whether the NPC is special |
-| `loveInterest` | `boolean \| () => boolean` | Whether the NPC can be a love interest |
-| `romance` | `(() => boolean)[]` | Romance condition function list |
+| Field          | Type                               | Description                            |
+| -------------- | ---------------------------------- | -------------------------------------- |
+| `love`         | `{ maxValue: number }`             | Love/Like max value                    |
+| `loveAlias`    | `[string, string] \| () => string` | Love/Like alias (CN/EN)                |
+| `important`    | `boolean \| () => boolean`         | Whether the NPC is important           |
+| `special`      | `boolean \| () => boolean`         | Whether the NPC is special             |
+| `loveInterest` | `boolean \| () => boolean`         | Whether the NPC can be a love interest |
+| `romance`      | `(() => boolean)[]`                | Romance condition function list        |
 
 ## Pronoun System
 
 The framework has built-in complete pronoun mapping, supporting both Chinese and English:
 
 | Pronoun Type | Description | he(EN) | he(CN) |
-|--------------|-------------|--------|--------|
-| `m` | Male | he | 他 |
-| `f` | Female | she | 她 |
-| `i` | Non-person | it | 它 |
-| `n` | Neuter | they | 她 |
-| `t` | Plural | they | 他们 |
+| ------------ | ----------- | ------ | ------ |
+| `m`          | Male        | he     | 他     |
+| `f`          | Female      | she    | 她     |
+| `i`          | Non-person  | it     | 它     |
+| `n`          | Neuter      | they   | 她     |
+| `t`          | Plural      | they   | 他们   |
 
 Each pronoun type includes complete mappings for `he`, `his`, `hers`, `him`, `himself`, `man`, `boy`, `men`, etc.
 
@@ -93,8 +93,8 @@ Register custom NPC attributes via `addStats()`:
 maplebirch.npc.addStats({
   trust: {
     maxValue: 100,
-    position: 'last'  // 'first', 'last', or numeric index
-  }
+    position: "last", // 'first', 'last', or numeric index
+  },
 });
 ```
 
@@ -147,7 +147,7 @@ The NPCClothes submodule manages the NPC clothing system:
 
 ```js
 maplebirch.npc.addClothes({
-  name: 'customOutfit',
+  name: "customOutfit",
   // Clothing configuration...
 });
 ```
@@ -160,15 +160,16 @@ The NPCSchedules submodule manages NPC location schedules:
 
 ```js
 maplebirch.npc.addSchedule(
-  'MyNPC',           // NPC name
-  { hour: 8, minute: 0, endHour: 17, endMinute: 0 },  // Time condition
-  'shop',            // Location
-  'work_schedule',   // Schedule ID
-  { priority: 10 }   // Options
+  "MyNPC", // NPC name
+  { hour: 8, minute: 0, endHour: 17, endMinute: 0 }, // Time condition
+  "shop", // Location
+  "work_schedule", // Schedule ID
+  { priority: 10 }, // Options
 );
 ```
 
 The schedule system supports:
+
 - Time-based schedules
 - Condition-based schedules
 - Special schedules (with priority)

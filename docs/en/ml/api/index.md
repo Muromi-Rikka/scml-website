@@ -4,12 +4,12 @@ ModLoader exposes a public API to Mod developers via global objects for querying
 
 ## Global Objects
 
-| Global Object | Description |
-|---------------|-------------|
-| `window.modUtils` | Main API entry for Mod authors |
-| `window.modSC2DataManager` | Core data manager; low-level access |
-| `window.jsPreloader` | Script preloader |
-| `window.modAddonPluginManager` | Addon plugin manager |
+| Global Object                  | Description                         |
+| ------------------------------ | ----------------------------------- |
+| `window.modUtils`              | Main API entry for Mod authors      |
+| `window.modSC2DataManager`     | Core data manager; low-level access |
+| `window.jsPreloader`           | Script preloader                    |
+| `window.modAddonPluginManager` | Addon plugin manager                |
 
 ## API Categories
 
@@ -22,14 +22,14 @@ ModLoader exposes a public API to Mod developers via global objects for querying
 
 SC2 emits these jQuery events during gameplay. Mods can listen for them to react to game state:
 
-| Event | When Fired |
-|-------|------------|
-| `:storyready` | Game fully started |
-| `:passageinit` | New Passage context initializing |
-| `:passagestart` | New Passage starting to render |
-| `:passagerender` | New Passage render complete |
+| Event             | When Fired                            |
+| ----------------- | ------------------------------------- |
+| `:storyready`     | Game fully started                    |
+| `:passageinit`    | New Passage context initializing      |
+| `:passagestart`   | New Passage starting to render        |
+| `:passagerender`  | New Passage render complete           |
 | `:passagedisplay` | New Passage ready to insert into HTML |
-| `:passageend` | New Passage handling complete |
+| `:passageend`     | New Passage handling complete         |
 
 ### Listening Example
 

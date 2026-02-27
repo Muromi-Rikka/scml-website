@@ -4,11 +4,11 @@ ModLoader 生态使用 GitHub Actions 实现自动编译和发布。各仓库的
 
 ## 相关仓库
 
-| 仓库 | 说明 |
-|------|------|
-| [sugarcube-2_Vrelnir](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir) | 修改版 SC2 引擎，已注入 ModLoader 引导点 |
-| [sugarcube-2-ModLoader](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader) | ModLoader 本体及 Insert Tools |
-| [DoLModLoaderBuild](https://github.com/Lyoko-Jeremie/DoLModLoaderBuild) | 包含 ModLoader 和预置 Mod 的 DoL 自动构建版 |
+| 仓库                                                                            | 说明                                        |
+| ------------------------------------------------------------------------------- | ------------------------------------------- |
+| [sugarcube-2_Vrelnir](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir)     | 修改版 SC2 引擎，已注入 ModLoader 引导点    |
+| [sugarcube-2-ModLoader](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader) | ModLoader 本体及 Insert Tools               |
+| [DoLModLoaderBuild](https://github.com/Lyoko-Jeremie/DoLModLoaderBuild)         | 包含 ModLoader 和预置 Mod 的 DoL 自动构建版 |
 
 ## 修改版 SC2 引擎
 

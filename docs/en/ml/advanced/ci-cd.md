@@ -4,11 +4,11 @@ The ModLoader ecosystem uses GitHub Actions for builds and releases. Artifacts c
 
 ## Related Repositories
 
-| Repository | Description |
-|------------|-------------|
-| [sugarcube-2_Vrelnir](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir) | Modified SC2 engine with ModLoader bootstrap |
-| [sugarcube-2-ModLoader](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader) | ModLoader core and Insert Tools |
-| [DoLModLoaderBuild](https://github.com/Lyoko-Jeremie/DoLModLoaderBuild) | DoL build with ModLoader and built-in Mods |
+| Repository                                                                      | Description                                  |
+| ------------------------------------------------------------------------------- | -------------------------------------------- |
+| [sugarcube-2_Vrelnir](https://github.com/Lyoko-Jeremie/sugarcube-2_Vrelnir)     | Modified SC2 engine with ModLoader bootstrap |
+| [sugarcube-2-ModLoader](https://github.com/Lyoko-Jeremie/sugarcube-2-ModLoader) | ModLoader core and Insert Tools              |
+| [DoLModLoaderBuild](https://github.com/Lyoko-Jeremie/DoLModLoaderBuild)         | DoL build with ModLoader and built-in Mods   |
 
 ## Modified SC2 Engine
 

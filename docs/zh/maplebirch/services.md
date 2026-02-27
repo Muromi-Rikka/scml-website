@@ -8,50 +8,54 @@
 
 ### API
 
-| 方法 | 签名 | 说明 |
-|------|------|------|
-| `on` | `on(eventName, callback, description?)` | 注册事件监听器 |
-| `off` | `off(eventName, identifier)` | 移除监听器（按函数引用或描述） |
-| `once` | `once(eventName, callback, description?)` | 注册一次性监听器 |
-| `after` | `after(eventName, callback)` | 注册事件触发后的回调 |
-| `trigger` | `trigger(eventName, ...args)` | 触发事件（异步） |
+| 方法      | 签名                                      | 说明                           |
+| --------- | ----------------------------------------- | ------------------------------ |
+| `on`      | `on(eventName, callback, description?)`   | 注册事件监听器                 |
+| `off`     | `off(eventName, identifier)`              | 移除监听器（按函数引用或描述） |
+| `once`    | `once(eventName, callback, description?)` | 注册一次性监听器               |
+| `after`   | `after(eventName, callback)`              | 注册事件触发后的回调           |
+| `trigger` | `trigger(eventName, ...args)`             | 触发事件（异步）               |
 
 ### 便捷方法
 
 `MaplebirchCore` 代理了事件总线的方法，可直接在 `maplebirch` 上调用：
 
 ```js
-maplebirch.on(':passageend', () => {
-  // 每次 Passage 结束时执行
-}, 'my handler');
+maplebirch.on(
+  ":passageend",
+  () => {
+    // 每次 Passage 结束时执行
+  },
+  "my handler",
+);
 
-maplebirch.once(':storyready', () => {
+maplebirch.once(":storyready", () => {
   // 游戏启动后执行一次
 });
 
-maplebirch.off(':passageend', 'my handler');
+maplebirch.off(":passageend", "my handler");
 ```
 
 ### 内置事件
 
-| 事件名 | 触发时机 |
-|--------|---------|
-| `:IndexedDB` | IDB 存储注册时机 |
-| `:import` | 数据导入（语言文件等） |
-| `:allModule` | 所有模块注册完成 |
-| `:variable` | 变量可注入时机 |
-| `:onSave` | 存档时 |
-| `:onLoad` | 读档时 |
-| `:onLoadSave` | 加载存档完成 |
-| `:language` | 语言切换时 |
-| `:storyready` | 游戏完全启动 |
-| `:passageinit` | Passage 初始化 |
-| `:passagestart` | Passage 开始渲染 |
-| `:passagerender` | Passage 渲染结束 |
-| `:passagedisplay` | Passage 准备显示 |
-| `:passageend` | Passage 处理完成 |
-| `:sugarcube` | SugarCube 对象可用 |
-| `:modLoaderEnd` | ModLoader 加载结束 |
+| 事件名            | 触发时机               |
+| ----------------- | ---------------------- |
+| `:IndexedDB`      | IDB 存储注册时机       |
+| `:import`         | 数据导入（语言文件等） |
+| `:allModule`      | 所有模块注册完成       |
+| `:variable`       | 变量可注入时机         |
+| `:onSave`         | 存档时                 |
+| `:onLoad`         | 读档时                 |
+| `:onLoadSave`     | 加载存档完成           |
+| `:language`       | 语言切换时             |
+| `:storyready`     | 游戏完全启动           |
+| `:passageinit`    | Passage 初始化         |
+| `:passagestart`   | Passage 开始渲染       |
+| `:passagerender`  | Passage 渲染结束       |
+| `:passagedisplay` | Passage 准备显示       |
+| `:passageend`     | Passage 处理完成       |
+| `:sugarcube`      | SugarCube 对象可用     |
+| `:modLoaderEnd`   | ModLoader 加载结束     |
 
 ### `on` vs `once` vs `after`
 
@@ -65,12 +69,16 @@ maplebirch.off(':passageend', 'my handler');
 
 ```js
 // 注册自定义事件监听
-maplebirch.on(':myCustomEvent', (data) => {
-  console.log('收到数据:', data);
-}, 'my custom handler');
+maplebirch.on(
+  ":myCustomEvent",
+  (data) => {
+    console.log("收到数据:", data);
+  },
+  "my custom handler",
+);
 
 // 触发自定义事件
-await maplebirch.trigger(':myCustomEvent', { key: 'value' });
+await maplebirch.trigger(":myCustomEvent", { key: "value" });
 ```
 
 ## Logger 日志服务
@@ -79,12 +87,12 @@ await maplebirch.trigger(':myCustomEvent', { key: 'value' });
 
 ### 日志级别
 
-| 级别 | 值 | 标签 | 颜色 |
-|------|---|------|------|
-| DEBUG | 0 | `[调试]` | 灰色 |
-| INFO | 1 | `[信息]` | 绿色 |
-| WARN | 2 | `[警告]` | 橙色 |
-| ERROR | 3 | `[错误]` | 红色 |
+| 级别  | 值  | 标签     | 颜色 |
+| ----- | --- | -------- | ---- |
+| DEBUG | 0   | `[调试]` | 灰色 |
+| INFO  | 1   | `[信息]` | 绿色 |
+| WARN  | 2   | `[警告]` | 橙色 |
+| ERROR | 3   | `[错误]` | 红色 |
 
 默认级别为 `INFO`。设置为 `DEBUG` 后可以看到所有调试日志。
 
@@ -92,14 +100,14 @@ await maplebirch.trigger(':myCustomEvent', { key: 'value' });
 
 ```js
 // 通过 maplebirch 便捷方法
-maplebirch.log('这是一条信息', 'INFO');
-maplebirch.log('调试数据', 'DEBUG', someObject);
-maplebirch.log('出现警告', 'WARN');
-maplebirch.log('发生错误', 'ERROR');
+maplebirch.log("这是一条信息", "INFO");
+maplebirch.log("调试数据", "DEBUG", someObject);
+maplebirch.log("出现警告", "WARN");
+maplebirch.log("发生错误", "ERROR");
 
 // 设置日志级别
-maplebirch.LogLevel = 'DEBUG';  // 显示所有日志
-maplebirch.LogLevel = 'WARN';   // 仅显示警告和错误
+maplebirch.LogLevel = "DEBUG"; // 显示所有日志
+maplebirch.LogLevel = "WARN"; // 仅显示警告和错误
 ```
 
 ### 创建模块日志
@@ -107,9 +115,9 @@ maplebirch.LogLevel = 'WARN';   // 仅显示警告和错误
 使用 `createlog()` 创建带前缀的日志函数：
 
 ```js
-const log = maplebirch.tool.createlog('mymod');
-log('初始化完成');       // [maplebirch][信息] [mymod] 初始化完成
-log('详细信息', 'DEBUG'); // [maplebirch][调试] [mymod] 详细信息
+const log = maplebirch.tool.createlog("mymod");
+log("初始化完成"); // [maplebirch][信息] [mymod] 初始化完成
+log("详细信息", "DEBUG"); // [maplebirch][调试] [mymod] 详细信息
 ```
 
 ### IDB 配置
@@ -129,10 +137,10 @@ log('详细信息', 'DEBUG'); // [maplebirch][调试] [mymod] 详细信息
 
 ```js
 // 按键翻译
-const text = maplebirch.t('greeting');  // 返回当前语言的翻译
+const text = maplebirch.t("greeting"); // 返回当前语言的翻译
 
 // 自动翻译（反向查找）
-const translated = maplebirch.auto('Hello');  // 如果当前是 CN，返回 "你好"
+const translated = maplebirch.auto("Hello"); // 如果当前是 CN，返回 "你好"
 ```
 
 ### `t()` 方法
@@ -173,11 +181,12 @@ shop.welcome: 欢迎光临
 ### 切换语言
 
 ```js
-maplebirch.Language = 'CN';  // 切换到中文
-maplebirch.Language = 'EN';  // 切换到英文
+maplebirch.Language = "CN"; // 切换到中文
+maplebirch.Language = "EN"; // 切换到英文
 ```
 
 切换语言会：
+
 1. 更新 `LanguageManager.language`
 2. 清除翻译缓存
 3. 触发 `:language` 事件

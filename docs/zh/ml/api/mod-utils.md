@@ -19,7 +19,7 @@ const modNames = window.modUtils.getModListName();
 
 ```js
 // 找到返回 ModInfo，找不到返回 undefined
-const modInfo = window.modUtils.getMod('MyMod');
+const modInfo = window.modUtils.getMod("MyMod");
 ```
 
 ### getModZip(modName)
@@ -28,7 +28,7 @@ const modInfo = window.modUtils.getMod('MyMod');
 
 ```js
 // 找到返回 ModZipReader，找不到返回 undefined
-const zip = window.modUtils.getModZip('MyMod');
+const zip = window.modUtils.getModZip("MyMod");
 ```
 
 ### getNowRunningModName()
@@ -98,19 +98,19 @@ const modAInfo = window.modUtils.getMod(modAName);
 // modRef 默认为 undefined，设置为自定义对象即可暴露 API
 modAInfo.modRef = {
   funcA: () => {
-    console.log('modA funcA');
+    console.log("modA funcA");
   },
   objA: {
     a: 1,
     b: 2,
-  }
+  },
 };
 ```
 
 ### Mod B（后加载）—— 调用接口
 
 ```js
-const modAInfo = window.modUtils.getMod('Mod A Name');
+const modAInfo = window.modUtils.getMod("Mod A Name");
 
 // 必须先检查 Mod A 是否存在且已注册 modRef
 if (modAInfo && modAInfo.modRef) {

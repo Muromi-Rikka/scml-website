@@ -88,15 +88,15 @@ Variables 模块集成了 `migration` 工具来处理版本升级时的数据迁
 const migration = maplebirch.var.migration;
 
 // 注册迁移规则：从旧版本迁移到新版本
-migration.add('3.0.0', '3.1.0', (data) => {
+migration.add("3.0.0", "3.1.0", (data) => {
   // 迁移逻辑
   if (!data.newField) {
-    data.newField = 'defaultValue';
+    data.newField = "defaultValue";
   }
 });
 
 // 手动运行迁移
-migration.run(V.maplebirch, '3.2.0');
+migration.run(V.maplebirch, "3.2.0");
 ```
 
 ## 发色渐变

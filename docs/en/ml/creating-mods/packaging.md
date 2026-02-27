@@ -13,6 +13,7 @@ Simplest method: use a Zip-capable tool (e.g. [7-Zip](https://7-zip.org/)).
 **2.** In the directory containing `boot.json`, use the compression tool to **pack `boot.json` and all referenced files** into a zip.
 
 **3.** Set options:
+
 - **Format**: Zip
 - **Algorithm**: Deflate
 - **Compression level**: Higher is better
@@ -21,6 +22,7 @@ Simplest method: use a Zip-capable tool (e.g. [7-Zip](https://7-zip.org/)).
 **4.** Run the compression.
 
 **5.** Inspect the zip:
+
 - `boot.json` is at the **root**
 - Paths in `boot.json` **match** the zip layout
 - Compression is **Store or Deflate** only
@@ -34,10 +36,11 @@ Besides `.mod.zip`, ModLoader supports `.modpack` binary format. See [ModPack Fo
 :::
 
 :::danger Common mistakes
+
 - `boot.json` is not at zip root (nested in a folder)
 - Paths in `boot.json` don't match zip layout
 - Using an unsupported compression algorithm
-:::
+  :::
 
 ## Automated Packaging (Node.js)
 

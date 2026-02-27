@@ -22,33 +22,33 @@
 
 ```js
 // 注册普通模块
-maplebirch.register('myModule', {
+maplebirch.register("myModule", {
   Init() {
-    console.log('模块初始化');
-  }
+    console.log("模块初始化");
+  },
 });
 
 // 注册带依赖的模块
 maplebirch.register(
-  'myModule2',
+  "myModule2",
   {
     Init() {
-      console.log('依赖 var 和 tool 模块');
-    }
+      console.log("依赖 var 和 tool 模块");
+    },
   },
-  ['var', 'tool']
+  ["var", "tool"],
 );
 
 // 注册扩展模块
 maplebirch.register(
-  'myExtension',
+  "myExtension",
   {
     sayHello() {
-      return 'Hello World';
-    }
+      return "Hello World";
+    },
   },
   [],
-  'my-mod-name'
+  "my-mod-name",
 );
 ```
 
@@ -62,7 +62,7 @@ maplebirch.register(
 - **@return** 模块对象或 `undefined`。
 
 ```js
-const addonModule = maplebirch.getModule('addon');
+const addonModule = maplebirch.getModule("addon");
 ```
 
 ### dependencyGraph
@@ -87,8 +87,8 @@ console.log(graph.addon);
 // }
 
 // 查询依赖关系
-console.log('addon 的依赖:', graph.addon.dependencies);
-console.log('依赖 addon 的模块:', graph.addon.dependents);
+console.log("addon 的依赖:", graph.addon.dependencies);
+console.log("依赖 addon 的模块:", graph.addon.dependents);
 ```
 
 ---
@@ -97,13 +97,13 @@ console.log('依赖 addon 的模块:', graph.addon.dependents);
 
 每个模块在生命周期中可能处于以下状态：
 
-| 状态常量 | 值 | 说明 |
-|----------|---|------|
-| `REGISTERED` | 0 | 已注册，但未初始化 |
-| `LOADED` | 1 | 预初始化已完成 |
-| `MOUNTED` | 2 | 主初始化已完成 |
-| `EXTENSION` | 3 | 扩展模块，已挂载到框架实例 |
-| `ERROR` | 4 | 初始化过程中发生错误 |
+| 状态常量     | 值  | 说明                       |
+| ------------ | --- | -------------------------- |
+| `REGISTERED` | 0   | 已注册，但未初始化         |
+| `LOADED`     | 1   | 预初始化已完成             |
+| `MOUNTED`    | 2   | 主初始化已完成             |
+| `EXTENSION`  | 3   | 扩展模块，已挂载到框架实例 |
+| `ERROR`      | 4   | 初始化过程中发生错误       |
 
 ---
 
@@ -166,24 +166,24 @@ class MyModule {
   }
 
   preInit() {
-    console.log('MyModule 预初始化');
+    console.log("MyModule 预初始化");
     this.cache = new Map();
   }
 
   Init() {
-    console.log('MyModule 主初始化');
+    console.log("MyModule 主初始化");
     this.setup();
   }
 
   loadInit() {
-    console.log('MyModule 存档初始化');
+    console.log("MyModule 存档初始化");
     if (State.variables.myModuleData) {
       this.data = State.variables.myModuleData;
     }
   }
 
   postInit() {
-    console.log('MyModule 后初始化');
+    console.log("MyModule 后初始化");
     this.cleanup();
   }
 
@@ -196,12 +196,12 @@ class MyModule {
   }
 
   myFunction() {
-    return 'Hello from MyModule';
+    return "Hello from MyModule";
   }
 }
 
 // 注册模块
-maplebirch.register('myModule', new MyModule(maplebirch), ['addon', 'dynamic']);
+maplebirch.register("myModule", new MyModule(maplebirch), ["addon", "dynamic"]);
 ```
 
 ---
@@ -212,7 +212,7 @@ maplebirch.register('myModule', new MyModule(maplebirch), ['addon', 'dynamic']);
 
 ```js
 // 在注册时声明
-maplebirch.register('myModule', myModuleInstance, ['var', 'tool']);
+maplebirch.register("myModule", myModuleInstance, ["var", "tool"]);
 ```
 
 ### 依赖规则
@@ -225,8 +225,8 @@ maplebirch.register('myModule', myModuleInstance, ['var', 'tool']);
 
 ```js
 const graph = maplebirch.dependencyGraph;
-console.log('addon 模块的依赖:', graph.addon.dependencies);
-console.log('依赖 addon 的模块:', graph.addon.dependents);
+console.log("addon 模块的依赖:", graph.addon.dependencies);
+console.log("依赖 addon 的模块:", graph.addon.dependents);
 ```
 
 ---

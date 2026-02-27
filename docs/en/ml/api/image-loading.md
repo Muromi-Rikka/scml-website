@@ -7,17 +7,22 @@ ModLoader intercepts image requests via `HtmlTagSrcHook` so images can be loaded
 Since v1.6.0, ModLoader hooks into SC2's `Wikifier.Parser.add 'htmlTag'` to intercept image creation:
 
 ```js
-if (typeof window.modSC2DataManager !== 'undefined' &&
-    typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== 'undefined') {
-  if (tagName === 'img' && !el.getAttribute('src')?.startsWith('data:')) {
-    el.setAttribute('ML-src', el.getAttribute('src'));
-    el.removeAttribute('src');
-    window.modSC2DataManager.getHtmlTagSrcHook().doHook(el).catch(E => console.error(E));
+if (
+  typeof window.modSC2DataManager !== "undefined" &&
+  typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== "undefined"
+) {
+  if (tagName === "img" && !el.getAttribute("src")?.startsWith("data:")) {
+    el.setAttribute("ML-src", el.getAttribute("src"));
+    el.removeAttribute("src");
+    window.modSC2DataManager
+      .getHtmlTagSrcHook()
+      .doHook(el)
+      .catch((E) => console.error(E));
   }
 }
 
 // SC2 original (insert above this line)
-output.appendChild(tagName === 'track' ? el.cloneNode(true) : el);
+output.appendChild(tagName === "track" ? el.cloneNode(true) : el);
 ```
 
 All HTML `<img>` tags created by SC2 can now be intercepted and replaced. Previously, only canvas-drawn images were handled.
@@ -27,16 +32,24 @@ All HTML `<img>` tags created by SC2 can now be intercepted and replaced. Previo
 If you have an `HTMLImageElement`, you can let ModLoader handle its `src`:
 
 ```js
-const el = document.createElement('img');
-el.src = 'aaaa/bbbb/cccc/dddd.jpg';
+const el = document.createElement("img");
+el.src = "aaaa/bbbb/cccc/dddd.jpg";
 
-if (typeof window.modSC2DataManager !== 'undefined' &&
-    typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== 'undefined') {
-  if (el.tagName === 'img' && !el.hasAttribute('ML-src') &&
-      !el.getAttribute('src')?.startsWith('data:')) {
-    el.setAttribute('ML-src', el.getAttribute('src'));
-    el.removeAttribute('src');
-    window.modSC2DataManager.getHtmlTagSrcHook().doHook(el).catch(E => console.error(E));
+if (
+  typeof window.modSC2DataManager !== "undefined" &&
+  typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== "undefined"
+) {
+  if (
+    el.tagName === "img" &&
+    !el.hasAttribute("ML-src") &&
+    !el.getAttribute("src")?.startsWith("data:")
+  ) {
+    el.setAttribute("ML-src", el.getAttribute("src"));
+    el.removeAttribute("src");
+    window.modSC2DataManager
+      .getHtmlTagSrcHook()
+      .doHook(el)
+      .catch((E) => console.error(E));
   }
 }
 
@@ -52,13 +65,13 @@ Pass an image path and receive a Promise:
 // async-await
 const imageData = await window.modSC2DataManager
   .getHtmlTagSrcHook()
-  .requestImageBySrc('path/to/image');
+  .requestImageBySrc("path/to/image");
 
 // Promise
 window.modSC2DataManager
   .getHtmlTagSrcHook()
-  .requestImageBySrc('path/to/image')
-  .then(imageData => {
+  .requestImageBySrc("path/to/image")
+  .then((imageData) => {
     // Process image data
   });
 ```

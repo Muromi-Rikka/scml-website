@@ -22,33 +22,33 @@ Registers a module with the system.
 
 ```js
 // Register a basic module
-maplebirch.register('myModule', {
+maplebirch.register("myModule", {
   Init() {
-    console.log('Module initialized');
-  }
+    console.log("Module initialized");
+  },
 });
 
 // Register with dependencies
 maplebirch.register(
-  'myModule2',
+  "myModule2",
   {
     Init() {
-      console.log('Depends on var and tool');
-    }
+      console.log("Depends on var and tool");
+    },
   },
-  ['var', 'tool']
+  ["var", "tool"],
 );
 
 // Register an extension module
 maplebirch.register(
-  'myExtension',
+  "myExtension",
   {
     sayHello() {
-      return 'Hello World';
-    }
+      return "Hello World";
+    },
   },
   [],
-  'my-mod-name'
+  "my-mod-name",
 );
 ```
 
@@ -62,7 +62,7 @@ Returns the registered module instance.
 - **@return** Module object or `undefined`.
 
 ```js
-const addonModule = maplebirch.getModule('addon');
+const addonModule = maplebirch.getModule("addon");
 ```
 
 ### dependencyGraph
@@ -87,8 +87,8 @@ console.log(graph.addon);
 // }
 
 // Query dependencies
-console.log('addon dependencies:', graph.addon.dependencies);
-console.log('Modules depending on addon:', graph.addon.dependents);
+console.log("addon dependencies:", graph.addon.dependencies);
+console.log("Modules depending on addon:", graph.addon.dependents);
 ```
 
 ---
@@ -97,13 +97,13 @@ console.log('Modules depending on addon:', graph.addon.dependents);
 
 Each module can be in one of these states:
 
-| State constant | Value | Description |
-|----------------|-------|-------------|
-| `REGISTERED` | 0 | Registered but not yet initialized |
-| `LOADED` | 1 | Pre-initialization complete |
-| `MOUNTED` | 2 | Main initialization complete |
-| `EXTENSION` | 3 | Extension module, mounted on framework instance |
-| `ERROR` | 4 | Error during initialization |
+| State constant | Value | Description                                     |
+| -------------- | ----- | ----------------------------------------------- |
+| `REGISTERED`   | 0     | Registered but not yet initialized              |
+| `LOADED`       | 1     | Pre-initialization complete                     |
+| `MOUNTED`      | 2     | Main initialization complete                    |
+| `EXTENSION`    | 3     | Extension module, mounted on framework instance |
+| `ERROR`        | 4     | Error during initialization                     |
 
 ---
 
@@ -166,24 +166,24 @@ class MyModule {
   }
 
   preInit() {
-    console.log('MyModule preInit');
+    console.log("MyModule preInit");
     this.cache = new Map();
   }
 
   Init() {
-    console.log('MyModule Init');
+    console.log("MyModule Init");
     this.setup();
   }
 
   loadInit() {
-    console.log('MyModule loadInit');
+    console.log("MyModule loadInit");
     if (State.variables.myModuleData) {
       this.data = State.variables.myModuleData;
     }
   }
 
   postInit() {
-    console.log('MyModule postInit');
+    console.log("MyModule postInit");
     this.cleanup();
   }
 
@@ -196,12 +196,12 @@ class MyModule {
   }
 
   myFunction() {
-    return 'Hello from MyModule';
+    return "Hello from MyModule";
   }
 }
 
 // Register module
-maplebirch.register('myModule', new MyModule(maplebirch), ['addon', 'dynamic']);
+maplebirch.register("myModule", new MyModule(maplebirch), ["addon", "dynamic"]);
 ```
 
 ---
@@ -212,7 +212,7 @@ maplebirch.register('myModule', new MyModule(maplebirch), ['addon', 'dynamic']);
 
 ```js
 // When registering
-maplebirch.register('myModule', myModuleInstance, ['var', 'tool']);
+maplebirch.register("myModule", myModuleInstance, ["var", "tool"]);
 ```
 
 ### Dependency Rules
@@ -225,8 +225,8 @@ maplebirch.register('myModule', myModuleInstance, ['var', 'tool']);
 
 ```js
 const graph = maplebirch.dependencyGraph;
-console.log('addon dependencies:', graph.addon.dependencies);
-console.log('Modules depending on addon:', graph.addon.dependents);
+console.log("addon dependencies:", graph.addon.dependencies);
+console.log("Modules depending on addon:", graph.addon.dependents);
 ```
 
 ---

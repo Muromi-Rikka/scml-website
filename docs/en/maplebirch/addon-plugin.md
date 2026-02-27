@@ -7,8 +7,8 @@ AddonPlugin is the core module that integrates maplebirchFramework with the ModL
 The framework registers itself with ModLoader during the `inject_early` phase:
 
 ```js
-modAddonPluginManager.registerAddonPlugin('maplebirch', 'maplebirchAddon', this);
-modSC2DataManager.getModLoadController().addLifeTimeCircleHook('maplebirchFramework', this);
+modAddonPluginManager.registerAddonPlugin("maplebirch", "maplebirchAddon", this);
+modSC2DataManager.getModLoadController().addLifeTimeCircleHook("maplebirchFramework", this);
 ```
 
 Other mods register with the framework via the `addonPlugin` field in `boot.json`:
@@ -158,9 +158,7 @@ NPC configuration object with the following sub-items:
 ```json
 {
   "npc": {
-    "NamedNPC": [
-      [{ "nam": "MyNPC", "gender": "f" }, { "love": { "maxValue": 100 } }, {}]
-    ],
+    "NamedNPC": [[{ "nam": "MyNPC", "gender": "f" }, { "love": { "maxValue": 100 } }, {}]],
     "Stats": { "customStat": { "maxValue": 100 } },
     "Sidebar": {
       "clothes": ["npc/clothes.json"],

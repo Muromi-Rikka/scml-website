@@ -19,16 +19,16 @@ The framework is distributed as `.mod.zip` and loaded by ModLoader at startup. T
 
 The framework declares the following hard dependencies, all of which must be loaded before `maplebirch`:
 
-| Dependency | Minimum Version | Purpose |
-|------------|-----------------|---------|
-| ModLoader | >=2.0.0 | Core mod loader and lifecycle |
-| ModLoaderGui | >=1.0.0 | GUI panel host |
-| ModSubUiAngularJs | >=1.0.0 | AngularJS component registration (settings UI) |
-| ConflictChecker | >=1.0.0 | Mod conflict detection |
-| BeautySelectorAddon | >=2.0.0 | BSA image pipeline (NPC sidebar) |
-| ReplacePatcher | >=1.0.0 | Passage content replacement |
-| TweeReplacer | >=1.0.0 | Twee passage replacement |
-| GameVersion | >=0.5.7.0 | Game version detection |
+| Dependency          | Minimum Version | Purpose                                        |
+| ------------------- | --------------- | ---------------------------------------------- |
+| ModLoader           | >=2.0.0         | Core mod loader and lifecycle                  |
+| ModLoaderGui        | >=1.0.0         | GUI panel host                                 |
+| ModSubUiAngularJs   | >=1.0.0         | AngularJS component registration (settings UI) |
+| ConflictChecker     | >=1.0.0         | Mod conflict detection                         |
+| BeautySelectorAddon | >=2.0.0         | BSA image pipeline (NPC sidebar)               |
+| ReplacePatcher      | >=1.0.0         | Passage content replacement                    |
+| TweeReplacer        | >=1.0.0         | Twee passage replacement                       |
+| GameVersion         | >=0.5.7.0       | Game version detection                         |
 
 ## Core Capabilities
 
@@ -52,33 +52,33 @@ The framework provides the following core modules:
 
 All features are accessed through the `window.maplebirch` singleton:
 
-| Access Path | Type | Description |
-|-------------|------|-------------|
-| `maplebirch.addon` | AddonPlugin | Plugin system and lifecycle hooks |
-| `maplebirch.dynamic` | DynamicManager | Dynamic events (time/state/weather) |
-| `maplebirch.tool` | ToolCollection | Tool collection (console/random/macros/HTML/regions etc.) |
-| `maplebirch.audio` | AudioManager | Audio playback and management |
-| `maplebirch.var` | Variables | Variable management and migration |
-| `maplebirch.char` | Character | Character rendering layer system |
-| `maplebirch.npc` | NPCManager | Named NPC system |
-| `maplebirch.combat` | CombatManager | Combat system |
-| `maplebirch.gui` | GUIControl | GUI settings panel |
-| `maplebirch.lang` | LanguageManager | Internationalization and translation |
-| `maplebirch.idb` | IndexedDBService | IndexedDB storage |
-| `maplebirch.logger` | Logger | Logging service |
-| `maplebirch.tracer` | EventEmitter | Event bus |
+| Access Path          | Type             | Description                                               |
+| -------------------- | ---------------- | --------------------------------------------------------- |
+| `maplebirch.addon`   | AddonPlugin      | Plugin system and lifecycle hooks                         |
+| `maplebirch.dynamic` | DynamicManager   | Dynamic events (time/state/weather)                       |
+| `maplebirch.tool`    | ToolCollection   | Tool collection (console/random/macros/HTML/regions etc.) |
+| `maplebirch.audio`   | AudioManager     | Audio playback and management                             |
+| `maplebirch.var`     | Variables        | Variable management and migration                         |
+| `maplebirch.char`    | Character        | Character rendering layer system                          |
+| `maplebirch.npc`     | NPCManager       | Named NPC system                                          |
+| `maplebirch.combat`  | CombatManager    | Combat system                                             |
+| `maplebirch.gui`     | GUIControl       | GUI settings panel                                        |
+| `maplebirch.lang`    | LanguageManager  | Internationalization and translation                      |
+| `maplebirch.idb`     | IndexedDBService | IndexedDB storage                                         |
+| `maplebirch.logger`  | Logger           | Logging service                                           |
+| `maplebirch.tracer`  | EventEmitter     | Event bus                                                 |
 
 The following convenience properties are also exposed:
 
-| Property | Description |
-|----------|-------------|
-| `maplebirch.yaml` | `js-yaml` library (frozen) |
-| `maplebirch.howler` | `{ Howl, Howler }` object (frozen) |
-| `maplebirch.lodash` | `lodash-es` library |
-| `maplebirch.SugarCube` | SugarCube2 engine object |
-| `maplebirch.Language` | Current language (getter/setter) |
-| `maplebirch.LogLevel` | Log level (getter/setter) |
-| `maplebirch.gameVersion` | Current game version |
+| Property                 | Description                        |
+| ------------------------ | ---------------------------------- |
+| `maplebirch.yaml`        | `js-yaml` library (frozen)         |
+| `maplebirch.howler`      | `{ Howl, Howler }` object (frozen) |
+| `maplebirch.lodash`      | `lodash-es` library                |
+| `maplebirch.SugarCube`   | SugarCube2 engine object           |
+| `maplebirch.Language`    | Current language (getter/setter)   |
+| `maplebirch.LogLevel`    | Log level (getter/setter)          |
+| `maplebirch.gameVersion` | Current game version               |
 
 ## Modules & Features
 

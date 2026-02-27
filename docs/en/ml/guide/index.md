@@ -8,12 +8,12 @@
 
 Mods can be loaded from four sources, in this order:
 
-| Order | Source Type | Description |
-|------|-------------|-------------|
-| 1 | **local** | Mods embedded in the game HTML via the `insert2html` tool |
-| 2 | **remote** | Remote Mods specified by `modList.json` on a web server |
-| 3 | **localStorage** | Mods side-loaded via browser localStorage (size limited) |
-| 4 | **IndexDB** | Mods side-loaded via IndexedDB (main method for player uploads) |
+| Order | Source Type      | Description                                                     |
+| ----- | ---------------- | --------------------------------------------------------------- |
+| 1     | **local**        | Mods embedded in the game HTML via the `insert2html` tool       |
+| 2     | **remote**       | Remote Mods specified by `modList.json` on a web server         |
+| 3     | **localStorage** | Mods side-loaded via browser localStorage (size limited)        |
+| 4     | **IndexDB**      | Mods side-loaded via IndexedDB (main method for player uploads) |
 
 If the same Mod name exists in multiple sources, the later-loaded source overrides the earlier one.
 
@@ -38,6 +38,7 @@ Mod content in `tweeFileList`, `styleFileList`, and `scriptFileList` is merged i
 ### Dependency Checking
 
 Mods can declare version constraints on the following in `boot.json`'s `dependenceInfo` (see [Dependency Checking](./dependency-checking)):
+
 - Other Mods (ordinary dependencies)
 - ModLoader version
 - Game version (e.g., DoL version)

@@ -53,7 +53,7 @@ graph TD
 
 ```js
 // 注册模块，声明依赖 'tool'
-maplebirch.register('var', new Variables(maplebirch), ['tool']);
+maplebirch.register("var", new Variables(maplebirch), ["tool"]);
 ```
 
 ### 模块依赖图
@@ -71,16 +71,16 @@ graph LR
   npc --> combat["combat"]
 ```
 
-| 模块 | 注册名 | 依赖 |
-|------|-------|------|
-| AddonPlugin | `addon` | 无 |
-| DynamicManager | `dynamic` | `addon` |
-| ToolCollection | `tool` | `dynamic` |
-| AudioManager | `audio` | `tool` |
-| Variables | `var` | `tool` |
-| Character | `char` | `var` |
-| NPCManager | `npc` | `char` |
-| CombatManager | `combat` | `npc` |
+| 模块           | 注册名    | 依赖      |
+| -------------- | --------- | --------- |
+| AddonPlugin    | `addon`   | 无        |
+| DynamicManager | `dynamic` | `addon`   |
+| ToolCollection | `tool`    | `dynamic` |
+| AudioManager   | `audio`   | `tool`    |
+| Variables      | `var`     | `tool`    |
+| Character      | `char`    | `var`     |
+| NPCManager     | `npc`     | `char`    |
+| CombatManager  | `combat`  | `npc`     |
 
 ### Early Mount
 
@@ -95,7 +95,7 @@ graph LR
 第三方模块可以通过传递 `source` 参数注册为扩展模块：
 
 ```js
-maplebirch.register('myModule', myModuleInstance, [], 'MyModName');
+maplebirch.register("myModule", myModuleInstance, [], "MyModName");
 ```
 
 扩展模块直接挂载到 `maplebirch` 实例上，可通过 GUI 面板启用/禁用。
@@ -109,12 +109,12 @@ graph LR
   preInit --> Init --> loadInit --> postInit
 ```
 
-| 阶段 | 方法 | 触发时机 | 说明 |
-|------|------|---------|------|
-| 预初始化 | `preInit()` | `:allModule` 事件后 | 模块注册完成后的首次初始化 |
-| 主初始化 | `Init()` | `:passagestart` 事件 | 每次 Passage 开始时执行（仅首次） |
-| 存档初始化 | `loadInit()` | 加载存档后 | 读档时重新初始化状态 |
-| 后初始化 | `postInit()` | `Init` 或 `loadInit` 完成后 | 每次 Passage 的后处理 |
+| 阶段       | 方法         | 触发时机                    | 说明                              |
+| ---------- | ------------ | --------------------------- | --------------------------------- |
+| 预初始化   | `preInit()`  | `:allModule` 事件后         | 模块注册完成后的首次初始化        |
+| 主初始化   | `Init()`     | `:passagestart` 事件        | 每次 Passage 开始时执行（仅首次） |
+| 存档初始化 | `loadInit()` | 加载存档后                  | 读档时重新初始化状态              |
+| 后初始化   | `postInit()` | `Init` 或 `loadInit` 完成后 | 每次 Passage 的后处理             |
 
 ### 执行流程
 
@@ -145,13 +145,13 @@ sequenceDiagram
 
 每个模块在其生命周期中经历以下状态：
 
-| 状态 | 说明 |
-|------|------|
-| `REGISTERED` | 已注册，等待初始化 |
-| `LOADED` | Early Mount 完成或预初始化完成 |
-| `MOUNTED` | 主初始化完成，完全可用 |
-| `ERROR` | 初始化失败 |
-| `EXTENSION` | 扩展模块（第三方注册） |
+| 状态         | 说明                           |
+| ------------ | ------------------------------ |
+| `REGISTERED` | 已注册，等待初始化             |
+| `LOADED`     | Early Mount 完成或预初始化完成 |
+| `MOUNTED`    | 主初始化完成，完全可用         |
+| `ERROR`      | 初始化失败                     |
+| `EXTENSION`  | 扩展模块（第三方注册）         |
 
 ## 事件系统集成
 

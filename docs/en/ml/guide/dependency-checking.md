@@ -48,24 +48,24 @@ Declare dependencies in `boot.json` via the `dependenceInfo` array:
 
 ## Dependency Target Types
 
-| modName | Description |
-|---------|-------------|
-| **Other Mod name** | Dependency on an already-loaded Mod; version must satisfy constraint |
-| **ModLoader** | Dependency on ModLoader version |
-| **GameVersion** | Dependency on game version (e.g., DoL; requires an adapter like CheckGameVersion) |
+| modName            | Description                                                                       |
+| ------------------ | --------------------------------------------------------------------------------- |
+| **Other Mod name** | Dependency on an already-loaded Mod; version must satisfy constraint              |
+| **ModLoader**      | Dependency on ModLoader version                                                   |
+| **GameVersion**    | Dependency on game version (e.g., DoL; requires an adapter like CheckGameVersion) |
 
 ## Version Constraint Syntax
 
 Versions follow [Semantic Versioning](https://semver.org/lang/en/) and are validated with [semver](https://www.npmjs.com/package/semver):
 
-| Format | Meaning | Example |
-|--------|---------|---------|
-| `^x.y.z` | Compatible within same major version (recommended) | `^2.0.0` matches 2.x.x |
-| `=x.y.z` or `x.y.z` | Exact match | `=1.2.3` |
-| `>x.y.z` | Greater than | `>1.0.0` |
-| `>=x.y.z` | Greater or equal | `>=1.0.0` |
-| `<x.y.z` | Less than | `<2.0.0` |
-| `<=x.y.z` | Less or equal | `<=2.0.0` |
+| Format              | Meaning                                            | Example                |
+| ------------------- | -------------------------------------------------- | ---------------------- |
+| `^x.y.z`            | Compatible within same major version (recommended) | `^2.0.0` matches 2.x.x |
+| `=x.y.z` or `x.y.z` | Exact match                                        | `=1.2.3`               |
+| `>x.y.z`            | Greater than                                       | `>1.0.0`               |
+| `>=x.y.z`           | Greater or equal                                   | `>=1.0.0`              |
+| `<x.y.z`            | Less than                                          | `<2.0.0`               |
+| `<=x.y.z`           | Less or equal                                      | `<=2.0.0`              |
 
 :::tip
 For `GameVersion`, only the main version is compared; anything after the first `-` is ignored.

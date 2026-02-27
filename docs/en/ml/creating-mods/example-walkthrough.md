@@ -90,7 +90,7 @@ Macro.add("helloMod", {
   handler() {
     const text = this.args[0] || "HelloMod loaded!";
     $(document.createElement("span")).wiki(text).appendTo(this.output);
-  }
+  },
 });
 ```
 

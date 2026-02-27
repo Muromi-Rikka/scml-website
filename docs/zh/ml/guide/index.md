@@ -8,12 +8,12 @@
 
 Mod 可以从四种来源加载，按加载顺序排列：
 
-| 顺序 | 来源类型 | 说明 |
-|------|---------|------|
-| 1 | **local** | 通过 `insert2html` 工具内嵌到游戏 HTML 中的 Mod |
-| 2 | **remote** | 从 Web 服务器上的 `modList.json` 指定的远程 Mod |
-| 3 | **localStorage** | 通过浏览器 localStorage 旁加载的 Mod（有大小限制） |
-| 4 | **IndexDB** | 通过 IndexedDB 旁加载的 Mod（玩家上传的主要途径） |
+| 顺序 | 来源类型         | 说明                                               |
+| ---- | ---------------- | -------------------------------------------------- |
+| 1    | **local**        | 通过 `insert2html` 工具内嵌到游戏 HTML 中的 Mod    |
+| 2    | **remote**       | 从 Web 服务器上的 `modList.json` 指定的远程 Mod    |
+| 3    | **localStorage** | 通过浏览器 localStorage 旁加载的 Mod（有大小限制） |
+| 4    | **IndexDB**      | 通过 IndexedDB 旁加载的 Mod（玩家上传的主要途径）  |
 
 同名 Mod 存在覆盖关系：后加载的来源会覆盖先加载的同名 Mod。
 
@@ -38,6 +38,7 @@ Mod 中的 `tweeFileList`、`styleFileList` 和 `scriptFileList` 内容会在 Su
 ### 依赖检查
 
 Mod 可在 `boot.json` 的 `dependenceInfo` 中声明对以下目标的版本约束，详见[依赖检查](./dependency-checking)：
+
 - 其他 Mod（普通依赖）
 - ModLoader 自身版本
 - 游戏版本（如 DoL 的版本号）

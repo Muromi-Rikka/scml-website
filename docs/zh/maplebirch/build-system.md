@@ -4,27 +4,27 @@
 
 ## 构建工具链
 
-| 工具 | 用途 |
-|------|------|
-| [Rspack](https://rspack.dev) + SWC | TypeScript 编译与打包 |
-| [tsup](https://tsup.egoist.dev) | TypeScript 类型声明生成 |
-| [Bun](https://bun.sh) | 包管理器与脚本运行器 |
-| [oxlint](https://oxc.rs) | 代码检查 |
-| [oxfmt](https://oxc.rs) | 代码格式化 |
+| 工具                               | 用途                    |
+| ---------------------------------- | ----------------------- |
+| [Rspack](https://rspack.dev) + SWC | TypeScript 编译与打包   |
+| [tsup](https://tsup.egoist.dev)    | TypeScript 类型声明生成 |
+| [Bun](https://bun.sh)              | 包管理器与脚本运行器    |
+| [oxlint](https://oxc.rs)           | 代码检查                |
+| [oxfmt](https://oxc.rs)            | 代码格式化              |
 
 ## 构建命令
 
-| 命令 | 说明 |
-|------|------|
-| `bun run dev` | 启动开发服务器（端口 5678） |
-| `bun run build` | 生产构建（Rspack） |
-| `bun run build:dev` | 开发构建（含 source map） |
-| `bun run build:types` | 生成类型声明（tsup） |
-| `bun run package` | 打包为 `.mod.zip` |
-| `bun run build:all` | 完整构建流程（clean + build + types + package） |
-| `bun run clean` | 清理构建产物 |
-| `bun run lint` | 代码检查 |
-| `bun run fmt` | 代码格式化 |
+| 命令                  | 说明                                            |
+| --------------------- | ----------------------------------------------- |
+| `bun run dev`         | 启动开发服务器（端口 5678）                     |
+| `bun run build`       | 生产构建（Rspack）                              |
+| `bun run build:dev`   | 开发构建（含 source map）                       |
+| `bun run build:types` | 生成类型声明（tsup）                            |
+| `bun run package`     | 打包为 `.mod.zip`                               |
+| `bun run build:all`   | 完整构建流程（clean + build + types + package） |
+| `bun run clean`       | 清理构建产物                                    |
+| `bun run lint`        | 代码检查                                        |
+| `bun run fmt`         | 代码格式化                                      |
 
 ## Rspack 配置
 

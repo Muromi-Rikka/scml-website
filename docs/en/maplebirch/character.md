@@ -10,19 +10,19 @@ The framework intercepts the game's `Renderer.CanvasModels.main` model and deep-
 
 The framework provides the following layer overrides:
 
-| Layer | Function |
-|-------|----------|
-| `hair_sides` | Side hair mask support |
-| `hair_sides_close_up` | Side hair close-up (includes mask, srcfn, showfn, zfn, filtersfn) |
-| `hair_fringe` | Fringe mask support |
-| `hair_fringe_close_up` | Fringe close-up |
-| `freckles` | Freckles (facial style) |
-| `ears` | Ears (facial style) |
-| `eyes` / `sclera` | Eyes / Sclera |
-| `left_iris` / `right_iris` | Left/Right iris |
-| `eyelids` / `lashes` | Eyelids / Lashes |
-| `brows` / `mouth` / `blush` / `tears` | Brows / Mouth / Blush / Tears |
-| `makeup_*` | Makeup layers (eyeshadow, mascara, blush, lipstick, etc.) |
+| Layer                                 | Function                                                          |
+| ------------------------------------- | ----------------------------------------------------------------- |
+| `hair_sides`                          | Side hair mask support                                            |
+| `hair_sides_close_up`                 | Side hair close-up (includes mask, srcfn, showfn, zfn, filtersfn) |
+| `hair_fringe`                         | Fringe mask support                                               |
+| `hair_fringe_close_up`                | Fringe close-up                                                   |
+| `freckles`                            | Freckles (facial style)                                           |
+| `ears`                                | Ears (facial style)                                               |
+| `eyes` / `sclera`                     | Eyes / Sclera                                                     |
+| `left_iris` / `right_iris`            | Left/Right iris                                                   |
+| `eyelids` / `lashes`                  | Eyelids / Lashes                                                  |
+| `brows` / `mouth` / `blush` / `tears` | Brows / Mouth / Blush / Tears                                     |
+| `makeup_*`                            | Makeup layers (eyeshadow, mascara, blush, lipstick, etc.)         |
 
 ### Custom Layers
 
@@ -39,21 +39,21 @@ maplebirch.char.use({
     },
     zfn() {
       return 10;
-    }
-  }
+    },
+  },
 });
 ```
 
 Layer configuration supports the following properties:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `srcfn` | `(options) => string` | Returns image path |
-| `showfn` | `(options) => boolean` | Controls whether the layer is shown |
-| `zfn` | `(options) => number` | Returns Z-Index |
-| `masksrcfn` | `(options) => any` | Returns mask image path |
-| `filtersfn` | `(options) => string[]` | Returns list of filter names |
-| `animation` | `string` | Animation type |
+| Property    | Type                    | Description                         |
+| ----------- | ----------------------- | ----------------------------------- |
+| `srcfn`     | `(options) => string`   | Returns image path                  |
+| `showfn`    | `(options) => boolean`  | Controls whether the layer is shown |
+| `zfn`       | `(options) => number`   | Returns Z-Index                     |
+| `masksrcfn` | `(options) => any`      | Returns mask image path             |
+| `filtersfn` | `(options) => string[]` | Returns list of filter names        |
+| `animation` | `string`                | Animation type                      |
 
 ## Preprocessing and Postprocessing
 
@@ -61,18 +61,19 @@ Character supports registering pre- and post-processing functions that run in th
 
 ```js
 // Register preprocessing function
-maplebirch.char.use('pre', (options) => {
+maplebirch.char.use("pre", (options) => {
   // Modify options before rendering
-  options.custom_field = 'value';
+  options.custom_field = "value";
 });
 
 // Register postprocessing function
-maplebirch.char.use('post', (options) => {
+maplebirch.char.use("post", (options) => {
   // Process after rendering
 });
 ```
 
 The framework's built-in preprocessing functions will:
+
 - Inject mask value into `options.maplebirch.char.mask`
 - Process hair colour gradient filters
 
@@ -102,12 +103,12 @@ The `mask()` function is used to generate canvas mask images:
 const maskUrl = maplebirch.char.mask(x, swap, width, height);
 ```
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `x` | 0 | Mask split position offset |
-| `swap` | false | Whether to swap left and right masks |
-| `width` | 256 | Canvas width |
-| `height` | 256 | Canvas height |
+| Parameter | Default | Description                          |
+| --------- | ------- | ------------------------------------ |
+| `x`       | 0       | Mask split position offset           |
+| `swap`    | false   | Whether to swap left and right masks |
+| `width`   | 256     | Canvas width                         |
+| `height`  | 256     | Canvas height                        |
 
 Mask value is configured via `V.options.maplebirch.character.mask`.
 

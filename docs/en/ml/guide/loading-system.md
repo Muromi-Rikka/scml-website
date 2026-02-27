@@ -15,12 +15,12 @@ Mod loading starts when `SC2DataManager.startInit()` calls `ModLoader.loadMod()`
 
 ModLoader loads Mods from four sources, in this order:
 
-| Order | Source | Description |
-|------|--------|-------------|
-| 1 | HTML-embedded (local) | Mods packed into HTML via `insert2html` |
-| 2 | Remote server | Mods specified by `modList.json` on the web server |
-| 3 | localStorage | Side-loaded via browser localStorage (size limited) |
-| 4 | IndexedDB | Side-loaded via IndexedDB (main path for player uploads) |
+| Order | Source                | Description                                              |
+| ----- | --------------------- | -------------------------------------------------------- |
+| 1     | HTML-embedded (local) | Mods packed into HTML via `insert2html`                  |
+| 2     | Remote server         | Mods specified by `modList.json` on the web server       |
+| 3     | localStorage          | Side-loaded via browser localStorage (size limited)      |
+| 4     | IndexedDB             | Side-loaded via IndexedDB (main path for player uploads) |
 
 **Override rule**: If the same Mod exists in multiple sources, the later-loaded one wins. So remote overrides local, IndexedDB overrides remote and local.
 
@@ -43,6 +43,7 @@ The `inject_early` stage supports only synchronous operations; async operations 
 During this, loaded Mods can register the `ModLoadControllerCallback.canLoadThisMod` hook to decide whether later Mods may load (ModLoaderGui uses this for safe mode).
 
 **4.** Fire these hooks to notify all Mods that the current Mod has loaded:
+
 - `AddonPluginHookPoint.afterInjectEarlyLoad`
 - `ModLoadControllerCallback.afterModLoad`
 - `AddonPluginHookPoint.afterModLoad`

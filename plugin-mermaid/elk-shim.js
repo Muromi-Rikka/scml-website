@@ -7,8 +7,6 @@ const ELK =
   typeof globalThis !== "undefined" && globalThis.ELK
     ? globalThis.ELK
     : function ELKStub() {
-        throw new Error(
-          "ELK not loaded. Ensure /elk.bundled.js is loaded before the app."
-        );
+        throw new Error("ELK not loaded. Ensure /elk.bundled.js is loaded before the app.");
       };
 export default ELK;

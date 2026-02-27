@@ -7,8 +7,8 @@ AddonPlugin 是 maplebirchFramework 与 ModLoader 生命周期集成的核心模
 框架在 `inject_early` 阶段向 ModLoader 注册自身：
 
 ```js
-modAddonPluginManager.registerAddonPlugin('maplebirch', 'maplebirchAddon', this);
-modSC2DataManager.getModLoadController().addLifeTimeCircleHook('maplebirchFramework', this);
+modAddonPluginManager.registerAddonPlugin("maplebirch", "maplebirchAddon", this);
+modSC2DataManager.getModLoadController().addLifeTimeCircleHook("maplebirchFramework", this);
 ```
 
 其他 Mod 通过 `boot.json` 的 `addonPlugin` 字段注册到框架：
@@ -158,9 +158,7 @@ NPC 配置对象，包含以下子项：
 ```json
 {
   "npc": {
-    "NamedNPC": [
-      [{ "nam": "MyNPC", "gender": "f" }, { "love": { "maxValue": 100 } }, {}]
-    ],
+    "NamedNPC": [[{ "nam": "MyNPC", "gender": "f" }, { "love": { "maxValue": 100 } }, {}]],
     "Stats": { "customStat": { "maxValue": 100 } },
     "Sidebar": {
       "clothes": ["npc/clothes.json"],

@@ -20,13 +20,13 @@
 
 ```js
 // 基础用法
-maplebirch.t('ui_title'); // 输出: '地图编辑器' (当前语言为 CN 时)
+maplebirch.t("ui_title"); // 输出: '地图编辑器' (当前语言为 CN 时)
 
 // 英文模式下添加空格
-maplebirch.t('game_start', true); // 输出: 'Start ' (当前语言为 EN 时)
+maplebirch.t("game_start", true); // 输出: 'Start ' (当前语言为 EN 时)
 
 // 键不存在的情况
-maplebirch.t('nonexistent_key'); // 输出: '[nonexistent_key]'
+maplebirch.t("nonexistent_key"); // 输出: '[nonexistent_key]'
 ```
 
 ### auto(text)
@@ -38,15 +38,15 @@ maplebirch.t('nonexistent_key'); // 输出: '[nonexistent_key]'
 
 ```js
 // 从英文自动翻译到中文
-maplebirch.Language = 'CN';
-maplebirch.auto('Welcome to the game.'); // 输出: '欢迎来到游戏。'
+maplebirch.Language = "CN";
+maplebirch.auto("Welcome to the game."); // 输出: '欢迎来到游戏。'
 
 // 从中文自动翻译到英文
-maplebirch.Language = 'EN';
-maplebirch.auto('欢迎来到游戏。'); // 输出: 'Welcome to the game.'
+maplebirch.Language = "EN";
+maplebirch.auto("欢迎来到游戏。"); // 输出: 'Welcome to the game.'
 
 // 翻译文本不存在
-maplebirch.auto('Some unique untranslated text.'); // 输出原文本
+maplebirch.auto("Some unique untranslated text."); // 输出原文本
 ```
 
 ### Language 属性
@@ -58,11 +58,11 @@ maplebirch.auto('Some unique untranslated text.'); // 输出原文本
 const currentLang = maplebirch.Language;
 
 // 切换语言（会触发页面文本的重新渲染）
-maplebirch.Language = 'JA';
+maplebirch.Language = "JA";
 
 // 监听语言切换事件
-maplebirch.on(':language', () => {
-  console.log('语言已切换至:', maplebirch.Language);
+maplebirch.on(":language", () => {
+  console.log("语言已切换至:", maplebirch.Language);
 });
 ```
 
@@ -176,11 +176,11 @@ my-mod/
 ### YAML / YML 格式
 
 ```yaml
-ui_menu_start: '开始游戏'
-ui_menu_load: '加载游戏'
-ui_menu_settings: '设置'
-character_player_name: '艾莉丝'
-dialogue_merchant_greeting: '看看我的货物吧，旅行者！'
-item_potion_health_name: '生命药水'
-system_save_success: '游戏已保存。'
+ui_menu_start: "开始游戏"
+ui_menu_load: "加载游戏"
+ui_menu_settings: "设置"
+character_player_name: "艾莉丝"
+dialogue_merchant_greeting: "看看我的货物吧，旅行者！"
+item_potion_health_name: "生命药水"
+system_save_success: "游戏已保存。"
 ```

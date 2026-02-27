@@ -40,17 +40,18 @@ ModLoader 所需的唯一注入点位于 [sugarcube.js](https://github.com/Lyoko
 
 ```js
 jQuery(() => {
-  'use strict';
+  "use strict";
 
   const mainStart = () => {
     // 原来的 jQuery(() => {}) 的内容
   };
 
-  if (typeof window.modSC2DataManager !== 'undefined') {
-    window.modSC2DataManager.startInit()
+  if (typeof window.modSC2DataManager !== "undefined") {
+    window.modSC2DataManager
+      .startInit()
       .then(() => window.jsPreloader.startLoad())
       .then(() => mainStart())
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   } else {
@@ -121,11 +122,11 @@ flowchart LR
 
 ModLoader 向 Mod 脚本暴露三个全局对象：
 
-| 全局对象 | 类型 | 作用 |
-|---------|------|------|
+| 全局对象                   | 类型           | 作用                       |
+| -------------------------- | -------------- | -------------------------- |
 | `window.modSC2DataManager` | SC2DataManager | 核心协调器，持有所有子系统 |
-| `window.modUtils` | ModUtils | 面向 Mod 开发者的公共 API |
-| `window.jsPreloader` | JsPreloader | 在合并后执行 preload 脚本 |
+| `window.modUtils`          | ModUtils       | 面向 Mod 开发者的公共 API  |
+| `window.jsPreloader`       | JsPreloader    | 在合并后执行 preload 脚本  |
 
 ## 核心组件
 
@@ -200,6 +201,7 @@ ModLoader 与游戏的关系结构：
 ```
 
 打包流程：
+
 1. 构建修改版 SC2 引擎，获得 `format.js`
 2. 用 `format.js` 覆盖游戏项目的 `devTools/tweego/storyFormats/sugarcube-2/format.js`，编译游戏
 3. 用 `insert2html.js` 将 ModLoader 注入到游戏 HTML 中

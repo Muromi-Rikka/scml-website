@@ -4,27 +4,27 @@ This document introduces the maplebirchFramework build toolchain, build commands
 
 ## Build Toolchain
 
-| Tool | Purpose |
-|------|---------|
-| [Rspack](https://rspack.dev) + SWC | TypeScript compilation and bundling |
-| [tsup](https://tsup.egoist.dev) | TypeScript type declaration generation |
-| [Bun](https://bun.sh) | Package manager and script runner |
-| [oxlint](https://oxc.rs) | Code linting |
-| [oxfmt](https://oxc.rs) | Code formatting |
+| Tool                               | Purpose                                |
+| ---------------------------------- | -------------------------------------- |
+| [Rspack](https://rspack.dev) + SWC | TypeScript compilation and bundling    |
+| [tsup](https://tsup.egoist.dev)    | TypeScript type declaration generation |
+| [Bun](https://bun.sh)              | Package manager and script runner      |
+| [oxlint](https://oxc.rs)           | Code linting                           |
+| [oxfmt](https://oxc.rs)            | Code formatting                        |
 
 ## Build Commands
 
-| Command | Description |
-|---------|-------------|
-| `bun run dev` | Start dev server (port 5678) |
-| `bun run build` | Production build (Rspack) |
-| `bun run build:dev` | Development build (with source map) |
-| `bun run build:types` | Generate type declarations (tsup) |
-| `bun run package` | Package as `.mod.zip` |
-| `bun run build:all` | Full build workflow (clean + build + types + package) |
-| `bun run clean` | Clean build artifacts |
-| `bun run lint` | Run linter |
-| `bun run fmt` | Format code |
+| Command               | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| `bun run dev`         | Start dev server (port 5678)                          |
+| `bun run build`       | Production build (Rspack)                             |
+| `bun run build:dev`   | Development build (with source map)                   |
+| `bun run build:types` | Generate type declarations (tsup)                     |
+| `bun run package`     | Package as `.mod.zip`                                 |
+| `bun run build:all`   | Full build workflow (clean + build + types + package) |
+| `bun run clean`       | Clean build artifacts                                 |
+| `bun run lint`        | Run linter                                            |
+| `bun run fmt`         | Format code                                           |
 
 ## Rspack Configuration
 

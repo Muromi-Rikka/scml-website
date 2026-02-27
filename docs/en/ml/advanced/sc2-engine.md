@@ -16,17 +16,18 @@ The jQuery closure in `sugarcube.js` is modified to add ModLoader’s async wait
 
 ```js
 jQuery(() => {
-  'use strict';
+  "use strict";
 
   const mainStart = () => {
     // Original contents of jQuery(() => {})
   };
 
-  if (typeof window.modSC2DataManager !== 'undefined') {
-    window.modSC2DataManager.startInit()
+  if (typeof window.modSC2DataManager !== "undefined") {
+    window.modSC2DataManager
+      .startInit()
       .then(() => window.jsPreloader.startLoad())
       .then(() => mainStart())
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   } else {
@@ -54,12 +55,17 @@ Image creation (`img` and `svg`) is intercepted so all images can be loaded from
 In `Wikifier.Parser.add 'htmlTag'`:
 
 ```js
-if (typeof window.modSC2DataManager !== 'undefined' &&
-    typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== 'undefined') {
-  if (tagName === 'img' && !el.getAttribute('src')?.startsWith('data:')) {
-    el.setAttribute('ML-src', el.getAttribute('src'));
-    el.removeAttribute('src');
-    window.modSC2DataManager.getHtmlTagSrcHook().doHook(el).catch(E => console.error(E));
+if (
+  typeof window.modSC2DataManager !== "undefined" &&
+  typeof window.modSC2DataManager.getHtmlTagSrcHook?.()?.doHook !== "undefined"
+) {
+  if (tagName === "img" && !el.getAttribute("src")?.startsWith("data:")) {
+    el.setAttribute("ML-src", el.getAttribute("src"));
+    el.removeAttribute("src");
+    window.modSC2DataManager
+      .getHtmlTagSrcHook()
+      .doHook(el)
+      .catch((E) => console.error(E));
   }
 }
 ```

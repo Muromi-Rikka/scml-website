@@ -19,16 +19,16 @@ graph LR
 
 框架声明了以下硬依赖，全部需在 `maplebirch` 之前加载：
 
-| 依赖 | 最低版本 | 作用 |
-|------|---------|------|
-| ModLoader | >=2.0.0 | 核心模组加载器与生命周期 |
-| ModLoaderGui | >=1.0.0 | GUI 面板宿主 |
-| ModSubUiAngularJs | >=1.0.0 | AngularJS 组件注册（设置 UI） |
-| ConflictChecker | >=1.0.0 | 模组冲突检测 |
-| BeautySelectorAddon | >=2.0.0 | BSA 图片管线（NPC 侧边栏） |
-| ReplacePatcher | >=1.0.0 | Passage 内容替换 |
-| TweeReplacer | >=1.0.0 | Twee Passage 替换 |
-| GameVersion | >=0.5.7.0 | 游戏版本检测 |
+| 依赖                | 最低版本  | 作用                          |
+| ------------------- | --------- | ----------------------------- |
+| ModLoader           | >=2.0.0   | 核心模组加载器与生命周期      |
+| ModLoaderGui        | >=1.0.0   | GUI 面板宿主                  |
+| ModSubUiAngularJs   | >=1.0.0   | AngularJS 组件注册（设置 UI） |
+| ConflictChecker     | >=1.0.0   | 模组冲突检测                  |
+| BeautySelectorAddon | >=2.0.0   | BSA 图片管线（NPC 侧边栏）    |
+| ReplacePatcher      | >=1.0.0   | Passage 内容替换              |
+| TweeReplacer        | >=1.0.0   | Twee Passage 替换             |
+| GameVersion         | >=0.5.7.0 | 游戏版本检测                  |
 
 ## 核心能力
 
@@ -52,33 +52,33 @@ graph LR
 
 所有功能均通过 `window.maplebirch` 单例访问：
 
-| 访问路径 | 类型 | 说明 |
-|---------|------|------|
-| `maplebirch.addon` | AddonPlugin | 插件系统与生命周期钩子 |
-| `maplebirch.dynamic` | DynamicManager | 动态事件（时间/状态/天气） |
-| `maplebirch.tool` | ToolCollection | 工具集合（控制台/随机/宏/HTML/区域等） |
-| `maplebirch.audio` | AudioManager | 音频播放与管理 |
-| `maplebirch.var` | Variables | 变量管理与迁移 |
-| `maplebirch.char` | Character | 角色渲染图层系统 |
-| `maplebirch.npc` | NPCManager | 命名 NPC 系统 |
-| `maplebirch.combat` | CombatManager | 战斗系统 |
-| `maplebirch.gui` | GUIControl | GUI 设置面板 |
-| `maplebirch.lang` | LanguageManager | 国际化翻译 |
-| `maplebirch.idb` | IndexedDBService | IndexedDB 存储 |
-| `maplebirch.logger` | Logger | 日志服务 |
-| `maplebirch.tracer` | EventEmitter | 事件总线 |
+| 访问路径             | 类型             | 说明                                   |
+| -------------------- | ---------------- | -------------------------------------- |
+| `maplebirch.addon`   | AddonPlugin      | 插件系统与生命周期钩子                 |
+| `maplebirch.dynamic` | DynamicManager   | 动态事件（时间/状态/天气）             |
+| `maplebirch.tool`    | ToolCollection   | 工具集合（控制台/随机/宏/HTML/区域等） |
+| `maplebirch.audio`   | AudioManager     | 音频播放与管理                         |
+| `maplebirch.var`     | Variables        | 变量管理与迁移                         |
+| `maplebirch.char`    | Character        | 角色渲染图层系统                       |
+| `maplebirch.npc`     | NPCManager       | 命名 NPC 系统                          |
+| `maplebirch.combat`  | CombatManager    | 战斗系统                               |
+| `maplebirch.gui`     | GUIControl       | GUI 设置面板                           |
+| `maplebirch.lang`    | LanguageManager  | 国际化翻译                             |
+| `maplebirch.idb`     | IndexedDBService | IndexedDB 存储                         |
+| `maplebirch.logger`  | Logger           | 日志服务                               |
+| `maplebirch.tracer`  | EventEmitter     | 事件总线                               |
 
 此外还暴露了以下便捷属性：
 
-| 属性 | 说明 |
-|------|------|
-| `maplebirch.yaml` | `js-yaml` 库（冻结） |
-| `maplebirch.howler` | `{ Howl, Howler }` 对象（冻结） |
-| `maplebirch.lodash` | `lodash-es` 库 |
-| `maplebirch.SugarCube` | SugarCube2 引擎对象 |
-| `maplebirch.Language` | 当前语言（getter/setter） |
-| `maplebirch.LogLevel` | 日志级别（getter/setter） |
-| `maplebirch.gameVersion` | 当前游戏版本 |
+| 属性                     | 说明                            |
+| ------------------------ | ------------------------------- |
+| `maplebirch.yaml`        | `js-yaml` 库（冻结）            |
+| `maplebirch.howler`      | `{ Howl, Howler }` 对象（冻结） |
+| `maplebirch.lodash`      | `lodash-es` 库                  |
+| `maplebirch.SugarCube`   | SugarCube2 引擎对象             |
+| `maplebirch.Language`    | 当前语言（getter/setter）       |
+| `maplebirch.LogLevel`    | 日志级别（getter/setter）       |
+| `maplebirch.gameVersion` | 当前游戏版本                    |
 
 ## 模块与功能
 

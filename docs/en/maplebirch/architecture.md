@@ -53,7 +53,7 @@ Modules are registered via `maplebirch.register(name, module, dependencies)`. Ea
 
 ```js
 // Register module, declare dependency on 'tool'
-maplebirch.register('var', new Variables(maplebirch), ['tool']);
+maplebirch.register("var", new Variables(maplebirch), ["tool"]);
 ```
 
 ### Module Dependency Graph
@@ -71,16 +71,16 @@ graph LR
   npc --> combat["combat"]
 ```
 
-| Module | Registration Name | Dependencies |
-|--------|-------------------|--------------|
-| AddonPlugin | `addon` | None |
-| DynamicManager | `dynamic` | `addon` |
-| ToolCollection | `tool` | `dynamic` |
-| AudioManager | `audio` | `tool` |
-| Variables | `var` | `tool` |
-| Character | `char` | `var` |
-| NPCManager | `npc` | `char` |
-| CombatManager | `combat` | `npc` |
+| Module         | Registration Name | Dependencies |
+| -------------- | ----------------- | ------------ |
+| AddonPlugin    | `addon`           | None         |
+| DynamicManager | `dynamic`         | `addon`      |
+| ToolCollection | `tool`            | `dynamic`    |
+| AudioManager   | `audio`           | `tool`       |
+| Variables      | `var`             | `tool`       |
+| Character      | `char`            | `var`        |
+| NPCManager     | `npc`             | `char`       |
+| CombatManager  | `combat`          | `npc`        |
 
 ### Early Mount
 
@@ -95,7 +95,7 @@ The module system uses topological sort to determine initialization order, imple
 Third-party modules can be registered as extension modules by passing the `source` parameter:
 
 ```js
-maplebirch.register('myModule', myModuleInstance, [], 'MyModName');
+maplebirch.register("myModule", myModuleInstance, [], "MyModName");
 ```
 
 Extension modules are mounted directly to the `maplebirch` instance and can be enabled/disabled via the GUI panel.
@@ -109,12 +109,12 @@ graph LR
   preInit --> Init --> loadInit --> postInit
 ```
 
-| Phase | Method | Trigger | Description |
-|-------|--------|---------|-------------|
-| Pre-initialization | `preInit()` | After `:allModule` event | First initialization after module registration completes |
-| Main initialization | `Init()` | `:passagestart` event | Executed at each Passage start (only on first run) |
-| Save load initialization | `loadInit()` | After loading save | Re-initialize state when loading a save |
-| Post-initialization | `postInit()` | After `Init` or `loadInit` completes | Post-processing for each Passage |
+| Phase                    | Method       | Trigger                              | Description                                              |
+| ------------------------ | ------------ | ------------------------------------ | -------------------------------------------------------- |
+| Pre-initialization       | `preInit()`  | After `:allModule` event             | First initialization after module registration completes |
+| Main initialization      | `Init()`     | `:passagestart` event                | Executed at each Passage start (only on first run)       |
+| Save load initialization | `loadInit()` | After loading save                   | Re-initialize state when loading a save                  |
+| Post-initialization      | `postInit()` | After `Init` or `loadInit` completes | Post-processing for each Passage                         |
 
 ### Execution Flow
 
@@ -145,13 +145,13 @@ sequenceDiagram
 
 Each module goes through the following states during its lifecycle:
 
-| State | Description |
-|-------|-------------|
-| `REGISTERED` | Registered, awaiting initialization |
-| `LOADED` | Early Mount complete or pre-initialization complete |
-| `MOUNTED` | Main initialization complete, fully available |
-| `ERROR` | Initialization failed |
-| `EXTENSION` | Extension module (third-party registered) |
+| State        | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `REGISTERED` | Registered, awaiting initialization                 |
+| `LOADED`     | Early Mount complete or pre-initialization complete |
+| `MOUNTED`    | Main initialization complete, fully available       |
+| `ERROR`      | Initialization failed                               |
+| `EXTENSION`  | Extension module (third-party registered)           |
 
 ## Event System Integration
 

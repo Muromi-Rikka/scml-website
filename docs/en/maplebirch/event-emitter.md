@@ -21,7 +21,7 @@ Registers a persistent event listener.
 
 ```js
 // Listen for passage start
-maplebirch.on(':passagestart', () => console.log('New passage started!'), 'my passage listener');
+maplebirch.on(":passagestart", () => console.log("New passage started!"), "my passage listener");
 ```
 
 ### off(eventName, identifier)
@@ -33,9 +33,9 @@ Removes an existing event listener.
 - **@return** `boolean`: `true` if the listener was removed.
 
 ```js
-const handler = () => console.log('Handler');
-maplebirch.on(':passagestart', handler, 'my handler');
-maplebirch.off(':passagestart', handler);  // or maplebirch.off(':passagestart', 'my handler');
+const handler = () => console.log("Handler");
+maplebirch.on(":passagestart", handler, "my handler");
+maplebirch.off(":passagestart", handler); // or maplebirch.off(':passagestart', 'my handler');
 ```
 
 ### once(eventName, callback, description?)
@@ -46,9 +46,13 @@ Registers a one-time listener that is removed after the first trigger.
 - Useful for one-off initialization tasks.
 
 ```js
-maplebirch.once(':storyready', () => {
-  console.log('Game ready, initializing once');
-}, 'one-time init');
+maplebirch.once(
+  ":storyready",
+  () => {
+    console.log("Game ready, initializing once");
+  },
+  "one-time init",
+);
 ```
 
 ### trigger(eventName, ...args)
@@ -59,7 +63,7 @@ Fires the given event and runs all associated callbacks in registration order. S
 - **@param** `...args` (any): Arguments passed to each callback.
 
 ```js
-await maplebirch.trigger(':myCustomEvent', { key: 'value' });
+await maplebirch.trigger(":myCustomEvent", { key: "value" });
 ```
 
 ### after(eventName, callback)
@@ -70,8 +74,8 @@ Registers a callback that runs **once** after the **next** time the event fires.
 - **@param** `callback` (function): Callback to run.
 
 ```js
-maplebirch.after(':passagestart', () => {
-  console.log('Passage started, doing follow-up work');
+maplebirch.after(":passagestart", () => {
+  console.log("Passage started, doing follow-up work");
 });
 ```
 
@@ -79,11 +83,11 @@ maplebirch.after(':passagestart', () => {
 
 ## on vs once vs after
 
-| Method | When it runs | After execution |
-|--------|--------------|-----------------|
-| `on` | Every time the event fires | Stays registered |
-| `once` | First time the event fires | Removed |
-| `after` | Once, after the next event fire (including all `on` callbacks) | Removed |
+| Method  | When it runs                                                   | After execution  |
+| ------- | -------------------------------------------------------------- | ---------------- |
+| `on`    | Every time the event fires                                     | Stays registered |
+| `once`  | First time the event fires                                     | Removed          |
+| `after` | Once, after the next event fire (including all `on` callbacks) | Removed          |
 
 ---
 
@@ -91,24 +95,24 @@ maplebirch.after(':passagestart', () => {
 
 The framework defines these lifecycle events for hooking into key moments:
 
-| Event Name | Trigger Timing |
-|------------|----------------|
-| `:IndexedDB` | Before database initialization |
-| `:import` | During data import |
-| `:allModule` | All modules registered |
-| `:variable` | When variables are injectable |
-| `:onSave` | Game save |
-| `:onLoad` | Game load |
-| `:onLoadSave` | After save loaded |
-| `:language` | Language switch |
-| `:storyready` | Story fully initialized |
-| `:passageinit` | Passage initialization |
-| `:passagestart` | Passage start |
-| `:passagerender` | Passage render |
-| `:passagedisplay` | Passage display |
-| `:passageend` | Passage end |
-| `:sugarcube` | SugarCube object available |
-| `:modLoaderEnd` | ModLoader load complete |
+| Event Name        | Trigger Timing                 |
+| ----------------- | ------------------------------ |
+| `:IndexedDB`      | Before database initialization |
+| `:import`         | During data import             |
+| `:allModule`      | All modules registered         |
+| `:variable`       | When variables are injectable  |
+| `:onSave`         | Game save                      |
+| `:onLoad`         | Game load                      |
+| `:onLoadSave`     | After save loaded              |
+| `:language`       | Language switch                |
+| `:storyready`     | Story fully initialized        |
+| `:passageinit`    | Passage initialization         |
+| `:passagestart`   | Passage start                  |
+| `:passagerender`  | Passage render                 |
+| `:passagedisplay` | Passage display                |
+| `:passageend`     | Passage end                    |
+| `:sugarcube`      | SugarCube object available     |
+| `:modLoaderEnd`   | ModLoader load complete        |
 
 ---
 
@@ -117,9 +121,13 @@ The framework defines these lifecycle events for hooking into key moments:
 You can register and trigger custom events:
 
 ```js
-maplebirch.on(':myCustomEvent', (data) => {
-  console.log('Received:', data);
-}, 'my custom handler');
+maplebirch.on(
+  ":myCustomEvent",
+  (data) => {
+    console.log("Received:", data);
+  },
+  "my custom handler",
+);
 
-await maplebirch.trigger(':myCustomEvent', { key: 'value' });
+await maplebirch.trigger(":myCustomEvent", { key: "value" });
 ```

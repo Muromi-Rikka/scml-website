@@ -40,17 +40,18 @@ ModLoader's injection point is in [sugarcube.js](https://github.com/Lyoko-Jeremi
 
 ```js
 jQuery(() => {
-  'use strict';
+  "use strict";
 
   const mainStart = () => {
     // Original contents of jQuery(() => {})
   };
 
-  if (typeof window.modSC2DataManager !== 'undefined') {
-    window.modSC2DataManager.startInit()
+  if (typeof window.modSC2DataManager !== "undefined") {
+    window.modSC2DataManager
+      .startInit()
       .then(() => window.jsPreloader.startLoad())
       .then(() => mainStart())
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   } else {
@@ -121,11 +122,11 @@ flowchart LR
 
 ModLoader exposes three global objects to Mod scripts:
 
-| Global Object | Type | Purpose |
-|---------------|------|---------|
+| Global Object              | Type           | Purpose                               |
+| -------------------------- | -------------- | ------------------------------------- |
 | `window.modSC2DataManager` | SC2DataManager | Core coordinator, owns all subsystems |
-| `window.modUtils` | ModUtils | Public API for Mod authors |
-| `window.jsPreloader` | JsPreloader | Runs preload scripts after merge |
+| `window.modUtils`          | ModUtils       | Public API for Mod authors            |
+| `window.jsPreloader`       | JsPreloader    | Runs preload scripts after merge      |
 
 ## Core Components
 
@@ -166,6 +167,7 @@ Runs dependency checks during Mod load, validating that `dependenceInfo` constra
 ModLoader caches the original unmodified `tw-storydata` via `initSC2DataInfoCache()` at startup. Each `SC2DataInfo` exposes a read-only interface to game data.
 
 **Purpose**:
+
 - In earlyload and preload, Mod scripts can read raw or merged Passage/CSS/JS data
 - Earlyload sees raw data; preload sees merged data
 - Enables TweeReplacer, ReplacePatch, and similar Addons
@@ -199,6 +201,7 @@ Mod framework breakdown:
 ```
 
 Build steps:
+
 1. Build the modified SC2 engine to get `format.js`
 2. Override `devTools/tweego/storyFormats/sugarcube-2/format.js` with `format.js`, then compile the game
 3. Use `insert2html.js` to inject ModLoader into the game HTML

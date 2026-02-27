@@ -6,22 +6,22 @@ ModLoader provides hooks during load so Mods can register callbacks for specific
 
 These hooks come from the AddonPlugin system. Addon Mods register to respond to load events.
 
-| Hook | When Fired | Description |
-|------|------------|-------------|
-| `afterInjectEarlyLoad` | After each Mod's `inject_early` scripts run | Addon notified that early injection is done |
-| `afterModLoad` | After each Mod loads | Addon notified that a Mod has loaded |
-| `afterEarlyLoad` | After all Mods' `earlyload` scripts complete | All Mod JS loading and execution done |
-| `afterRegisterMod2Addon` | After all Mods are registered with Addons | Mod-to-Addon registration complete |
-| `beforePatchModToGame` | Before merging into `tw-storydata` | About to merge Mod data into the game |
-| `afterPatchModToGame` | After merge into `tw-storydata` | Mod data merged; TweeReplacer etc. run here |
-| `afterPreload` | After `preload` scripts run | Preload stage complete |
+| Hook                     | When Fired                                   | Description                                 |
+| ------------------------ | -------------------------------------------- | ------------------------------------------- |
+| `afterInjectEarlyLoad`   | After each Mod's `inject_early` scripts run  | Addon notified that early injection is done |
+| `afterModLoad`           | After each Mod loads                         | Addon notified that a Mod has loaded        |
+| `afterEarlyLoad`         | After all Mods' `earlyload` scripts complete | All Mod JS loading and execution done       |
+| `afterRegisterMod2Addon` | After all Mods are registered with Addons    | Mod-to-Addon registration complete          |
+| `beforePatchModToGame`   | Before merging into `tw-storydata`           | About to merge Mod data into the game       |
+| `afterPatchModToGame`    | After merge into `tw-storydata`              | Mod data merged; TweeReplacer etc. run here |
+| `afterPreload`           | After `preload` scripts run                  | Preload stage complete                      |
 
 ## AddonPluginHookPointExMustImplement
 
 Addon Mods **must implement** these interface methods.
 
-| Method | Description |
-|--------|-------------|
+| Method        | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
 | `registerMod` | Callback when a regular Mod registers; Addon records or acts accordingly |
 
 ## ModLoadController
@@ -43,11 +43,11 @@ During earlyload, ModLoader repeatedly calls `tryInitWaitingLazyLoadMod()` to ha
 
 Callbacks from `ModLoadController` for controlling load behavior.
 
-| Callback | When | Description |
-|----------|------|-------------|
-| `canLoadThisMod` | Before each Mod's `inject_early` | Return whether loading that Mod is allowed (e.g. safe mode) |
-| `afterModLoad` | After each Mod loads | Controller notified that Mod loaded |
-| `ModLoaderLoadEnd` | After ModLoader finishes loading | **Last hook**; Mods can do final setup here |
+| Callback           | When                             | Description                                                 |
+| ------------------ | -------------------------------- | ----------------------------------------------------------- |
+| `canLoadThisMod`   | Before each Mod's `inject_early` | Return whether loading that Mod is allowed (e.g. safe mode) |
+| `afterModLoad`     | After each Mod loads             | Controller notified that Mod loaded                         |
+| `ModLoaderLoadEnd` | After ModLoader finishes loading | **Last hook**; Mods can do final setup here                 |
 
 ## Hook Order
 
@@ -83,6 +83,7 @@ ModLoaderLoadEnd           → ModLoader fully done
 ## Async Support
 
 These hooks **support async** (awaits Promise completion):
+
 - `afterInjectEarlyLoad`
 - `afterModLoad`
 - `afterEarlyLoad`
@@ -90,6 +91,7 @@ These hooks **support async** (awaits Promise completion):
 - `ModLoaderLoadEnd`
 
 These hooks are **sync only**:
+
 - `canLoadThisMod` (must return a boolean immediately)
 
 :::tip

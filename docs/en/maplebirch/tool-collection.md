@@ -4,23 +4,23 @@ The ToolCollection module aggregates 8 sub-tool modules in a facade pattern, acc
 
 ## Submodule Overview
 
-| Access Path | Submodule | Description |
-|-------------|-----------|-------------|
-| `maplebirch.tool.console` | Console | Console cheat tools |
-| `maplebirch.tool.migration` | migration | Data migration tools |
-| `maplebirch.tool.rand` | randSystem | Random number system |
-| `maplebirch.tool.macro` | defineMacros | SugarCube2 macro definitions |
-| `maplebirch.tool.text` | htmlTools | HTML text tools |
-| `maplebirch.tool.zone` | zonesManager | Zones manager |
-| `maplebirch.tool.link` | applyLinkZone | Link zone handling |
-| `maplebirch.tool.other` | otherTools | Other tools |
+| Access Path                 | Submodule     | Description                  |
+| --------------------------- | ------------- | ---------------------------- |
+| `maplebirch.tool.console`   | Console       | Console cheat tools          |
+| `maplebirch.tool.migration` | migration     | Data migration tools         |
+| `maplebirch.tool.rand`      | randSystem    | Random number system         |
+| `maplebirch.tool.macro`     | defineMacros  | SugarCube2 macro definitions |
+| `maplebirch.tool.text`      | htmlTools     | HTML text tools              |
+| `maplebirch.tool.zone`      | zonesManager  | Zones manager                |
+| `maplebirch.tool.link`      | applyLinkZone | Link zone handling           |
+| `maplebirch.tool.other`     | otherTools    | Other tools                  |
 
 Additionally, there are convenience properties:
 
-| Property | Description |
-|----------|-------------|
-| `maplebirch.tool.createlog` | Create log functions with prefix |
-| `maplebirch.tool.utils` | Framework internal utility function set |
+| Property                    | Description                             |
+| --------------------------- | --------------------------------------- |
+| `maplebirch.tool.createlog` | Create log functions with prefix        |
+| `maplebirch.tool.utils`     | Framework internal utility function set |
 
 ## Console
 
@@ -41,7 +41,7 @@ const Migration = maplebirch.tool.migration;
 const m = new Migration();
 
 // 注册迁移规则
-m.add('1.0.0', '2.0.0', (data) => {
+m.add("1.0.0", "2.0.0", (data) => {
   // 从 1.0.0 迁移到 2.0.0 的逻辑
 });
 
@@ -67,9 +67,9 @@ Used to define and manage SugarCube2 macros:
 const macro = maplebirch.tool.macro;
 
 // 定义一个自定义宏
-macro.define('myMacro', function() {
+macro.define("myMacro", function () {
   // 宏实现
-  this.output.textContent = 'Hello from macro';
+  this.output.textContent = "Hello from macro";
 });
 ```
 
@@ -93,18 +93,18 @@ The zones manager handles widget registration and rendering for game interface a
 const zone = maplebirch.tool.zone;
 
 // 添加简单的 Twee 部件
-zone.addTo('sidebar', '<<myWidget>>');
+zone.addTo("sidebar", "<<myWidget>>");
 
 // 添加带条件的部件
-zone.addTo('sidebar', {
-  widget: '<<myWidget>>',
-  exclude: ['Combat'],       // 在这些 Passage 中排除
-  match: ['Home', 'Shop'],   // 仅在这些 Passage 中显示
-  passage: 'MyPassage'       // 指定 Passage
+zone.addTo("sidebar", {
+  widget: "<<myWidget>>",
+  exclude: ["Combat"], // 在这些 Passage 中排除
+  match: ["Home", "Shop"], // 仅在这些 Passage 中显示
+  passage: "MyPassage", // 指定 Passage
 });
 
 // 添加带优先级的部件（数字越小越靠前）
-zone.addTo('sidebar', [5, '<<myWidget>>']);
+zone.addTo("sidebar", [5, "<<myWidget>>"]);
 ```
 
 ### Shortcut Methods
@@ -113,7 +113,7 @@ ToolCollection provides two shortcut methods for direct access to common zones m
 
 ```js
 // 等价于 maplebirch.tool.zone.addTo(...)
-maplebirch.tool.addTo('sidebar', '<<myWidget>>');
+maplebirch.tool.addTo("sidebar", "<<myWidget>>");
 
 // 注册初始化函数
 maplebirch.tool.onInit(() => {
@@ -145,11 +145,11 @@ const other = maplebirch.tool.other;
 
 // 添加自定义特质
 other.addTraits({
-  title: '勇敢',
-  name: 'brave',
-  colour: 'green',
+  title: "勇敢",
+  name: "brave",
+  colour: "green",
   has: () => V.brave >= 1,
-  text: '角色展现出勇气'
+  text: "角色展现出勇气",
 });
 
 // 应用位置逻辑
@@ -161,10 +161,10 @@ other.applyBodywriting();
 
 ### Trait Interface
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `title` | `string` | Trait title |
-| `name` | `string` | Trait identifier (required) |
-| `colour` | `string` | Display color |
-| `has` | `Function \| string` | Ownership condition (function or expression string) |
-| `text` | `string` | Trait description text |
+| Field    | Type                 | Description                                         |
+| -------- | -------------------- | --------------------------------------------------- |
+| `title`  | `string`             | Trait title                                         |
+| `name`   | `string`             | Trait identifier (required)                         |
+| `colour` | `string`             | Display color                                       |
+| `has`    | `Function \| string` | Ownership condition (function or expression string) |
+| `text`   | `string`             | Trait description text                              |

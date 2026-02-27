@@ -7,6 +7,7 @@ Addons are special Mods that act as an extension layer. By centralizing common f
 Similar to RimWorld "Body Extension" or "Combat Extension" Mods, Addons inject and modify the game and expose new functionality for other Mods.
 
 Benefits of Addons:
+
 - Keeps ModLoader core small and generic
 - Separates game-specific features from SC2-tied ModLoader
 - Enables fast iteration and upgrades
@@ -18,9 +19,9 @@ Addon Mods must register during **EarlyLoad** (or **InjectEarlyLoad**):
 
 ```js
 window.modAddonPluginManager.registerAddonPlugin(
-  'AddonModName',   // Mod providing the plugin
-  'addonName',      // Plugin name
-  addonInstance     // Plugin instance (object implementing AddonPluginHookPointEx)
+  "AddonModName", // Mod providing the plugin
+  "addonName", // Plugin name
+  addonInstance, // Plugin instance (object implementing AddonPluginHookPointEx)
 );
 ```
 

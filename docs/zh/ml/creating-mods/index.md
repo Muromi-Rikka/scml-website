@@ -41,9 +41,7 @@ MyMod
   "scriptFileList": [],
   "tweeFileList": [],
   "imgFileList": [],
-  "additionFile": [
-    "readme.txt"
-  ]
+  "additionFile": ["readme.txt"]
 }
 ```
 

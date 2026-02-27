@@ -42,9 +42,7 @@ Register your Mod with maplebirch's AddonPlugin system via the `addonPlugin` fie
       "addonName": "maplebirchAddon",
       "modVersion": "^2.7.0",
       "params": {
-        "script": [
-          "mymod_framework.js"
-        ]
+        "script": ["mymod_framework.js"]
       }
     }
   ]
@@ -53,14 +51,14 @@ Register your Mod with maplebirch's AddonPlugin system via the `addonPlugin` fie
 
 The following configuration options are supported in `params`:
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `module` | `string[]` | JS files executed immediately after `inject_early` completes; not recommended unless necessary |
-| `script` | `string[]` | JS files executed after AddonPlugin processing completes (recommended) |
-| `language` | `boolean \| string[] \| object` | Language file configuration; see [AddonPlugin System](./addon-plugin) for details |
-| `audio` | `boolean \| string[]` | Audio file configuration |
-| `npc` | `object` | NPC configuration (named NPCs, sidebar, clothing, etc.) |
-| `framework` | `object \| object[]` | Framework-level configuration (traits, region parts, etc.) |
+| Parameter   | Type                            | Description                                                                                    |
+| ----------- | ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `module`    | `string[]`                      | JS files executed immediately after `inject_early` completes; not recommended unless necessary |
+| `script`    | `string[]`                      | JS files executed after AddonPlugin processing completes (recommended)                         |
+| `language`  | `boolean \| string[] \| object` | Language file configuration; see [AddonPlugin System](./addon-plugin) for details              |
+| `audio`     | `boolean \| string[]`           | Audio file configuration                                                                       |
+| `npc`       | `object`                        | NPC configuration (named NPCs, sidebar, clothing, etc.)                                        |
+| `framework` | `object \| object[]`            | Framework-level configuration (traits, region parts, etc.)                                     |
 
 ## Minimal Example
 
@@ -106,6 +104,7 @@ MyFirstMod/
     ├── cn.json
     └── en.json
 ```
+
 :::
 
 ## Difference Between `module` and `script`
@@ -119,10 +118,10 @@ Check whether the framework is available in your script:
 
 ```js
 if (window.maplebirch) {
-  console.log('maplebirch framework version:', window.maplebirch.meta.version);
+  console.log("maplebirch framework version:", window.maplebirch.meta.version);
   // Framework is ready, you can use its API
 } else {
-  console.error('maplebirch framework not loaded');
+  console.error("maplebirch framework not loaded");
 }
 ```
 

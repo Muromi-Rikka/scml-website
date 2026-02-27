@@ -88,15 +88,15 @@ The Variables module integrates the `migration` utility to handle data migration
 const migration = maplebirch.var.migration;
 
 // Register migration rule: migrate from old version to new version
-migration.add('3.0.0', '3.1.0', (data) => {
+migration.add("3.0.0", "3.1.0", (data) => {
   // Migration logic
   if (!data.newField) {
-    data.newField = 'defaultValue';
+    data.newField = "defaultValue";
   }
 });
 
 // Run migration manually
-migration.run(V.maplebirch, '3.2.0');
+migration.run(V.maplebirch, "3.2.0");
 ```
 
 ## Hair Colour Gradients

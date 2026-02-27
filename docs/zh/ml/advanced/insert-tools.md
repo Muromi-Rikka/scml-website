@@ -4,12 +4,12 @@ ModLoader 的 Insert Tools 是一组用于 Mod 打包、ModLoader 注入和 SC2 
 
 ## 工具列表
 
-| 工具 | 用途 |
-|------|------|
-| `insert2html.js` | 将 ModLoader 注入到游戏 HTML，并嵌入 modList.json 中的 Mod |
-| `packModZip.js` | 将 Mod 目录打包为 `.mod.zip` |
-| `sc2ReplaceTool.js` | 将新的 SC2 引擎（format.js）替换到已编译的游戏 HTML 中 |
-| `sc2PatchTool.js` | 对游戏 HTML 应用 SC2 引导点补丁（与 sc2ReplaceTool 配合使用） |
+| 工具                | 用途                                                          |
+| ------------------- | ------------------------------------------------------------- |
+| `insert2html.js`    | 将 ModLoader 注入到游戏 HTML，并嵌入 modList.json 中的 Mod    |
+| `packModZip.js`     | 将 Mod 目录打包为 `.mod.zip`                                  |
+| `sc2ReplaceTool.js` | 将新的 SC2 引擎（format.js）替换到已编译的游戏 HTML 中        |
+| `sc2PatchTool.js`   | 对游戏 HTML 应用 SC2 引导点补丁（与 sc2ReplaceTool 配合使用） |
 
 ## insert2html.js
 
@@ -23,11 +23,11 @@ node "<insert2html.js 路径>" "<游戏 HTML 路径>" "<modList.json 路径>" "<
 
 ### 参数
 
-| 参数 | 说明 |
-|------|------|
-| 游戏 HTML 路径 | 已编译的游戏 HTML 文件（需包含 SC2 引导点） |
-| modList.json 路径 | 预置 Mod 列表的 JSON 文件 |
-| BeforeSC2.js 路径 | ModLoader 核心脚本 |
+| 参数              | 说明                                        |
+| ----------------- | ------------------------------------------- |
+| 游戏 HTML 路径    | 已编译的游戏 HTML 文件（需包含 SC2 引导点） |
+| modList.json 路径 | 预置 Mod 列表的 JSON 文件                   |
+| BeforeSC2.js 路径 | ModLoader 核心脚本                          |
 
 ### 示例
 
@@ -55,8 +55,8 @@ node "<packModZip.js 路径>" "<boot.json 路径>"
 
 ### 参数
 
-| 参数 | 说明 |
-|------|------|
+| 参数           | 说明                      |
+| -------------- | ------------------------- |
 | boot.json 路径 | Mod 的 boot.json 文件路径 |
 
 ### 示例
@@ -86,9 +86,9 @@ node "<sc2ReplaceTool.js 路径>" "<游戏 HTML 路径>" "<format.js 路径>"
 
 ### 参数
 
-| 参数 | 说明 |
-|------|------|
-| 游戏 HTML 路径 | 已编译的游戏 HTML 文件 |
+| 参数           | 说明                                             |
+| -------------- | ------------------------------------------------ |
+| 游戏 HTML 路径 | 已编译的游戏 HTML 文件                           |
 | format.js 路径 | 修改版 SC2 的 format.js（包含 ModLoader 引导点） |
 
 ### 示例

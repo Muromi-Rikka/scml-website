@@ -41,9 +41,7 @@ Minimal `boot.json`:
   "scriptFileList": [],
   "tweeFileList": [],
   "imgFileList": [],
-  "additionFile": [
-    "readme.txt"
-  ]
+  "additionFile": ["readme.txt"]
 }
 ```
 

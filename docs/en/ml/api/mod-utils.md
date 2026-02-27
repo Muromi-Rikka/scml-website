@@ -19,7 +19,7 @@ Returns the Mod info object for the given name.
 
 ```js
 // Returns ModInfo if found, undefined otherwise
-const modInfo = window.modUtils.getMod('MyMod');
+const modInfo = window.modUtils.getMod("MyMod");
 ```
 
 ### getModZip(modName)
@@ -28,7 +28,7 @@ Returns the zip reader for the given Mod.
 
 ```js
 // Returns ModZipReader if found, undefined otherwise
-const zip = window.modUtils.getModZip('MyMod');
+const zip = window.modUtils.getModZip("MyMod");
 ```
 
 ### getNowRunningModName()
@@ -97,19 +97,19 @@ const modAInfo = window.modUtils.getMod(modAName);
 // modRef defaults to undefined; set to a custom object to expose API
 modAInfo.modRef = {
   funcA: () => {
-    console.log('modA funcA');
+    console.log("modA funcA");
   },
   objA: {
     a: 1,
     b: 2,
-  }
+  },
 };
 ```
 
 ### Mod B (loads later) — Call API
 
 ```js
-const modAInfo = window.modUtils.getMod('Mod A Name');
+const modAInfo = window.modUtils.getMod("Mod A Name");
 
 // Must check Mod A exists and has modRef registered
 if (modAInfo && modAInfo.modRef) {

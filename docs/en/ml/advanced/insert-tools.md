@@ -4,12 +4,12 @@ ModLoader’s Insert Tools are Node.js scripts for Mod packaging, ModLoader inje
 
 ## Tool List
 
-| Tool | Purpose |
-|------|---------|
-| `insert2html.js` | Inject ModLoader into game HTML and embed Mods from modList.json |
-| `packModZip.js` | Package a Mod directory into `.mod.zip` |
-| `sc2ReplaceTool.js` | Replace SC2 engine (format.js) in compiled game HTML |
-| `sc2PatchTool.js` | Apply SC2 bootstrap patch to game HTML (used with sc2ReplaceTool) |
+| Tool                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `insert2html.js`    | Inject ModLoader into game HTML and embed Mods from modList.json  |
+| `packModZip.js`     | Package a Mod directory into `.mod.zip`                           |
+| `sc2ReplaceTool.js` | Replace SC2 engine (format.js) in compiled game HTML              |
+| `sc2PatchTool.js`   | Apply SC2 bootstrap patch to game HTML (used with sc2ReplaceTool) |
 
 ## insert2html.js
 
@@ -23,11 +23,11 @@ node "<path to insert2html.js>" "<game HTML path>" "<modList.json path>" "<Befor
 
 ### Arguments
 
-| Argument | Description |
-|----------|-------------|
-| Game HTML path | Compiled game HTML (must include SC2 bootstrap) |
-| modList.json path | JSON file listing built-in Mods |
-| BeforeSC2.js path | ModLoader core script |
+| Argument          | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| Game HTML path    | Compiled game HTML (must include SC2 bootstrap) |
+| modList.json path | JSON file listing built-in Mods                 |
+| BeforeSC2.js path | ModLoader core script                           |
 
 ### Example
 
@@ -55,8 +55,8 @@ node "<path to packModZip.js>" "<path to boot.json>"
 
 ### Arguments
 
-| Argument | Description |
-|----------|-------------|
+| Argument       | Description                 |
+| -------------- | --------------------------- |
 | boot.json path | Path to the Mod’s boot.json |
 
 ### Example
@@ -86,9 +86,9 @@ node "<path to sc2ReplaceTool.js>" "<game HTML path>" "<format.js path>"
 
 ### Arguments
 
-| Argument | Description |
-|----------|-------------|
-| Game HTML path | Compiled game HTML |
+| Argument       | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| Game HTML path | Compiled game HTML                                    |
 | format.js path | Modified SC2 format.js (includes ModLoader bootstrap) |
 
 ### Example

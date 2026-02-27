@@ -1,6 +1,6 @@
 # 示例 Mod 教程
 
-本教程从零开始创建一个功能 Mod，涵盖 boot.json 编写、twee  passage、JS 脚本、CSS 样式、图片资源、打包和测试的完整流程。
+本教程从零开始创建一个功能 Mod，涵盖 boot.json 编写、twee passage、JS 脚本、CSS 样式、图片资源、打包和测试的完整流程。
 
 ## 目标
 
@@ -90,7 +90,7 @@ Macro.add("helloMod", {
   handler() {
     const text = this.args[0] || "HelloMod 已加载！";
     $(document.createElement("span")).wiki(text).appendTo(this.output);
-  }
+  },
 });
 ```
 
