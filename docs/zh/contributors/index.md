@@ -2,8 +2,6 @@
 
 感谢以下项目贡献者的付出，以下展示由 [contrib.rocks](https://contrib.rocks/) 生成。
 
----
-
 ## MapleBirch 框架 (SCML-DOL-maplebirchFramework)
 
 基于 Sugarcube2 ModLoader 的 DOL 模块化模组开发框架。
