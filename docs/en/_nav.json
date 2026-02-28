@@ -1,7 +1,1 @@
-[
-  { "text": "Guide", "link": "/ml/guide/", "activeMatch": "/ml/guide/" },
-  { "text": "API", "link": "/ml/api/", "activeMatch": "/ml/api/" },
-  { "text": "Creating Mods", "link": "/ml/creating-mods/", "activeMatch": "/ml/creating-mods/" },
-  { "text": "Advanced", "link": "/ml/advanced/", "activeMatch": "/ml/advanced/" },
-  { "text": "MapleBirch Framework", "link": "/maplebirch/", "activeMatch": "/maplebirch/" }
-]
+[{"text":"Guide","link":"/ml/guide/","activeMatch":"/ml/guide/"},{"text":"API","link":"/ml/api/","activeMatch":"/ml/api/"},{"text":"Creating Mods","link":"/ml/creating-mods/","activeMatch":"/ml/creating-mods/"},{"text":"Advanced","link":"/ml/advanced/","activeMatch":"/ml/advanced/"},{"text":"MapleBirch Framework","link":"/maplebirch/","activeMatch":"/maplebirch/"},{"text":"Contributors","link":"/contributors/","activeMatch":"/contributors/"}]
