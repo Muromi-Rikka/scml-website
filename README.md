@@ -31,7 +31,7 @@ Install dependencies:
 npm install
 ```
 
-For ELK-based Mermaid layout, the build copies `elk.bundled.js` from `elkjs` into `docs/public/` via `scripts/copy-elk.js` (runs automatically with `dev` and `build`).
+For ELK-based Mermaid layout, the build copies `elk.bundled.js` from `elkjs` into `docs/public/` via `scripts/copy-elk.ts` (runs automatically with `dev` and `build`).
 
 ## Scripts
 
@@ -58,7 +58,7 @@ For ELK-based Mermaid layout, the build copies `elk.bundled.js` from `elkjs` int
 │   ├── MermaidRender.tsx # React component for rendering
 │   └── elk-shim.js       # Shim for elkjs in the bundle
 ├── scripts/
-│   └── copy-elk.js       # Copies elk.bundled.js to docs/public
+│   └── copy-elk.ts       # Copies elk.bundled.js to docs/public
 ├── rspress.config.ts     # Rspress config (locales, plugins, theme)
 └── package.json
 ```

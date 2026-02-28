@@ -4,8 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/copy-elk.js && rspress build",
-    "dev": "node scripts/copy-elk.js && rspress dev",
+    "postinstall": "bun scripts/copy-elk.ts",
+    "build": "bun scripts/copy-elk.ts && rspress build",
+    "dev": "bun scripts/copy-elk.ts && rspress dev",
+    "update-elk": "bun scripts/copy-elk.ts",
     "preview": "rspress preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
@@ -13,15 +15,17 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
-    "@rspress/core": "^2.0.2",
-    "beautiful-mermaid": "^1.0.2",
+    "@rspress/core": "^2.0.3",
+    "beautiful-mermaid": "^1.1.3",
+    "elkjs": "^0.11.0",
     "rspress-plugin-reading-time": "^1.0.0"
   },
   "devDependencies": {
     "@rspress/plugin-llms": "^2.0.3",
     "@rspress/plugin-sitemap": "^2.0.3",
-    "@types/node": "^22.8.1",
-    "@types/react": "^19.2.13",
+    "@types/bun": "^1.3.9",
+    "@types/node": "^24.11.0",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "oxfmt": "^0.35.0",
     "oxlint": "^1.50.0",

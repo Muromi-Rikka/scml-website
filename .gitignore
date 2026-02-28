@@ -13,3 +13,4 @@ doc_build/
 !.vscode/extensions.json
 .idea
 github
+docs/public/elk.bundled.js
