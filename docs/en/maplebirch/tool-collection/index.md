@@ -22,6 +22,10 @@ Additionally, there are convenience properties:
 | `maplebirch.tool.createlog` | Create log functions with prefix        |
 | `maplebirch.tool.utils`     | Framework internal utility function set |
 
+## Global Utilities
+
+The framework mounts a set of utility functions on `window` for direct use: `clone`, `merge`, `equal`, `contains`, `random`, `either`, `SelectCase`, `convert`, `number`, `loadImage`, etc. See [Utilities](./utils) for details.
+
 ## Console
 
 Console tools provide developers with quick testing and debugging capabilities.

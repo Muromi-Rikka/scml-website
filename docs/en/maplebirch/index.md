@@ -92,6 +92,7 @@ The following convenience properties are also exposed:
   - [Time Events](./dynamic/time-events)
   - [Weather Events](./dynamic/weather-events)
 - **Tool Collection** ([Tool Collection](./tool-collection/index))
+  - [Utilities](./tool-collection/utils)
   - [Variable Migration](./variables#variable-migration-system)
   - [Random System](./tool-collection/rand-system)
   - [HTML Tools](./tool-collection/html-tools)
@@ -99,6 +100,13 @@ The following convenience properties are also exposed:
   - [Traits Registration](./tool-collection/traits)
   - [Location Config](./tool-collection/location)
   - [Bodywriting](./tool-collection/bodywriting)
+
+## Recent Updates (v3.1.11)
+
+- Improved framework execution timing
+- Fixed error when ModI18N mod is not installed
+- Earlier NPC module mounting
+- Optimized framework variable setup
 
 ## Next Steps
 

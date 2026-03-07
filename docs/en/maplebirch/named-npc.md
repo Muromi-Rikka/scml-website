@@ -110,33 +110,124 @@ The framework automatically handles NPC pregnancy system initialization. Based o
 
 ## NPC Sidebar
 
-The NPCSidebar submodule handles NPC sidebar model rendering with multi-layer configuration:
+The NPCSidebar submodule handles NPC sidebar rendering with two modes:
 
-- `base_layers` — Base body layers
-- `face_layers` — Face layers
-- `head_layers` — Head layers
-- `upper_layers` — Upper body layers
-- `lower_layers` — Lower body layers
-- `legs_layers` — Leg layers
-- `feet_layers` — Feet layers
-- `hands_layers` — Hand layers
-- `handheld_layers` — Handheld item layers
-- `neck_layers` — Neck layers
+1. **Static image mode** — Displays pre-drawn NPC static images
+2. **Dynamic model mode** — Renders NPC model based on in-game clothing system
 
-### Loading Layer Images from Mods
+### Static Image Mode
 
-Load via `boot.json` `npc.Sidebar` configuration:
+Place images at `img/ui/nnpc/[npc_name]/[image_name].[png|jpg|gif]`:
+
+- `[npc_name]`: NPC name (lowercase, e.g. luna, draven)
+- `[image_name]`: Image name, shown as display options in game
+
+Example:
+
+```
+img/ui/nnpc/luna/default.png
+img/ui/nnpc/luna/happy.png
+img/ui/nnpc/luna/angry.png
+```
+
+After registering `luna` in `boot.json`, these images are automatically available as sidebar options.
+
+### boot.json Configuration
 
 ```json
 {
-  "npc": {
-    "Sidebar": {
-      "image": ["img/npc/sidebar/"],
-      "config": ["npc/sidebar_config.json"],
-      "clothes": ["npc/clothes_config.json"]
+  "params": {
+    "npc": {
+      "Sidebar": {
+        "image": ["Elara", "Merlin", "Draven"],
+        "clothes": ["data/npc/elven_clothes.yaml", "data/npc/wizard_wardrobe.json"],
+        "config": ["data/npc/elara_sidebar.yaml", "data/npc/merlin_sidebar.json"]
+      }
     }
   }
 }
+```
+
+| Field     | Type     | Description                                                     |
+| --------- | -------- | --------------------------------------------------------------- |
+| `image`   | string[] | Static sidebar NPCs; reads images from `img/ui/nnpc/<npcName>/` |
+| `clothes` | string[] | NPC clothing config for dynamic model mode                      |
+| `config`  | string[] | Dynamic model layer config (YAML/JSON)                          |
+
+### Layer Configuration (YAML)
+
+```yaml
+# data/npc/elara_sidebar.yaml
+- name: "Elara" # Must match NPC system ID
+  body: "img/npc/elara/body.png" # Base body, foundation for all layers
+
+  head:
+    - { img: "img/npc/elara/hair.png", zIndex: auto } # auto = auto-compute order
+    - { img: "img/npc/elara/ears.png", zIndex: 7 }
+
+  face:
+    - { img: "img/npc/elara/face_default.png", zIndex: 10 }
+    - {
+        img: "img/npc/elara/blush.png",
+        zIndex: 12,
+        cond: "C.npc.Elara.mood === 'shy' || C.npc.Elara.mood === 'happy'",
+      }
+
+  upper:
+    - {
+        img: "img/npc/elara/top_default.png",
+        zIndex: 15,
+        cond: "maplebirch.npc.Clothes.worn('Elara').upper.name === 'elven_robe'",
+      }
+
+  lower:
+    - {
+        img: "img/npc/elara/skirt_default.png",
+        zIndex: 10,
+        cond: "maplebirch.npc.Clothes.worn('Elara').lower.name === 'elven_skirt'",
+      }
+```
+
+- `body` — Base layer
+- `head` / `face` / `upper` / `lower` — Logical layer groups
+- `zIndex` — Layer order; use `auto` for auto-computed order
+- `cond` — Condition expression; layer renders only when it evaluates to `true`
+
+### Layer Configuration (JSON)
+
+```json
+[
+  {
+    "name": "Elara",
+    "body": "img/npc/elara/body.png",
+    "head": [
+      { "img": "img/npc/elara/hair.png", "zIndex": "auto" },
+      { "img": "img/npc/elara/ears.png", "zIndex": 7 }
+    ],
+    "face": [
+      { "img": "img/npc/elara/face_default.png", "zIndex": 10 },
+      {
+        "img": "img/npc/elara/blush.png",
+        "zIndex": 12,
+        "cond": "C.npc.Elara.mood === 'shy' || C.npc.Elara.mood === 'happy'"
+      }
+    ],
+    "upper": [
+      {
+        "img": "img/npc/elara/top_default.png",
+        "zIndex": 15,
+        "cond": "maplebirch.npc.Clothes.worn('Elara').upper.name === 'elven_robe'"
+      }
+    ],
+    "lower": [
+      {
+        "img": "img/npc/elara/skirt_default.png",
+        "zIndex": 10,
+        "cond": "maplebirch.npc.Clothes.worn('Elara').lower.name === 'elven_skirt'"
+      }
+    ]
+  }
+]
 ```
 
 Images are automatically registered to the BeautySelectorAddon image pipeline.

@@ -28,6 +28,16 @@ img/ui/nnpc/[npc_name]/[image_name].[png|jpg|gif]
 - `[npc_name]`: NPC 名称(小写，如：luna, draven)
 - `[image_name]`: 图片名称，将在游戏中作为显示选项
 
+例如：
+
+```
+img/ui/nnpc/luna/default.png
+img/ui/nnpc/luna/happy.png
+img/ui/nnpc/luna/angry.png
+```
+
+当 `boot.json` 中注册了 `luna` 后，以上图片会自动作为侧边栏可选图片。
+
 ---
 
 ## 在 boot.json 中配置
@@ -64,11 +74,11 @@ img/ui/nnpc/[npc_name]/[image_name].[png|jpg|gif]
 
 ### 配置字段说明
 
-| 字段      | 类型     | 说明                                   |
-| --------- | -------- | -------------------------------------- |
-| `image`   | string[] | NPC 名称列表，系统自动加载其侧边栏图片 |
-| `clothes` | string[] | 服装配置文件路径(YAML/JSON)            |
-| `config`  | string[] | 侧边栏图层配置文件路径(YAML/JSON)      |
+| 字段      | 类型     | 说明                                                       |
+| --------- | -------- | ---------------------------------------------------------- |
+| `image`   | string[] | 静态侧边栏 NPC，读取 `img/ui/nnpc/<npcName>/` 目录中的图片 |
+| `clothes` | string[] | 动态模型模式使用的 NPC 服装配置                            |
+| `config`  | string[] | 动态模型图层配置 (YAML/JSON)                               |
 
 ---
 
@@ -78,17 +88,21 @@ img/ui/nnpc/[npc_name]/[image_name].[png|jpg|gif]
 
 ```yaml
 # data/npc/elara_sidebar.yaml
-- name: "Elara" # NPC名称
-  body: "img/npc/elara/body.png" # 基础身体图片
+- name: "Elara" # NPC名称，需要与NPC系统中的ID一致
+  body: "img/npc/elara/body.png" # 基础身体图片，所有图层的基础
 
   # 头部图层
   head:
-    - { img: "img/npc/elara/hair.png", zIndex: 5 }
+    # 头发图层
+    - { img: "img/npc/elara/hair.png", zIndex: auto } # auto 表示自动计算图层顺序
+    # 耳朵图层
     - { img: "img/npc/elara/ears.png", zIndex: 7 }
 
   # 面部图层
   face:
+    # 默认表情
     - { img: "img/npc/elara/face_default.png", zIndex: 10 }
+    # 条件图层：当NPC心情为 shy 或 happy 时显示
     - {
         img: "img/npc/elara/blush.png",
         zIndex: 12,
@@ -97,14 +111,74 @@ img/ui/nnpc/[npc_name]/[image_name].[png|jpg|gif]
 
   # 上半身服装
   upper:
+    # 当NPC穿 elven_robe 时显示
     - {
         img: "img/npc/elara/top_default.png",
         zIndex: 15,
         cond: "maplebirch.npc.Clothes.worn('Elara').upper.name === 'elven_robe'",
       }
+
+  # 下半身服装
+  lower:
+    # 当NPC穿 elven_skirt 时显示
+    - {
+        img: "img/npc/elara/skirt_default.png",
+        zIndex: 10,
+        cond: "maplebirch.npc.Clothes.worn('Elara').lower.name === 'elven_skirt'",
+      }
 ```
 
+**说明**：
+
+- `body` 为基础层
+- `head / face / upper / lower` 为逻辑图层组
+- `zIndex` 控制图层叠放顺序，可使用 `auto` 表示自动计算
+- `cond` 为条件表达式，返回 `true` 时图层才会渲染
+
+---
+
+### 侧边栏图层配置 (JSON)
+
+```json
+[
+  {
+    "name": "Elara",
+    "body": "img/npc/elara/body.png",
+    "head": [
+      { "img": "img/npc/elara/hair.png", "zIndex": "auto" },
+      { "img": "img/npc/elara/ears.png", "zIndex": 7 }
+    ],
+    "face": [
+      { "img": "img/npc/elara/face_default.png", "zIndex": 10 },
+      {
+        "img": "img/npc/elara/blush.png",
+        "zIndex": 12,
+        "cond": "C.npc.Elara.mood === 'shy' || C.npc.Elara.mood === 'happy'"
+      }
+    ],
+    "upper": [
+      {
+        "img": "img/npc/elara/top_default.png",
+        "zIndex": 15,
+        "cond": "maplebirch.npc.Clothes.worn('Elara').upper.name === 'elven_robe'"
+      }
+    ],
+    "lower": [
+      {
+        "img": "img/npc/elara/skirt_default.png",
+        "zIndex": 10,
+        "cond": "maplebirch.npc.Clothes.worn('Elara').lower.name === 'elven_skirt'"
+      }
+    ]
+  }
+]
+```
+
+---
+
 ### 服装配置文件 (YAML)
+
+以下为简化示例，用于快速定义服装套装。完整的动态模型服装配置基于游戏原始服装结构，需包含各 slot（如 `over_upper`、`upper`、`lower` 等）的完整属性定义。
 
 ```yaml
 # data/npc/elven_clothes.yaml

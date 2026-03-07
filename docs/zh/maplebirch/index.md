@@ -96,6 +96,7 @@ graph LR
   - [时间事件](./dynamic/time-events)
   - [天气事件](./dynamic/weather-events)
 - **工具合集**（[工具集合](./tool-collection/index)）
+  - [工具函数](./tool-collection/utils)
   - [变量迁移](./variables#变量迁移系统)
   - [随机数系统](./tool-collection/rand-system)
   - [文本工具](./tool-collection/html-tools)
@@ -103,6 +104,13 @@ graph LR
   - [特质注册](./tool-collection/traits)
   - [地点配置](./tool-collection/location)
   - [纹身注册](./tool-collection/bodywriting)
+
+## 最近更新 (v3.1.11)
+
+- 优化框架执行时机
+- 修复未安装 ModI18N 模组时出现的错误
+- 将 npc 模块的挂载提前
+- 优化框架变量的设置
 
 ## 下一步
 

@@ -22,6 +22,10 @@ ToolCollection 模块以门面模式聚合了 8 个子工具模块，通过 `map
 | `maplebirch.tool.createlog` | 创建带前缀的日志函数 |
 | `maplebirch.tool.utils`     | 框架内部工具函数集   |
 
+## 全局工具函数 (Utilities)
+
+框架将一组工具函数挂载到 `window` 上，可直接调用，包括 `clone`、`merge`、`equal`、`contains`、`random`、`either`、`SelectCase`、`convert`、`number`、`loadImage` 等。详见 [工具函数](./utils)。
+
 ## Console（控制台）
 
 控制台工具为开发者提供快速测试和调试能力。
