@@ -35,6 +35,7 @@ Option configuration is stored in `V.options.maplebirch` and remains consistent 
 {
   character: {
     mask: 0,
+    rotation: 0,  // Mask rotation angle, range -90 ~ 90
     charArt: {
       type: 'fringe',
       select: 'low-ombre',
@@ -59,6 +60,7 @@ Option configuration is stored in `V.options.maplebirch` and remains consistent 
     freckles: false,
     ears: 'back',
     mask: 0,
+    rotation: 0,  // Mask rotation angle
     nnpc: false,
     display: {}
   },

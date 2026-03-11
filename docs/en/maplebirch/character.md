@@ -100,17 +100,18 @@ The framework scans all loaded Mod zip files to auto-discover facial styles and 
 The `mask()` function is used to generate canvas mask images:
 
 ```js
-const maskUrl = maplebirch.char.mask(x, swap, width, height);
+const maskUrl = maplebirch.char.mask(x, rotation, swap, width, height);
 ```
 
-| Parameter | Default | Description                          |
-| --------- | ------- | ------------------------------------ |
-| `x`       | 0       | Mask split position offset           |
-| `swap`    | false   | Whether to swap left and right masks |
-| `width`   | 256     | Canvas width                         |
-| `height`  | 256     | Canvas height                        |
+| Parameter  | Default | Description                           |
+| ---------- | ------- | ------------------------------------- |
+| `x`        | 0       | Mask split position offset (pixels from center) |
+| `rotation` | 0       | Rotation angle, range -90° ~ 90°      |
+| `swap`     | false   | Whether to swap left and right masks  |
+| `width`    | 256     | Canvas width                          |
+| `height`   | 256     | Canvas height                         |
 
-Mask value is configured via `V.options.maplebirch.character.mask`.
+Mask values are configured via `V.options.maplebirch.character.mask` and `V.options.maplebirch.character.rotation`. For NPC sidebar, use `V.options.maplebirch.npcsidebar.mask` and `V.options.maplebirch.npcsidebar.rotation`.
 
 ## Hair Colour Gradients
 

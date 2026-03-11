@@ -105,13 +105,6 @@ graph LR
   - [地点配置](./tool-collection/location)
   - [纹身注册](./tool-collection/bodywriting)
 
-## 最近更新 (v3.1.11)
-
-- 优化框架执行时机
-- 修复未安装 ModI18N 模组时出现的错误
-- 将 npc 模块的挂载提前
-- 优化框架变量的设置
-
 ## 下一步
 
 - [快速开始](./getting-started) — 如何让你的 Mod 依赖并使用框架

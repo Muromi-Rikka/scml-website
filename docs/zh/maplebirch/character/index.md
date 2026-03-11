@@ -159,8 +159,21 @@ maplebirch.char.use({
 
 创建遮罩图片，用于控制图层的可见区域。
 
+**签名**：`mask(x = 0, rotation = 0, swap = false, width = 256, height = 256)`
+
+| 参数      | 默认值  | 说明                                       |
+| --------- | ------- | ------------------------------------------ |
+| `x`       | 0       | 分割线偏移（像素，相对中心），范围受 width 约束 |
+| `rotation`| 0       | 旋转角度，范围 -90° ~ 90°                  |
+| `swap`    | false   | 是否左右交换遮罩                           |
+| `width`   | 256     | 画布宽度                                   |
+| `height`  | 256     | 画布高度                                   |
+
+选项来源：`V.options.maplebirch.character.mask`、`V.options.maplebirch.character.rotation`；NPC 侧边栏使用 `V.options.maplebirch.npcsidebar.mask`、`V.options.maplebirch.npcsidebar.rotation`。
+
 ```javascript
-// 创建遮罩
-const halfMask = maplebirch.char.mask(0.5); // 50% 遮罩
-const reversedMask = maplebirch.char.mask(0.3, true); // 30% 反向遮罩
+// 中心分割，无旋转
+maplebirch.char.mask(0);
+// 向右偏移 50px，旋转 45°，反向遮罩
+maplebirch.char.mask(50, 45, true);
 ```

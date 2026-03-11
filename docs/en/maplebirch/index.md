@@ -101,13 +101,6 @@ The following convenience properties are also exposed:
   - [Location Config](./tool-collection/location)
   - [Bodywriting](./tool-collection/bodywriting)
 
-## Recent Updates (v3.1.11)
-
-- Improved framework execution timing
-- Fixed error when ModI18N mod is not installed
-- Earlier NPC module mounting
-- Optimized framework variable setup
-
 ## Next Steps
 
 - [Getting Started](./getting-started) — How to add framework dependency to your Mod and use it
