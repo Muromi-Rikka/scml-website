@@ -29,3 +29,7 @@ other.addTraits({
 
 other.applyLocation();
 ```
+
+## 说明
+
+框架对特质添加做了内部解析与去重，避免重复或错误覆盖。`maplebirch.tool.other.addTraits` 的用法保持不变。

@@ -101,6 +101,15 @@ The following convenience properties are also exposed:
   - [Location Config](./tool-collection/location)
   - [Bodywriting](./tool-collection/bodywriting)
 
+## Feature highlights
+
+- **Numeric clamping** — `number()` utility for range, rounding, step, and percent ([Utilities](./tool-collection/utils))
+- **Mask rotation** — Character and NPC sidebar masks support rotation angle (`mask` and options)
+- **Combat multi-slot** — Combat buttons can use an array of `actionType` to show in multiple slots ([Combat](./combat))
+- **Zone injection** — Use keys such as `MobileStats` to inject into mobile stats and other areas ([Zones Manager](./tool-collection/zones-manager))
+- **Stat and grace display** — Macros such as `statChange` and `grace` for numeric output ([SugarCube macros](./sugar-cube-macro))
+- **Pronouns with ModI18N** — When used with ModI18N, the framework corrects pronoun (his/hers) display for vanilla NPCs ([Named NPC](./named-npc))
+
 ## Next Steps
 
 - [Getting Started](./getting-started) — How to add framework dependency to your Mod and use it

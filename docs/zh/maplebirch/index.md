@@ -105,6 +105,15 @@ graph LR
   - [地点配置](./tool-collection/location)
   - [纹身注册](./tool-collection/bodywriting)
 
+## 功能要点
+
+- **数值修整** — `number()` 工具函数，支持范围、取整、步进、百分比（[工具函数](./tool-collection/utils)）
+- **遮罩旋转** — 角色与 NPC 侧边栏遮罩支持角度旋转（`mask` 的 `rotation` 与选项配置）
+- **战斗多部位** — 战斗按钮可指定多个 `actionType`，一次注册在多个部位显示（[战斗按钮](./combat/actions)）
+- **区域注入** — 使用 `MobileStats` 等键向移动端状态等区域注入内容（[区域管理](./tool-collection/zones-manager)）
+- **属性与恩惠显示** — macro 提供 `statChange`、`grace` 等数值片段输出（[SugarCube 宏](./sugar-cube-macro)）
+- **代词与 ModI18N** — 与 ModI18N 同用时，原版 NPC 的性别代词（his/hers）由框架统一修正（[NPC 注册](./named-npc/)）
+
 ## 下一步
 
 - [快速开始](./getting-started) — 如何让你的 Mod 依赖并使用框架

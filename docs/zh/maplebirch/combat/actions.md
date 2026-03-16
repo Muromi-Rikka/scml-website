@@ -26,6 +26,8 @@ actionType 只能是以下预设值之一：
 | `chestaction`  | 胸部动作 | 胸部     |
 | `thighaction`  | 大腿动作 | 大腿     |
 
+`actionType` 可为**单个字符串**或**字符串数组**（如 `['leftaction','rightaction']`），同一配置会在多个部位显示同一按钮。
+
 ### combatType 限制
 
 combatType 只能是以下预设值之一：
@@ -60,6 +62,19 @@ maplebirch.combat.CombatAction.reg({
   order: 0,
 });
 
+// 同一按钮在多个部位显示：actionType 使用数组
+maplebirch.combat.CombatAction.reg({
+  id: "dual_strike",
+  actionType: ["leftaction", "rightaction"],
+  cond: (ctx) => V.player.health > 0,
+  display: "双手斩击",
+  value: "dualStrike",
+  color: "red",
+  difficulty: "双手同时攻击",
+  combatType: "Default",
+  order: 0,
+});
+
 // 注册多个战斗按钮
 maplebirch.combat.CombatAction.reg(
   {
@@ -90,7 +105,7 @@ maplebirch.combat.CombatAction.reg(
 ```javascript
 {
   id: string,                          // 唯一标识符
-  actionType: string,                  // 必须是预设的 actionType
+  actionType: string | string[],      // 预设的 actionType，或数组以在多个部位显示
   cond: (ctx) => boolean,              // 显示条件函数
   display: string | (ctx) => string,   // 显示文本
   value: any,                          // 按钮对应的值

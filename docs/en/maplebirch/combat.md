@@ -4,22 +4,28 @@ The CombatManager module provides combat-related extension capabilities for Mods
 
 ## Combat Actions
 
-Register custom combat actions through the `CombatAction` submodule:
+Register custom combat actions through `CombatAction.reg()`. Use `maplebirch.combat.CombatAction.reg` or `maplebirchFrameworks.addAction`.
+
+**Registration** — pass one or more config objects:
 
 ```js
-const CombatAction = maplebirch.combat.CombatAction;
-
-// Register combat action
-CombatAction.register({
-  action: "myAction",
-  type: "Default",
-  name: "My Action",
-  color: "green",
-  difficulty: "<<myDifficultyWidget>>",
+maplebirch.combat.CombatAction.reg({
+  id: "custom_attack",
+  actionType: "leftaction",           // or ['leftaction','rightaction'] for multiple slots
+  cond: (ctx) => V.player.health > 0 && V.player.hasWeapon,
+  display: (ctx) => (V.player.weaponType === "sword" ? "Strike" : "Attack"),
+  value: "customAttack",
+  color: "white",
+  difficulty: "Easy",
+  combatType: "Default",
+  order: 0,
 });
 ```
 
-The `CombatAction` provides the following methods:
+- **actionType**: a single preset string (e.g. `leftaction`, `rightaction`) or an **array** of such strings; when using an array, the same button is shown in multiple body slots.
+- **combatType**: one of `Default`, `Self`, `Struggle`, `Swarm`, `Vore`, `Machine`, `Tentacle`.
+
+The `CombatAction` submodule also provides:
 
 | Method                                         | Description                                         |
 | ---------------------------------------------- | --------------------------------------------------- |

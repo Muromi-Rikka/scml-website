@@ -29,3 +29,7 @@ other.addTraits({
 
 other.applyLocation();
 ```
+
+## Note
+
+The framework resolves and deduplicates trait registration internally to avoid duplicate or incorrect overwrites. The `maplebirch.tool.other.addTraits` API is unchanged.

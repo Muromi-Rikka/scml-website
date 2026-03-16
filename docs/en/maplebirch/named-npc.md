@@ -85,6 +85,8 @@ The framework has built-in complete pronoun mapping, supporting both Chinese and
 
 Each pronoun type includes complete mappings for `he`, `his`, `hers`, `him`, `himself`, `man`, `boy`, `men`, etc.
 
+When used with ModI18N, the framework corrects pronoun (his/hers) display for some vanilla NPCs.
+
 ## Custom Attributes
 
 Register custom NPC attributes via `addStats()`:

@@ -304,3 +304,49 @@
 <<maplebirchReplace "SettingsOverlay" "title">>
 <<maplebirchReplace "SettingsOverlay" "customize">>
 ```
+
+---
+
+## 数值与状态显示宏
+
+以下宏由框架的 `maplebirch.tool.macro`（defineMacros）提供，用于在界面中输出属性变化或恩惠等数值片段。通常在自定义 widget 或脚本中调用。
+
+### statChange
+
+输出属性变化的带色文本片段（如「+ 5」「- 3」），常用于战斗、事件等场景的数值反馈。
+
+**签名**：`statChange(statType, amount, colorClass, condition)`
+
+| 参数         | 说明 |
+| ------------ | ---- |
+| `statType`   | 属性类型名称（如 `"Health"`、`"Arousal"`） |
+| `amount`     | 变化量，会先经 `Math.trunc` 取整 |
+| `colorClass` | 颜色类名（如 `"green"`、`"red"`），正负通常用不同颜色 |
+| `condition`  | 可选，函数 `() => boolean`；为 `false` 时不输出片段，默认 `() => true` |
+
+**行为**：
+
+- `amount` 会先被转为整数；若结果非有限数（如 `NaN`）或为 `0`，返回空文档片段，不输出任何内容。
+- 若 `V.settings.blindStatsEnabled` 为真（盲人模式）或 `condition()` 为 `false`，同样返回空片段。
+
+**返回值**：`DocumentFragment`，可插入 DOM 或由 widget 输出。
+
+---
+
+### grace
+
+输出恩惠（Grace）变化的带色片段，与庙宇等级系统配合使用。
+
+**签名**：`grace(amount, expectedRank?)`
+
+| 参数           | 说明 |
+| -------------- | ---- |
+| `amount`       | 恩惠变化量，会先取整；非有限数或为 0 时不输出 |
+| `expectedRank` | 可选。庙宇等级之一：`prospective`、`initiate`、`monk`、`priest`、`bishop`。用于控制显示条件（例如仅在玩家等级低于该等级时显示） |
+
+**行为**：
+
+- `amount` 取整规则同 `statChange`；盲人模式不显示。
+- 若玩家未加入庙宇或 `expectedRank` 与当前庙宇等级比较后不满足显示条件，则返回空片段；否则输出与 `statChange('Grace', amount, ...)` 类似的带色片段。
+
+**返回值**：`DocumentFragment`。

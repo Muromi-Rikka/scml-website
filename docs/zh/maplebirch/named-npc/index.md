@@ -6,6 +6,8 @@ NPC 系统允许模组制作者在游戏中添加自定义的非玩家角色(NPC
 
 _可通过 `maplebirch.npc.add` 或 `maplebirchFrameworks.addNPC` 来进行模组 NPC 的注册。_
 
+与 ModI18N 同时使用时，框架会修正部分原版 NPC 的性别代词（his/hers）显示。
+
 ---
 
 ## 基本语法
