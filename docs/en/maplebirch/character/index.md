@@ -124,13 +124,13 @@ Gradients are enabled via `hair_colour_style: 'gradient'` and `hair_colour_gradi
 - Blend mode (hard-light)
 - Adaptive by hairstyle and hair length
 
-## Transformation
+## Transformation System
 
-The `Transformation` submodule handles character transformation effects (such as wolf transformation), injecting custom logic by modifying game scripts.
+The Transformation system allows mod authors to add custom form changes (e.g. beast, divine, demon). See [Transformation](transformation) for full API and configuration.
 
 ```js
-// Transformation module is accessed via char.transformation
-maplebirch.char.transformation.inject();
+// Register via transformation.add or maplebirchFrameworks.addTransform
+maplebirch.char.transformation.add("dragon", "physical", { ... });
 ```
 
 ## Z-Index Reference

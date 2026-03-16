@@ -87,7 +87,7 @@ The following convenience properties are also exposed:
 - [**Language Manager**](./language-manager) — Internationalization and translation
 - [**Module System**](./module-system) — Module registration and lifecycle API
 - [**SugarCube Macros**](./sugar-cube-macro) — Multi-language and stat/grace macros
-- **Combat System** ([Combat](./combat)) — Combat actions, reactions, speech, buttons
+- **Combat System** ([Combat](./combat/actions)) — Combat actions, reactions, speech, buttons
 - **Dynamic Events** ([Dynamic Events](./dynamic/index))
   - [State Events](./dynamic/state-events)
   - [Time Events](./dynamic/time-events)
@@ -106,7 +106,7 @@ The following convenience properties are also exposed:
 
 - **Numeric clamping** — `number()` utility for range, rounding, step, and percent ([Utilities](./tool-collection/utils))
 - **Mask rotation** — Character and NPC sidebar masks support rotation angle (`mask` and options)
-- **Combat multi-slot** — Combat buttons can use an array of `actionType` to show in multiple slots ([Combat](./combat))
+- **Combat multi-slot** — Combat buttons can use an array of `actionType` to show in multiple slots ([Combat](./combat/actions))
 - **Zone injection** — Use keys such as `MobileStats` to inject into mobile stats and other areas ([Zones Manager](./tool-collection/zones-manager))
 - **Stat and grace display** — Macros such as `statChange` and `grace` for numeric output ([SugarCube macros](./sugar-cube-macro))
 - **Pronouns with ModI18N** — When used with ModI18N, the framework corrects pronoun (his/hers) display for vanilla NPCs ([Named NPC](./named-npc))
