@@ -7,6 +7,7 @@
   "language-manager",
   "module-system",
   "variables",
+  "sugar-cube-macro",
   "character",
   "named-npc",
   "combat",

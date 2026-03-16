@@ -86,6 +86,7 @@ The following convenience properties are also exposed:
 - [**Event Emitter**](./event-emitter) — Event publish/subscribe system
 - [**Language Manager**](./language-manager) — Internationalization and translation
 - [**Module System**](./module-system) — Module registration and lifecycle API
+- [**SugarCube Macros**](./sugar-cube-macro) — Multi-language and stat/grace macros
 - **Combat System** ([Combat](./combat)) — Combat actions, reactions, speech, buttons
 - **Dynamic Events** ([Dynamic Events](./dynamic/index))
   - [State Events](./dynamic/state-events)
