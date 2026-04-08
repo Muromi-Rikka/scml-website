@@ -70,11 +70,11 @@ Once `luna` is registered in `boot.json`, these images are available as sidebar 
 
 ### Field Reference
 
-| Field     | Type     | Description                                                |
-| --------- | -------- | ---------------------------------------------------------- |
-| `image`   | string[] | Static sidebar NPCs; images from `img/ui/nnpc/<npcName>/`  |
-| `clothes` | string[] | Clothing config for dynamic model mode                     |
-| `config`  | string[] | Dynamic model layer config (YAML/JSON)                      |
+| Field     | Type     | Description                                               |
+| --------- | -------- | --------------------------------------------------------- |
+| `image`   | string[] | Static sidebar NPCs; images from `img/ui/nnpc/<npcName>/` |
+| `clothes` | string[] | Clothing config for dynamic model mode                    |
+| `config`  | string[] | Dynamic model layer config (YAML/JSON)                    |
 
 ---
 
@@ -84,7 +84,7 @@ Once `luna` is registered in `boot.json`, these images are available as sidebar 
 
 ```yaml
 # data/npc/elara_sidebar.yaml
-- name: "Elara"   # Must match NPC system ID
+- name: "Elara" # Must match NPC system ID
   body: "img/npc/elara/body.png"
 
   head:

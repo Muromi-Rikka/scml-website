@@ -124,7 +124,7 @@ const currentVolume = audioManager.Volume; // 0.0 - 1.0
 audioManager.Volume = 0.8; // Set volume to 80%
 
 // Toggle mute
-audioManager.Mute = true;  // Mute
+audioManager.Mute = true; // Mute
 audioManager.Mute = false; // Unmute
 ```
 
@@ -134,9 +134,9 @@ audioManager.Mute = false; // Unmute
 // Playback mode constants
 const PlayMode = {
   SEQUENTIAL: "sequential", // Play in order
-  LOOP_ALL: "loop_all",     // Loop playlist
-  LOOP_ONE: "loop_one",     // Loop single track
-  SHUFFLE: "shuffle",       // Shuffle
+  LOOP_ALL: "loop_all", // Loop playlist
+  LOOP_ONE: "loop_one", // Loop single track
+  SHUFFLE: "shuffle", // Shuffle
 };
 
 // Set playback mode
@@ -188,11 +188,11 @@ playlist.mode(PlayMode.SHUFFLE);
 
 ## Audio Manager Properties
 
-| Property       | Type    | Description                    |
-| -------------- | ------- | ------------------------------ |
-| `Volume`       | number  | Current volume (0.0–1.0)       |
-| `Mute`         | boolean | Whether muted                  |
-| `PlayMode`     | string  | Current playback mode          |
-| `currentTime`  | number  | Current playback time (seconds) |
+| Property       | Type    | Description                      |
+| -------------- | ------- | -------------------------------- |
+| `Volume`       | number  | Current volume (0.0–1.0)         |
+| `Mute`         | boolean | Whether muted                    |
+| `PlayMode`     | string  | Current playback mode            |
+| `currentTime`  | number  | Current playback time (seconds)  |
 | `duration`     | number  | Current track duration (seconds) |
-| `currentTrack` | Track   | Currently playing track        |
+| `currentTrack` | Track   | Currently playing track          |

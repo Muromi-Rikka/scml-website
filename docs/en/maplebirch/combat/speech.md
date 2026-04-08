@@ -22,12 +22,7 @@ maplebirch.combat.Speech.reg(
 );
 
 // Multiple lines
-maplebirch.combat.Speech.reg(
-  "Draven",
-  () => V.combatTurn === 1,
-  '"Let\'s make this quick!"',
-  5,
-);
+maplebirch.combat.Speech.reg("Draven", () => V.combatTurn === 1, '"Let\'s make this quick!"', 5);
 maplebirch.combat.Speech.reg(
   "Draven",
   () => V.player.attackCount >= 3,

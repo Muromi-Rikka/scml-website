@@ -287,11 +287,11 @@ Outputs a coloured fragment for a stat change (e.g. "+ 5", "- 3"), often used in
 
 **Signature**: `statChange(statType, amount, colorClass, condition)`
 
-| Parameter     | Description |
-| ------------- | ----------- |
-| `statType`    | Stat name (e.g. `"Health"`, `"Arousal"`) |
-| `amount`     | Delta; converted with `Math.trunc` first |
-| `colorClass` | CSS class for colour (e.g. `"green"`, `"red"`) |
+| Parameter    | Description                                                             |
+| ------------ | ----------------------------------------------------------------------- |
+| `statType`   | Stat name (e.g. `"Health"`, `"Arousal"`)                                |
+| `amount`     | Delta; converted with `Math.trunc` first                                |
+| `colorClass` | CSS class for colour (e.g. `"green"`, `"red"`)                          |
 | `condition`  | Optional `() => boolean`; when `false`, no output; default `() => true` |
 
 **Behaviour**:
@@ -309,9 +309,9 @@ Outputs a coloured fragment for Grace changes, used with the temple rank system.
 
 **Signature**: `grace(amount, expectedRank?)`
 
-| Parameter     | Description |
-| ------------- | ----------- |
-| `amount`     | Grace delta; truncated like statChange; no output if not finite or 0 |
+| Parameter      | Description                                                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `amount`       | Grace delta; truncated like statChange; no output if not finite or 0                                                                       |
 | `expectedRank` | Optional. One of: `prospective`, `initiate`, `monk`, `priest`, `bishop`. Controls when to show (e.g. only when player rank is below this). |
 
 **Behaviour**:

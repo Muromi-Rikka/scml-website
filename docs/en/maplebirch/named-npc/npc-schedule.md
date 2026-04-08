@@ -31,8 +31,8 @@ _Register schedules via `maplebirch.npc.addSchedule` or `maplebirch.npc.addNPCSc
 
 ```javascript
 // Fixed time
-maplebirch.npc.addSchedule("Luna", 9, "school");              // at 9:00
-maplebirch.npc.addSchedule("Luna", [14, 16], "library");      // 14:00–16:00
+maplebirch.npc.addSchedule("Luna", 9, "school"); // at 9:00
+maplebirch.npc.addSchedule("Luna", [14, 16], "library"); // 14:00–16:00
 
 // Condition-based
 maplebirch.npc.addSchedule(
@@ -71,16 +71,16 @@ addSchedule(
 ### Single Time
 
 ```javascript
-maplebirch.npc.addSchedule("Robin", 8, "school");     // 8:00 at school
+maplebirch.npc.addSchedule("Robin", 8, "school"); // 8:00 at school
 maplebirch.npc.addSchedule("Robin", 12, "cafeteria"); // 12:00 at cafeteria
-maplebirch.npc.addSchedule("Robin", 18, "home");      // 18:00 at home
+maplebirch.npc.addSchedule("Robin", 18, "home"); // 18:00 at home
 ```
 
 ### Time Range
 
 ```javascript
-maplebirch.npc.addSchedule("Kylar", [9, 12], "library");   // 9–12 at library
-maplebirch.npc.addSchedule("Whitney", [13, 15], "gym");     // 13–15 at gym
+maplebirch.npc.addSchedule("Kylar", [9, 12], "library"); // 9–12 at library
+maplebirch.npc.addSchedule("Whitney", [13, 15], "gym"); // 13–15 at gym
 maplebirch.npc.addSchedule("Sydney", [19, 22], "dormitory"); // 19–22 at dormitory
 ```
 
@@ -91,15 +91,11 @@ maplebirch.npc.addSchedule("Sydney", [19, 22], "dormitory"); // 19–22 at dormi
 ### Time Conditions
 
 ```javascript
-maplebirch.npc.addSchedule(
-  "Eden",
-  (date) => date.isHour(6, 18),
-  "forest_clearing",
-);
+maplebirch.npc.addSchedule("Eden", (date) => date.isHour(6, 18), "forest_clearing");
 
 maplebirch.npc.addSchedule(
   "Black Wolf",
-  (date) => date.isBetween([20, 0], [6, 0]),  // 20:00–06:00
+  (date) => date.isBetween([20, 0], [6, 0]), // 20:00–06:00
   "wolf_cave",
 );
 ```
@@ -131,8 +127,7 @@ maplebirch.npc.addSchedule(
 
 maplebirch.npc.addSchedule(
   "Whitney",
-  (date) =>
-    C.npc.Whitney?.love >= 30 && date.weekEnd && date.hour >= 18,
+  (date) => C.npc.Whitney?.love >= 30 && date.weekEnd && date.hour >= 18,
   "arcade",
 );
 ```
@@ -193,13 +188,9 @@ maplebirch.npc.addSchedule(
 );
 
 // after: runs after another schedule
-maplebirch.npc.addSchedule(
-  "EveningStudy",
-  (date) => date.isHour(20),
-  "library",
-  "evening_study",
-  { after: "dinner" },
-);
+maplebirch.npc.addSchedule("EveningStudy", (date) => date.isHour(20), "library", "evening_study", {
+  after: "dinner",
+});
 ```
 
 ---

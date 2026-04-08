@@ -39,9 +39,7 @@ maplebirch.combat.Reaction.regReaction("crossdress", "Draven", {
     }
   },
   affter: () =>
-    V.player.charisma >= 15
-      ? "<<set $dravenIntrigued = true>>"
-      : "<<set $dravenDisgusted = true>>",
+    V.player.charisma >= 15 ? "<<set $dravenIntrigued = true>>" : "<<set $dravenDisgusted = true>>",
 });
 ```
 
@@ -62,11 +60,7 @@ maplebirch.combat.Reaction.reg(
   "herm",
   "CustomNPC",
   () => {
-    return (
-      V.player.isHerm &&
-      !V.customnpcSeen.includes("herm") &&
-      V.encounterType === "special"
-    );
+    return V.player.isHerm && !V.customnpcSeen.includes("herm") && V.encounterType === "special";
   },
   () => {
     V.customnpcSeen.pushUnique("herm");
@@ -82,8 +76,7 @@ maplebirch.combat.Reaction.reg(
 ```javascript
 // Herm reaction for an elven NPC
 maplebirch.combat.Reaction.regReaction("herm", "ElvenQueen", {
-  before:
-    '<<set _queenMood = V.elfReputation >= 50 ? "accepting" : "disdainful">>',
+  before: '<<set _queenMood = V.elfReputation >= 50 ? "accepting" : "disdainful">>',
   texts: (lang, single) => {
     const mood = V._queenMood;
 

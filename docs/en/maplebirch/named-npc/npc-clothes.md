@@ -163,7 +163,7 @@ maplebirch.npc.Clothes.register(
   () => V.time.hour >= 18 || V.time.hour <= 8,
 );
 
-maplebirch.npc.Clothes.register("Luna", "*", "casual_outfit");  // Default
+maplebirch.npc.Clothes.register("Luna", "*", "casual_outfit"); // Default
 
 // 3. Get current outfit
 const currentOutfit = maplebirch.npc.Clothes.worn("Luna");

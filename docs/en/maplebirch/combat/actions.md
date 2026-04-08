@@ -14,17 +14,17 @@ _Register via `maplebirch.combat.CombatAction.reg` or `maplebirchFrameworks.addA
 
 `actionType` must be one of these presets:
 
-| Type            | Description   | Slot     |
-| ---------------- | ------------- | -------- |
-| `leftaction`     | Left hand     | Left hand |
-| `rightaction`    | Right hand    | Right hand |
-| `feetaction`     | Feet          | Feet      |
-| `mouthaction`    | Mouth         | Mouth     |
-| `penisaction`    | Penis         | Penis     |
-| `vaginaaction`   | Vagina        | Vagina    |
-| `anusaction`     | Anus          | Anus      |
-| `chestaction`    | Chest         | Chest     |
-| `thighaction`    | Thighs        | Thighs    |
+| Type           | Description | Slot       |
+| -------------- | ----------- | ---------- |
+| `leftaction`   | Left hand   | Left hand  |
+| `rightaction`  | Right hand  | Right hand |
+| `feetaction`   | Feet        | Feet       |
+| `mouthaction`  | Mouth       | Mouth      |
+| `penisaction`  | Penis       | Penis      |
+| `vaginaaction` | Vagina      | Vagina     |
+| `anusaction`   | Anus        | Anus       |
+| `chestaction`  | Chest       | Chest      |
+| `thighaction`  | Thighs      | Thighs     |
 
 `actionType` can be a **single string** or an **array** (e.g. `['leftaction','rightaction']`); the same action is then shown in multiple slots.
 
@@ -32,15 +32,15 @@ _Register via `maplebirch.combat.CombatAction.reg` or `maplebirchFrameworks.addA
 
 `combatType` must be one of:
 
-| Type       | Description        |
-| ---------- | ------------------ |
-| `Default`  | Default combat     |
+| Type       | Description                     |
+| ---------- | ------------------------------- |
+| `Default`  | Default combat                  |
 | `Self`     | Self combat (e.g. masturbation) |
-| `Struggle` | Struggle           |
-| `Swarm`    | Swarm              |
-| `Vore`     | Vore               |
-| `Machine`  | Machine            |
-| `Tentacle` | Tentacle           |
+| `Struggle` | Struggle                        |
+| `Swarm`    | Swarm                           |
+| `Vore`     | Vore                            |
+| `Machine`  | Machine                         |
+| `Tentacle` | Tentacle                        |
 
 ---
 
@@ -122,7 +122,7 @@ maplebirch.combat.CombatAction.reg(
 | ---------------------------------------------- | --------------------------------------------------- |
 | `action(optionsTable, actionType, combatType)` | Inject custom actions into the combat options table |
 | `difficulty(action, combatType)`               | Return the difficulty hint macro for custom actions |
-| `color(action, encounterType)`                 | Return the colour for custom actions                 |
+| `color(action, encounterType)`                 | Return the colour for custom actions                |
 
 ---
 

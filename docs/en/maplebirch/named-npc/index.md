@@ -14,44 +14,44 @@ When used with ModI18N, the framework corrects pronoun (his/hers) display for so
 
 ```javascript
 maplebirch.npc.add(
-  npcData,     // NPC base data
-  npcConfig,   // NPC configuration
-  translations // Translation data (optional)
+  npcData, // NPC base data
+  npcConfig, // NPC configuration
+  translations, // Translation data (optional)
 );
 ```
 
 ## NPC Base Data (NPCData)
 
-| Field            | Type                                 | Description                     | Default   |
-| ---------------- | ------------------------------------ | ------------------------------- | --------- |
-| `nam`            | string                               | **Required.** Unique NPC name    | —         |
-| `gender`         | 'm'/'f'/'h'/'n'/'none'               | Gender                          | random    |
-| `title`          | string                               | Title / epithet                  | 'none'    |
-| `description`    | string                               | Description text                 | NPC name  |
-| `type`           | string                               | NPC type                        | 'human'   |
-| `adult`          | number                               | Adult (1/0)                     | random    |
-| `teen`           | number                               | Teen (1/0)                      | random    |
-| `age`            | number                               | Age                             | 0         |
-| `insecurity`     | string                               | Insecurity type                 | random    |
-| `chastity`       | object                               | Chastity state                  | {}        |
-| `virginity`      | object                               | Virginity state                 | intact    |
-| `hair_side_type` | string                               | Side hair type                  | 'default' |
-| `hair_fringe_type` | string                             | Fringe type                     | 'default' |
-| `hair_position`  | string                               | Hair position                   | 'back'    |
-| `hairlength`     | number                               | Hair length                     | random    |
-| `eyeColour`      | string                               | Eye colour                      | random    |
-| `hairColour`     | string                               | Hair colour                     | random    |
-| `bottomsize`     | number                               | Bottom size                     | random    |
-| `skincolour`     | number                               | Skin colour                     | 0         |
-| `init`           | number                               | Init state                      | 0         |
-| `intro`          | number                               | Intro state                     | 0         |
-| `penis`          | string                               | Penis state                     | by gender |
-| `penissize`      | number                               | Penis size                      | by gender |
-| `vagina`         | string                               | Vagina state                    | by gender |
-| `breastsize`     | number                               | Breast size                     | by gender |
-| `ballssize`      | number                               | Testicles size                  | by gender |
-| `outfits`        | string[]                             | Outfit list                     | default   |
-| `pregnancy`      | any                                  | Pregnancy state                 | null      |
+| Field              | Type                   | Description                   | Default   |
+| ------------------ | ---------------------- | ----------------------------- | --------- |
+| `nam`              | string                 | **Required.** Unique NPC name | —         |
+| `gender`           | 'm'/'f'/'h'/'n'/'none' | Gender                        | random    |
+| `title`            | string                 | Title / epithet               | 'none'    |
+| `description`      | string                 | Description text              | NPC name  |
+| `type`             | string                 | NPC type                      | 'human'   |
+| `adult`            | number                 | Adult (1/0)                   | random    |
+| `teen`             | number                 | Teen (1/0)                    | random    |
+| `age`              | number                 | Age                           | 0         |
+| `insecurity`       | string                 | Insecurity type               | random    |
+| `chastity`         | object                 | Chastity state                | {}        |
+| `virginity`        | object                 | Virginity state               | intact    |
+| `hair_side_type`   | string                 | Side hair type                | 'default' |
+| `hair_fringe_type` | string                 | Fringe type                   | 'default' |
+| `hair_position`    | string                 | Hair position                 | 'back'    |
+| `hairlength`       | number                 | Hair length                   | random    |
+| `eyeColour`        | string                 | Eye colour                    | random    |
+| `hairColour`       | string                 | Hair colour                   | random    |
+| `bottomsize`       | number                 | Bottom size                   | random    |
+| `skincolour`       | number                 | Skin colour                   | 0         |
+| `init`             | number                 | Init state                    | 0         |
+| `intro`            | number                 | Intro state                   | 0         |
+| `penis`            | string                 | Penis state                   | by gender |
+| `penissize`        | number                 | Penis size                    | by gender |
+| `vagina`           | string                 | Vagina state                  | by gender |
+| `breastsize`       | number                 | Breast size                   | by gender |
+| `ballssize`        | number                 | Testicles size                | by gender |
+| `outfits`          | string[]               | Outfit list                   | default   |
+| `pregnancy`        | any                    | Pregnancy state               | null      |
 
 ### Gender
 
@@ -227,14 +227,14 @@ maplebirch.npc.add(
 
 ## NPC Config (NPCConfig)
 
-| Field          | Type                               | Description                    |
-| -------------- | ---------------------------------- | ------------------------------ |
-| `love`         | `{ maxValue: number }`             | Love/Like max value            |
-| `loveAlias`    | `[string, string]` or function     | Love/Like alias (e.g. CN/EN)   |
-| `important`    | boolean or function                | Whether NPC is important       |
-| `special`      | boolean or function                | Whether NPC is special         |
-| `loveInterest` | boolean or function                | Whether NPC can be love interest |
-| `romance`      | `(() => boolean)[]`                | Romance condition functions    |
+| Field          | Type                           | Description                      |
+| -------------- | ------------------------------ | -------------------------------- |
+| `love`         | `{ maxValue: number }`         | Love/Like max value              |
+| `loveAlias`    | `[string, string]` or function | Love/Like alias (e.g. CN/EN)     |
+| `important`    | boolean or function            | Whether NPC is important         |
+| `special`      | boolean or function            | Whether NPC is special           |
+| `loveInterest` | boolean or function            | Whether NPC can be love interest |
+| `romance`      | `(() => boolean)[]`            | Romance condition functions      |
 
 ### Example
 

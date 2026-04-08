@@ -38,16 +38,16 @@ maplebirch.tool.onInit(() => {
 
 Zone names passed to `addTo()` (e.g. `"sidebar"`) map to specific injection points. The following are internal zone keys for Mods that need precise injection:
 
-| Zone Key                | Description                    |
-| ----------------------- | ------------------------------ |
-| `sidebar`               | Main sidebar area              |
-| `MenuSmall`             | Small menu                     |
-| `CaptionAfterDescription` | After caption description    |
-| `HintMobile`            | Mobile icons (above pain)      |
-| `MobileStats`           | Mobile stats (pain, etc.)      |
-| `CharaDescription`      | Character description          |
-| `DegreesBonusDisplay`   | Attribute bonus display        |
-| `DegreesBox`            | Attribute box                  |
+| Zone Key                  | Description               |
+| ------------------------- | ------------------------- |
+| `sidebar`                 | Main sidebar area         |
+| `MenuSmall`               | Small menu                |
+| `CaptionAfterDescription` | After caption description |
+| `HintMobile`              | Mobile icons (above pain) |
+| `MobileStats`             | Mobile stats (pain, etc.) |
+| `CharaDescription`        | Character description     |
+| `DegreesBonusDisplay`     | Attribute bonus display   |
+| `DegreesBox`              | Attribute box             |
 
 ## Built-in Initialization
 

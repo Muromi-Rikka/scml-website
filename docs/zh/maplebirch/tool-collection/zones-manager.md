@@ -38,16 +38,16 @@ maplebirch.tool.onInit(() => {
 
 向 `addTo()` 传入的区域名（如 `"sidebar"`）会映射到具体注入点。以下为部分内部区域键，供需要精确注入的 Mod 使用：
 
-| 区域键                  | 说明                     |
-| ----------------------- | ------------------------ |
-| `sidebar`               | 侧边栏主区域             |
-| `MenuSmall`             | 小菜单                   |
+| 区域键                    | 说明                   |
+| ------------------------- | ---------------------- |
+| `sidebar`                 | 侧边栏主区域           |
+| `MenuSmall`               | 小菜单                 |
 | `CaptionAfterDescription` | 标题描述后             |
-| `HintMobile`            | 移动端图标（疼痛上方）   |
-| `MobileStats`           | 移动端状态（疼痛等）     |
-| `CharaDescription`      | 角色描述                 |
-| `DegreesBonusDisplay`   | 属性加成显示             |
-| `DegreesBox`            | 属性框                   |
+| `HintMobile`              | 移动端图标（疼痛上方） |
+| `MobileStats`             | 移动端状态（疼痛等）   |
+| `CharaDescription`        | 角色描述               |
+| `DegreesBonusDisplay`     | 属性加成显示           |
+| `DegreesBox`              | 属性框                 |
 
 ## 内置初始化
 

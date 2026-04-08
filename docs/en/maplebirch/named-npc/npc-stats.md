@@ -45,12 +45,12 @@ maplebirch.npc.addStats({
 
 ## Stat Properties
 
-| Property   | Type                     | Description                    | Required |
-| ---------- | ------------------------ | ------------------------------ | -------- |
-| `min`      | number                   | Minimum value                  | Yes      |
-| `max`      | number                   | Maximum value                  | Yes      |
-| `default`  | number                   | Default initial value          | Yes      |
-| `position` | number / 'first' / 'last' | Index in the stats list       | No       |
+| Property   | Type                      | Description             | Required |
+| ---------- | ------------------------- | ----------------------- | -------- |
+| `min`      | number                    | Minimum value           | Yes      |
+| `max`      | number                    | Maximum value           | Yes      |
+| `default`  | number                    | Default initial value   | Yes      |
+| `position` | number / 'first' / 'last' | Index in the stats list | No       |
 
 ### Position
 

@@ -103,13 +103,13 @@ The `mask()` function is used to generate canvas mask images:
 const maskUrl = maplebirch.char.mask(x, rotation, swap, width, height);
 ```
 
-| Parameter  | Default | Description                           |
-| ---------- | ------- | ------------------------------------- |
+| Parameter  | Default | Description                                     |
+| ---------- | ------- | ----------------------------------------------- |
 | `x`        | 0       | Mask split position offset (pixels from center) |
-| `rotation` | 0       | Rotation angle, range -90° ~ 90°      |
-| `swap`     | false   | Whether to swap left and right masks  |
-| `width`    | 256     | Canvas width                          |
-| `height`   | 256     | Canvas height                         |
+| `rotation` | 0       | Rotation angle, range -90° ~ 90°                |
+| `swap`     | false   | Whether to swap left and right masks            |
+| `width`    | 256     | Canvas width                                    |
+| `height`   | 256     | Canvas height                                   |
 
 Mask values are configured via `V.options.maplebirch.character.mask` and `V.options.maplebirch.character.rotation`. For NPC sidebar, use `V.options.maplebirch.npcsidebar.mask` and `V.options.maplebirch.npcsidebar.rotation`.
 

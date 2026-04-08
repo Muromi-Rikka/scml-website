@@ -34,7 +34,7 @@ maplebirch.tool.onInit(() => {
 
     // Transformation config
     build: 100, // Max build value
-    level: 6,   // Max level
+    level: 6, // Max level
     update: [20, 40, 60, 80, 95, 100], // Level-up build thresholds
 
     // Optional: icon
@@ -152,11 +152,11 @@ maplebirch.tool.onInit(() => {
 
 ### Required Parameters
 
-| Parameter | Type   | Description                                           |
-| --------- | ------ | ----------------------------------------------------- |
-| `name`    | string | Unique identifier for the transformation              |
+| Parameter | Type   | Description                                            |
+| --------- | ------ | ------------------------------------------------------ |
+| `name`    | string | Unique identifier for the transformation               |
 | `type`    | string | Type: `'physical'` (physical transformation) or custom |
-| `parts`   | Array  | Array of transformation part definitions              |
+| `parts`   | Array  | Array of transformation part definitions               |
 
 ### Transformation Parts (parts)
 
@@ -185,11 +185,11 @@ traits: [
 
 ### Level Configuration
 
-| Parameter | Type     | Description                          |
-| --------- | -------- | ------------------------------------ |
-| `build`   | number   | Max build value (0–100)               |
-| `level`   | number   | Max level (typically 6)              |
-| `update`  | number[] | Build thresholds for each level up   |
+| Parameter | Type     | Description                        |
+| --------- | -------- | ---------------------------------- |
+| `build`   | number   | Max build value (0–100)            |
+| `level`   | number   | Max level (typically 6)            |
+| `update`  | number[] | Build thresholds for each level up |
 
 ```javascript
 build: 100,
@@ -199,10 +199,10 @@ update: [20, 40, 60, 80, 95, 100]  // 20 build = level 1, 40 = level 2, ...
 
 ### Decay System
 
-| Parameter          | Type       | Description                |
-| ------------------ | ---------- | -------------------------- |
-| `decay`            | boolean    | Whether natural decay is allowed |
-| `decayConditions`  | Function[] | Array of decay condition functions |
+| Parameter         | Type       | Description                        |
+| ----------------- | ---------- | ---------------------------------- |
+| `decay`           | boolean    | Whether natural decay is allowed   |
+| `decayConditions` | Function[] | Array of decay condition functions |
 
 ```javascript
 decay: true,
@@ -215,10 +215,10 @@ decayConditions: [
 
 ### Suppress System
 
-| Parameter             | Type       | Description                  |
-| --------------------- | ---------- | ---------------------------- |
-| `suppress`            | boolean    | Whether to suppress other transformations |
-| `suppressConditions`  | Function[] | Array of suppress condition functions |
+| Parameter            | Type       | Description                               |
+| -------------------- | ---------- | ----------------------------------------- |
+| `suppress`           | boolean    | Whether to suppress other transformations |
+| `suppressConditions` | Function[] | Array of suppress condition functions     |
 
 ```javascript
 suppress: true,
@@ -272,15 +272,15 @@ post: (options) => {
 ```javascript
 V.maplebirch.transformation = {
   dragon: {
-    level: 0,  // Current level
-    build: 0,  // Current build value
+    level: 0, // Current level
+    build: 0, // Current build value
   },
   // Other custom transformations...
 };
 
 V.transformationParts = {
   dragon: {
-    horns: "disabled",  // or 'default' or custom value
+    horns: "disabled", // or 'default' or custom value
     tail: "disabled",
     wings: "disabled",
   },
