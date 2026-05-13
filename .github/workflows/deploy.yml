@@ -33,7 +33,7 @@ jobs:
 
       # Cache Bun's download cache (keyed on bun.lock) to speed up bun install
       - name: Cache Bun install cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-install-${{ hashFiles('bun.lock') }}
@@ -47,7 +47,7 @@ jobs:
         run: bun run build
 
       - name: Publish to CF Pages scml
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.ACCOUNT_ID }}
