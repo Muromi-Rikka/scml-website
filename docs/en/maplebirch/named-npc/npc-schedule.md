@@ -12,10 +12,10 @@ _Register with **`maplebirch.npc.addSchedule(npcName, config)`**, where `config`
 
 ### addSchedule(npcName, config)
 
-| Argument   | Type                         | Description |
-| ---------- | ---------------------------- | ----------- |
-| `npcName`  | `string`                     | NPC name consistent with `maplebirch.npc.add` |
-| `config`   | `ScheduleConfig \| (schedule: Schedule) => void \| Schedule` | Object config or builder |
+| Argument  | Type                                                         | Description                                   |
+| --------- | ------------------------------------------------------------ | --------------------------------------------- |
+| `npcName` | `string`                                                     | NPC name consistent with `maplebirch.npc.add` |
+| `config`  | `ScheduleConfig \| (schedule: Schedule) => void \| Schedule` | Object config or builder                      |
 
 ### ScheduleConfig
 
@@ -63,11 +63,7 @@ maplebirch.npc.addSchedule("Luna", (s) =>
   s
     .at(9, "school")
     .at([14, 16], "library")
-    .when(
-      (date) => date.weekEnd && date.hour >= 10,
-      "park",
-      { id: "weekend_park" },
-    ),
+    .when((date) => date.weekEnd && date.hour >= 10, "park", { id: "weekend_park" }),
 );
 ```
 

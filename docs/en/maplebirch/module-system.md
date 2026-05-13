@@ -96,13 +96,13 @@ console.log("Modules depending on addon:", graph.addon.dependents);
 
 Each module can be in one of these states:
 
-| State constant | Value | Description                                      |
-| -------------- | ----- | ------------------------------------------------ |
-| `REGISTERED`   | 0     | Registered, main init not finished               |
-| `MOUNTED`      | 1     | Main initialization finished                     |
-| `ERROR`        | 2     | Error during initialization                      |
-| `EXPOSED`      | 3     | Exposed module mounted on `maplebirch` root      |
-| `DISABLED`     | 4     | Module disabled                                  |
+| State constant | Value | Description                                 |
+| -------------- | ----- | ------------------------------------------- |
+| `REGISTERED`   | 0     | Registered, main init not finished          |
+| `MOUNTED`      | 1     | Main initialization finished                |
+| `ERROR`        | 2     | Error during initialization                 |
+| `EXPOSED`      | 3     | Exposed module mounted on `maplebirch` root |
+| `DISABLED`     | 4     | Module disabled                             |
 
 ---
 

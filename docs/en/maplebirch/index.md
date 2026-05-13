@@ -53,22 +53,22 @@ The framework provides the following core modules:
 
 All features are accessed through the `window.maplebirch` singleton:
 
-| Access Path          | Type             | Description                                               |
-| -------------------- | ---------------- | --------------------------------------------------------- |
-| `maplebirch.addon`   | AddonPlugin      | Plugin system and lifecycle hooks                         |
-| `maplebirch.dynamic` | DynamicManager   | Dynamic events (time/state/weather)                       |
-| `maplebirch.tool`    | ToolCollection   | Tool collection (console/random/macros/HTML/regions etc.) |
-| `maplebirch.audio`   | AudioManager     | Audio playback and management                             |
-| `maplebirch.var`     | Variables        | Variable management and migration                         |
-| `maplebirch.char`    | Character        | Character rendering layer system                          |
-| `maplebirch.npc`     | NPCManager       | Named NPC system                                          |
-| `maplebirch.combat`  | CombatManager    | Combat system                                             |
-| `maplebirch.gui`     | GUIControl       | GUI settings panel                                        |
-| `maplebirch.lang`    | LanguageManager  | Internationalization and translation                      |
-| `maplebirch.idb`     | IndexedDBService | IndexedDB storage                                         |
-| `maplebirch.credential` | CredentialVault | Mod credentials, auth guard, unlock helpers          |
-| `maplebirch.logger`  | Logger           | Logging service                                           |
-| `maplebirch.tracer`  | EventEmitter     | Event bus                                                 |
+| Access Path             | Type             | Description                                               |
+| ----------------------- | ---------------- | --------------------------------------------------------- |
+| `maplebirch.addon`      | AddonPlugin      | Plugin system and lifecycle hooks                         |
+| `maplebirch.dynamic`    | DynamicManager   | Dynamic events (time/state/weather)                       |
+| `maplebirch.tool`       | ToolCollection   | Tool collection (console/random/macros/HTML/regions etc.) |
+| `maplebirch.audio`      | AudioManager     | Audio playback and management                             |
+| `maplebirch.var`        | Variables        | Variable management and migration                         |
+| `maplebirch.char`       | Character        | Character rendering layer system                          |
+| `maplebirch.npc`        | NPCManager       | Named NPC system                                          |
+| `maplebirch.combat`     | CombatManager    | Combat system                                             |
+| `maplebirch.gui`        | GUIControl       | GUI settings panel                                        |
+| `maplebirch.lang`       | LanguageManager  | Internationalization and translation                      |
+| `maplebirch.idb`        | IndexedDBService | IndexedDB storage                                         |
+| `maplebirch.credential` | CredentialVault  | Mod credentials, auth guard, unlock helpers               |
+| `maplebirch.logger`     | Logger           | Logging service                                           |
+| `maplebirch.tracer`     | EventEmitter     | Event bus                                                 |
 
 The following convenience properties are also exposed:
 

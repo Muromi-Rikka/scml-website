@@ -53,22 +53,22 @@ graph LR
 
 所有功能均通过 `window.maplebirch` 单例访问：
 
-| 访问路径             | 类型             | 说明                                   |
-| -------------------- | ---------------- | -------------------------------------- |
-| `maplebirch.addon`   | AddonPlugin      | 插件系统与生命周期钩子                 |
-| `maplebirch.dynamic` | DynamicManager   | 动态事件（时间/状态/天气）             |
-| `maplebirch.tool`    | ToolCollection   | 工具集合（控制台/随机/宏/HTML/区域等） |
-| `maplebirch.audio`   | AudioManager     | 音频播放与管理                         |
-| `maplebirch.var`     | Variables        | 变量管理与迁移                         |
-| `maplebirch.char`    | Character        | 角色渲染图层系统                       |
-| `maplebirch.npc`     | NPCManager       | 命名 NPC 系统                          |
-| `maplebirch.combat`  | CombatManager    | 战斗系统                               |
-| `maplebirch.gui`     | GUIControl       | GUI 设置面板                           |
-| `maplebirch.lang`    | LanguageManager  | 国际化翻译                             |
-| `maplebirch.idb`     | IndexedDBService | IndexedDB 存储                         |
-| `maplebirch.credential` | CredentialVault | 模组凭证、授权校验与解密协作       |
-| `maplebirch.logger`  | Logger           | 日志服务                               |
-| `maplebirch.tracer`  | EventEmitter     | 事件总线                               |
+| 访问路径                | 类型             | 说明                                   |
+| ----------------------- | ---------------- | -------------------------------------- |
+| `maplebirch.addon`      | AddonPlugin      | 插件系统与生命周期钩子                 |
+| `maplebirch.dynamic`    | DynamicManager   | 动态事件（时间/状态/天气）             |
+| `maplebirch.tool`       | ToolCollection   | 工具集合（控制台/随机/宏/HTML/区域等） |
+| `maplebirch.audio`      | AudioManager     | 音频播放与管理                         |
+| `maplebirch.var`        | Variables        | 变量管理与迁移                         |
+| `maplebirch.char`       | Character        | 角色渲染图层系统                       |
+| `maplebirch.npc`        | NPCManager       | 命名 NPC 系统                          |
+| `maplebirch.combat`     | CombatManager    | 战斗系统                               |
+| `maplebirch.gui`        | GUIControl       | GUI 设置面板                           |
+| `maplebirch.lang`       | LanguageManager  | 国际化翻译                             |
+| `maplebirch.idb`        | IndexedDBService | IndexedDB 存储                         |
+| `maplebirch.credential` | CredentialVault  | 模组凭证、授权校验与解密协作           |
+| `maplebirch.logger`     | Logger           | 日志服务                               |
+| `maplebirch.tracer`     | EventEmitter     | 事件总线                               |
 
 此外还暴露了以下便捷属性：
 

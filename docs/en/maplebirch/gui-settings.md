@@ -17,13 +17,13 @@ The framework registers an AngularJS component `maplebirch-control-component` vi
 
 ### Operation Instructions
 
-| Operation       | Description                                                                         |
-| --------------- | ----------------------------------------------------------------------------------- |
-| Switch language | Select language from dropdown menu, takes effect immediately and persists           |
-| Enable debug    | Click "Enable debug mode" to set log level to DEBUG                                 |
-| Disable debug   | Click "Disable debug mode" to restore log level to INFO                             |
-| Disable module  | Select module from enabled list, click "Disable module", takes effect after restart |
-| Enable module   | Select module from disabled list, click "Enable module", takes effect after restart |
+| Operation                | Description                                                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Switch language          | Select language from dropdown menu, takes effect immediately and persists                                                                |
+| Enable debug             | Click "Enable debug mode" to set log level to DEBUG                                                                                      |
+| Disable debug            | Click "Disable debug mode" to restore log level to INFO                                                                                  |
+| Disable module           | Select module from enabled list, click "Disable module", takes effect after restart                                                      |
+| Enable module            | Select module from disabled list, click "Enable module", takes effect after restart                                                      |
 | Reset framework settings | Clears `$options.maplebirch` for the current save and fires `:rest-options`; the framework reapplies defaults and the overlay re-renders |
 
 ### Cascade Dependencies
