@@ -2,220 +2,133 @@
 
 ## Overview
 
-The NPC schedule system lets mod authors define when and where NPCs appear: fixed times, condition-based locations, and special schedules with priority and dependencies.
+Schedules describe where a named NPC should be for each hour of the day, plus optional conditional overrides. Internally this is backed by `Schedule` instances and the `maplebirch.npc.Schedule` helpers. **v3.2.3** tightens special-schedule registration and topological sorting; pair it with **`GameVersion >= 0.5.9.7`** so time handling matches the supported game build.
 
-_Register schedules via `maplebirch.npc.addSchedule` or `maplebirch.npc.addNPCSchedule`._
-
----
-
-## Concepts
-
-### Schedule Types
-
-1. **Fixed-time**: NPC is at a given location at a specific time or time range.
-2. **Condition-based**: Location depends on game state, time, weather, etc.
-3. **Special**: Schedules with dependencies and priority (e.g. override, before/after).
-
-### Core Components
-
-- **ScheduleTime**: Time (hour or range).
-- **ScheduleCondition**: Condition function.
-- **ScheduleLocation**: Location (string or function).
-- **SpecialSchedule**: Options for override, before, after, etc.
+_Register with **`maplebirch.npc.addSchedule(npcName, config)`**, where `config` is either a **`ScheduleConfig` object** or a **builder function** `(schedule) => …` chaining `at` / `when`. This delegates to `maplebirch.npc.Schedule.set`._
 
 ---
 
-## addSchedule
+## API summary
 
-### Basic Syntax
+### addSchedule(npcName, config)
+
+| Argument   | Type                         | Description |
+| ---------- | ---------------------------- | ----------- |
+| `npcName`  | `string`                     | NPC name consistent with `maplebirch.npc.add` |
+| `config`   | `ScheduleConfig \| (schedule: Schedule) => void \| Schedule` | Object config or builder |
+
+### ScheduleConfig
+
+```ts
+interface ScheduleConfig {
+  daily?: Array<{ time: number | [number, number?]; location: string }>;
+  special?: SpecialScheduleConfig[];
+}
+```
+
+`daily`: `time` is an hour index, or `[startHour, endHour]` inclusive; each hour in the range gets the same `location`.
+
+`special`: array of conditional rows with `condition`, `location`, and optional `id`, `before`, `after`, `insteadOf`, `override` (same shape as `SpecialScheduleConfig` in the framework).
+
+### Object-style example
 
 ```javascript
-// Fixed time
-maplebirch.npc.addSchedule("Luna", 9, "school"); // at 9:00
-maplebirch.npc.addSchedule("Luna", [14, 16], "library"); // 14:00–16:00
+maplebirch.npc.addSchedule("Robin", {
+  daily: [
+    { time: 8, location: "school" },
+    { time: 12, location: "cafeteria" },
+    { time: [14, 16], location: "library" },
+    { time: 18, location: "home" },
+  ],
+  special: [
+    {
+      id: "weekend_park",
+      condition: (date) => date.weekEnd && date.hour >= 10,
+      location: "park",
+    },
+    {
+      id: "night_study",
+      condition: (date) => date.schoolDay && date.isHourBetween(19, 21),
+      location: "library",
+      override: false,
+    },
+  ],
+});
+```
 
-// Condition-based
-maplebirch.npc.addSchedule(
-  "Luna",
-  (date) => date.weekEnd && date.hour >= 10,
-  "park",
-  "weekend_park",
-);
+### Builder example
 
-// Special schedule with options
-maplebirch.npc.addSchedule(
-  "Luna",
-  (date) => date.weather === "rain" && date.hour >= 18,
-  "home",
-  "rainy_night_home",
-  { override: true, before: "night_club" },
+```javascript
+maplebirch.npc.addSchedule("Luna", (s) =>
+  s
+    .at(9, "school")
+    .at([14, 16], "library")
+    .when(
+      (date) => date.weekEnd && date.hour >= 10,
+      "park",
+      { id: "weekend_park" },
+    ),
 );
 ```
 
-### Method Signature
+### EnhancedDate hints
 
-```javascript
-addSchedule(
-  npcName: string,                          // NPC name
-  scheduleConfig: ScheduleTime | ScheduleCondition,  // time or condition
-  location: string | ScheduleLocation,       // location
-  id?: string | number,                     // schedule ID (optional)
-  options?: Partial<SpecialSchedule>       // special options
-): Schedule
-```
+Callbacks receive an `EnhancedDate` with helpers such as `weekEnd`, `schoolDay`, season flags, `dawn` / `daytime` / `dusk` / `night`, and `isAt` / `isBetween` / `isHourBetween`. For weather or story flags, read normal game globals (`V`, `Weather`, …); not every game field is mirrored on `date`.
 
 ---
 
-## 1. Fixed-Time Schedules
+## Special schedule options
 
-### Single Time
-
-```javascript
-maplebirch.npc.addSchedule("Robin", 8, "school"); // 8:00 at school
-maplebirch.npc.addSchedule("Robin", 12, "cafeteria"); // 12:00 at cafeteria
-maplebirch.npc.addSchedule("Robin", 18, "home"); // 18:00 at home
-```
-
-### Time Range
+- **`override: true`**: evaluated ahead of non-override specials after sorting.
+- **`before` / `after` / `insteadOf`**: declare ordering between specials. Cycles log a warning and fall back to the original order.
 
 ```javascript
-maplebirch.npc.addSchedule("Kylar", [9, 12], "library"); // 9–12 at library
-maplebirch.npc.addSchedule("Whitney", [13, 15], "gym"); // 13–15 at gym
-maplebirch.npc.addSchedule("Sydney", [19, 22], "dormitory"); // 19–22 at dormitory
-```
-
----
-
-## 2. Condition-Based Schedules
-
-### Time Conditions
-
-```javascript
-maplebirch.npc.addSchedule("Eden", (date) => date.isHour(6, 18), "forest_clearing");
-
-maplebirch.npc.addSchedule(
-  "Black Wolf",
-  (date) => date.isBetween([20, 0], [6, 0]), // 20:00–06:00
-  "wolf_cave",
-);
-```
-
-### Date / Weather Conditions
-
-```javascript
-maplebirch.npc.addSchedule(
-  "Alex",
-  (date) => date.weekEnd && date.weather === "sunny",
-  "farm_field",
-);
-
-maplebirch.npc.addSchedule(
-  "River",
-  (date) => date.schoolDay && date.isHourBetween(8, 15),
-  "clinic",
-);
-```
-
-### Game State Conditions
-
-```javascript
-maplebirch.npc.addSchedule(
-  "Bailey",
-  (date) => date.day === 1 && date.hour === 10 && V.rentDue,
-  "orphanage_office",
-);
-
-maplebirch.npc.addSchedule(
-  "Whitney",
-  (date) => C.npc.Whitney?.love >= 30 && date.weekEnd && date.hour >= 18,
-  "arcade",
-);
-```
-
----
-
-## 3. Dynamic Location
-
-```javascript
-maplebirch.npc.addSchedule(
-  "Robin",
-  (date) => date.weekEnd,
-  (date) => {
-    if (date.weather === "rain") return "home";
-    if (date.money >= 100) return "mall";
-    return "park";
-  },
-  "robin_weekend",
-);
-```
-
----
-
-## Schedule Options
-
-### Priority
-
-```javascript
-// override: overrides all other schedules
-maplebirch.npc.addSchedule(
-  "EmergencyDoctor",
-  (date) => V.emergency,
-  "hospital_emergency_room",
-  "emergency_call",
-  { override: true },
-);
-
-// insteadOf: replaces a specific schedule
-maplebirch.npc.addSchedule(
-  "RobinSick",
-  (date) => C.npc.Robin?.health < 30,
-  "hospital",
-  "robin_sick",
-  { insteadOf: "school_day" },
-);
-```
-
-### Dependencies
-
-```javascript
-// before: runs before another schedule
-maplebirch.npc.addSchedule(
-  "MorningRoutine",
-  (date) => date.isHour(7),
-  "bathroom",
-  "morning_routine",
-  { before: "school" },
-);
-
-// after: runs after another schedule
-maplebirch.npc.addSchedule("EveningStudy", (date) => date.isHour(20), "library", "evening_study", {
-  after: "dinner",
+maplebirch.npc.addSchedule("Demo", {
+  special: [
+    {
+      id: "emergency",
+      condition: (date) => !!V.emergency,
+      location: "hospital",
+      override: true,
+    },
+    {
+      id: "morning",
+      condition: (date) => date.isHour(7),
+      location: "bathroom",
+      before: "school_block",
+    },
+  ],
 });
 ```
 
 ---
 
-## Schedule Management
+## Query & maintenance
 
-### Get Schedule
+### Instance and current location
 
 ```javascript
-const robinSchedule = maplebirch.npc.Schedule.get("Robin");
-const currentLocation = robinSchedule.location;
+const schedule = maplebirch.npc.Schedule.get("Robin");
+const loc = schedule.location;
 ```
 
-### Update Schedule
+### Update / remove specials
 
 ```javascript
-maplebirch.npc.Schedule.update("Robin", "school_day", {
-  condition: (date) => date.schoolDay && !date.holiday,
-  location: "school_classroom",
+maplebirch.npc.Schedule.update("Robin", "weekend_park", {
+  location: "mall",
 });
+
+maplebirch.npc.Schedule.remove("Robin", "weekend_park");
 ```
 
-### Remove Schedule
+### Clear
 
 ```javascript
-maplebirch.npc.Schedule.remove("Robin", "weekend_mall");
 maplebirch.npc.Schedule.clear("Robin");
+// maplebirch.npc.Schedule.clearAll(); // clears every NPC — use with care
 ```
+
+### Bulk snapshot
+
+Read-only getter `maplebirch.npc.Schedule.location` returns `{ [npcName: string]: string }`.

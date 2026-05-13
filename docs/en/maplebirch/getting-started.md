@@ -7,8 +7,14 @@ This guide explains how to add maplebirchFramework as a dependency to your Mod a
 1. Download the framework `.mod.zip` file from [GitHub Releases](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases)
 2. Install it via ModLoader's Mod manager. Ensure the framework and all its dependencies (ModLoader, ModLoaderGui, BeautySelectorAddon, etc.) are loaded correctly
 
-:::tip
-The framework's alias is `Simple Frameworks`. If you have an older version of the Simple Framework installed, maplebirch will automatically disable it at startup to avoid conflicts.
+:::tip Coexisting with “Simple Frameworks”
+
+The framework declares the alias `Simple Frameworks`. If players still have the legacy Simple Framework mod installed, maplebirch **disables it at startup** to avoid conflicts.
+
+From **v3.2.3** onward only two compatibility globals remain: **`window.simpleFrameworks.addto`** (mapped to `maplebirch.tool.addTo`) and the **`TimeEvent`** helper class (internally bridged to `maplebirch.dynamic.regTimeEvent`). Other legacy shortcut globals were removed—new mods should call the `maplebirch` APIs directly.
+
+The framework also pins **`GameVersion` to `>=0.5.9.7`**. Mirror both `GameVersion` and `maplebirch` constraints in your own `boot.json`.
+
 :::
 
 ## Declaring Dependencies
@@ -21,8 +27,12 @@ Declare the version constraint for maplebirch in your Mod's `boot.json` through 
   "version": "1.0.0",
   "dependenceInfo": [
     {
+      "modName": "GameVersion",
+      "version": ">=0.5.9.7"
+    },
+    {
       "modName": "maplebirch",
-      "version": ">=3.0.0"
+      "version": ">=3.2.3"
     }
   ]
 }
@@ -40,7 +50,7 @@ Register your Mod with maplebirch's AddonPlugin system via the `addonPlugin` fie
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^3.1.0",
+      "modVersion": "^3.2.0",
       "params": {
         "script": ["mymod_framework.js"]
       }
@@ -75,15 +85,19 @@ The following is a complete `boot.json` example that depends on maplebirch:
   "additionFile": ["readme.txt"],
   "dependenceInfo": [
     {
+      "modName": "GameVersion",
+      "version": ">=0.5.9.7"
+    },
+    {
       "modName": "maplebirch",
-      "version": ">=3.0.0"
+      "version": ">=3.2.3"
     }
   ],
   "addonPlugin": [
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^3.1.0",
+      "modVersion": "^3.2.0",
       "params": {
         "script": ["mymod.js"],
         "language": true

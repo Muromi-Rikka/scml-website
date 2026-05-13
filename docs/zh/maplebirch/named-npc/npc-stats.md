@@ -4,7 +4,7 @@
 
 NPC 状态系统允许模组制作者为 NPC 添加自定义的数值属性，例如好感度、信任度、压力值、特殊能力等级等。这些状态会显示在 NPC 的侧边栏中，并可通过游戏逻辑进行修改。
 
-_可通过 `maplebirch.npc.addStats` 或 `maplebirchFrameworks.addNPCStats` 来进行状态的注册。_
+_请使用 **`maplebirch.npc.addStats`**。_
 
 ---
 

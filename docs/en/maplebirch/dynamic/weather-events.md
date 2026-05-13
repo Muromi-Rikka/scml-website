@@ -2,7 +2,7 @@
 
 The WeatherEvents module handles weather-related events and effects. It allows registering events on weather changes, modifying weather layers/effects, and adding custom weather types.
 
-_Access via `maplebirch.dynamic.Weather` or shortcut `maplebirchFrameworks.addWeatherEvent()`._
+_Use **`maplebirch.dynamic.regWeatherEvent`** / **`maplebirch.dynamic.addWeather`** (manager: **`maplebirch.dynamic.Weather`**). Do not rely on removed shortcut globals; see [Getting Started](/maplebirch/getting-started) for the supported Simple Frameworks shim surface._
 
 :::tip
 Layer/effect changes must be registered before the framework's `:passagestart` phase. Using the recommended `script` load method ensures correct timing.

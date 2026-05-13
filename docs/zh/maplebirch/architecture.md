@@ -48,7 +48,7 @@ flowchart TB
 
 ## 模块系统
 
-`ModuleSystem` 负责管理所有功能模块的注册、依赖解析和生命周期。完整 API 参考（`register`、`getModule`、`dependencyGraph`、生命周期方法）见 [ModuleSystem API](./module-system)。
+`ModuleSystem` 负责管理所有功能模块的注册、依赖解析和生命周期。完整 API 参考（`register`、`get`、`dependencyGraph`、生命周期方法）见 [ModuleSystem API](./module-system)。
 
 ### 模块注册
 

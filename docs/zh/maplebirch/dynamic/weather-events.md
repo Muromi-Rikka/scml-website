@@ -2,7 +2,7 @@
 
 天气事件模块 (`WeatherEvents`) 是动态管理系统的一部分，用于处理游戏中的天气相关事件和效果。支持注册天气变化时触发的事件、修改天气图层与效果、添加自定义天气类型。
 
-_可通过 `maplebirch.dynamic.Weather` 或快捷接口 `maplebirchFrameworks.addWeatherEvent()` 访问。_
+_请使用 **`maplebirch.dynamic.regWeatherEvent`** / **`maplebirch.dynamic.addWeather`**（子系统为 **`maplebirch.dynamic.Weather`**）。新代码请勿依赖已移除的全局快捷名；简易框架兼容层说明见 [快速开始](/maplebirch/getting-started)。_
 
 :::tip
 图层效果修改需要在框架 `:passagestart` 时机前注册。使用推荐的 `script` 方式加载文件会自动在正确时机执行。

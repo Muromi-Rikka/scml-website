@@ -2,7 +2,7 @@
 
 提供各类随机数生成工具，包含加权随机、范围随机等功能。
 
-_可通过 `maplebirch.tool.rand` 或快捷接口 `maplebirchFrameworks.rand()` 访问。_
+_请使用 **`maplebirch.tool.rand`**。_
 
 ## 使用方式
 

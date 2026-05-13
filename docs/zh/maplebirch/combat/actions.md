@@ -4,7 +4,7 @@
 
 战斗按钮系统允许模组制作者在战斗界面中添加自定义的战斗动作，包括攻击、防御、特殊技能、互动选项等。每个按钮可以有自己的显示条件、效果、颜色和难度提示。
 
-_可通过 `maplebirch.combat.CombatAction.reg` 或 `maplebirchFrameworks.addAction` 来注册战斗按钮。_
+_可通过 **`maplebirch.combat.CombatAction.reg`** 注册战斗按钮。_
 
 ---
 

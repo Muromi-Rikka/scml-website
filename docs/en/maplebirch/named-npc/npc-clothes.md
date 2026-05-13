@@ -8,7 +8,7 @@ The NPC clothing system has three related subsystems for different use cases:
 2. **NPC sidebar default clothes** (`Sidebar.config`) — What the NPC wears in the sidebar
 3. **NPC Wardrobe** — Outfit changes by location and conditions
 
-_Register vanilla NPC clothes via `maplebirch.npc.addClothes` or `maplebirchFrameworks.addNPCClothes`._
+_Register vanilla NPC clothes via **`maplebirch.npc.addClothes`**._
 
 ---
 

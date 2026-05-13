@@ -4,7 +4,7 @@
 
 The NPC system allows mod authors to add custom non-player characters (NPCs) to the game. You can define appearance, personality, relationship state, schedule, and special abilities.
 
-_Register mod NPCs via `maplebirch.npc.add` or `maplebirchFrameworks.addNPC`._
+_Register mod NPCs via **`maplebirch.npc.add`**._
 
 When used with ModI18N, the framework corrects pronoun (his/hers) display for some vanilla NPCs.
 

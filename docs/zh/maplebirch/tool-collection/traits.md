@@ -2,7 +2,7 @@
 
 通过 `maplebirch.tool.other.addTraits()` 注册自定义特质。
 
-_可通过 `maplebirch.tool.other.addTraits()` 或快捷接口 `maplebirchFrameworks.addTraits()` 访问。_
+_请使用 **`maplebirch.tool.other.addTraits()`**。_
 
 ## 特质接口
 

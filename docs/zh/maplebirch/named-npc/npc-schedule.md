@@ -2,251 +2,133 @@
 
 ## 基本介绍
 
-NPC 日程系统允许模组制作者为 NPC 定义详细的日常活动安排，包括固定时间、条件触发、特殊事件等。系统支持时间范围、条件判断、优先级控制和复杂依赖关系。
+NPC 日程用于描述命名 NPC 在一天中各小时出现的地点，以及基于条件的特殊覆盖规则。底层由 `Schedule` 实例与 `maplebirch.npc.Schedule` 静态方法管理；**v3.2.3** 起优化了特殊日程的依赖解析与拓扑排序，请与 **`GameVersion >= 0.5.9.7`** 一并使用以保证时间系统一致。
 
-_可通过 `maplebirch.npc.addSchedule` 或 `maplebirch.npc.addNPCSchedule` 来注册 NPC 日程。_
-
----
-
-## 基本概念
-
-### 日程类型
-
-1. **固定时间日程**：在特定时间或时间段出现在特定地点
-2. **条件日程**：根据游戏状态、时间、天气等条件决定出现地点
-3. **特殊日程**：有依赖关系和优先级控制的复杂日程
-
-### 核心组件
-
-- **ScheduleTime**: 时间定义(小时或时间段)
-- **ScheduleCondition**: 条件函数
-- **ScheduleLocation**: 地点定义(字符串或函数)
-- **SpecialSchedule**: 特殊日程配置
+_通过 **`maplebirch.npc.addSchedule(npcName, config)`** 注册；`config` 为配置对象（`ScheduleConfig`）或建造函数（接收 `Schedule` 并链式调用 `at` / `when`）。等价于内部调用 `maplebirch.npc.Schedule.set`。_
 
 ---
 
-## 添加日程 (addSchedule 方法)
+## API 概览
 
-### 基本语法
+### addSchedule(npcName, config)
+
+| 参数       | 类型                         | 说明 |
+| ---------- | ---------------------------- | ---- |
+| `npcName`  | `string`                     | 与 `maplebirch.npc.add` 等一致的 NPC 名 |
+| `config`   | `ScheduleConfig \| (schedule: Schedule) => void \| Schedule` | 对象式配置或建造函数 |
+
+### ScheduleConfig
+
+```ts
+interface ScheduleConfig {
+  daily?: Array<{ time: number | [number, number?]; location: string }>;
+  special?: SpecialScheduleConfig[];
+}
+```
+
+`daily`：`time` 为整点小时，或 `[起始小时, 结束小时]` 闭区间；该区间内每个整点写入同一 `location`。
+
+`special`：条件日程数组，元素含 `condition`、`location`，以及可选的 `id`、`before`、`after`、`insteadOf`、`override` 等字段（与框架 `SpecialScheduleConfig` 一致）。
+
+### 配置对象示例
 
 ```javascript
-// 添加固定时间日程
-maplebirch.npc.addSchedule("Luna", 9, "school"); // 9点到学校
-maplebirch.npc.addSchedule("Luna", [14, 16], "library"); // 14-16点在图书馆
+maplebirch.npc.addSchedule("Robin", {
+  daily: [
+    { time: 8, location: "school" },
+    { time: 12, location: "cafeteria" },
+    { time: [14, 16], location: "library" },
+    { time: 18, location: "home" },
+  ],
+  special: [
+    {
+      id: "weekend_park",
+      condition: (date) => date.weekEnd && date.hour >= 10,
+      location: "park",
+    },
+    {
+      id: "night_study",
+      condition: (date) => date.schoolDay && date.isHourBetween(19, 21),
+      location: "library",
+      override: false,
+    },
+  ],
+});
+```
 
-// 添加条件日程
-maplebirch.npc.addSchedule(
-  "Luna",
-  (date) => date.weekEnd && date.hour >= 10,
-  "park",
-  "weekend_park",
-);
+### 建造函数示例
 
-// 添加带选项的特殊日程
-maplebirch.npc.addSchedule(
-  "Luna",
-  (date) => date.weather === "rain" && date.hour >= 18,
-  "home",
-  "rainy_night_home",
-  { override: true, before: "night_club" },
+```javascript
+maplebirch.npc.addSchedule("Luna", (s) =>
+  s
+    .at(9, "school")
+    .at([14, 16], "library")
+    .when(
+      (date) => date.weekEnd && date.hour >= 10,
+      "park",
+      { id: "weekend_park" },
+    ),
 );
 ```
 
-### 方法签名
+### EnhancedDate 提示
 
-```javascript
-addSchedule(
-  npcName: string,                     // NPC名称
-  scheduleConfig: ScheduleTime | ScheduleCondition,  // 时间或条件
-  location: string | ScheduleLocation, // 地点
-  id?: string | number,               // 日程ID(可选)
-  options?: Partial<SpecialSchedule>  // 特殊选项
-): Schedule
-```
+`condition` / `location` 回调中的 `date` 为增强时间对象（`EnhancedDate`），除原版 `DateTime` 字段外，还提供如 `weekEnd`、`schoolDay`、季节布尔、`dawn` / `daytime` / `dusk` / `night`，以及 `isAt`、`isBetween`、`isHourBetween` 等辅助方法。需要读取天气或剧情变量时，可直接访问游戏全局（如 `V`、`Weather` 等），框架未在 `date` 上挂载全部游戏状态。
 
 ---
 
-## 1. 固定时间日程
+## 特殊日程选项
 
-### 单个时间点
-
-```javascript
-// NPC在指定小时出现在指定地点
-maplebirch.npc.addSchedule("Robin", 8, "school"); // 8点到学校
-maplebirch.npc.addSchedule("Robin", 12, "cafeteria"); // 12点到食堂
-maplebirch.npc.addSchedule("Robin", 18, "home"); // 18点到家
-```
-
-### 时间段
+- **`override: true`**：在拓扑排序中优先于非 override 条目评估。
+- **`before` / `after` / `insteadOf`**：在多个特殊条目之间声明相对顺序；若依赖成环，框架会记录警告并回退为原始顺序。
 
 ```javascript
-// NPC在时间段内出现在指定地点
-maplebirch.npc.addSchedule("Kylar", [9, 12], "library"); // 9-12点在图书馆
-maplebirch.npc.addSchedule("Whitney", [13, 15], "gym"); // 13-15点在体育馆
-maplebirch.npc.addSchedule("Sydney", [19, 22], "dormitory"); // 19-22点在宿舍
-```
-
----
-
-## 2. 条件日程
-
-### 时间条件
-
-```javascript
-// 基于时间的条件
-maplebirch.npc.addSchedule(
-  "Eden",
-  (date) => date.isHour(6, 18), // 6点或18点
-  "forest_clearing",
-);
-
-maplebirch.npc.addSchedule(
-  "Black Wolf",
-  (date) => date.isBetween([20, 0], [6, 0]), // 20:00-6:00
-  "wolf_cave",
-);
-```
-
-### 日期条件
-
-```javascript
-// 基于星期、季节、天气的条件
-maplebirch.npc.addSchedule(
-  "Alex",
-  (date) => date.weekEnd && date.weather === "sunny", // 周末晴天
-  "farm_field",
-);
-
-maplebirch.npc.addSchedule(
-  "River",
-  (date) => date.schoolDay && date.isHourBetween(8, 15), // 上学日8-15点
-  "clinic",
-);
-```
-
-### 游戏状态条件
-
-```javascript
-// 基于游戏变量和NPC状态的条件
-maplebirch.npc.addSchedule(
-  "Bailey",
-  (date) => {
-    return (
-      date.day === 1 && // 每月1号
-      date.hour === 10 && // 10点
-      V.rentDue
-    ); // 租金到期
-  },
-  "orphanage_office",
-);
-
-maplebirch.npc.addSchedule(
-  "Whitney",
-  (date) => {
-    return (
-      C.npc.Whitney?.love >= 30 && // 好感度≥30
-      date.weekEnd && // 周末
-      date.hour >= 18
-    ); // 18点后
-  },
-  "arcade",
-);
-```
-
----
-
-## 3. 动态地点
-
-### 函数返回地点
-
-```javascript
-// 动态决定地点
-maplebirch.npc.addSchedule(
-  "Robin",
-  (date) => date.weekEnd,
-  (date) => {
-    if (date.weather === "rain") return "home";
-    if (date.money >= 100) return "mall";
-    return "park";
-  },
-  "robin_weekend",
-);
-```
-
----
-
-## 日程选项
-
-### 优先级控制
-
-```javascript
-// override: 覆盖其他所有日程
-maplebirch.npc.addSchedule(
-  "EmergencyDoctor",
-  (date) => V.emergency,
-  "hospital_emergency_room",
-  "emergency_call",
-  { override: true },
-);
-
-// insteadOf: 替代特定日程
-maplebirch.npc.addSchedule(
-  "RobinSick",
-  (date) => C.npc.Robin?.health < 30,
-  "hospital",
-  "robin_sick",
-  { insteadOf: "school_day" },
-);
-```
-
-### 依赖关系
-
-```javascript
-// before: 在某个日程之前执行
-maplebirch.npc.addSchedule(
-  "MorningRoutine",
-  (date) => date.isHour(7),
-  "bathroom",
-  "morning_routine",
-  { before: "school" },
-);
-
-// after: 在某个日程之后执行
-maplebirch.npc.addSchedule("EveningStudy", (date) => date.isHour(20), "library", "evening_study", {
-  after: "dinner",
+maplebirch.npc.addSchedule("Demo", {
+  special: [
+    {
+      id: "emergency",
+      condition: (date) => !!V.emergency,
+      location: "hospital",
+      override: true,
+    },
+    {
+      id: "morning",
+      condition: (date) => date.isHour(7),
+      location: "bathroom",
+      before: "school_block",
+    },
+  ],
 });
 ```
 
 ---
 
-## 日程管理
+## 查询与维护
 
-### 获取日程
+### 获取实例与当前地点
 
 ```javascript
-// 获取NPC的日程对象
-const robinSchedule = maplebirch.npc.Schedule.get("Robin");
-
-// 获取当前地点
-const currentLocation = robinSchedule.location;
+const schedule = maplebirch.npc.Schedule.get("Robin");
+const loc = schedule.location; // 当前游戏时间下解析出的地点键
 ```
 
-### 更新日程
+### 更新 / 删除特殊条目
 
 ```javascript
-// 更新已有日程的条件
-maplebirch.npc.Schedule.update("Robin", "school_day", {
-  condition: (date) => date.schoolDay && !date.holiday,
-  location: "school_classroom",
+maplebirch.npc.Schedule.update("Robin", "weekend_park", {
+  location: "mall",
 });
+
+maplebirch.npc.Schedule.remove("Robin", "weekend_park");
 ```
 
-### 删除日程
+### 清空
 
 ```javascript
-// 删除特定日程
-maplebirch.npc.Schedule.remove("Robin", "weekend_mall");
-
-// 清空NPC的所有日程
 maplebirch.npc.Schedule.clear("Robin");
+// maplebirch.npc.Schedule.clearAll(); // 清空全部 NPC 日程，谨慎使用
 ```
+
+### 批量快照
+
+只读 getter `maplebirch.npc.Schedule.location` 返回 `{ [npcName: string]: string }` 形式的当前地点映射。

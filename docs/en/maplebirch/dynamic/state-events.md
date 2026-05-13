@@ -2,7 +2,7 @@
 
 The StateEvents module is part of the dynamic management system. It handles game state-triggered events. The framework automatically checks and triggers events at passage start and end.
 
-_Access via `maplebirch.dynamic.State` or shortcut `maplebirchFrameworks.addStateEvent()`._
+_Access via **`maplebirch.dynamic.regStateEvent`** (manager: **`maplebirch.dynamic.State`**). Legacy “Simple Frameworks” snippets should migrate; only **`simpleFrameworks.addto`** and **`TimeEvent`** remain as compatibility globals (see [Getting Started](/maplebirch/getting-started))._
 
 ## Core API
 

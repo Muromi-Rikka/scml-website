@@ -2,7 +2,7 @@
 
 提供 HTML 文本处理和操作工具，支持自动翻译、Wiki 语法解析，并集成 SugarCube 宏系统。
 
-_可通过 `maplebirch.tool.text` 或快捷接口 `maplebirchFrameworks.addText()` 访问。_
+_请使用 **`maplebirch.tool.text`**。简易框架兼容层仍提供 **`simpleFrameworks.addto`**（见 [快速开始](/maplebirch/getting-started)）。_
 
 ## 使用方式
 

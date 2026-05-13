@@ -17,7 +17,7 @@ When starting a new game (`Start2` Passage), `V.maplebirch` is initialized as:
   },
   npc: {},
   transformation: {},
-  version: "3.2.0"
+  version: "3.2.3"
 }
 ```
 
@@ -98,7 +98,7 @@ migration.add("3.0.0", "3.1.0", (data) => {
 });
 
 // Run migration manually
-migration.run(V.maplebirch, "3.2.0");
+migration.run(V.maplebirch, "3.2.3");
 ```
 
 ## Hair Colour Gradients

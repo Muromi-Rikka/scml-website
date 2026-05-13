@@ -48,7 +48,7 @@ All services are frozen with `Object.seal()` to prevent runtime modification.
 
 ## Module System
 
-`ModuleSystem` is responsible for managing the registration, dependency resolution, and lifecycle of all functional modules. For full API reference (`register`, `getModule`, `dependencyGraph`, lifecycle methods), see [ModuleSystem API](./module-system).
+`ModuleSystem` is responsible for managing the registration, dependency resolution, and lifecycle of all functional modules. For full API reference (`register`, `get`, `dependencyGraph`, lifecycle methods), see [ModuleSystem API](./module-system).
 
 ### Module Registration
 

@@ -12,6 +12,7 @@ The framework registers an AngularJS component `maplebirch-control-component` vi
 - **Debug Mode** — Enable/disable DEBUG log level
 - **Module Management** — Enable/disable extension modules (visible only in debug mode)
 - **Script Management** — Enable/disable Mod scripts (visible only in debug mode)
+- **Reset Framework Settings** — Clears `$options.maplebirch` to defaults and triggers the internal `:rest-options` event so the Variables module re-applies option defaults (the settings overlay refreshes in place)
 - **Clear Database** — Reset IndexedDB (visible only in debug mode)
 
 ### Operation Instructions
@@ -23,6 +24,7 @@ The framework registers an AngularJS component `maplebirch-control-component` vi
 | Disable debug   | Click "Disable debug mode" to restore log level to INFO                             |
 | Disable module  | Select module from enabled list, click "Disable module", takes effect after restart |
 | Enable module   | Select module from disabled list, click "Enable module", takes effect after restart |
+| Reset framework settings | Clears `$options.maplebirch` for the current save and fires `:rest-options`; the framework reapplies defaults and the overlay re-renders |
 
 ### Cascade Dependencies
 

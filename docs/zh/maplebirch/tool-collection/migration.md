@@ -2,7 +2,7 @@
 
 数据迁移工具用于处理版本升级时的存档数据变更。被 Variables 模块直接使用。
 
-_可通过 `maplebirch.tool.migration` 或快捷接口 `maplebirchFrameworks.migration()` 访问。_
+_请使用 **`maplebirch.tool.migration`**。_
 
 ## 核心 API
 

@@ -10,59 +10,61 @@
 
 ## 核心 API
 
-### register(name, module, dependencies?, source?)
+### register(name, module, dependencies?)
 
-注册一个模块到系统中。
+在 `maplebirch` 上注册模块（代理到 `ModuleSystem.register`）。
 
 - **@param** `name` (string): 模块名称。
-- **@param** `module` (object): 模块对象，需包含初始化方法。
-- **@param** `dependencies` (string[]): 依赖模块列表，默认空数组。
-- **@param** `source` (string): 可选，模块来源标识，用于扩展模块。
-- **@return** `boolean`: 是否成功注册。
+- **@param** `module` (object): 模块对象，可含 `preInit` / `Init` / `loadInit` / `postInit` 等生命周期方法；若需**暴露到 `maplebirch` 根上**供脚本访问，需设置 `exposed: true`（见下例）。
+- **@param** `dependencies` (string[]): 依赖模块列表，默认 `[]`。亦可将依赖写在 `module.dependencies` 数组中，二者会合并。
+- **@return** `boolean`: 是否成功注册（同名已存在时返回 `false`）。
+
+**来源标识 `source`（v3.2.3）**：`register` 不再接受第四个参数。扩展模块所属 Mod 名由 **`maplebirch.modules.runWithSource(modName, callback)`** 在加载你的脚本时自动压栈，回调内的 `register` 会把 `source` 记为当前 Mod，用于 GUI 中的启禁与依赖展示。
 
 ```js
-// 注册普通模块
+// 普通模块
 maplebirch.register("myModule", {
   Init() {
     console.log("模块初始化");
   },
 });
 
-// 注册带依赖的模块
+// 带依赖
 maplebirch.register(
   "myModule2",
   {
     Init() {
-      console.log("依赖 var 和 tool 模块");
+      console.log("依赖 var 与 tool");
     },
   },
   ["var", "tool"],
 );
 
-// 注册扩展模块
-maplebirch.register(
-  "myExtension",
-  {
-    sayHello() {
-      return "Hello World";
+// 在 Addon 脚本上下文中注册扩展（由 AddonPlugin 包在 runWithSource 内执行时，source 自动为当前 modName）
+await maplebirch.modules.runWithSource("MyCoolMod", async () => {
+  maplebirch.register(
+    "myExtension",
+    {
+      exposed: true,
+      sayHello() {
+        return "Hello";
+      },
+      Init() {},
     },
-  },
-  [],
-  "my-mod-name",
-);
+    [],
+  );
+});
 ```
 
-扩展模块会直接挂载到 `maplebirch` 实例上，可通过 GUI 面板启用/禁用。
+### get(name)
 
-### getModule(name)
-
-获取已注册的模块实例。
+获取已注册模块实例（`ModuleSystem.registry`）。
 
 - **@param** `name` (string): 模块名称。
 - **@return** 模块对象或 `undefined`。
 
 ```js
-const addonModule = maplebirch.getModule("addon");
+const addon = maplebirch.get("addon");
 ```
 
 ### dependencyGraph
@@ -97,13 +99,13 @@ console.log("依赖 addon 的模块:", graph.addon.dependents);
 
 每个模块在生命周期中可能处于以下状态：
 
-| 状态常量     | 值  | 说明                       |
-| ------------ | --- | -------------------------- |
-| `REGISTERED` | 0   | 已注册，但未初始化         |
-| `LOADED`     | 1   | 预初始化已完成             |
-| `MOUNTED`    | 2   | 主初始化已完成             |
-| `EXTENSION`  | 3   | 扩展模块，已挂载到框架实例 |
-| `ERROR`      | 4   | 初始化过程中发生错误       |
+| 状态常量     | 值  | 说明                         |
+| ------------ | --- | ---------------------------- |
+| `REGISTERED` | 0   | 已注册，尚未完成主初始化   |
+| `MOUNTED`    | 1   | 主初始化流程已完成         |
+| `ERROR`      | 2   | 初始化过程中发生错误       |
+| `EXPOSED`    | 3   | 暴露模块，已挂到 `maplebirch` 根属性 |
+| `DISABLED`   | 4   | 已被禁用                   |
 
 ---
 
@@ -237,4 +239,4 @@ console.log("依赖 addon 的模块:", graph.addon.dependents);
 2. **初始化顺序**：依赖解析基于拓扑排序，需理解排序逻辑。
 3. **错误处理**：单个模块初始化失败不会影响其他模块。
 4. **禁用机制**：模块可从模组加载器配置中禁用。
-5. **扩展模块**：扩展模块会挂载到 `maplebirch` 实例上，便于全局访问。
+5. **扩展模块**：设置 `exposed: true` 且注册成功后会挂到 `maplebirch` 根属性；需在 `runWithSource` 提供的上下文中注册以便记录 `source`，并可通过 GUI 启禁。

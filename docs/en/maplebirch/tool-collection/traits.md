@@ -2,7 +2,7 @@
 
 Register custom traits via `maplebirch.tool.other.addTraits()`.
 
-_Access via `maplebirch.tool.other.addTraits()` or shortcut `maplebirchFrameworks.addTraits()`._
+_Access via **`maplebirch.tool.other.addTraits()`**._
 
 ## Trait Interface
 

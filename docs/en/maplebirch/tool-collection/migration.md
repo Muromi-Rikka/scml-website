@@ -2,7 +2,7 @@
 
 The `migration` tool handles save data changes during version upgrades. It is used directly by the Variables module.
 
-_Access via `maplebirch.tool.migration` or shortcut `maplebirchFrameworks.migration()`._
+_Access via **`maplebirch.tool.migration`**._
 
 ## Core API
 

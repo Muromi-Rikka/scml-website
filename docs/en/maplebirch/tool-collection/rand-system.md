@@ -2,7 +2,7 @@
 
 The `randSystem` provides various random number generation utilities including weighted random, range random, and more.
 
-_Access via `maplebirch.tool.rand` or shortcut `maplebirchFrameworks.rand()`._
+_Access via **`maplebirch.tool.rand`**._
 
 ## Usage
 

@@ -1,8 +1,14 @@
 # Time Events
 
-The TimeEvents module handles time-related events. It allows registering events that trigger at specific times or intervals (e.g. hourly, daily, monthly) and on time travel.
+The TimeEvents module handles time-related events. It allows registering events that trigger at specific times or intervals (e.g. per second, per minute, hourly, daily, monthly) and on time travel.
 
-_Access via `maplebirch.dynamic.Time` or shortcut `maplebirchFrameworks.addTimeEvent()`._
+_Use **`maplebirch.dynamic.regTimeEvent`** (the underlying manager is **`maplebirch.dynamic.Time`**). For legacy “Simple Frameworks” scripts, the global **`TimeEvent`** class still bridges to `regTimeEvent` (see [Getting Started](/maplebirch/getting-started))._
+
+:::tip Game version & v3.2.3
+
+The framework pins **`GameVersion` to `>=0.5.9.7`**. **v3.2.3** includes time-event fixes targeting that line; mirror the same constraint in your mod’s `dependenceInfo` when you rely on these APIs.
+
+:::
 
 ## Core API
 
@@ -10,7 +16,7 @@ _Access via `maplebirch.dynamic.Time` or shortcut `maplebirchFrameworks.addTimeE
 
 Register a new time event.
 
-- **@param** `type` (string): Event type — `onSec`, `onMin`, `onHour`, `onDay`, `onWeek`, `onMonth`, `onYear`, `onTimeTravel`
+- **@param** `type` (string): Event type — `onSec`, `onMin`, `onHour`, `onDay`, `onWeek`, `onMonth`, `onYear`, `onBefore`, `onThread`, `onAfter`, `onTimeTravel`
 - **@param** `eventId` (string): Unique event identifier
 - **@param** `options` (TimeEventOptions): Event configuration
 - **@return** `boolean`: Whether registration succeeded

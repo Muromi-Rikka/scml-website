@@ -129,7 +129,7 @@ Gradients are enabled via `hair_colour_style: 'gradient'` and `hair_colour_gradi
 The Transformation system allows mod authors to add custom form changes (e.g. beast, divine, demon). See [Transformation](transformation) for full API and configuration.
 
 ```js
-// Register via transformation.add or maplebirchFrameworks.addTransform
+// Register via transformation.add
 maplebirch.char.transformation.add("dragon", "physical", { ... });
 ```
 

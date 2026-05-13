@@ -1,8 +1,14 @@
 # 时间事件
 
-时间事件模块 (`TimeEvents`) 是动态管理系统的一部分，用于处理游戏中的时间相关事件。支持按特定时间点或时间间隔（如每小时、每天、每月）以及时间旅行时触发。
+时间事件模块 (`TimeEvents`) 是动态管理系统的一部分，用于处理游戏中的时间相关事件。支持按特定时间点或时间间隔（如每秒、每分、每小时、每天等）以及时间旅行时触发。
 
-_可通过 `maplebirch.dynamic.Time` 或快捷接口 `maplebirchFrameworks.addTimeEvent()` 访问。_
+_请使用 **`maplebirch.dynamic.regTimeEvent`**（底层管理器为 **`maplebirch.dynamic.Time`**）。若需兼容仍引用旧「简易框架」的脚本，可使用全局 **`TimeEvent`** 类：其内部会桥接到 `regTimeEvent`（见 [快速开始](/maplebirch/getting-started)）。_
+
+:::tip 游戏版本与 v3.2.3
+
+框架 `boot.json` 将 **`GameVersion` 依赖设为 `>=0.5.9.7`**。**v3.2.3** 在该版本线上修复了时间事件相关缺陷；编写跨版本 Mod 时请在自身 `dependenceInfo` 中与之一致，避免在未支持的游戏构建上运行。
+
+:::
 
 ## 核心 API
 
@@ -10,7 +16,7 @@ _可通过 `maplebirch.dynamic.Time` 或快捷接口 `maplebirchFrameworks.addTi
 
 注册一个新的时间事件。
 
-- **@param** `type` (string): 事件类型 — `onSec`、`onMin`、`onHour`、`onDay`、`onWeek`、`onMonth`、`onYear`、`onTimeTravel`
+- **@param** `type` (string): 事件类型 — `onSec`、`onMin`、`onHour`、`onDay`、`onWeek`、`onMonth`、`onYear`、`onBefore`、`onThread`、`onAfter`、`onTimeTravel`
 - **@param** `eventId` (string): 事件唯一标识符
 - **@param** `options` (TimeEventOptions): 事件配置选项
 - **@return** `boolean`: 是否成功注册

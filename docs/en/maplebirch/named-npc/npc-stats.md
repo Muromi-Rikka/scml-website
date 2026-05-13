@@ -4,7 +4,7 @@
 
 The NPC stats system allows mod authors to add custom numeric attributes to NPCs, such as favour, trust, stress, or special ability level. These stats are shown in the NPC sidebar and can be modified by game logic.
 
-_Register stats via `maplebirch.npc.addStats` or `maplebirchFrameworks.addNPCStats`._
+_Register stats via **`maplebirch.npc.addStats`**._
 
 ---
 

@@ -4,7 +4,7 @@
 
 The combat action system lets mod authors add custom combat actions to the combat UI: attacks, defence, special skills, and interactions. Each action can have its own display condition, effect, colour, and difficulty hint.
 
-_Register via `maplebirch.combat.CombatAction.reg` or `maplebirchFrameworks.addAction`._
+_Register via **`maplebirch.combat.CombatAction.reg`**._
 
 ---
 

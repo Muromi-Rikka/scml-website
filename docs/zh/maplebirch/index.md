@@ -28,7 +28,7 @@ graph LR
 | BeautySelectorAddon | >=2.0.0   | BSA 图片管线（NPC 侧边栏）    |
 | ReplacePatcher      | >=1.0.0   | Passage 内容替换              |
 | TweeReplacer        | >=1.0.0   | Twee Passage 替换             |
-| GameVersion         | >=0.5.7.0 | 游戏版本检测                  |
+| GameVersion         | >=0.5.9.7 | 游戏版本检测                  |
 
 ## 核心能力
 
@@ -38,7 +38,7 @@ graph LR
 - **变量管理** — 统一的 `V.maplebirch` 命名空间，支持默认值与版本迁移
 - **角色渲染** — body / head / face / clothing 图层系统，发色渐变、遮罩生成
 - **命名 NPC** — NPC 注册与数据管理、侧边栏模型渲染、服装系统、日程安排
-- **战斗系统** — 战斗动作、反应、语音注册，战斗按钮生成
+- **战斗系统** — 战斗动作与战斗按钮生成（`CombatAction`；自 v3.2.3 起已移除反应 / 语音类封装，见 [战斗反应](./combat/reaction)、[战斗对话](./combat/speech)）
 - **动态事件** — 时间、状态、天气事件管理与时间旅行
 - **音频管理** — 基于 Howler.js 的音频播放、播放列表管理
 - **工具集合** — 控制台、随机系统、宏定义、HTML 工具、区域管理等实用工具
@@ -46,6 +46,7 @@ graph LR
 - **国际化** — 多语言支持（EN/CN），翻译文件自动导入
 - **事件总线** — `on` / `off` / `once` / `after` / `trigger` 事件系统
 - **持久化存储** — IndexedDB 设置持久化
+- **凭证与保护** — `CredentialVault`（`maplebirch.credential`）与模组授权/解密流程配合（参见 [模组保护与凭证](./mod-protection)）
 - **日志系统** — 分级日志（DEBUG / INFO / WARN / ERROR）
 
 ## 全局访问路径
@@ -65,6 +66,7 @@ graph LR
 | `maplebirch.gui`     | GUIControl       | GUI 设置面板                           |
 | `maplebirch.lang`    | LanguageManager  | 国际化翻译                             |
 | `maplebirch.idb`     | IndexedDBService | IndexedDB 存储                         |
+| `maplebirch.credential` | CredentialVault | 模组凭证、授权校验与解密协作       |
 | `maplebirch.logger`  | Logger           | 日志服务                               |
 | `maplebirch.tracer`  | EventEmitter     | 事件总线                               |
 
@@ -90,7 +92,7 @@ graph LR
 - [**音频管理**](./audio) — 背景音乐、音效与播放列表
 - **角色管理**（[侧边栏图层](./character/)、[转化管理](./character/transformation)）
 - **NPC 管理**（[NPC 注册](./named-npc/)、[NPC 状态](./named-npc/npc-stats)、[NPC 日程](./named-npc/npc-schedule)、[NPC 服装](./named-npc/npc-clothes)、[NPC 侧边栏](./named-npc/npc-sidebar)）
-- **战斗管理**（[战斗按钮](./combat/actions)、[战斗反应](./combat/reaction)、[战斗语音](./combat/speech)）
+- **战斗管理**（[战斗按钮](./combat/actions)；[战斗反应](./combat/reaction)、[战斗对话](./combat/speech) 为 v3.2.3 移除说明）
 - **动态事件**（[动态事件](./dynamic/index)）
   - [状态事件](./dynamic/state-events)
   - [时间事件](./dynamic/time-events)
@@ -104,6 +106,8 @@ graph LR
   - [特质注册](./tool-collection/traits)
   - [地点配置](./tool-collection/location)
   - [纹身注册](./tool-collection/bodywriting)
+- [**GUI 控制**](./gui-settings) — AngularJS 设置面板与模块启禁
+- [**模组保护与凭证**](./mod-protection) — `CredentialVault` 与配套工具链
 
 ## 功能要点
 

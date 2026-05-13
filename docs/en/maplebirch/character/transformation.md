@@ -4,7 +4,7 @@
 
 The Transformation system allows mod authors to add custom form changes to the game, such as beast, divine, or demon transformations. You can define appearance, traits, conditions, and effects for each transformation stage.
 
-_Register via `maplebirch.char.transformation.add` or `maplebirchFrameworks.addTransform`._
+_Register via **`maplebirch.char.transformation.add`**._
 
 ---
 

@@ -2,7 +2,7 @@
 
 The `htmlTools` module provides HTML text processing and manipulation tools, with support for auto-translation, Wiki syntax parsing, and SugarCube macro integration.
 
-_Access via `maplebirch.tool.text` or shortcut `maplebirchFrameworks.addText()`._
+_Access via **`maplebirch.tool.text`**. The Simple Frameworks shim still exposes **`simpleFrameworks.addto`** ([Getting Started](/maplebirch/getting-started))._
 
 ## Usage
 

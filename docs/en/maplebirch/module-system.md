@@ -10,59 +10,58 @@ For the overall architecture and initialization flow, see [Core Architecture](./
 
 ## Core API
 
-### register(name, module, dependencies?, source?)
+### register(name, module, dependencies?)
 
-Registers a module with the system.
+Registers a module (delegates to `ModuleSystem.register`).
 
 - **@param** `name` (string): Module name.
-- **@param** `module` (object): Module object; must implement the initialization methods described below.
-- **@param** `dependencies` (string[]): List of module names this module depends on. Default `[]`.
-- **@param** `source` (string): Optional source identifier; used for extension modules.
-- **@return** `boolean`: `true` if registration succeeded.
+- **@param** `module` (object): Module object with optional lifecycle methods (`preInit`, `Init`, `loadInit`, `postInit`, …). Set **`exposed: true`** if the module should be attached as a property on the `maplebirch` root.
+- **@param** `dependencies` (string[]): Dependency list, default `[]`. Values from `module.dependencies` are merged in.
+- **@return** `boolean`: `true` on success; `false` if the name is already registered.
+
+**Source / owning mod (v3.2.3):** `register` no longer takes a fourth `source` argument. While AddonPlugin executes your script it wraps the body in **`await maplebirch.modules.runWithSource(modName, …)`**, so nested `register` calls automatically record the owning mod name for GUI enable/disable and graph metadata.
 
 ```js
-// Register a basic module
 maplebirch.register("myModule", {
   Init() {
-    console.log("Module initialized");
+    console.log("initialized");
   },
 });
 
-// Register with dependencies
 maplebirch.register(
   "myModule2",
   {
     Init() {
-      console.log("Depends on var and tool");
+      console.log("depends on var and tool");
     },
   },
   ["var", "tool"],
 );
 
-// Register an extension module
-maplebirch.register(
-  "myExtension",
-  {
-    sayHello() {
-      return "Hello World";
+await maplebirch.modules.runWithSource("MyCoolMod", async () => {
+  maplebirch.register(
+    "myExtension",
+    {
+      exposed: true,
+      sayHello() {
+        return "Hello";
+      },
+      Init() {},
     },
-  },
-  [],
-  "my-mod-name",
-);
+    [],
+  );
+});
 ```
 
-Extension modules are mounted onto `maplebirch` and can be enabled/disabled via the GUI panel.
+### get(name)
 
-### getModule(name)
-
-Returns the registered module instance.
+Returns a registered module instance.
 
 - **@param** `name` (string): Module name.
 - **@return** Module object or `undefined`.
 
 ```js
-const addonModule = maplebirch.getModule("addon");
+const addon = maplebirch.get("addon");
 ```
 
 ### dependencyGraph
@@ -97,13 +96,13 @@ console.log("Modules depending on addon:", graph.addon.dependents);
 
 Each module can be in one of these states:
 
-| State constant | Value | Description                                     |
-| -------------- | ----- | ----------------------------------------------- |
-| `REGISTERED`   | 0     | Registered but not yet initialized              |
-| `LOADED`       | 1     | Pre-initialization complete                     |
-| `MOUNTED`      | 2     | Main initialization complete                    |
-| `EXTENSION`    | 3     | Extension module, mounted on framework instance |
-| `ERROR`        | 4     | Error during initialization                     |
+| State constant | Value | Description                                      |
+| -------------- | ----- | ------------------------------------------------ |
+| `REGISTERED`   | 0     | Registered, main init not finished               |
+| `MOUNTED`      | 1     | Main initialization finished                     |
+| `ERROR`        | 2     | Error during initialization                      |
+| `EXPOSED`      | 3     | Exposed module mounted on `maplebirch` root      |
+| `DISABLED`     | 4     | Module disabled                                  |
 
 ---
 
@@ -237,4 +236,4 @@ console.log("Modules depending on addon:", graph.addon.dependents);
 2. **Initialization order** — Dependencies are resolved via topological sort; understand how this affects order.
 3. **Error handling** — A failed module does not block others.
 4. **Disabling** — Modules can be disabled via ModLoader config.
-5. **Extension modules** — Extension modules are mounted on `maplebirch` for global access.
+5. **Extension modules** — Use `exposed: true` and register inside the `runWithSource` context so `source` is tracked; exposed modules appear on the `maplebirch` root and can be toggled from the GUI.
