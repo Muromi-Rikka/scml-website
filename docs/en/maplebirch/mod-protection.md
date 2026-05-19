@@ -4,10 +4,10 @@ From **v3.2.5** onward the framework ships full **mod encryption** support: the 
 
 ## Framework vs dependent mods
 
-| Target | Encrypted? | Notes |
-| ------ | ---------- | ----- |
-| maplebirch framework | No | Distributed as a normal `.mod.zip` or as a release `.modpack` shell that only wraps the framework install |
-| Mods that depend on maplebirch | Optional | Convert the source zip with [dol-mod-protection-tools](https://github.com/MaplebirchLeaf/dol-mod-protection-tools) |
+| Target                         | Encrypted? | Notes                                                                                                              |
+| ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| maplebirch framework           | No         | Distributed as a normal `.mod.zip` or as a release `.modpack` shell that only wraps the framework install          |
+| Mods that depend on maplebirch | Optional   | Convert the source zip with [dol-mod-protection-tools](https://github.com/MaplebirchLeaf/dol-mod-protection-tools) |
 
 A protected `.modpack` **only exposes** the shell `boot.json`, an `earlyload` decryptor, and `.crypt` shards. The original `boot.json`, `auth.json`, scripts, and assets live inside the encrypted payload and are not left in plaintext in the shell.
 

@@ -52,3 +52,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.ACCOUNT_ID }}
           command: pages deploy doc_build --project-name=modloader --branch main
+          packageManager: bun

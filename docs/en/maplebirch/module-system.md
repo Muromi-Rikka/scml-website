@@ -14,11 +14,11 @@ For architecture and boot flow see [Core Architecture](./architecture).
 
 Registers a module (delegates to `ModuleSystem.register`).
 
-| Parameter | Description |
-| --------- | ----------- |
-| `name` | Module name |
-| `module` | Module object with optional lifecycle methods; `module.dependencies` merges with the third argument |
-| `dependencies` | Optional dependency name array |
+| Parameter      | Description                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| `name`         | Module name                                                                                         |
+| `module`       | Module object with optional lifecycle methods; `module.dependencies` merges with the third argument |
+| `dependencies` | Optional dependency name array                                                                      |
 
 - **@return** `boolean` — `true` on success; `false` if the name already exists.
 
@@ -55,16 +55,16 @@ const npcModule = maplebirch.get("npc");
 
 Dependency metadata per module:
 
-| Field | Description |
-| ----- | ----------- |
-| `protected` | Protected module (cannot be turned off in the disable UI) |
-| `mounted` | Part of the core mount list |
-| `early` | Mounted during pre-initialization |
-| `dependencies` | Direct dependencies |
-| `dependents` | Modules that depend on this one |
-| `allDependencies` | Transitive dependencies |
-| `state` | Current state (e.g. `'MOUNTED'`) |
-| `source` | Owning mod name (extension modules) |
+| Field             | Description                                               |
+| ----------------- | --------------------------------------------------------- |
+| `protected`       | Protected module (cannot be turned off in the disable UI) |
+| `mounted`         | Part of the core mount list                               |
+| `early`           | Mounted during pre-initialization                         |
+| `dependencies`    | Direct dependencies                                       |
+| `dependents`      | Modules that depend on this one                           |
+| `allDependencies` | Transitive dependencies                                   |
+| `state`           | Current state (e.g. `'MOUNTED'`)                          |
+| `source`          | Owning mod name (extension modules)                       |
 
 ```js
 const graph = maplebirch.dependencyGraph;
@@ -96,13 +96,13 @@ Exposed modules **do not** run the normal lifecycle (`preInit` / `Init` / `loadI
 
 ## Module states
 
-| State | Value | Description |
-| ----- | ----- | ----------- |
-| `REGISTERED` | 0 | Registered, waiting for init |
-| `MOUNTED` | 1 | Main initialization finished |
-| `ERROR` | 2 | Initialization failed |
-| `EXPOSED` | 3 | Exposed on the `maplebirch` root |
-| `DISABLED` | 4 | Disabled, skipped |
+| State        | Value | Description                      |
+| ------------ | ----- | -------------------------------- |
+| `REGISTERED` | 0     | Registered, waiting for init     |
+| `MOUNTED`    | 1     | Main initialization finished     |
+| `ERROR`      | 2     | Initialization failed            |
+| `EXPOSED`    | 3     | Exposed on the `maplebirch` root |
+| `DISABLED`   | 4     | Disabled, skipped                |
 
 Pre-init completion is tracked separately in an internal `preInitialized` set; modules move to `MOUNTED` after main init.
 
@@ -110,12 +110,12 @@ Pre-init completion is tracked separately in an internal `preInitialized` set; m
 
 ## Lifecycle methods
 
-| Method | When | Purpose |
-| ------ | ---- | ------- |
-| `preInit()` | After `afterInjectEarlyLoad`, IndexedDB/logging ready | Early setup (no `setup` / `V` yet) |
-| `Init()` | First normal-game **`:passagestart`** | Main init (`setup` and `V` available) |
-| `loadInit()` | After loading a save | Restore save-related state |
-| `postInit()` | Every passage start, after `Init` or `loadInit` | Per-passage refresh |
+| Method       | When                                                  | Purpose                               |
+| ------------ | ----------------------------------------------------- | ------------------------------------- |
+| `preInit()`  | After `afterInjectEarlyLoad`, IndexedDB/logging ready | Early setup (no `setup` / `V` yet)    |
+| `Init()`     | First normal-game **`:passagestart`**                 | Main init (`setup` and `V` available) |
+| `loadInit()` | After loading a save                                  | Restore save-related state            |
+| `postInit()` | Every passage start, after `Init` or `loadInit`       | Per-passage refresh                   |
 
 ```js
 class MyModule {

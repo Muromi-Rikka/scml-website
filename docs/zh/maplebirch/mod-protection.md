@@ -4,10 +4,10 @@
 
 ## 框架本体与依赖模组
 
-| 对象 | 是否加密 | 说明 |
-| ---- | -------- | ---- |
-| maplebirch 框架 | 否 | 以普通 `.mod.zip` 或发行页提供的 `.modpack` 壳分发均可；壳内仅为框架安装包，不涉及第三方 Mod 保护 |
-| 依赖框架的 Mod | 可选 | 使用 [dol-mod-protection-tools](https://github.com/MaplebirchLeaf/dol-mod-protection-tools) 将原始 zip 转为 `.modpack` |
+| 对象            | 是否加密 | 说明                                                                                                                   |
+| --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| maplebirch 框架 | 否       | 以普通 `.mod.zip` 或发行页提供的 `.modpack` 壳分发均可；壳内仅为框架安装包，不涉及第三方 Mod 保护                      |
+| 依赖框架的 Mod  | 可选     | 使用 [dol-mod-protection-tools](https://github.com/MaplebirchLeaf/dol-mod-protection-tools) 将原始 zip 转为 `.modpack` |
 
 加密后的 `.modpack` **仅暴露**壳 `boot.json`、`earlyload` 解密器与 `.crypt` 分片；原始 `boot.json`、`auth.json`、脚本与资源均进入加密 payload，不会以明文留在壳包中。
 

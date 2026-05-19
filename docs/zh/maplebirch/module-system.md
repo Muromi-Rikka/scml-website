@@ -14,11 +14,11 @@
 
 在 `maplebirch` 上注册模块（代理到 `ModuleSystem.register`）。
 
-| 参数 | 说明 |
-| ---- | ---- |
-| `name` | 模块名称 |
-| `module` | 模块对象，可含生命周期方法；`module.dependencies` 会与第三个参数合并 |
-| `dependencies` | 依赖模块名称数组，可选 |
+| 参数           | 说明                                                                 |
+| -------------- | -------------------------------------------------------------------- |
+| `name`         | 模块名称                                                             |
+| `module`       | 模块对象，可含生命周期方法；`module.dependencies` 会与第三个参数合并 |
+| `dependencies` | 依赖模块名称数组，可选                                               |
 
 - **@return** `boolean`：成功为 `true`；同名已存在为 `false`。
 
@@ -55,16 +55,16 @@ const npcModule = maplebirch.get("npc");
 
 返回每个模块的依赖关系。常见字段：
 
-| 字段 | 说明 |
-| ---- | ---- |
-| `protected` | 是否为受保护模块（不可被禁用界面关闭） |
-| `mounted` | 是否属于框架核心挂载列表 |
-| `early` | 是否会在预初始化阶段提前挂载 |
-| `dependencies` | 直接依赖 |
-| `dependents` | 依赖该模块的模块 |
-| `allDependencies` | 传递依赖 |
-| `state` | 当前状态（如 `'MOUNTED'`） |
-| `source` | 来源 Mod 名（扩展模块） |
+| 字段              | 说明                                   |
+| ----------------- | -------------------------------------- |
+| `protected`       | 是否为受保护模块（不可被禁用界面关闭） |
+| `mounted`         | 是否属于框架核心挂载列表               |
+| `early`           | 是否会在预初始化阶段提前挂载           |
+| `dependencies`    | 直接依赖                               |
+| `dependents`      | 依赖该模块的模块                       |
+| `allDependencies` | 传递依赖                               |
+| `state`           | 当前状态（如 `'MOUNTED'`）             |
+| `source`          | 来源 Mod 名（扩展模块）                |
 
 ```js
 const graph = maplebirch.dependencyGraph;
@@ -96,13 +96,13 @@ maplebirch.myApi.hello();
 
 ## 模块状态
 
-| 状态 | 值 | 说明 |
-| ---- | -- | ---- |
-| `REGISTERED` | 0 | 已注册，等待初始化 |
-| `MOUNTED` | 1 | 主初始化已完成 |
-| `ERROR` | 2 | 初始化失败 |
-| `EXPOSED` | 3 | 暴露模块，已挂到 `maplebirch` 根属性 |
-| `DISABLED` | 4 | 被禁用，跳过初始化 |
+| 状态         | 值  | 说明                                 |
+| ------------ | --- | ------------------------------------ |
+| `REGISTERED` | 0   | 已注册，等待初始化                   |
+| `MOUNTED`    | 1   | 主初始化已完成                       |
+| `ERROR`      | 2   | 初始化失败                           |
+| `EXPOSED`    | 3   | 暴露模块，已挂到 `maplebirch` 根属性 |
+| `DISABLED`   | 4   | 被禁用，跳过初始化                   |
 
 预初始化完成不会改变模块状态，而是记录在内部的 `preInitialized` 集合；主初始化完成后才进入 `MOUNTED`。
 
@@ -110,12 +110,12 @@ maplebirch.myApi.hello();
 
 ## 生命周期方法
 
-| 方法 | 调用时机 | 用途 |
-| ---- | -------- | ---- |
-| `preInit()` | `afterInjectEarlyLoad` 后，IndexedDB 与日志准备完成 | 提前准备资源、配置、缓存（无 `setup` / `V`） |
-| `Init()` | 首次进入正常游戏段落的 **`:passagestart`** | 主初始化，可使用 `setup` 与 `V` |
-| `loadInit()` | 读档后进入段落时 | 从存档恢复状态 |
-| `postInit()` | 每次段落开始，在 `Init` 或 `loadInit` 之后 | 刷新段落级逻辑 |
+| 方法         | 调用时机                                            | 用途                                         |
+| ------------ | --------------------------------------------------- | -------------------------------------------- |
+| `preInit()`  | `afterInjectEarlyLoad` 后，IndexedDB 与日志准备完成 | 提前准备资源、配置、缓存（无 `setup` / `V`） |
+| `Init()`     | 首次进入正常游戏段落的 **`:passagestart`**          | 主初始化，可使用 `setup` 与 `V`              |
+| `loadInit()` | 读档后进入段落时                                    | 从存档恢复状态                               |
+| `postInit()` | 每次段落开始，在 `Init` 或 `loadInit` 之后          | 刷新段落级逻辑                               |
 
 ```js
 class MyModule {
