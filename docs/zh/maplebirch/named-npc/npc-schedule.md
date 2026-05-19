@@ -2,7 +2,7 @@
 
 ## 基本介绍
 
-NPC 日程用于描述命名 NPC 在一天中各小时出现的地点，以及基于条件的特殊覆盖规则。底层由 `Schedule` 实例与 `maplebirch.npc.Schedule` 静态方法管理；**v3.2.3** 起优化了特殊日程的依赖解析与拓扑排序，请与 **`GameVersion >= 0.5.9.7`** 一并使用以保证时间系统一致。
+NPC 日程用于描述命名 NPC 在一天中各小时出现的地点，以及基于条件的特殊覆盖规则。底层由 `Schedule` 实例与 `maplebirch.npc.Schedule` 静态方法管理；**v3.2.5** 优化了 NPC 日程的注册逻辑与特殊日程的依赖解析，请与 **`GameVersion >= 0.5.9.7`** 一并使用以保证时间系统一致。
 
 _通过 **`maplebirch.npc.addSchedule(npcName, config)`** 注册；`config` 为配置对象（`ScheduleConfig`）或建造函数（接收 `Schedule` 并链式调用 `at` / `when`）。等价于内部调用 `maplebirch.npc.Schedule.set`。_
 

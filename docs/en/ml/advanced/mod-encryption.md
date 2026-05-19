@@ -2,6 +2,8 @@
 
 ModLoader provides a content protection framework based on [libsodium](https://doc.libsodium.org/) since v2.1.0 for Mods that need protection.
 
+For mods that depend on **maplebirchFramework**, see [Maplebirch mod protection & credentials](/maplebirch/mod-protection) for the `.modpack` shell and `maplebirch.credential` flow.
+
 ## How It Works
 
 Encrypted Mods use ModLoader’s **SideLazyLoad** support:

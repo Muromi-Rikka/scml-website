@@ -2,7 +2,7 @@
 
 ## Overview
 
-Schedules describe where a named NPC should be for each hour of the day, plus optional conditional overrides. Internally this is backed by `Schedule` instances and the `maplebirch.npc.Schedule` helpers. **v3.2.3** tightens special-schedule registration and topological sorting; pair it with **`GameVersion >= 0.5.9.7`** so time handling matches the supported game build.
+Schedules describe where a named NPC should be for each hour of the day, plus optional conditional overrides. Internally this is backed by `Schedule` instances and the `maplebirch.npc.Schedule` helpers. **v3.2.5** improves NPC schedule registration and special-schedule dependency resolution; pair it with **`GameVersion >= 0.5.9.7`** so time handling matches the supported game build.
 
 _Register with **`maplebirch.npc.addSchedule(npcName, config)`**, where `config` is either a **`ScheduleConfig` object** or a **builder function** `(schedule) => …` chaining `at` / `when`. This delegates to `maplebirch.npc.Schedule.set`._
 

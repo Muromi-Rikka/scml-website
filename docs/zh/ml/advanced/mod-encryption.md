@@ -2,6 +2,8 @@
 
 为满足部分 Mod 作者对内容保护的需求，ModLoader 从 v2.1.0 开始提供基于 [libsodium](https://doc.libsodium.org/) 的 Mod 内容保护框架。
 
+依赖 **maplebirchFramework** 的 Mod 可使用框架侧的凭证与 `.modpack` 流程，详见 [秋枫白桦 · 模组保护与凭证](/maplebirch/mod-protection)。
+
 ## 工作原理
 
 加密 Mod 利用了 ModLoader 的**懒加载（SideLazyLoad）**特性：

@@ -1,8 +1,10 @@
-# Combat Speech (Removed)
+# Combat speech (removed)
 
-Starting with **v3.2.3**, **`maplebirch.combat.Speech`**, **`maplebirch.combat.ejaculation`**, and related combat dialogue helpers were removed from the combat module; the base game can cover these flows directly (see the [v3.2.3 release notes](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.3)).
+Starting with **v3.2.5**, **`maplebirch.combat.Speech`**, **`maplebirch.combat.ejaculation`** (**combat ejaculation** macro helpers), and related combat dialogue APIs were removed from the combat module; the base game can cover these flows directly (see the [v3.2.5 release notes](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.5)).
+
+**Combat reaction** and **crossdress dialogue** were removed in the same release—see [Combat reaction](./reaction).
 
 ## Migration
 
-- General combat lines: output them from the relevant passage/widget with normal SugarCube conditionals.
-- Named NPC ejaculation lines: register vanilla-style widgets such as `<<widget "ejaculation-<npc>">>` yourself, or inject them via TweeReplacer / ReplacePatcher—there is no longer a framework combat wrapper for this.
+- General combat lines: output conditions in the relevant passage or widget with SugarCube.
+- Named NPC ejaculation lines: register `<<widget "ejaculation-<npc>">>` macros per vanilla conventions, or inject via TweeReplacer / ReplacePatcher, instead of framework combat wrappers.

@@ -38,7 +38,7 @@ graph LR
 - **变量管理** — 统一的 `V.maplebirch` 命名空间，支持默认值与版本迁移
 - **角色渲染** — body / head / face / clothing 图层系统，发色渐变、遮罩生成
 - **命名 NPC** — NPC 注册与数据管理、侧边栏模型渲染、服装系统、日程安排
-- **战斗系统** — 战斗动作与战斗按钮生成（`CombatAction`；自 v3.2.3 起已移除反应 / 语音类封装，见 [战斗反应](./combat/reaction)、[战斗对话](./combat/speech)）
+- **战斗系统** — 战斗动作与战斗按钮生成（`CombatAction`；自 v3.2.5 起已移除反应 / 语音类封装，见 [战斗反应](./combat/reaction)、[战斗对话](./combat/speech)）
 - **动态事件** — 时间、状态、天气事件管理与时间旅行
 - **音频管理** — 基于 Howler.js 的音频播放、播放列表管理
 - **工具集合** — 控制台、随机系统、宏定义、HTML 工具、区域管理等实用工具
@@ -92,7 +92,7 @@ graph LR
 - [**音频管理**](./audio) — 背景音乐、音效与播放列表
 - **角色管理**（[侧边栏图层](./character/)、[转化管理](./character/transformation)）
 - **NPC 管理**（[NPC 注册](./named-npc/)、[NPC 状态](./named-npc/npc-stats)、[NPC 日程](./named-npc/npc-schedule)、[NPC 服装](./named-npc/npc-clothes)、[NPC 侧边栏](./named-npc/npc-sidebar)）
-- **战斗管理**（[战斗按钮](./combat/actions)；[战斗反应](./combat/reaction)、[战斗对话](./combat/speech) 为 v3.2.3 移除说明）
+- **战斗管理**（[战斗按钮](./combat/actions)；[战斗反应](./combat/reaction)、[战斗对话](./combat/speech) 为 v3.2.5 移除说明）
 - **动态事件**（[动态事件](./dynamic/index)）
   - [状态事件](./dynamic/state-events)
   - [时间事件](./dynamic/time-events)
@@ -120,6 +120,7 @@ graph LR
 
 ## 下一步
 
+- [版本历史](./changelog) — v3.2.5 及更早版本变更摘要
 - [快速开始](./getting-started) — 如何让你的 Mod 依赖并使用框架
 - [核心架构](./architecture) — 深入了解 MaplebirchCore 与模块系统
 - [AddonPlugin 系统](./addon-plugin) — 生命周期钩子与配置加载详解

@@ -4,16 +4,18 @@ This guide explains how to add maplebirchFramework as a dependency to your Mod a
 
 ## Installing the Framework
 
-1. Download the framework `.mod.zip` file from [GitHub Releases](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases)
+1. Download the framework from [GitHub Releases](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases) (current recommended asset: **`maplebirch-0.5.9.7-v3.2.5.modpack`** or the matching `.mod.zip`)
 2. Install it via ModLoader's Mod manager. Ensure the framework and all its dependencies (ModLoader, ModLoaderGui, BeautySelectorAddon, etc.) are loaded correctly
 
 :::tip Coexisting with “Simple Frameworks”
 
 The framework declares the alias `Simple Frameworks`. If players still have the legacy Simple Framework mod installed, maplebirch **disables it at startup** to avoid conflicts.
 
-From **v3.2.3** onward only two compatibility globals remain: **`window.simpleFrameworks.addto`** (mapped to `maplebirch.tool.addTo`) and the **`TimeEvent`** helper class (internally bridged to `maplebirch.dynamic.regTimeEvent`). Other legacy shortcut globals were removed—new mods should call the `maplebirch` APIs directly.
+From **v3.2.5** onward (on **game version >= 0.5.9.7**) only two compatibility globals remain: **`window.simpleFrameworks.addto`** (mapped to `maplebirch.tool.addTo`) and the **`TimeEvent`** helper class (internally bridged to `maplebirch.dynamic.regTimeEvent`). Other legacy shortcut globals were removed—new mods should call the `maplebirch` APIs directly.
 
-The framework also pins **`GameVersion` to `>=0.5.9.7`**. Mirror both `GameVersion` and `maplebirch` constraints in your own `boot.json`.
+The framework also pins **`GameVersion` to `>=0.5.9.7`**. Mirror both `GameVersion` and `maplebirch` constraints in your own `boot.json` (prefer **`>=3.2.5`**).
+
+The framework itself is not encrypted. Package your mod as `.modpack` with [dol-mod-protection-tools](https://github.com/MaplebirchLeaf/dol-mod-protection-tools)—see [Mod protection & credentials](./mod-protection).
 
 :::
 
@@ -32,7 +34,7 @@ Declare the version constraint for maplebirch in your Mod's `boot.json` through 
     },
     {
       "modName": "maplebirch",
-      "version": ">=3.2.3"
+      "version": ">=3.2.5"
     }
   ]
 }
@@ -90,7 +92,7 @@ The following is a complete `boot.json` example that depends on maplebirch:
     },
     {
       "modName": "maplebirch",
-      "version": ">=3.2.3"
+      "version": ">=3.2.5"
     }
   ],
   "addonPlugin": [
@@ -141,6 +143,7 @@ if (window.maplebirch) {
 
 ## Next Steps
 
+- [Changelog](./changelog) — v3.2.5 and earlier release summaries
 - [Core Architecture](./architecture) — Deep dive into MaplebirchCore and module system
 - [AddonPlugin System](./addon-plugin) — Detailed usage of each params configuration option
 - [Variables and Game State](./variables) — Managing the `V.maplebirch` namespace

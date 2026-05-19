@@ -2,7 +2,7 @@
 
 ## Overview
 
-The NPC sidebar system lets mod authors add sidebar display for custom NPCs, either as static images or as a dynamic model driven by the in-game clothing system. **v3.2.3** fixes several issues around sidebar character models and related rendering paths; if assets still fail to load, double-check the BeautySelectorAddon dependency and `img/ui/nnpc/...` paths.
+The NPC sidebar system lets mod authors add sidebar display for custom NPCs, either as static images or as a dynamic model driven by the in-game clothing system. **v3.2.5** continues to fix sidebar character models and related rendering paths; if assets still fail to load, double-check the BeautySelectorAddon dependency and `img/ui/nnpc/...` paths.
 
 ---
 

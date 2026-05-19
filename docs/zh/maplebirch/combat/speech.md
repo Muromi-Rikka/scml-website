@@ -1,6 +1,8 @@
 # 战斗对话（已移除）
 
-自框架 **v3.2.3** 起，战斗模块中的 **`maplebirch.combat.Speech`** 以及 **`maplebirch.combat.ejaculation`** 等战斗对话 / 射精宏辅助 API 已从框架中删除；原版游戏路径已可直接实现同类需求（见 [v3.2.3 发布说明](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.3)）。
+自框架 **v3.2.5** 起，战斗模块中的 **`maplebirch.combat.Speech`** 以及 **`maplebirch.combat.ejaculation`**（**战斗射精** 宏辅助）等战斗对话 API 已从框架中删除；原版游戏路径已可直接实现同类需求（见 [v3.2.5 发布说明](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.5)）。
+
+与反应类 API 一并移除的还包括 **战斗反应** 与 **异装对话**，详见 [战斗反应](./reaction)。
 
 ## 迁移建议
 

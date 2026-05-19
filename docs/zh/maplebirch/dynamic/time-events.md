@@ -4,9 +4,9 @@
 
 _请使用 **`maplebirch.dynamic.regTimeEvent`**（底层管理器为 **`maplebirch.dynamic.Time`**）。若需兼容仍引用旧「简易框架」的脚本，可使用全局 **`TimeEvent`** 类：其内部会桥接到 `regTimeEvent`（见 [快速开始](/maplebirch/getting-started)）。_
 
-:::tip 游戏版本与 v3.2.3
+:::tip 游戏版本与 v3.2.5
 
-框架 `boot.json` 将 **`GameVersion` 依赖设为 `>=0.5.9.7`**。**v3.2.3** 在该版本线上修复了时间事件相关缺陷；编写跨版本 Mod 时请在自身 `dependenceInfo` 中与之一致，避免在未支持的游戏构建上运行。
+框架 `boot.json` 将 **`GameVersion` 依赖设为 `>=0.5.9.7`**。**v3.2.5** 在该版本线上修复了时间事件相关缺陷；编写跨版本 Mod 时请在自身 `dependenceInfo` 中与之一致，避免在未支持的游戏构建上运行。
 
 :::
 

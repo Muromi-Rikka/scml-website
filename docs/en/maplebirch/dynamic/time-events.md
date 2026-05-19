@@ -4,9 +4,9 @@ The TimeEvents module handles time-related events. It allows registering events 
 
 _Use **`maplebirch.dynamic.regTimeEvent`** (the underlying manager is **`maplebirch.dynamic.Time`**). For legacy “Simple Frameworks” scripts, the global **`TimeEvent`** class still bridges to `regTimeEvent` (see [Getting Started](/maplebirch/getting-started))._
 
-:::tip Game version & v3.2.3
+:::tip Game version & v3.2.5
 
-The framework pins **`GameVersion` to `>=0.5.9.7`**. **v3.2.3** includes time-event fixes targeting that line; mirror the same constraint in your mod’s `dependenceInfo` when you rely on these APIs.
+The framework pins **`GameVersion` to `>=0.5.9.7`**. **v3.2.5** includes time-event fixes targeting that line; mirror the same constraint in your mod’s `dependenceInfo` when you rely on these APIs.
 
 :::
 

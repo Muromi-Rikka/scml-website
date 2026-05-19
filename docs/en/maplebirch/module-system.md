@@ -2,24 +2,27 @@
 
 ## Overview
 
-`ModuleSystem` is the framework’s module loading and dependency management system. It handles module registration, dependency resolution, and lifecycle initialization, so modules load and run in the correct order.
+`ModuleSystem` handles module registration, dependency ordering, and lifecycle scheduling. **Most content mods should not register framework modules**—use `addonPlugin` **`script`** entries instead. Only use `maplebirch.register` when you intentionally extend internal framework capabilities.
 
-For the overall architecture and initialization flow, see [Core Architecture](./architecture).
+For architecture and boot flow see [Core Architecture](./architecture).
 
 ---
 
-## Core API
+## Registering modules
 
 ### register(name, module, dependencies?)
 
 Registers a module (delegates to `ModuleSystem.register`).
 
-- **@param** `name` (string): Module name.
-- **@param** `module` (object): Module object with optional lifecycle methods (`preInit`, `Init`, `loadInit`, `postInit`, …). Set **`exposed: true`** if the module should be attached as a property on the `maplebirch` root.
-- **@param** `dependencies` (string[]): Dependency list, default `[]`. Values from `module.dependencies` are merged in.
-- **@return** `boolean`: `true` on success; `false` if the name is already registered.
+| Parameter | Description |
+| --------- | ----------- |
+| `name` | Module name |
+| `module` | Module object with optional lifecycle methods; `module.dependencies` merges with the third argument |
+| `dependencies` | Optional dependency name array |
 
-**Source / owning mod (v3.2.3):** `register` no longer takes a fourth `source` argument. While AddonPlugin executes your script it wraps the body in **`await maplebirch.modules.runWithSource(modName, …)`**, so nested `register` calls automatically record the owning mod name for GUI enable/disable and graph metadata.
+- **@return** `boolean` — `true` on success; `false` if the name already exists.
+
+Extension modules get a **`source`** (owning mod name) recorded automatically when AddonPlugin loads your **`module`** scripts—**no** fourth `source` argument or `runWithSource` wrapper required.
 
 ```js
 maplebirch.register("myModule", {
@@ -31,209 +34,131 @@ maplebirch.register("myModule", {
 maplebirch.register(
   "myModule2",
   {
+    dependencies: ["tool"],
     Init() {
-      console.log("depends on var and tool");
+      console.log("depends on tool and npc");
     },
   },
-  ["var", "tool"],
+  ["npc"],
 );
-
-await maplebirch.modules.runWithSource("MyCoolMod", async () => {
-  maplebirch.register(
-    "myExtension",
-    {
-      exposed: true,
-      sayHello() {
-        return "Hello";
-      },
-      Init() {},
-    },
-    [],
-  );
-});
 ```
 
 ### get(name)
 
 Returns a registered module instance.
 
-- **@param** `name` (string): Module name.
-- **@return** Module object or `undefined`.
-
 ```js
-const addon = maplebirch.get("addon");
+const npcModule = maplebirch.get("npc");
 ```
 
 ### dependencyGraph
 
-Returns the module dependency graph. Each entry includes:
+Dependency metadata per module:
 
-- `dependencies` — Direct dependencies
-- `dependents` — Modules that depend on this one
-- `state` — Current state (e.g. `'MOUNTED'`)
-- `allDependencies` — All transitive dependencies
-- `source` — Source identifier (for extension modules)
+| Field | Description |
+| ----- | ----------- |
+| `protected` | Protected module (cannot be turned off in the disable UI) |
+| `mounted` | Part of the core mount list |
+| `early` | Mounted during pre-initialization |
+| `dependencies` | Direct dependencies |
+| `dependents` | Modules that depend on this one |
+| `allDependencies` | Transitive dependencies |
+| `state` | Current state (e.g. `'MOUNTED'`) |
+| `source` | Owning mod name (extension modules) |
 
 ```js
 const graph = maplebirch.dependencyGraph;
-console.log(graph.addon);
-// Output: {
-//   dependencies: [],
-//   dependents: ['dynamic', 'tool', ...],
-//   state: 'MOUNTED',
-//   allDependencies: [],
-//   source: null
-// }
-
-// Query dependencies
-console.log("addon dependencies:", graph.addon.dependencies);
-console.log("Modules depending on addon:", graph.addon.dependents);
+console.log(graph.npc);
 ```
 
 ---
 
-## Module States
+## Exposed modules (EXPOSED)
 
-Each module can be in one of these states:
+Set **`exposed: true`** on the module object. After registration the state is **`EXPOSED`** and the object is mounted at **`maplebirch[name]`**.
 
-| State constant | Value | Description                                 |
-| -------------- | ----- | ------------------------------------------- |
-| `REGISTERED`   | 0     | Registered, main init not finished          |
-| `MOUNTED`      | 1     | Main initialization finished                |
-| `ERROR`        | 2     | Error during initialization                 |
-| `EXPOSED`      | 3     | Exposed module mounted on `maplebirch` root |
-| `DISABLED`     | 4     | Module disabled                             |
+```js
+maplebirch.register("myApi", {
+  exposed: true,
+  hello() {
+    return "Hello";
+  },
+});
+
+maplebirch.myApi.hello();
+```
+
+:::warning EXPOSED behavior
+Exposed modules **do not** run the normal lifecycle (`preInit` / `Init` / `loadInit` / `postInit`) and **do not** appear in the disable UI. The dependency graph treats `EXPOSED` modules as satisfied dependencies. Registration fails if `maplebirch[name]` is already taken.
+:::
 
 ---
 
-## Lifecycle Methods
+## Module states
 
-A module can define these lifecycle methods:
+| State | Value | Description |
+| ----- | ----- | ----------- |
+| `REGISTERED` | 0 | Registered, waiting for init |
+| `MOUNTED` | 1 | Main initialization finished |
+| `ERROR` | 2 | Initialization failed |
+| `EXPOSED` | 3 | Exposed on the `maplebirch` root |
+| `DISABLED` | 4 | Disabled, skipped |
 
-### preInit()
-
-Runs during pre-initialization, after the `:allModule` event. Use for lightweight setup or resource loading.
-
-```js
-preInit() {
-  this.cache = new Map();
-}
-```
-
-### Init()
-
-Main initialization, called on `:passagestart` (first run only). Usually required for core module logic.
-
-```js
-Init() {
-  this.setupEventListeners();
-  this.loadConfig();
-}
-```
-
-### loadInit()
-
-Called only when a save is loaded. Use to restore state from save data.
-
-```js
-loadInit() {
-  if (V.myData) {
-    this.data = V.myData;
-  }
-}
-```
-
-### postInit()
-
-Runs after `Init` or `loadInit` finishes. Use for cleanup or final setup.
-
-```js
-postInit() {
-  this.cleanupTemporaryData();
-  this.finalizeSetup();
-}
-```
+Pre-init completion is tracked separately in an internal `preInitialized` set; modules move to `MOUNTED` after main init.
 
 ---
 
-## Full Module Example
+## Lifecycle methods
+
+| Method | When | Purpose |
+| ------ | ---- | ------- |
+| `preInit()` | After `afterInjectEarlyLoad`, IndexedDB/logging ready | Early setup (no `setup` / `V` yet) |
+| `Init()` | First normal-game **`:passagestart`** | Main init (`setup` and `V` available) |
+| `loadInit()` | After loading a save | Restore save-related state |
+| `postInit()` | Every passage start, after `Init` or `loadInit` | Per-passage refresh |
 
 ```js
 class MyModule {
-  constructor(maplebirch) {
-    this.maplebirch = maplebirch;
-  }
+  dependencies = ["tool"];
 
-  preInit() {
-    console.log("MyModule preInit");
+  async preInit() {
     this.cache = new Map();
   }
 
-  Init() {
-    console.log("MyModule Init");
+  async Init() {
     this.setup();
   }
 
-  loadInit() {
-    console.log("MyModule loadInit");
-    if (V.myModuleData) {
-      this.data = V.myModuleData;
-    }
+  async loadInit() {
+    this.restoreFromSave();
   }
 
-  postInit() {
-    console.log("MyModule postInit");
-    this.cleanup();
+  async postInit() {
+    this.refreshPassageState();
   }
 
-  setup() {
-    // Setup logic
-  }
-
-  cleanup() {
-    // Cleanup logic
-  }
-
-  myFunction() {
-    return "Hello from MyModule";
-  }
+  setup() {}
+  restoreFromSave() {}
+  refreshPassageState() {}
 }
 
-// Register module
-maplebirch.register("myModule", new MyModule(maplebirch), ["addon", "dynamic"]);
+maplebirch.register("myModule", new MyModule(), ["npc"]);
 ```
 
 ---
 
-## Dependency Management
+## Dependency rules
 
-### Declaring Dependencies
-
-```js
-// When registering
-maplebirch.register("myModule", myModuleInstance, ["var", "tool"]);
-```
-
-### Dependency Rules
-
-1. A module initializes only after all its dependencies have initialized.
-2. Transitive dependencies are supported (if A depends on B and B on C, A depends on C).
-3. Circular dependencies are detected and rejected.
-
-### Querying the Dependency Graph
-
-```js
-const graph = maplebirch.dependencyGraph;
-console.log("addon dependencies:", graph.addon.dependencies);
-console.log("Modules depending on addon:", graph.addon.dependents);
-```
+1. A module initializes only after all dependencies are satisfied (transitive closure applies).
+2. **`EXPOSED`** modules count as satisfied dependencies.
+3. If a dependency is **`ERROR`** or **`DISABLED`**, dependents do not initialize.
+4. Circular dependencies are detected at registration time.
 
 ---
 
 ## Notes
 
-1. **Naming** — Avoid reserved names such as `core`, `modules`.
-2. **Initialization order** — Dependencies are resolved via topological sort; understand how this affects order.
-3. **Error handling** — A failed module does not block others.
-4. **Disabling** — Modules can be disabled via ModLoader config.
-5. **Extension modules** — Use `exposed: true` and register inside the `runWithSource` context so `source` is tracked; exposed modules appear on the `maplebirch` root and can be toggled from the GUI.
+1. Prefer **`script`** over framework module registration for content mods (**v3.2.5** simplified registration—see [changelog](./changelog)).
+2. Use mod-prefixed names to avoid clashes with built-ins or other mods.
+3. A failed module does not block others.
+4. Protected modules (`protected`) cannot be disabled from the UI; extension modules remain toggleable when `source` is tracked by the framework.

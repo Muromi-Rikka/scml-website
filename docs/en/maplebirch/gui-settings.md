@@ -2,6 +2,10 @@
 
 The GUIControl service manages the framework's settings panel, implemented through the ModLoaderGui AngularJS component system. Settings data is persisted to IndexedDB.
 
+:::tip v3.2.5
+The settings page adds a **“Reset framework defaults”** control: it restores `$options.maplebirch` to defaults and fires `:rest-options`, then redraws the current settings view. See **Reset framework settings** below.
+:::
+
 ## Settings Panel
 
 The framework registers an AngularJS component `maplebirch-control-component` via `ModSubUiAngularJs`, displayed on the ModLoader settings page.

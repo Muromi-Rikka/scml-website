@@ -1,6 +1,12 @@
 # 战斗反应（已移除）
 
-自框架 **v3.2.3** 起，战斗模块中的 **`maplebirch.combat.Reaction`** 以及基于该 API 的「异装 / 双性」等反应对话注册能力已从框架中删除（与上游 [v3.2.3 发布说明](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.3) 一致）。当前 `CombatManager` 仅保留 **[战斗按钮](./actions)** 相关能力（`maplebirch.combat.CombatAction`）。
+自框架 **v3.2.5** 起，战斗模块中以下能力已从框架删除（与上游 [v3.2.5 发布说明](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v3.2.5) 一致）：
+
+- **`maplebirch.combat.Reaction`** — 战斗反应注册
+- **异装对话** — 基于 Reaction 的异装 / 双性等反应对话
+- **战斗射精** — 见 [战斗对话](./speech)（`ejaculation` 等）
+
+当前 `CombatManager` 仅保留 **[战斗按钮](./actions)** 相关能力（`maplebirch.combat.CombatAction`）。
 
 ## 迁移建议
 

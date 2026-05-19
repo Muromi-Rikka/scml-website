@@ -2,6 +2,10 @@
 
 GUIControl 服务负责框架的设置面板，通过 ModLoaderGui 的 AngularJS 组件系统实现。设置数据持久化到 IndexedDB。
 
+:::tip v3.2.5
+设置页新增 **「重置框架默认设置」** 按钮：将 `$options.maplebirch` 恢复为默认值并触发 `:rest-options`，当前设置页会立即重绘。下文「重置框架设置」一节描述其行为。
+:::
+
 ## 设置面板
 
 框架通过 `ModSubUiAngularJs` 注册了一个 AngularJS 组件 `maplebirch-control-component`，在 ModLoader 的设置页面中显示。

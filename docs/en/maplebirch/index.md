@@ -38,7 +38,7 @@ The framework provides the following core modules:
 - **Variable Management** — Unified `V.maplebirch` namespace with default values and version migration support
 - **Character Rendering** — body / head / face / clothing layer system, hair color gradients, mask generation
 - **Named NPCs** — NPC registration and data management, sidebar model rendering, clothing system, scheduling
-- **Combat System** — Combat actions and button generation (`CombatAction`; reaction / speech wrappers removed in v3.2.3 — see [Combat Reaction](./combat/reaction) and [Combat Speech](./combat/speech))
+- **Combat System** — Combat actions and button generation (`CombatAction`; reaction / speech wrappers removed in v3.2.5 — see [Combat Reaction](./combat/reaction) and [Combat Speech](./combat/speech))
 - **Dynamic Events** — Time, state, weather event management and time travel
 - **Audio Management** — Howler.js-based audio playback, playlist management
 - **Tool Collection** — Console, random system, macros, HTML utilities, region management and other practical tools
@@ -89,7 +89,7 @@ The following convenience properties are also exposed:
 - [**Language Manager**](./language-manager) — Internationalization and translation
 - [**Module System**](./module-system) — Module registration and lifecycle API
 - [**SugarCube Macros**](./sugar-cube-macro) — Multi-language and stat/grace macros
-- **Combat** ([actions](./combat/actions); [reaction](./combat/reaction) / [speech](./combat/speech) are v3.2.3 removal notes)
+- **Combat** ([actions](./combat/actions); [reaction](./combat/reaction) / [speech](./combat/speech) are v3.2.5 removal notes)
 - **Dynamic Events** ([Dynamic Events](./dynamic/index))
   - [State Events](./dynamic/state-events)
   - [Time Events](./dynamic/time-events)
@@ -117,6 +117,7 @@ The following convenience properties are also exposed:
 
 ## Next Steps
 
+- [Changelog](./changelog) — v3.2.5 and earlier release summaries
 - [Getting Started](./getting-started) — How to add framework dependency to your Mod and use it
 - [Core Architecture](./architecture) — Deep dive into MaplebirchCore and module system
 - [AddonPlugin System](./addon-plugin) — Lifecycle hooks and configuration loading in detail
