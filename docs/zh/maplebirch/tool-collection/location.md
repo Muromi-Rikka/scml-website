@@ -1,13 +1,13 @@
 # 地点配置
 
-通过 `maplebirch.tool.other.applyLocation()` 应用游戏中地点相关逻辑。
+通过 `maplebirch.tool.patch.applyLocation()` 应用游戏中地点相关逻辑。
 
-_可通过 `maplebirch.tool.other` 访问。_
+_可通过 `maplebirch.tool.patch` 访问。_
 
 ## 使用方式
 
 ```js
-const other = maplebirch.tool.other;
+const other = maplebirch.tool.patch;
 
 other.applyLocation();
 ```

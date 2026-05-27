@@ -1,8 +1,8 @@
 # Traits Registration
 
-Register custom traits via `maplebirch.tool.other.addTraits()`.
+Register custom traits via `maplebirch.tool.patch.addTraits()`.
 
-_Access via **`maplebirch.tool.other.addTraits()`**._
+_Access via **`maplebirch.tool.patch.addTraits()`**._
 
 ## Trait Interface
 
@@ -17,7 +17,7 @@ _Access via **`maplebirch.tool.other.addTraits()`**._
 ## Example
 
 ```js
-const other = maplebirch.tool.other;
+const other = maplebirch.tool.patch;
 
 other.addTraits({
   title: "General Traits",
@@ -32,4 +32,34 @@ other.applyLocation();
 
 ## Note
 
-The framework resolves and deduplicates trait registration internally to avoid duplicate or incorrect overwrites. The `maplebirch.tool.other.addTraits` API is unchanged.
+The framework resolves and deduplicates trait registration internally to avoid duplicate or incorrect overwrites. The `maplebirch.tool.patch.addTraits` API is unchanged.
+
+## boot.json
+
+Traits can also be registered via the `framework` field in `boot.json`:
+
+```json
+{
+  "framework": {
+    "traits": [
+      {
+        "title": "General Traits",
+        "name": "brave",
+        "colour": "green",
+        "has": "V.brave >= 1",
+        "text": "Character shows courage"
+      }
+    ]
+  }
+}
+```
+
+External `.json`, `.yaml`, or `.yml` files are also supported:
+
+```json
+{
+  "framework": {
+    "traits": "data/traits.yaml"
+  }
+}
+```

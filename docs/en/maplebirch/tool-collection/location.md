@@ -1,13 +1,13 @@
 # Location Config
 
-Apply in-game location logic via `maplebirch.tool.other.applyLocation()`.
+Apply in-game location logic via `maplebirch.tool.patch.applyLocation()`.
 
-_Access via `maplebirch.tool.other`._
+_Access via `maplebirch.tool.patch`._
 
 ## Usage
 
 ```js
-const other = maplebirch.tool.other;
+const other = maplebirch.tool.patch;
 
 other.applyLocation();
 ```

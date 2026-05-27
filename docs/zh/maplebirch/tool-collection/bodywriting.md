@@ -4,7 +4,7 @@
 
 `Bodywriting` 是框架提供的纹身管理系统，允许模组制作者添加或删除自定义的纹身图案。纹身在游戏中通常用于角色自定义、状态标记、剧情表达等场景。
 
-_可通过 `maplebirch.tool.other.addBodywriting()` 访问。_
+_可通过 `maplebirch.tool.patch.addBodywriting()` 访问。_
 
 ---
 
@@ -18,7 +18,7 @@ _可通过 `maplebirch.tool.other.addBodywriting()` 访问。_
 - **@return** void
 
 ```javascript
-maplebirch.tool.other.addBodywriting("dragon_tattoo", {
+maplebirch.tool.patch.addBodywriting("dragon_tattoo", {
   writing: "Dragon",
   writ_cn: "龙纹",
   type: "text",
@@ -64,7 +64,7 @@ maplebirch.tool.other.addBodywriting("dragon_tattoo", {
 
 ```javascript
 // 添加一个简单的文本纹身
-maplebirch.tool.other.addBodywriting("tribal_symbol", {
+maplebirch.tool.patch.addBodywriting("tribal_symbol", {
   writing: "Tribal Symbol",
   writ_cn: "部落符号",
   type: "text",
@@ -78,7 +78,7 @@ maplebirch.tool.other.addBodywriting("tribal_symbol", {
 
 ```javascript
 // 添加一个图案纹身
-maplebirch.tool.other.addBodywriting("phoenix_tattoo", {
+maplebirch.tool.patch.addBodywriting("phoenix_tattoo", {
   writing: "Phoenix",
   writ_cn: "凤凰纹身",
   type: "object",
@@ -93,7 +93,7 @@ maplebirch.tool.other.addBodywriting("phoenix_tattoo", {
 
 ```javascript
 // 女性专属纹身
-maplebirch.tool.other.addBodywriting("butterfly_f", {
+maplebirch.tool.patch.addBodywriting("butterfly_f", {
   writing: "Butterfly",
   writ_cn: "蝴蝶",
   type: "object",
@@ -103,7 +103,7 @@ maplebirch.tool.other.addBodywriting("butterfly_f", {
 });
 
 // 男性专属纹身
-maplebirch.tool.other.addBodywriting("skull_m", {
+maplebirch.tool.patch.addBodywriting("skull_m", {
   writing: "Skull",
   writ_cn: "骷髅头",
   type: "object",
@@ -117,7 +117,7 @@ maplebirch.tool.other.addBodywriting("skull_m", {
 
 ```javascript
 // 带有箭头标记的纹身
-maplebirch.tool.other.addBodywriting("arrow_tribal", {
+maplebirch.tool.patch.addBodywriting("arrow_tribal", {
   writing: "Arrow Tribal",
   writ_cn: "箭头部落纹",
   type: "object",
@@ -128,7 +128,7 @@ maplebirch.tool.other.addBodywriting("arrow_tribal", {
 });
 
 // 特殊类型的纹身
-maplebirch.tool.other.addBodywriting("magic_rune", {
+maplebirch.tool.patch.addBodywriting("magic_rune", {
   writing: "Magic Rune",
   writ_cn: "魔法符文",
   type: "text",
@@ -143,7 +143,7 @@ maplebirch.tool.other.addBodywriting("magic_rune", {
 
 ```javascript
 // 色情内容纹身(需要特定条件解锁)
-maplebirch.tool.other.addBodywriting("bdsm_mark", {
+maplebirch.tool.patch.addBodywriting("bdsm_mark", {
   writing: "BDSM Mark",
   writ_cn: "BDSM标记",
   type: "text",
@@ -152,4 +152,45 @@ maplebirch.tool.other.addBodywriting("bdsm_mark", {
   degree: 3,
   featSkip: false,
 });
+```
+
+## boot.json
+
+对象映射写法，推荐用于一次注册多个条目：
+
+```json
+{
+  "framework": {
+    "bodywriting": {
+      "my_mod_rune_text": {
+        "writing": "Rune",
+        "writ_cn": "符文",
+        "type": "text",
+        "gender": "n",
+        "degree": 1
+      }
+    }
+  }
+}
+```
+
+也可以引用 `.json`、`.yaml` 或 `.yml` 文件：
+
+```json
+{
+  "framework": {
+    "bodywriting": "data/bodywriting.yaml"
+  }
+}
+```
+
+数组写法也支持，但每一项必须带 `key`：
+
+```yaml
+- key: my_mod_rune_text
+  writing: Rune
+  writ_cn: 符文
+  type: text
+  gender: n
+  degree: 1
 ```
