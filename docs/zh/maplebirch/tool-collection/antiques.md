@@ -13,7 +13,7 @@ maplebirch.tool.patch.injectAntiques(_museumAntiqueText);
 
 推荐注入位置：
 
-```twine
+```scss
 <<widget "museumAntiqueText">>
   <<if _museumAntiqueText is undefined>>
     <<set _museumAntiqueText to {
@@ -68,7 +68,7 @@ notFound -> found -> talk -> museum
 
 发现古董的剧情仍需要在 passage 中自行写：
 
-```twine
+```scss
 <<set $antiquemoney += 4000>>
 <<museumAntiqueStatus "antiquemyitem" "found">>
 ```

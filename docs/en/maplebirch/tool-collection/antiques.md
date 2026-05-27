@@ -13,7 +13,7 @@ Use **`addAntiques`** to register data. Inject **`injectAntiques`** after vanill
 
 Recommended injection point:
 
-```twine
+```scss
 <<widget "museumAntiqueText">>
   <<if _museumAntiqueText is undefined>>
     <<set _museumAntiqueText to {
@@ -66,7 +66,7 @@ notFound -> found -> talk -> museum
 
 **`stolen`** and **`recovered`** also exist. The framework only registers text and default state; _discovery locations and rewards should remain in your own passages_.
 
-```twine
+```scss
 <<set $antiquemoney += 4000>>
 <<museumAntiqueStatus "antiquemyitem" "found">>
 ```
