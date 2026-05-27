@@ -17,11 +17,17 @@
 - 优化 **NPC 日程** 注册逻辑 — 见 [NPC 日程](./named-npc/npc-schedule)
 - 模组设置中新增 **重置框架默认设置** — 见 [GUI 控制](./gui-settings)
 - 提供 **模组加密** 协作能力（`.modpack` + `maplebirch.credential`）— 见 [模组保护与凭证](./mod-protection)
+- 添加 **食物注册**（`maplebirch.tool.patch.addFoodstuff`，0.5.9.x 以上版本可用）以及 **古董注册**（`maplebirch.tool.patch.addAntiques`）功能 — 见 [食物注册](./tool-collection/foodstuff)、[古董注册](./tool-collection/antiques)
+- 将 `maplebirch.tool.other` 重构为 `maplebirch.tool.patch`，原有特质、地点、纹身 API 路径同步更新
+- `boot.json` 的 `framework` 字段新增 `foodstuff`、`antiques`、`bodywriting` 的外部文件引用支持
 
 ### 文档相关
 
 - [模组保护与凭证](./mod-protection) — 对齐上游 README 加密流程
 - [模块系统](./module-system) — 生命周期、`dependencyGraph`、EXPOSED 模块说明
+- [食物注册](./tool-collection/foodstuff) — 新增食物注册 API 文档
+- [古董注册](./tool-collection/antiques) — 新增古董注册 API 文档
+- [纹身系统](./tool-collection/bodywriting) — 新增 boot.json 配置说明
 
 ## 更早版本
 

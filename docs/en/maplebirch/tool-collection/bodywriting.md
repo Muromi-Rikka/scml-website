@@ -1,13 +1,13 @@
 # Bodywriting
 
-Add custom bodywriting patterns via `maplebirch.tool.other.addBodywriting()`. Use `other.applyBodywriting()` to apply bodywriting-related logic.
+Add custom bodywriting patterns via `maplebirch.tool.patch.addBodywriting()`. Use `patch.applyBodywriting()` to apply bodywriting-related logic.
 
-_Access via `maplebirch.tool.other.addBodywriting()`._
+_Access via `maplebirch.tool.patch.addBodywriting()`._
 
 ## Example
 
 ```js
-maplebirch.tool.other.addBodywriting("dragon_tattoo", {
+maplebirch.tool.patch.addBodywriting("dragon_tattoo", {
   writing: "Dragon",
   writ_cn: "龙纹",
   type: "text",
@@ -26,3 +26,44 @@ maplebirch.tool.other.addBodywriting("dragon_tattoo", {
 | `gender`  | string | `'n'` / `'f'` / `'m'` / `'h'` |
 | `lewd`    | number | 0 or 1                        |
 | `degree`  | number | Intensity level               |
+
+## boot.json
+
+Object-map form, recommended for registering multiple entries:
+
+```json
+{
+  "framework": {
+    "bodywriting": {
+      "my_mod_rune_text": {
+        "writing": "Rune",
+        "writ_cn": "Rune",
+        "type": "text",
+        "gender": "n",
+        "degree": 1
+      }
+    }
+  }
+}
+```
+
+External `.json`, `.yaml`, or `.yml` files are supported:
+
+```json
+{
+  "framework": {
+    "bodywriting": "data/bodywriting.yaml"
+  }
+}
+```
+
+Array form is also supported. Each item must include `key`:
+
+```yaml
+- key: my_mod_rune_text
+  writing: Rune
+  writ_cn: Rune
+  type: text
+  gender: n
+  degree: 1
+```

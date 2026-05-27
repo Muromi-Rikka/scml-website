@@ -13,7 +13,7 @@ The ToolCollection module aggregates 8 sub-tool modules in a facade pattern, acc
 | `maplebirch.tool.text`      | htmlTools     | HTML text tools              |
 | `maplebirch.tool.zone`      | zonesManager  | Zones manager                |
 | `maplebirch.tool.link`      | applyLinkZone | Link zone handling           |
-| `maplebirch.tool.other`     | otherTools    | Other tools                  |
+| `maplebirch.tool.patch`     | Patch         | Patch toolkit (traits, location, bodywriting, foodstuff, antiques) |
 
 Additionally, there are convenience properties:
 
@@ -21,6 +21,23 @@ Additionally, there are convenience properties:
 | --------------------------- | --------------------------------------- |
 | `maplebirch.tool.createlog` | Create log functions with prefix        |
 | `maplebirch.tool.utils`     | Framework internal utility function set |
+
+## Patch
+
+The Patch module aggregates data registration and injection tools, accessible via `maplebirch.tool.patch`.
+
+| Method | Description |
+| :--- | :--- |
+| `addTraits()` | Register custom traits |
+| `injectTraits()` | Inject registered traits into trait list |
+| `configureLocation()` | Configure location images |
+| `applyLocation()` | Apply location config |
+| `addBodywriting()` | Register bodywriting |
+| `applyBodywriting()` | Apply bodywriting registration |
+| `addFoodstuff()` | Register foodstuff |
+| `applyFoodstuff()` | Apply foodstuff registration |
+| `addAntiques()` | Register antiques |
+| `injectAntiques()` | Inject antique text |
 
 ## Global Utilities
 

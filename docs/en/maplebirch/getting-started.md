@@ -70,7 +70,7 @@ The following configuration options are supported in `params`:
 | `language`  | `boolean \| string[] \| object` | Language file configuration; see [AddonPlugin System](./addon-plugin) for details              |
 | `audio`     | `boolean \| string[]`           | Audio file configuration                                                                       |
 | `npc`       | `object`                        | NPC configuration (named NPCs, sidebar, clothing, etc.)                                        |
-| `framework` | `object \| object[]`            | Framework-level configuration (traits, region parts, etc.)                                     |
+| `framework` | `object \| object[]`            | Framework-level configuration (traits, bodywriting, foodstuff, antiques, region parts, etc.)   |
 
 ## Minimal Example
 
