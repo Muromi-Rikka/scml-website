@@ -17,11 +17,17 @@ Recommended asset: `maplebirch-0.5.9.7-v3.2.5.modpack`
 - Improve **NPC schedule** registration—see [NPC schedule](./named-npc/npc-schedule)
 - Add **reset framework defaults** in mod settings—see [GUI control](./gui-settings)
 - Ship **mod encryption** collaboration (`.modpack` + `maplebirch.credential`)—see [Mod protection](./mod-protection)
+- Add **Foodstuff** registration (`maplebirch.tool.patch.addFoodstuff`, requires game version 0.5.9.x+) and **Antiques** registration (`maplebirch.tool.patch.addAntiques`) — see [Foodstuff](./tool-collection/foodstuff), [Antiques](./tool-collection/antiques)
+- Refactor `maplebirch.tool.other` to `maplebirch.tool.patch` — existing traits, location, and bodywriting API paths updated accordingly
+- `boot.json` `framework` field now supports external file references for `foodstuff`, `antiques`, and `bodywriting`
 
 ### Documentation
 
 - [Mod protection](./mod-protection) — aligned with upstream README encryption flow
 - [Module system](./module-system) — lifecycle, `dependencyGraph`, EXPOSED modules
+- [Foodstuff](./tool-collection/foodstuff) — new foodstuff registration API documentation
+- [Antiques](./tool-collection/antiques) — new antiques registration API documentation
+- [Bodywriting](./tool-collection/bodywriting) — added boot.json configuration section
 
 ## Earlier releases
 
