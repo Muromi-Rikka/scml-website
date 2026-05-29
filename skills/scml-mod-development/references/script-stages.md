@@ -4,12 +4,12 @@ SCML provides four script stages, each running at a different point during start
 
 ## Stage Comparison
 
-| Stage | boot.json Field | When | Async | Data Access |
-|-------|----------------|------|-------|-------------|
-| inject_early | `scriptFileList_inject_early` | Immediately after mod load | Sync only | Raw unmodified |
-| earlyload | `scriptFileList_earlyload` | After inject_early | Async OK | Raw unmodified |
-| preload | `scriptFileList_preload` | After data merge into tw-storydata | Async OK | Merged final |
-| Main scripts | `scriptFileList` | With SC2 engine | With SC2 | Runtime game |
+| Stage        | boot.json Field               | When                               | Async     | Data Access    |
+| ------------ | ----------------------------- | ---------------------------------- | --------- | -------------- |
+| inject_early | `scriptFileList_inject_early` | Immediately after mod load         | Sync only | Raw unmodified |
+| earlyload    | `scriptFileList_earlyload`    | After inject_early                 | Async OK  | Raw unmodified |
+| preload      | `scriptFileList_preload`      | After data merge into tw-storydata | Async OK  | Merged final   |
+| Main scripts | `scriptFileList`              | With SC2 engine                    | With SC2  | Runtime game   |
 
 ## Execution Order
 
@@ -26,6 +26,7 @@ SCML provides four script stages, each running at a different point during start
 Scripts are injected as `<script>` tags immediately after the mod loads.
 
 Use for:
+
 - Registering addon plugins (`registerAddonPlugin`)
 - Registering load control callbacks (`canLoadThisMod`)
 - Setting `modRef` to expose API
@@ -33,11 +34,7 @@ Use for:
 
 ```js
 // Register an addon
-window.modAddonPluginManager.registerAddonPlugin(
-  "MyAddonMod",
-  "myPlugin",
-  myPluginInstance
-);
+window.modAddonPluginManager.registerAddonPlugin("MyAddonMod", "myPlugin", myPluginInstance);
 
 // Expose API for other mods
 const myName = window.modUtils.getNowRunningModName();
@@ -65,6 +62,7 @@ Because `return` is injected before the first line, only the first line or an II
 ```
 
 Use for:
+
 - Async initialization (remote data fetch)
 - Reading and analyzing raw game data
 - Decrypting and releasing lazily-loaded mods
@@ -82,6 +80,7 @@ Same IIFE format as earlyload. Runs after all mod data is merged into `tw-storyd
 ```
 
 Use for:
+
 - Operations that need merged data
 - Dynamically modifying merged passages
 - Final validation and adjustments
@@ -110,6 +109,7 @@ $(document).on(":passageend", () => {
 ```
 
 Use for:
+
 - Extending game logic
 - Adding SugarCube macros
 - Listening to game events
@@ -119,14 +119,14 @@ Use for:
 
 After SC2 starts, these events fire during gameplay:
 
-| Event | When |
-|-------|------|
-| `:storyready` | Game fully started |
-| `:passageinit` | New passage context initializing |
-| `:passagestart` | New passage starting to render |
-| `:passagerender` | New passage render complete |
+| Event             | When                                  |
+| ----------------- | ------------------------------------- |
+| `:storyready`     | Game fully started                    |
+| `:passageinit`    | New passage context initializing      |
+| `:passagestart`   | New passage starting to render        |
+| `:passagerender`  | New passage render complete           |
 | `:passagedisplay` | New passage ready to insert into HTML |
-| `:passageend` | New passage handling complete |
+| `:passageend`     | New passage handling complete         |
 
 ```js
 $(document).one(":storyready", () => {
@@ -140,14 +140,14 @@ $(document).on(":passageend", () => {
 
 ## Choosing the Right Stage
 
-| I need to... | Use this stage |
-|-------------|----------------|
-| Register an addon | `inject_early` |
-| Set up modRef for other mods | `inject_early` |
-| Fetch remote data | `earlyload` |
-| Read raw passage data before merge | `earlyload` |
-| Read merged passage data | `preload` |
-| Modify passages before game starts | `preload` |
-| Add SugarCube macros | `scriptFileList` |
-| Extend game logic at runtime | `scriptFileList` |
-| Listen to passage events | `scriptFileList` |
+| I need to...                       | Use this stage   |
+| ---------------------------------- | ---------------- |
+| Register an addon                  | `inject_early`   |
+| Set up modRef for other mods       | `inject_early`   |
+| Fetch remote data                  | `earlyload`      |
+| Read raw passage data before merge | `earlyload`      |
+| Read merged passage data           | `preload`        |
+| Modify passages before game starts | `preload`        |
+| Add SugarCube macros               | `scriptFileList` |
+| Extend game logic at runtime       | `scriptFileList` |
+| Listen to passage events           | `scriptFileList` |

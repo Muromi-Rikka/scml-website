@@ -50,16 +50,20 @@ loader.getModCacheOneArray(); // ModInfo[]
 Mods expose APIs by setting `modRef` on their ModInfo object.
 
 **Mod A (provider) — in inject_early or earlyload:**
+
 ```js
 const myName = window.modUtils.getNowRunningModName();
 const myInfo = window.modUtils.getMod(myName);
 myInfo.modRef = {
   getConfig: () => ({ enabled: true, count: 42 }),
-  doAction: (target) => { /* ... */ },
+  doAction: (target) => {
+    /* ... */
+  },
 };
 ```
 
 **Mod B (consumer) — in preload or later:**
+
 ```js
 const modAInfo = window.modUtils.getMod("Mod A Name");
 if (modAInfo?.modRef) {
@@ -75,27 +79,32 @@ if (modAInfo?.modRef) {
 For structured extension points, use the addon system:
 
 **Addon registration (in inject_early or earlyload):**
+
 ```js
 window.modAddonPluginManager.registerAddonPlugin(
-  "MyAddonMod",    // mod providing the plugin
-  "myPlugin",      // plugin name
-  addonInstance    // implements AddonPluginHookPointEx
+  "MyAddonMod", // mod providing the plugin
+  "myPlugin", // plugin name
+  addonInstance, // implements AddonPluginHookPointEx
 );
 ```
 
 **Consumer declaration (in boot.json):**
+
 ```json
 {
-  "addonPlugin": [{
-    "modName": "MyAddonMod",
-    "addonName": "myPlugin",
-    "modVersion": "1.0.0",
-    "params": []
-  }]
+  "addonPlugin": [
+    {
+      "modName": "MyAddonMod",
+      "addonName": "myPlugin",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
 }
 ```
 
 **Registration flow:**
+
 1. Addon calls `registerAddonPlugin()` during earlyload
 2. ModLoader calls `registerMod2Addon()` to register consumers
 3. Addon receives `registerMod` callback
@@ -104,23 +113,23 @@ window.modAddonPluginManager.registerAddonPlugin(
 
 ### AddonPluginHookPoint
 
-| Hook | When | Async |
-|------|------|-------|
-| `afterInjectEarlyLoad` | After each mod's inject_early | Yes |
-| `afterModLoad` | After each mod loads | Yes |
-| `afterEarlyLoad` | After all earlyload complete | Yes |
-| `afterRegisterMod2Addon` | After mod-to-addon registration | Yes |
-| `beforePatchModToGame` | Before merging into tw-storydata | Sync |
-| `afterPatchModToGame` | After merge (replacers run here) | Sync |
-| `afterPreload` | After preload scripts complete | Yes |
+| Hook                     | When                             | Async |
+| ------------------------ | -------------------------------- | ----- |
+| `afterInjectEarlyLoad`   | After each mod's inject_early    | Yes   |
+| `afterModLoad`           | After each mod loads             | Yes   |
+| `afterEarlyLoad`         | After all earlyload complete     | Yes   |
+| `afterRegisterMod2Addon` | After mod-to-addon registration  | Yes   |
+| `beforePatchModToGame`   | Before merging into tw-storydata | Sync  |
+| `afterPatchModToGame`    | After merge (replacers run here) | Sync  |
+| `afterPreload`           | After preload scripts complete   | Yes   |
 
 ### ModLoadControllerCallback
 
-| Callback | When | Description |
-|----------|------|-------------|
-| `canLoadThisMod` | Before each mod's inject_early | Return boolean to allow/block loading |
-| `afterModLoad` | After each mod loads | Notification |
-| `ModLoaderLoadEnd` | After ModLoader finishes | Last hook — final setup |
+| Callback           | When                           | Description                           |
+| ------------------ | ------------------------------ | ------------------------------------- |
+| `canLoadThisMod`   | Before each mod's inject_early | Return boolean to allow/block loading |
+| `afterModLoad`     | After each mod loads           | Notification                          |
+| `ModLoaderLoadEnd` | After ModLoader finishes       | Last hook — final setup               |
 
 ### Safe Mode
 
@@ -158,6 +167,7 @@ ModLoaderLoadEnd → ModLoader fully done
 ModLoader intercepts image requests so images load from mod zips without a server.
 
 ### Async image request:
+
 ```js
 const imageData = await window.modSC2DataManager
   .getHtmlTagSrcHook()
@@ -165,13 +175,17 @@ const imageData = await window.modSC2DataManager
 ```
 
 ### Sync HTMLImageElement interception:
+
 ```js
 const el = document.createElement("img");
 el.src = "MyMod_Image/character/avatar.png";
 
 if (window.modSC2DataManager?.getHtmlTagSrcHook?.()?.doHook) {
-  if (el.tagName === "img" && !el.hasAttribute("ML-src") &&
-      !el.getAttribute("src")?.startsWith("data:")) {
+  if (
+    el.tagName === "img" &&
+    !el.hasAttribute("ML-src") &&
+    !el.getAttribute("src")?.startsWith("data:")
+  ) {
     el.setAttribute("ML-src", el.getAttribute("src"));
     el.removeAttribute("src");
     window.modSC2DataManager.getHtmlTagSrcHook().doHook(el).catch(console.error);

@@ -32,29 +32,29 @@ The single injection call does both jobs:
 ## Minimal Example
 
 ```javascript
-maplebirch.tool.patch.addAntiques('antiquemyitem', {
+maplebirch.tool.patch.addAntiques("antiquemyitem", {
   hint: '"For a curious little relic," Winter says.',
-  museum: 'The curious relic rests on a pedestal.',
-  name: 'Curious Relic',
-  cn_name: '奇妙遗物',
+  museum: "The curious relic rests on a pedestal.",
+  name: "Curious Relic",
+  cn_name: "奇妙遗物",
   journal: '"A curious little relic."',
-  journalName: 'Small relic',
-  icon: 'antiques/my-relic.png'
+  journalName: "Small relic",
+  icon: "antiques/my-relic.png",
 });
 ```
 
 ## Config Fields
 
-| Field | Description |
-| :--- | :--- |
-| `hint` | Winter hint text |
-| `museum` | Display text after the antique is in the museum |
-| `name` | True name |
-| `cn_name` | Optional Chinese display name |
-| `journal` | Journal description |
-| `journalName` | Optional journal display name |
-| `icon` | Icon path |
-| `key` | Unique id when using array config |
+| Field         | Description                                     |
+| :------------ | :---------------------------------------------- |
+| `hint`        | Winter hint text                                |
+| `museum`      | Display text after the antique is in the museum |
+| `name`        | True name                                       |
+| `cn_name`     | Optional Chinese display name                   |
+| `journal`     | Journal description                             |
+| `journalName` | Optional journal display name                   |
+| `icon`        | Icon path                                       |
+| `key`         | Unique id when using array config               |
 
 ## State Flow
 

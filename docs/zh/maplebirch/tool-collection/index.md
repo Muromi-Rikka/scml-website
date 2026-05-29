@@ -4,15 +4,15 @@ ToolCollection 模块以门面模式聚合了 8 个子工具模块，通过 `map
 
 ## 子模块概览
 
-| 访问路径                    | 子模块        | 说明              |
-| --------------------------- | ------------- | ----------------- |
-| `maplebirch.tool.console`   | Console       | 控制台作弊工具    |
-| `maplebirch.tool.migration` | migration     | 数据迁移工具      |
-| `maplebirch.tool.rand`      | randSystem    | 随机数系统        |
-| `maplebirch.tool.macro`     | defineMacros  | SugarCube2 宏定义 |
-| `maplebirch.tool.text`      | htmlTools     | HTML 文本工具     |
-| `maplebirch.tool.zone`      | zonesManager  | 区域管理器        |
-| `maplebirch.tool.link`      | applyLinkZone | 链接区域处理      |
+| 访问路径                    | 子模块        | 说明                                       |
+| --------------------------- | ------------- | ------------------------------------------ |
+| `maplebirch.tool.console`   | Console       | 控制台作弊工具                             |
+| `maplebirch.tool.migration` | migration     | 数据迁移工具                               |
+| `maplebirch.tool.rand`      | randSystem    | 随机数系统                                 |
+| `maplebirch.tool.macro`     | defineMacros  | SugarCube2 宏定义                          |
+| `maplebirch.tool.text`      | htmlTools     | HTML 文本工具                              |
+| `maplebirch.tool.zone`      | zonesManager  | 区域管理器                                 |
+| `maplebirch.tool.link`      | applyLinkZone | 链接区域处理                               |
 | `maplebirch.tool.patch`     | Patch         | 补丁工具集（特质、地点、纹身、食物、古董） |
 
 此外还有便捷属性：
@@ -26,18 +26,18 @@ ToolCollection 模块以门面模式聚合了 8 个子工具模块，通过 `map
 
 Patch 模块聚合了框架的数据注册与注入工具，通过 `maplebirch.tool.patch` 访问。
 
-| 方法 | 说明 |
-| :--- | :--- |
-| `addTraits()` | 注册自定义特质 |
-| `injectTraits()` | 向特质列表注入已注册特质 |
-| `configureLocation()` | 配置地点图片 |
-| `applyLocation()` | 应用地点配置 |
-| `addBodywriting()` | 注册纹身 |
-| `applyBodywriting()` | 应用纹身注册 |
-| `addFoodstuff()` | 注册食物 |
-| `applyFoodstuff()` | 应用食物注册 |
-| `addAntiques()` | 注册古董 |
-| `injectAntiques()` | 注入古董文本 |
+| 方法                  | 说明                     |
+| :-------------------- | :----------------------- |
+| `addTraits()`         | 注册自定义特质           |
+| `injectTraits()`      | 向特质列表注入已注册特质 |
+| `configureLocation()` | 配置地点图片             |
+| `applyLocation()`     | 应用地点配置             |
+| `addBodywriting()`    | 注册纹身                 |
+| `applyBodywriting()`  | 应用纹身注册             |
+| `addFoodstuff()`      | 注册食物                 |
+| `applyFoodstuff()`    | 应用食物注册             |
+| `addAntiques()`       | 注册古董                 |
+| `injectAntiques()`    | 注入古董文本             |
 
 ## 全局工具函数 (Utilities)
 

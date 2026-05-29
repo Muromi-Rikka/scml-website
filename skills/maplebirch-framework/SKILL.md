@@ -60,14 +60,14 @@ if (window.maplebirch) {
 
 The `addonPlugin` params field is the primary configuration surface. Read `references/boot-json-guide.md` for the complete reference. Key params:
 
-| Param | Type | Purpose |
-|-------|------|---------|
-| `script` | `string[]` | JS files executed after AddonPlugin processing (recommended) |
-| `module` | `string[]` | JS files executed immediately after `inject_early` (advanced) |
-| `language` | `boolean \| string[] \| object` | Translation file configuration |
-| `audio` | `boolean \| string[]` | Audio file configuration |
-| `npc` | `object` | NPC registration (NamedNPC, Stats, Sidebar) |
-| `framework` | `object \| object[]` | Traits, location, bodywriting, foodstuff, antiques, region widgets |
+| Param       | Type                            | Purpose                                                            |
+| ----------- | ------------------------------- | ------------------------------------------------------------------ |
+| `script`    | `string[]`                      | JS files executed after AddonPlugin processing (recommended)       |
+| `module`    | `string[]`                      | JS files executed immediately after `inject_early` (advanced)      |
+| `language`  | `boolean \| string[] \| object` | Translation file configuration                                     |
+| `audio`     | `boolean \| string[]`           | Audio file configuration                                           |
+| `npc`       | `object`                        | NPC registration (NamedNPC, Stats, Sidebar)                        |
+| `framework` | `object \| object[]`            | Traits, location, bodywriting, foodstuff, antiques, region widgets |
 
 **`module` vs `script`:** Use `script` for most cases. `module` runs very early when the framework may not be fully initialized — only use for advanced framework extension.
 
@@ -92,6 +92,7 @@ Register via `maplebirch.combat.CombatAction.reg()`. Action types: `leftaction`,
 ### When the user needs audio
 
 Configure in boot.json `params.audio` or use the JS API:
+
 - `maplebirch.audio.modPlay(modName, trackName)` — play a track
 - `maplebirch.audio.Volume`, `.Mute`, `.PlayMode` — control playback
 - Supports: mp3, wav, ogg, m4a, flac, webm
@@ -99,6 +100,7 @@ Configure in boot.json `params.audio` or use the JS API:
 ### When the user needs dynamic events
 
 Three event types via `maplebirch.dynamic`:
+
 - **Time events** — triggered at specific game times
 - **State events** — triggered by game state changes
 - **Weather events** — weather-related triggers and custom weather types
@@ -106,6 +108,7 @@ Three event types via `maplebirch.dynamic`:
 ### When the user needs multi-language support
 
 Use framework macros and APIs:
+
 - `<<language>>` macro — show content blocks by language
 - `<<lanSwitch>>` / `lanSwitch()` — inline language switching
 - `<<lanButton>>`, `<<lanLink>>`, `<<lanListbox>>` — language-aware UI components
@@ -120,24 +123,24 @@ Register extension modules via `maplebirch.register(name, module, dependencies, 
 
 ### Global Object: `window.maplebirch`
 
-| Access Path | Purpose |
-|-------------|---------|
-| `maplebirch.addon` | ModLoader lifecycle hooks, processes boot.json config |
-| `maplebirch.tool` | Facade for rand, macros, HTML tools, zones, patch (traits/location/bodywriting/foodstuff/antiques) |
-| `maplebirch.var` | Manages `V.maplebirch` game state and data migration |
-| `maplebirch.char` | Body/face/clothing layer system, hair gradients, transformation |
-| `maplebirch.npc` | Named NPC registration, schedules, sidebar rendering |
-| `maplebirch.audio` | Audio playback (Howler.js) with IndexedDB caching |
-| `maplebirch.combat` | Combat action button and speech registration |
-| `maplebirch.dynamic` | Time, State, and Weather event management |
+| Access Path          | Purpose                                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| `maplebirch.addon`   | ModLoader lifecycle hooks, processes boot.json config                                              |
+| `maplebirch.tool`    | Facade for rand, macros, HTML tools, zones, patch (traits/location/bodywriting/foodstuff/antiques) |
+| `maplebirch.var`     | Manages `V.maplebirch` game state and data migration                                               |
+| `maplebirch.char`    | Body/face/clothing layer system, hair gradients, transformation                                    |
+| `maplebirch.npc`     | Named NPC registration, schedules, sidebar rendering                                               |
+| `maplebirch.audio`   | Audio playback (Howler.js) with IndexedDB caching                                                  |
+| `maplebirch.combat`  | Combat action button and speech registration                                                       |
+| `maplebirch.dynamic` | Time, State, and Weather event management                                                          |
 
 ### Services
 
-| Access Path | Purpose |
-|-------------|---------|
-| `maplebirch.tracer` | EventEmitter pub/sub event bus |
-| `maplebirch.logger` | Logger service |
-| `maplebirch.lang` | LanguageManager internationalization |
+| Access Path         | Purpose                              |
+| ------------------- | ------------------------------------ |
+| `maplebirch.tracer` | EventEmitter pub/sub event bus       |
+| `maplebirch.logger` | Logger service                       |
+| `maplebirch.lang`   | LanguageManager internationalization |
 
 ### Convenience Methods (proxied from EventEmitter)
 
@@ -175,21 +178,22 @@ maplebirch.tool.patch.injectAntiques()
 
 ### Built-in Events
 
-| Event | Timing |
-|-------|--------|
-| `:allModule` | All modules registered |
-| `:modLoaderEnd` | ModLoader load complete |
-| `:passagestart` | Passage start |
-| `:passageend` | Passage end |
-| `:storyready` | Game fully initialized |
-| `:onSave` / `:onLoad` / `:onLoadSave` | Save/Load lifecycle |
-| `:language` | Language switch |
-| `:import` | Data import |
-| `:sugarcube` | SugarCube object available |
+| Event                                 | Timing                     |
+| ------------------------------------- | -------------------------- |
+| `:allModule`                          | All modules registered     |
+| `:modLoaderEnd`                       | ModLoader load complete    |
+| `:passagestart`                       | Passage start              |
+| `:passageend`                         | Passage end                |
+| `:storyready`                         | Game fully initialized     |
+| `:onSave` / `:onLoad` / `:onLoadSave` | Save/Load lifecycle        |
+| `:language`                           | Language switch            |
+| `:import`                             | Data import                |
+| `:sugarcube`                          | SugarCube object available |
 
 ### Variables Namespace
 
 Game state stored at `V.maplebirch`:
+
 ```js
 {
   player: { clothing: {} },  // Read-only proxy of V.worn
@@ -214,6 +218,7 @@ Options at `V.options.maplebirch` (persists across saves).
 ## Reference Files
 
 Read these as needed:
+
 - `references/boot-json-guide.md` — Complete boot.json configuration with all params
 - `references/api-reference.md` — Full API reference for all modules (NPC, combat, audio, character, dynamic, tools, events)
 - `assets/boot-json-template.json` — Template for scaffolding new mods

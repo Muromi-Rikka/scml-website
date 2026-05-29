@@ -17,11 +17,11 @@ jQuery → ModLoader initialization → SugarCube2 engine start
 
 Three global objects are available to mod scripts:
 
-| Global | Purpose |
-|--------|---------|
+| Global                     | Purpose                                      |
+| -------------------------- | -------------------------------------------- |
 | `window.modSC2DataManager` | Central orchestrator holding all sub-systems |
-| `window.modUtils` | Public API for mod authors |
-| `window.jsPreloader` | Runs preload-stage scripts after data merge |
+| `window.modUtils`          | Public API for mod authors                   |
+| `window.jsPreloader`       | Runs preload-stage scripts after data merge  |
 
 ## How to Help the User
 
@@ -97,12 +97,12 @@ Read `references/api-reference.md` for ModUtils, lifecycle hooks, and inter-mod 
 
 This is one of the most important decisions. Use this table to choose:
 
-| Need | Stage | boot.json field |
-|------|-------|-----------------|
-| Register an addon, set modRef, synchronous init | `inject_early` | `scriptFileList_inject_early` |
-| Async init, read raw game data, decrypt content | `earlyload` | `scriptFileList_earlyload` |
-| Read merged data, modify passages before SC2 starts | `preload` | `scriptFileList_preload` |
-| Normal game scripts, macros, game logic | Main | `scriptFileList` |
+| Need                                                | Stage          | boot.json field               |
+| --------------------------------------------------- | -------------- | ----------------------------- |
+| Register an addon, set modRef, synchronous init     | `inject_early` | `scriptFileList_inject_early` |
+| Async init, read raw game data, decrypt content     | `earlyload`    | `scriptFileList_earlyload`    |
+| Read merged data, modify passages before SC2 starts | `preload`      | `scriptFileList_preload`      |
+| Normal game scripts, macros, game logic             | Main           | `scriptFileList`              |
 
 Important: `earlyload` and `preload` scripts use `JsPreloader.JsRunner()` which wraps code as `(async () => { return ${jsCode} })()`. Always use an IIFE pattern:
 
@@ -115,6 +115,7 @@ Important: `earlyload` and `preload` scripts use `JsPreloader.JsRunner()` which 
 ## boot.json Essentials
 
 Required fields (must exist, even if empty):
+
 - `name` — mod name (string)
 - `version` — semver version
 - `styleFileList` — CSS files array
@@ -158,6 +159,7 @@ Passage names that match the base game **override** game content. Multiple mods 
 ## Reference Files
 
 Read these as needed:
+
 - `references/boot-json-reference.md` — Complete boot.json field documentation
 - `references/script-stages.md` — Detailed stage comparison with examples
 - `references/api-reference.md` — ModUtils, hooks, lifecycle, inter-mod communication

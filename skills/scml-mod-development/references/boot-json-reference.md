@@ -20,6 +20,7 @@ These fields must exist in every boot.json (use empty arrays if not needed):
 ## Optional Fields
 
 ### Display Name
+
 ```json
 "nickName": "My Mod Display Name"
 // Or multi-language:
@@ -27,12 +28,15 @@ These fields must exist in every boot.json (use empty arrays if not needed):
 ```
 
 ### Aliases
+
 ```json
 "alias": ["OldModName", "AlternateName"]
 ```
+
 Used when renaming a mod — old name remains compatible for dependency resolution.
 
 ### Early Script Stages
+
 ```json
 "scriptFileList_inject_early": ["init.js"],
 "scriptFileList_earlyload": ["early.js"],
@@ -40,14 +44,17 @@ Used when renaming a mod — old name remains compatible for dependency resoluti
 ```
 
 ### Additional Files
+
 ```json
 "additionFile": ["readme.txt", "changelog.md"],
 "additionBinaryFile": ["data.zip"],
 "additionDir": ["extra_data"]
 ```
+
 Files starting with "readme" (case-insensitive) are shown as mod description in the manager.
 
 ### Addon Plugin Dependencies
+
 ```json
 "addonPlugin": [
   {
@@ -60,6 +67,7 @@ Files starting with "readme" (case-insensitive) are shown as mod description in 
 ```
 
 ### Dependency Constraints
+
 ```json
 "dependenceInfo": [
   { "modName": "SomeMod", "version": "^2.0.0" },
@@ -70,14 +78,14 @@ Files starting with "readme" (case-insensitive) are shown as mod description in 
 
 ## Version Constraint Syntax
 
-| Format | Meaning | Example |
-|--------|---------|---------|
-| `^x.y.z` | Compatible within major version | `^2.0.0` matches 2.x.x |
-| `=x.y.z` | Exact match | `=1.2.3` |
-| `>x.y.z` | Greater than | `>1.0.0` |
-| `>=x.y.z` | Greater or equal | `>=1.0.0` |
-| `<x.y.z` | Less than | `<2.0.0` |
-| `<=x.y.z` | Less or equal | `<=2.0.0` |
+| Format    | Meaning                         | Example                |
+| --------- | ------------------------------- | ---------------------- |
+| `^x.y.z`  | Compatible within major version | `^2.0.0` matches 2.x.x |
+| `=x.y.z`  | Exact match                     | `=1.2.3`               |
+| `>x.y.z`  | Greater than                    | `>1.0.0`               |
+| `>=x.y.z` | Greater or equal                | `>=1.0.0`              |
+| `<x.y.z`  | Less than                       | `<2.0.0`               |
+| `<=x.y.z` | Less or equal                   | `<=2.0.0`              |
 
 For `GameVersion`, only the main version is compared; anything after the first `-` is ignored.
 

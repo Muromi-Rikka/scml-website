@@ -12,21 +12,29 @@ Complete API reference for all maplebirchFramework modules.
 maplebirch.register(name, module, dependencies?)
 ```
 
-| Parameter | Description |
-|-----------|-------------|
-| `name` | Module name (use mod-prefixed names to avoid clashes) |
-| `module` | Module object with optional lifecycle methods |
-| `dependencies` | Optional dependency name array |
+| Parameter      | Description                                           |
+| -------------- | ----------------------------------------------------- |
+| `name`         | Module name (use mod-prefixed names to avoid clashes) |
+| `module`       | Module object with optional lifecycle methods         |
+| `dependencies` | Optional dependency name array                        |
 
 Returns `boolean` — `true` on success, `false` if name already exists.
 
 ```js
 maplebirch.register("myModule", {
   dependencies: ["tool"],
-  async preInit() { this.cache = new Map(); },
-  async Init() { this.setup(); },
-  async loadInit() { this.restoreFromSave(); },
-  async postInit() { this.refresh(); },
+  async preInit() {
+    this.cache = new Map();
+  },
+  async Init() {
+    this.setup();
+  },
+  async loadInit() {
+    this.restoreFromSave();
+  },
+  async postInit() {
+    this.refresh();
+  },
   setup() {},
   restoreFromSave() {},
   refresh() {},
@@ -40,7 +48,9 @@ Set `exposed: true` to mount the module on `maplebirch[name]` directly:
 ```js
 maplebirch.register("myApi", {
   exposed: true,
-  hello() { return "Hello"; },
+  hello() {
+    return "Hello";
+  },
 });
 maplebirch.myApi.hello();
 ```
@@ -62,13 +72,13 @@ const graph = maplebirch.dependencyGraph;
 
 ### Module States
 
-| State | Value | Description |
-|-------|-------|-------------|
-| `REGISTERED` | 0 | Waiting for init |
-| `MOUNTED` | 1 | Main initialization finished |
-| `ERROR` | 2 | Initialization failed |
-| `EXPOSED` | 3 | Exposed on maplebirch root |
-| `DISABLED` | 4 | Disabled, skipped |
+| State        | Value | Description                  |
+| ------------ | ----- | ---------------------------- |
+| `REGISTERED` | 0     | Waiting for init             |
+| `MOUNTED`    | 1     | Main initialization finished |
+| `ERROR`      | 2     | Initialization failed        |
+| `EXPOSED`    | 3     | Exposed on maplebirch root   |
+| `DISABLED`   | 4     | Disabled, skipped            |
 
 ### Core Module Dependency Graph
 
@@ -77,16 +87,16 @@ addon → dynamic → tool → audio
                     tool → var → char → npc → combat
 ```
 
-| Module | Name | Dependencies |
-|--------|------|-------------|
-| AddonPlugin | `addon` | None |
-| DynamicManager | `dynamic` | `addon` |
-| ToolCollection | `tool` | `dynamic` |
-| AudioManager | `audio` | `tool` |
-| Variables | `var` | `tool` |
-| Character | `char` | `var` |
-| NPCManager | `npc` | `char` |
-| CombatManager | `combat` | `npc` |
+| Module         | Name      | Dependencies |
+| -------------- | --------- | ------------ |
+| AddonPlugin    | `addon`   | None         |
+| DynamicManager | `dynamic` | `addon`      |
+| ToolCollection | `tool`    | `dynamic`    |
+| AudioManager   | `audio`   | `tool`       |
+| Variables      | `var`     | `tool`       |
+| Character      | `char`    | `var`        |
+| NPCManager     | `npc`     | `char`       |
+| CombatManager  | `combat`  | `npc`        |
 
 ---
 
@@ -100,36 +110,36 @@ maplebirch.npc.add(npcData, npcConfig, translations?)
 
 ### NPCData Fields
 
-| Field | Type | Default |
-|-------|------|---------|
-| `nam` | string | **Required** |
-| `gender` | 'm'/'f'/'h'/'n'/'none' | random |
-| `title` | string | 'none' |
-| `description` | string | NPC name |
-| `type` | string | 'human' |
-| `adult` | number | random |
-| `teen` | number | random |
-| `age` | number | 0 |
-| `insecurity` | string | random |
-| `hairColour` | string | random |
-| `eyeColour` | string | random |
-| `hairlength` | number | random |
-| `breastsize` | number | by gender |
-| `penissize` | number | by gender |
-| `ballssize` | number | by gender |
-| `outfits` | string[] | default |
-| `pregnancy` | any | null |
+| Field         | Type                   | Default      |
+| ------------- | ---------------------- | ------------ |
+| `nam`         | string                 | **Required** |
+| `gender`      | 'm'/'f'/'h'/'n'/'none' | random       |
+| `title`       | string                 | 'none'       |
+| `description` | string                 | NPC name     |
+| `type`        | string                 | 'human'      |
+| `adult`       | number                 | random       |
+| `teen`        | number                 | random       |
+| `age`         | number                 | 0            |
+| `insecurity`  | string                 | random       |
+| `hairColour`  | string                 | random       |
+| `eyeColour`   | string                 | random       |
+| `hairlength`  | number                 | random       |
+| `breastsize`  | number                 | by gender    |
+| `penissize`   | number                 | by gender    |
+| `ballssize`   | number                 | by gender    |
+| `outfits`     | string[]               | default      |
+| `pregnancy`   | any                    | null         |
 
 ### NPCConfig Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `love` | `{ maxValue: number }` | Love max value |
-| `loveAlias` | `[string, string]` or function | Love label |
-| `important` | boolean or function | Important NPC flag |
-| `special` | boolean or function | Special NPC flag |
-| `loveInterest` | boolean or function | Love interest flag |
-| `romance` | `(() => boolean)[]` | Romance conditions |
+| Field          | Type                           | Description        |
+| -------------- | ------------------------------ | ------------------ |
+| `love`         | `{ maxValue: number }`         | Love max value     |
+| `loveAlias`    | `[string, string]` or function | Love label         |
+| `important`    | boolean or function            | Important NPC flag |
+| `special`      | boolean or function            | Special NPC flag   |
+| `loveInterest` | boolean or function            | Love interest flag |
+| `romance`      | `(() => boolean)[]`            | Romance conditions |
 
 ### Related Systems
 
@@ -186,7 +196,7 @@ maplebirch.combat.CombatAction.reg({
   cond: (ctx) => V.player.mana >= 25,
   display: (ctx) => `Fireball (25 mana)`,
   value: "fireball",
-  color: (ctx) => V.player.mana >= 25 ? "orange" : "gray",
+  color: (ctx) => (V.player.mana >= 25 ? "orange" : "gray"),
   difficulty: "High fire damage to one enemy",
   combatType: "Default",
   order: 1,
@@ -202,33 +212,33 @@ maplebirch.combat.CombatAction.reg({
 ```js
 const am = maplebirch.audio;
 
-await am.modPlay("myMod", "track_name");  // Play mod audio
-await am.play(track);                      // Play track
-am.pause();                                // Pause
-am.resume();                               // Resume
-am.stop();                                 // Stop
-am.togglePlayPause();                      // Toggle
-await am.next();                           // Next track
-await am.previous();                       // Previous track
-am.seek(50);                               // Seek to 50%
-am.seekTo(30);                             // Seek to 30 seconds
+await am.modPlay("myMod", "track_name"); // Play mod audio
+await am.play(track); // Play track
+am.pause(); // Pause
+am.resume(); // Resume
+am.stop(); // Stop
+am.togglePlayPause(); // Toggle
+await am.next(); // Next track
+await am.previous(); // Previous track
+am.seek(50); // Seek to 50%
+am.seekTo(30); // Seek to 30 seconds
 ```
 
 ### Volume Control
 
 ```js
-am.Volume = 0.8;   // 0.0 - 1.0
-am.Mute = true;     // Mute
-am.Mute = false;    // Unmute
+am.Volume = 0.8; // 0.0 - 1.0
+am.Mute = true; // Mute
+am.Mute = false; // Unmute
 ```
 
 ### Playback Modes
 
 ```js
-am.PlayMode = "sequential";  // Play in order
-am.PlayMode = "loop_all";    // Loop playlist
-am.PlayMode = "loop_one";    // Loop single track
-am.PlayMode = "shuffle";     // Shuffle
+am.PlayMode = "sequential"; // Play in order
+am.PlayMode = "loop_all"; // Loop playlist
+am.PlayMode = "loop_one"; // Loop single track
+am.PlayMode = "shuffle"; // Shuffle
 ```
 
 ### Audio Import
@@ -243,14 +253,14 @@ await am.modAudioClearAll("modName");
 
 ### Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `Volume` | number | Current volume (0.0-1.0) |
-| `Mute` | boolean | Muted state |
-| `PlayMode` | string | Playback mode |
-| `currentTime` | number | Current time (seconds) |
-| `duration` | number | Track duration (seconds) |
-| `currentTrack` | Track | Current track |
+| Property       | Type    | Description              |
+| -------------- | ------- | ------------------------ |
+| `Volume`       | number  | Current volume (0.0-1.0) |
+| `Mute`         | boolean | Muted state              |
+| `PlayMode`     | string  | Playback mode            |
+| `currentTime`  | number  | Current time (seconds)   |
+| `duration`     | number  | Track duration (seconds) |
+| `currentTrack` | Track   | Current track            |
 
 ---
 
@@ -261,9 +271,15 @@ await am.modAudioClearAll("modName");
 ```js
 maplebirch.char.use({
   my_layer: {
-    srcfn(options) { return `img/custom/${options.variant}.png`; },
-    showfn(options) { return options.show_custom; },
-    zfn() { return 10; },
+    srcfn(options) {
+      return `img/custom/${options.variant}.png`;
+    },
+    showfn(options) {
+      return options.show_custom;
+    },
+    zfn() {
+      return 10;
+    },
   },
 });
 ```
@@ -273,8 +289,12 @@ Layer properties: `srcfn`, `showfn`, `zfn`, `masksrcfn`, `filtersfn`, `animation
 ### Pre/Post Processing
 
 ```js
-maplebirch.char.use("pre", (options) => { /* modify before render */ });
-maplebirch.char.use("post", (options) => { /* process after render */ });
+maplebirch.char.use("pre", (options) => {
+  /* modify before render */
+});
+maplebirch.char.use("post", (options) => {
+  /* process after render */
+});
 ```
 
 ### Facial Styles
@@ -293,18 +313,18 @@ Auto-discovered from `img/face/` directory in mod zips. Resolution priority:
 maplebirch.char.mask(x?, rotation?, swap?, width?, height?)
 ```
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `x` | 0 | Mask split position offset (pixels from center) |
-| `rotation` | 0 | Rotation angle (-90 to 90) |
-| `swap` | false | Swap left/right masks |
-| `width` | 256 | Canvas width |
-| `height` | 256 | Canvas height |
+| Parameter  | Default | Description                                     |
+| ---------- | ------- | ----------------------------------------------- |
+| `x`        | 0       | Mask split position offset (pixels from center) |
+| `rotation` | 0       | Rotation angle (-90 to 90)                      |
+| `swap`     | false   | Swap left/right masks                           |
+| `width`    | 256     | Canvas width                                    |
+| `height`   | 256     | Canvas height                                   |
 
 ### Transformation System
 
 ```js
-maplebirch.char.transformation.add(type, category, config)
+maplebirch.char.transformation.add(type, category, config);
 ```
 
 ### Z-Index Constants
@@ -320,10 +340,10 @@ const z = maplebirch.char.ZIndices;
 
 ### Sub-managers
 
-| Manager | Description |
-|---------|-------------|
-| Time | Time-based event management |
-| State | State-based event triggers |
+| Manager | Description                    |
+| ------- | ------------------------------ |
+| Time    | Time-based event management    |
+| State   | State-based event triggers     |
 | Weather | Weather-based event conditions |
 
 Initialized on first `:passagestart`.
@@ -336,37 +356,37 @@ Access via `maplebirch.tool`.
 
 ### Submodules
 
-| Access Path | Description |
-|-------------|-------------|
-| `maplebirch.tool.console` | Console cheat tools |
-| `maplebirch.tool.migration` | Data migration tools |
-| `maplebirch.tool.rand` | Random number system |
-| `maplebirch.tool.macro` | SugarCube2 macro definitions |
-| `maplebirch.tool.text` | HTML text tools |
-| `maplebirch.tool.zone` | Zones manager |
-| `maplebirch.tool.link` | Link zone handling |
-| `maplebirch.tool.patch` | Patch toolkit (traits, location, bodywriting, foodstuff, antiques) |
+| Access Path                 | Description                                                        |
+| --------------------------- | ------------------------------------------------------------------ |
+| `maplebirch.tool.console`   | Console cheat tools                                                |
+| `maplebirch.tool.migration` | Data migration tools                                               |
+| `maplebirch.tool.rand`      | Random number system                                               |
+| `maplebirch.tool.macro`     | SugarCube2 macro definitions                                       |
+| `maplebirch.tool.text`      | HTML text tools                                                    |
+| `maplebirch.tool.zone`      | Zones manager                                                      |
+| `maplebirch.tool.link`      | Link zone handling                                                 |
+| `maplebirch.tool.patch`     | Patch toolkit (traits, location, bodywriting, foodstuff, antiques) |
 
 ### Patch API
 
 ```js
-maplebirch.tool.patch.addTraits(traitConfig)
-maplebirch.tool.patch.injectTraits()
-maplebirch.tool.patch.configureLocation(locationConfig)
-maplebirch.tool.patch.applyLocation()
-maplebirch.tool.patch.addBodywriting(config)
-maplebirch.tool.patch.applyBodywriting()
-maplebirch.tool.patch.addFoodstuff(config)
-maplebirch.tool.patch.applyFoodstuff()
-maplebirch.tool.patch.addAntiques(config)
-maplebirch.tool.patch.injectAntiques()
+maplebirch.tool.patch.addTraits(traitConfig);
+maplebirch.tool.patch.injectTraits();
+maplebirch.tool.patch.configureLocation(locationConfig);
+maplebirch.tool.patch.applyLocation();
+maplebirch.tool.patch.addBodywriting(config);
+maplebirch.tool.patch.applyBodywriting();
+maplebirch.tool.patch.addFoodstuff(config);
+maplebirch.tool.patch.applyFoodstuff();
+maplebirch.tool.patch.addAntiques(config);
+maplebirch.tool.patch.injectAntiques();
 ```
 
 ### Convenience Properties
 
 ```js
-maplebirch.tool.createlog("mymod")  // Create prefixed log function
-maplebirch.tool.utils               // Internal utility function set
+maplebirch.tool.createlog("mymod"); // Create prefixed log function
+maplebirch.tool.utils; // Internal utility function set
 ```
 
 ---
@@ -385,37 +405,43 @@ maplebirch.trigger(eventName, ...args)
 
 ### `on` vs `once` vs `after`
 
-| Method | Runs | After execution |
-|--------|------|-----------------|
-| `on` | Every time event fires | Stays registered |
-| `once` | First time only | Removed |
-| `after` | Once, after all `on` callbacks | Removed |
+| Method  | Runs                           | After execution  |
+| ------- | ------------------------------ | ---------------- |
+| `on`    | Every time event fires         | Stays registered |
+| `once`  | First time only                | Removed          |
+| `after` | Once, after all `on` callbacks | Removed          |
 
 ### Built-in Events
 
-| Event | Timing |
-|-------|--------|
-| `:IndexedDB` | IDB store registration |
-| `:import` | Data import |
-| `:allModule` | All modules registered |
-| `:variable` | Variables injectable |
-| `:onSave` | Game save |
-| `:onLoad` | Game load |
-| `:onLoadSave` | Save loaded |
-| `:language` | Language switch |
-| `:storyready` | Game fully started |
-| `:passageinit` | Passage initialization |
-| `:passagestart` | Passage start |
-| `:passagerender` | Passage render |
-| `:passagedisplay` | Passage display |
-| `:passageend` | Passage end |
-| `:sugarcube` | SugarCube object available |
-| `:modLoaderEnd` | ModLoader load complete |
+| Event             | Timing                     |
+| ----------------- | -------------------------- |
+| `:IndexedDB`      | IDB store registration     |
+| `:import`         | Data import                |
+| `:allModule`      | All modules registered     |
+| `:variable`       | Variables injectable       |
+| `:onSave`         | Game save                  |
+| `:onLoad`         | Game load                  |
+| `:onLoadSave`     | Save loaded                |
+| `:language`       | Language switch            |
+| `:storyready`     | Game fully started         |
+| `:passageinit`    | Passage initialization     |
+| `:passagestart`   | Passage start              |
+| `:passagerender`  | Passage render             |
+| `:passagedisplay` | Passage display            |
+| `:passageend`     | Passage end                |
+| `:sugarcube`      | SugarCube object available |
+| `:modLoaderEnd`   | ModLoader load complete    |
 
 ### Custom Events
 
 ```js
-maplebirch.on(":myEvent", (data) => { console.log(data); }, "my handler");
+maplebirch.on(
+  ":myEvent",
+  (data) => {
+    console.log(data);
+  },
+  "my handler",
+);
 await maplebirch.trigger(":myEvent", { key: "value" });
 ```
 
@@ -474,14 +500,14 @@ maplebirch.Language = "EN"       // Switch language
 
 ### SugarCube Macros
 
-| Macro | Purpose |
-|-------|---------|
-| `<<language>>` | Show content blocks by language |
-| `<<lanSwitch>>` / `lanSwitch()` | Inline language switching |
-| `<<lanButton>>` | Language-aware button |
-| `<<lanLink>>` | Language-aware link |
-| `<<lanListbox>>` | Language-aware dropdown |
-| `<<radiobuttonsfrom>>` | Multi-language radio buttons |
+| Macro                           | Purpose                         |
+| ------------------------------- | ------------------------------- |
+| `<<language>>`                  | Show content blocks by language |
+| `<<lanSwitch>>` / `lanSwitch()` | Inline language switching       |
+| `<<lanButton>>`                 | Language-aware button           |
+| `<<lanLink>>`                   | Language-aware link             |
+| `<<lanListbox>>`                | Language-aware dropdown         |
+| `<<radiobuttonsfrom>>`          | Multi-language radio buttons    |
 
 ### Logger
 

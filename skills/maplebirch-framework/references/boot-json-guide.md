@@ -59,16 +59,19 @@ Use only for custom module registration that must happen before normal script lo
 Three formats supported:
 
 **Auto-import all translations from `translations/` directory:**
+
 ```json
 { "language": true }
 ```
 
 **Specify language list:**
+
 ```json
 { "language": ["CN", "EN"] }
 ```
 
 **Custom path:**
+
 ```json
 {
   "language": {
@@ -79,6 +82,7 @@ Three formats supported:
 ```
 
 Translation files are simple key-value JSON or YAML:
+
 ```json
 {
   "greeting": "你好",
@@ -89,11 +93,13 @@ Translation files are simple key-value JSON or YAML:
 ### `audio`
 
 **Default path import (all audio from `audio/` directory):**
+
 ```json
 { "audio": true }
 ```
 
 **Custom paths:**
+
 ```json
 { "audio": ["bgm", "sfx/weapons", "sfx/ui"] }
 ```
@@ -148,41 +154,42 @@ Each `NamedNPC` entry is a triple: `[NPCData, NPCConfig, Translations]`.
 
 **NPCData fields:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `nam` | string | **Required.** Unique NPC name |
-| `gender` | 'm'/'f'/'h'/'n'/'none' | Gender |
-| `title` | string | Title / epithet |
-| `description` | string | Description text |
-| `type` | string | NPC type (default: 'human') |
-| `adult` | number | Adult (1/0) |
-| `teen` | number | Teen (1/0) |
-| `age` | number | Age |
-| `insecurity` | string | 'weak'/'looks'/'ethics'/'skill' |
-| `hairColour` | string | Red, black, brown, lightbrown, blond, platinumblond, strawberryblond, ginger |
-| `eyeColour` | string | Purple, darkblue, lightblue, amber, hazel, green, red, pink, grey, lightgrey, lime |
-| `hairlength` | number | Hair length |
-| `breastsize` | number | Breast size |
-| `penissize` | number | Penis size |
-| `ballssize` | number | Testicles size |
-| `outfits` | string[] | Outfit list |
+| Field         | Type                   | Description                                                                        |
+| ------------- | ---------------------- | ---------------------------------------------------------------------------------- |
+| `nam`         | string                 | **Required.** Unique NPC name                                                      |
+| `gender`      | 'm'/'f'/'h'/'n'/'none' | Gender                                                                             |
+| `title`       | string                 | Title / epithet                                                                    |
+| `description` | string                 | Description text                                                                   |
+| `type`        | string                 | NPC type (default: 'human')                                                        |
+| `adult`       | number                 | Adult (1/0)                                                                        |
+| `teen`        | number                 | Teen (1/0)                                                                         |
+| `age`         | number                 | Age                                                                                |
+| `insecurity`  | string                 | 'weak'/'looks'/'ethics'/'skill'                                                    |
+| `hairColour`  | string                 | Red, black, brown, lightbrown, blond, platinumblond, strawberryblond, ginger       |
+| `eyeColour`   | string                 | Purple, darkblue, lightblue, amber, hazel, green, red, pink, grey, lightgrey, lime |
+| `hairlength`  | number                 | Hair length                                                                        |
+| `breastsize`  | number                 | Breast size                                                                        |
+| `penissize`   | number                 | Penis size                                                                         |
+| `ballssize`   | number                 | Testicles size                                                                     |
+| `outfits`     | string[]               | Outfit list                                                                        |
 
 **NPCConfig fields:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `love` | `{ maxValue: number }` | Love/Like max value |
-| `loveAlias` | `[string, string]` or function | Love/Like label |
-| `important` | boolean or function | Whether NPC is important |
-| `special` | boolean or function | Whether NPC is special |
-| `loveInterest` | boolean or function | Whether NPC can be love interest |
-| `romance` | `(() => boolean)[]` | Romance condition functions |
+| Field          | Type                           | Description                      |
+| -------------- | ------------------------------ | -------------------------------- |
+| `love`         | `{ maxValue: number }`         | Love/Like max value              |
+| `loveAlias`    | `[string, string]` or function | Love/Like label                  |
+| `important`    | boolean or function            | Whether NPC is important         |
+| `special`      | boolean or function            | Whether NPC is special           |
+| `loveInterest` | boolean or function            | Whether NPC can be love interest |
+| `romance`      | `(() => boolean)[]`            | Romance condition functions      |
 
 ### `framework`
 
 Framework-level configuration. Supports multiple formats:
 
 **Register traits:**
+
 ```json
 {
   "framework": {
@@ -200,6 +207,7 @@ Framework-level configuration. Supports multiple formats:
 ```
 
 **Add region widget:**
+
 ```json
 {
   "framework": {
@@ -210,6 +218,7 @@ Framework-level configuration. Supports multiple formats:
 ```
 
 **Conditional widget:**
+
 ```json
 {
   "framework": {
@@ -225,6 +234,7 @@ Framework-level configuration. Supports multiple formats:
 ```
 
 **Array form (multiple configs):**
+
 ```json
 {
   "framework": [
