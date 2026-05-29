@@ -1,0 +1,13 @@
+{
+  "name": "MyMod",
+  "nickName": "My Mod Display Name",
+  "version": "1.0.0",
+  "alias": [],
+  "styleFileList": ["MyMod_style.css"],
+  "scriptFileList": ["MyMod_script.js"],
+  "tweeFileList": ["MyMod_passage.twee"],
+  "imgFileList": [],
+  "additionFile": ["readme.txt"],
+  "addonPlugin": [],
+  "dependenceInfo": []
+}
