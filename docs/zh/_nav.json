@@ -4,5 +4,6 @@
   { "text": "创建 Mod", "link": "/ml/creating-mods/", "activeMatch": "/ml/creating-mods/" },
   { "text": "高级", "link": "/ml/advanced/", "activeMatch": "/ml/advanced/" },
   { "text": "MapleBirch 框架", "link": "/maplebirch/", "activeMatch": "/maplebirch/" },
+  { "text": "技能", "link": "/skills/", "activeMatch": "/skills/" },
   { "text": "贡献者", "link": "/contributors/", "activeMatch": "/contributors/" }
 ]

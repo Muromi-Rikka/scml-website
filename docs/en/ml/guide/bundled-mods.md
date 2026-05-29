@@ -70,3 +70,89 @@ ModLoader splits non-core functionality into separate Mods and ships common ones
 :::info
 For detailed usage of each Mod, see the corresponding Mod project's README.md.
 :::
+
+## Common Addon Usage Examples
+
+### TweeReplacer
+
+Replace game Passage content. Declare the dependency in `boot.json`:
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "TweeReplacer",
+      "addonName": "tweeReplacer",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### ReplacePatch
+
+Simple string replacement for JS/CSS/Passage content:
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "ReplacePatch",
+      "addonName": "replacePatch",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### ImageLoaderHook
+
+Replace game images. Add images to `imgFileList` — images matching base game paths are replaced automatically:
+
+```json
+{
+  "imgFileList": ["MyMod_Image/character/avatar.png", "MyMod_Image/backgrounds/room.jpg"],
+  "addonPlugin": [
+    {
+      "modName": "ImageLoaderHook",
+      "addonName": "imgLoaderHook",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### Creating a Custom Addon
+
+If none of the built-in addons fit, you can create a custom addon:
+
+```js
+// Register during inject_early or earlyload
+(async () => {
+  const addonInstance = {
+    registerMod(modName, modZip, params) {
+      console.log(`Mod ${modName} registered with my addon`);
+    },
+  };
+
+  window.modAddonPluginManager.registerAddonPlugin("MyCustomAddon", "customPlugin", addonInstance);
+})();
+```
+
+Consumer mods declare the dependency in their `boot.json`:
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "MyCustomAddon",
+      "addonName": "customPlugin",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```

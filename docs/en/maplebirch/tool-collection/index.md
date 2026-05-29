@@ -4,15 +4,15 @@ The ToolCollection module aggregates 8 sub-tool modules in a facade pattern, acc
 
 ## Submodule Overview
 
-| Access Path                 | Submodule     | Description                  |
-| --------------------------- | ------------- | ---------------------------- |
-| `maplebirch.tool.console`   | Console       | Console cheat tools          |
-| `maplebirch.tool.migration` | migration     | Data migration tools         |
-| `maplebirch.tool.rand`      | randSystem    | Random number system         |
-| `maplebirch.tool.macro`     | defineMacros  | SugarCube2 macro definitions |
-| `maplebirch.tool.text`      | htmlTools     | HTML text tools              |
-| `maplebirch.tool.zone`      | zonesManager  | Zones manager                |
-| `maplebirch.tool.link`      | applyLinkZone | Link zone handling           |
+| Access Path                 | Submodule     | Description                                                        |
+| --------------------------- | ------------- | ------------------------------------------------------------------ |
+| `maplebirch.tool.console`   | Console       | Console cheat tools                                                |
+| `maplebirch.tool.migration` | migration     | Data migration tools                                               |
+| `maplebirch.tool.rand`      | randSystem    | Random number system                                               |
+| `maplebirch.tool.macro`     | defineMacros  | SugarCube2 macro definitions                                       |
+| `maplebirch.tool.text`      | htmlTools     | HTML text tools                                                    |
+| `maplebirch.tool.zone`      | zonesManager  | Zones manager                                                      |
+| `maplebirch.tool.link`      | applyLinkZone | Link zone handling                                                 |
 | `maplebirch.tool.patch`     | Patch         | Patch toolkit (traits, location, bodywriting, foodstuff, antiques) |
 
 Additionally, there are convenience properties:
@@ -26,18 +26,18 @@ Additionally, there are convenience properties:
 
 The Patch module aggregates data registration and injection tools, accessible via `maplebirch.tool.patch`.
 
-| Method | Description |
-| :--- | :--- |
-| `addTraits()` | Register custom traits |
-| `injectTraits()` | Inject registered traits into trait list |
-| `configureLocation()` | Configure location images |
-| `applyLocation()` | Apply location config |
-| `addBodywriting()` | Register bodywriting |
-| `applyBodywriting()` | Apply bodywriting registration |
-| `addFoodstuff()` | Register foodstuff |
-| `applyFoodstuff()` | Apply foodstuff registration |
-| `addAntiques()` | Register antiques |
-| `injectAntiques()` | Inject antique text |
+| Method                | Description                              |
+| :-------------------- | :--------------------------------------- |
+| `addTraits()`         | Register custom traits                   |
+| `injectTraits()`      | Inject registered traits into trait list |
+| `configureLocation()` | Configure location images                |
+| `applyLocation()`     | Apply location config                    |
+| `addBodywriting()`    | Register bodywriting                     |
+| `applyBodywriting()`  | Apply bodywriting registration           |
+| `addFoodstuff()`      | Register foodstuff                       |
+| `applyFoodstuff()`    | Apply foodstuff registration             |
+| `addAntiques()`       | Register antiques                        |
+| `injectAntiques()`    | Inject antique text                      |
 
 ## Global Utilities
 

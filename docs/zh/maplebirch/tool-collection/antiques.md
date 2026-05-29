@@ -32,29 +32,29 @@ maplebirch.tool.patch.injectAntiques(_museumAntiqueText);
 ## 最小示例
 
 ```javascript
-maplebirch.tool.patch.addAntiques('antiquemyitem', {
+maplebirch.tool.patch.addAntiques("antiquemyitem", {
   hint: '"For a curious little relic," Winter says.',
-  museum: 'The curious relic rests on a pedestal.',
-  name: 'Curious Relic',
-  cn_name: '奇妙遗物',
+  museum: "The curious relic rests on a pedestal.",
+  name: "Curious Relic",
+  cn_name: "奇妙遗物",
   journal: '"A curious little relic."',
-  journalName: 'Small relic',
-  icon: 'antiques/my-relic.png'
+  journalName: "Small relic",
+  icon: "antiques/my-relic.png",
 });
 ```
 
 ## 配置字段
 
-| 字段 | 说明 |
-| :--- | :--- |
-| `hint` | Winter 提示文本 |
-| `museum` | 古董放入博物馆后的展示文本 |
-| `name` | 真实名称 |
-| `cn_name` | 中文显示名称，可选 |
-| `journal` | 日志描述 |
-| `journalName` | 日志中使用的名称，可选 |
-| `icon` | 图标路径 |
-| `key` | 数组配置时使用的唯一标识 |
+| 字段          | 说明                       |
+| :------------ | :------------------------- |
+| `hint`        | Winter 提示文本            |
+| `museum`      | 古董放入博物馆后的展示文本 |
+| `name`        | 真实名称                   |
+| `cn_name`     | 中文显示名称，可选         |
+| `journal`     | 日志描述                   |
+| `journalName` | 日志中使用的名称，可选     |
+| `icon`        | 图标路径                   |
+| `key`         | 数组配置时使用的唯一标识   |
 
 ## 状态流转
 

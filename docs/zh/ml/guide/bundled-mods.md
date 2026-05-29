@@ -70,3 +70,89 @@ ModLoader 将与核心功能无关的功能分离为独立的 Mod，并将常用
 :::info
 有关各个 Mod 的详细功能及用法，请参见对应 Mod 项目的 README.md 文件。
 :::
+
+## 常用 Addon 使用示例
+
+### TweeReplacer
+
+替换游戏 Passage 内容。在 `boot.json` 中声明依赖：
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "TweeReplacer",
+      "addonName": "tweeReplacer",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### ReplacePatch
+
+对 JS/CSS/Passage 内容进行简单字符串替换：
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "ReplacePatch",
+      "addonName": "replacePatch",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### ImageLoaderHook
+
+替换游戏图片。将图片添加到 `imgFileList`，匹配原游戏路径的图片会自动替换：
+
+```json
+{
+  "imgFileList": ["MyMod_Image/character/avatar.png", "MyMod_Image/backgrounds/room.jpg"],
+  "addonPlugin": [
+    {
+      "modName": "ImageLoaderHook",
+      "addonName": "imgLoaderHook",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
+
+### 创建自定义 Addon
+
+如果内置 Addon 无法满足需求，可以创建自定义 Addon：
+
+```js
+// 在 inject_early 或 earlyload 阶段注册
+(async () => {
+  const addonInstance = {
+    registerMod(modName, modZip, params) {
+      console.log(`Mod ${modName} registered with my addon`);
+    },
+  };
+
+  window.modAddonPluginManager.registerAddonPlugin("MyCustomAddon", "customPlugin", addonInstance);
+})();
+```
+
+消费方 Mod 在 `boot.json` 中声明依赖：
+
+```json
+{
+  "addonPlugin": [
+    {
+      "modName": "MyCustomAddon",
+      "addonName": "customPlugin",
+      "modVersion": "1.0.0",
+      "params": []
+    }
+  ]
+}
+```
