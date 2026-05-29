@@ -1,3 +1,5 @@
+import { PackageManagerTabs } from '@rspress/core/theme';
+
 # Skills
 
 This project provides a set of **Claude Code Skills** to help AI coding assistants work more efficiently with SCML mod development.
@@ -17,10 +19,25 @@ Skills are **domain knowledge packages** for AI coding assistants, containing AP
 
 ### Option 1: Install via GitHub (Recommended)
 
-```bash
-npx skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development
-npx skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework
-```
+SCML Mod Development Skill:
+
+<PackageManagerTabs command={{
+  npm: 'npx skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development',
+  yarn: 'yarn dlx skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development',
+  pnpm: 'pnpm dlx skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development',
+  bun: 'bunx skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development',
+  deno: 'deno run -A npm:skills add github:Muromi-Rikka/scml-website/skills/scml-mod-development',
+}} />
+
+Maplebirch Framework Skill:
+
+<PackageManagerTabs command={{
+  npm: 'npx skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework',
+  yarn: 'yarn dlx skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework',
+  pnpm: 'pnpm dlx skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework',
+  bun: 'bunx skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework',
+  deno: 'deno run -A npm:skills add github:Muromi-Rikka/scml-website/skills/maplebirch-framework',
+}} />
 
 ### Option 2: Manual Installation
 
