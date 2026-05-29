@@ -1,0 +1,30 @@
+{
+  "name": "MyMaplebirchMod",
+  "version": "1.0.0",
+  "scriptFileList": [],
+  "styleFileList": [],
+  "tweeFileList": [],
+  "imgFileList": [],
+  "additionFile": [],
+  "dependenceInfo": [
+    {
+      "modName": "GameVersion",
+      "version": ">=0.5.9.7"
+    },
+    {
+      "modName": "maplebirch",
+      "version": ">=3.2.5"
+    }
+  ],
+  "addonPlugin": [
+    {
+      "modName": "maplebirch",
+      "addonName": "maplebirchAddon",
+      "modVersion": "^3.2.0",
+      "params": {
+        "script": ["mymod.js"],
+        "language": true
+      }
+    }
+  ]
+}
