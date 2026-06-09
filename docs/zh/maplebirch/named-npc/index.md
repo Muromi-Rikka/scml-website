@@ -51,7 +51,7 @@ maplebirch.npc.add(
 | `breastsize`       | number                 | 胸部大小                 | 根据性别  |
 | `ballssize`        | number                 | 睾丸大小                 | 根据性别  |
 | `outfits`          | string[]               | 服装列表                 | 默认服装  |
-| `pregnancy`        | any                    | 怀孕状态                 | null      |
+| `pregnancy`        | object                 | 怀孕配置               | {}        |
 
 ### 性别说明
 
@@ -293,3 +293,13 @@ maplebirch.npc.add(
   ]
 }
 ```
+
+---
+
+## 扩展系统
+
+NPC 注册后可通过以下子系统扩展功能：
+
+- **[NPC 转化](./npc-transformation)** — 轻量外观与身份层
+- **[NPC 体液](./npc-fluids)** — 侧边栏体液图层
+- **[NPC 怀孕](./npc-pregnancy)** — 自定义怀孕种族与出生配置

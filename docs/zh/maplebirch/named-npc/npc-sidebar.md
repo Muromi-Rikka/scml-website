@@ -40,6 +40,24 @@ img/ui/nnpc/luna/angry.png
 
 ---
 
+## 动态模型体液显示
+
+NPC 侧边栏动态模型可以显示原版玩家模型使用的体液与滴落图层。框架会把状态存在 `V.maplebirch.npc[name].fluids`，它只服务于 NPC 侧边栏显示，不会写入原版玩家的 `setup.bodyliquid`。
+
+```javascript
+maplebirch.npc.fluids.add('Robin', 'mouth', 2);
+maplebirch.npc.fluids.set('Robin', 'face', 3);
+maplebirch.npc.fluids.reduce('Robin', 'mouth');
+maplebirch.npc.fluids.clear('Robin', 'face');
+maplebirch.npc.fluids.clear('Robin');
+```
+
+可用部位为 `vagina`、`anus`、`mouth`、`chest`、`face`、`feet`、`leftarm`、`rightarm`、`neck`、`thigh`、`tummy`。数值会限制在 `0` 到 `5`，侧边栏渲染时再转换为原版模型认识的 `drip_*` 与 `cum_*` 参数。
+
+更完整的体液控制 API，请参阅 **[NPC 体液](./npc-fluids)**。
+
+---
+
 ## 在 boot.json 中配置
 
 ### 基本结构
@@ -63,9 +81,9 @@ img/ui/nnpc/luna/angry.png
   "params": {
     "npc": {
       "Sidebar": {
-        "image": ["Elara", "Merlin", "Draven"],
-        "clothes": ["data/npc/elven_clothes.yaml", "data/npc/wizard_wardrobe.json"],
-        "config": ["data/npc/elara_sidebar.yaml", "data/npc/merlin_sidebar.json"]
+        "image": ["Elara", "Merlin", "Draven"], // NPC名称，推荐小写，画师模型配置图片路径还是 ui/nnpc/<npcName>/
+        "clothes": ["data/npc/elven_clothes.yaml", "data/npc/wizard_wardrobe.json"], // PC模型模式下NPC的服装数据，取自PC身上的衣着
+        "config": ["data/npc/elara_sidebar.yaml", "data/npc/merlin_sidebar.json"] // 动态的画师模型配置
       }
     }
   }
@@ -76,9 +94,9 @@ img/ui/nnpc/luna/angry.png
 
 | 字段      | 类型     | 说明                                                       |
 | --------- | -------- | ---------------------------------------------------------- |
-| `image`   | string[] | 静态侧边栏 NPC，读取 `img/ui/nnpc/<npcName>/` 目录中的图片 |
-| `clothes` | string[] | 动态模型模式使用的 NPC 服装配置                            |
-| `config`  | string[] | 动态模型图层配置 (YAML/JSON)                               |
+| `image`   | string[] | NPC 名称列表，推荐小写，画师模型配置图片路径为 `ui/nnpc/<npcName>/` |
+| `clothes` | string[] | PC 模型模式下 NPC 的服装数据，取自 PC 身上的衣着                    |
+| `config`  | string[] | 动态的画师模型配置 (YAML/JSON)                                      |
 
 ---
 

@@ -149,21 +149,23 @@ Switches NPC outfit by location, time, or events (e.g. school uniform at school,
 
 ### In Code
 
+The built-in wardrobe is bundled with the framework and loaded automatically. Extra wardrobe files loaded by code must pass both the mod name and the file path.
+
 ```javascript
 // 1. Load wardrobe config
-await maplebirch.npc.Clothes.load("myMod", "data/wardrobe.yaml");
+await maplebirch.npc.Clothes.loadWardrobe("myMod", "data/wardrobe.yaml");
 
 // 2. Register outfits by location
-maplebirch.npc.Clothes.register("Luna", "school", "school_uniform");
+maplebirch.npc.Clothes.wear("Luna", "school", "school_uniform");
 
-maplebirch.npc.Clothes.register(
+maplebirch.npc.Clothes.wear(
   "Luna",
   "cafe",
   "casual_outfit",
   () => V.time.hour >= 18 || V.time.hour <= 8,
 );
 
-maplebirch.npc.Clothes.register("Luna", "*", "casual_outfit"); // Default
+maplebirch.npc.Clothes.wear("Luna", "*", "casual_outfit"); // Default
 
 // 3. Get current outfit
 const currentOutfit = maplebirch.npc.Clothes.worn("Luna");

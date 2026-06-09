@@ -51,7 +51,7 @@ maplebirch.npc.add(
 | `breastsize`       | number                 | Breast size                   | by gender |
 | `ballssize`        | number                 | Testicles size                | by gender |
 | `outfits`          | string[]               | Outfit list                   | default   |
-| `pregnancy`        | any                    | Pregnancy state               | null      |
+| `pregnancy`        | object                 | Pregnancy config                | {}        |
 
 ### Gender
 
@@ -289,3 +289,13 @@ The framework initializes the NPC pregnancy system by NPC name and type:
 - Infertile NPCs (e.g. Bailey, Leighton) are not initialized.
 - Supported types: `human`, `wolf`, `wolfboy`, `wolfgirl`, `hawk`, `harpy`.
 - Specific NPCs (Alex, Black Wolf, Great Hawk) are pregnant by default.
+
+---
+
+## Extension Systems
+
+After registration, NPCs can be extended with these subsystems:
+
+- **[NPC Transformation](./npc-transformation)** — Lightweight appearance and identity layer
+- **[NPC Fluids](./npc-fluids)** — Sidebar fluid layers
+- **[NPC Pregnancy](./npc-pregnancy)** — Custom pregnancy race and birth configuration

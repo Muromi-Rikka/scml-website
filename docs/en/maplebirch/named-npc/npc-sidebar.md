@@ -70,11 +70,11 @@ Once `luna` is registered in `boot.json`, these images are available as sidebar 
 
 ### Field Reference
 
-| Field     | Type     | Description                                               |
-| --------- | -------- | --------------------------------------------------------- |
-| `image`   | string[] | Static sidebar NPCs; images from `img/ui/nnpc/<npcName>/` |
-| `clothes` | string[] | Clothing config for dynamic model mode                    |
-| `config`  | string[] | Dynamic model layer config (YAML/JSON)                    |
+| Field     | Type     | Description                                                                    |
+| --------- | -------- | ------------------------------------------------------------------------------ |
+| `image`   | string[] | NPC names; recommended lowercase, image path is `ui/nnpc/<npcName>/`           |
+| `clothes` | string[] | Wardrobe data for PC-model mode, drawn from the player character's clothing    |
+| `config`  | string[] | Dynamic artist-model layer config (YAML/JSON)                                  |
 
 ---
 
@@ -205,3 +205,21 @@ fantasyMod/
 │       └── elven_clothes.yaml
 └── boot.json
 ```
+
+---
+
+## Dynamic Model Fluids
+
+Dynamic NPC sidebar models can show the same cum and drip sprites used by the original player model. The framework stores this as sidebar display state under `V.maplebirch.npc[name].fluids`; it does not write to the original player `setup.bodyliquid` data.
+
+```javascript
+maplebirch.npc.fluids.add('Robin', 'mouth', 2);
+maplebirch.npc.fluids.set('Robin', 'face', 3);
+maplebirch.npc.fluids.reduce('Robin', 'mouth');
+maplebirch.npc.fluids.clear('Robin', 'face');
+maplebirch.npc.fluids.clear('Robin');
+```
+
+Supported parts are `vagina`, `anus`, `mouth`, `chest`, `face`, `feet`, `leftarm`, `rightarm`, `neck`, `thigh`, and `tummy`. Values are clamped from `0` to `5`. The sidebar renderer converts those values to original `drip_*` and `cum_*` model options during render.
+
+For the full fluid control API, see **[NPC Fluids](./npc-fluids)**.
