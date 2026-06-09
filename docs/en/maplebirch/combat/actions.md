@@ -37,7 +37,7 @@ maplebirch.combat.CombatAction.reg({
 
 Then define a normal Twine widget for the text and effects:
 
-```twine
+```text
 :: My Mod Combat Effects [widget]
 <<widget "myModQuickStrikeEffect">>
   You strike with your left hand.
@@ -47,7 +47,7 @@ Then define a normal Twine widget for the text and effects:
 
 When the player selects this action, `$leftaction` becomes `myModQuickStrike`. During `effectsman`, the framework generates and runs a block similar to:
 
-```twine
+```text
 <<if $leftaction is "myModQuickStrike">>
   <<set $leftaction to 0>><<set $leftactiondefault to "myModQuickStrike">>
   <<myModQuickStrikeEffect>>
@@ -114,7 +114,7 @@ effect: ctx => ctx.actionType === 'leftaction' ? '<<myModLeftGuardEffect>>' : '<
 
 The framework wraps the `effect` in an action check, resets the corresponding action variable to `0`, and updates the default action:
 
-```twine
+```text
 <<set $leftaction to 0>>
 <<set $leftactiondefault to "action value">>
 ```
@@ -156,7 +156,7 @@ maplebirch.combat.CombatAction.reg({
 });
 ```
 
-```twine
+```text
 :: My Mod Combat Effects [widget]
 <<widget "myModMoonlightHealEffect">>
   <span class="green">Moonlight gathers across your chest.</span>

@@ -37,7 +37,7 @@ maplebirch.combat.CombatAction.reg({
 
 再写一个普通 Twine widget 处理实际文本和效果：
 
-```twine
+```text
 :: My Mod Combat Effects [widget]
 <<widget "myModQuickStrikeEffect">>
   You strike with your left hand.
@@ -47,7 +47,7 @@ maplebirch.combat.CombatAction.reg({
 
 当玩家选中这个按钮后，`$leftaction` 会变成 `myModQuickStrike`。进入 `effectsman` 时，框架会在手部动作区生成并执行类似这样的片段：
 
-```twine
+```text
 <<if $leftaction is "myModQuickStrike">>
   <<set $leftaction to 0>><<set $leftactiondefault to "myModQuickStrike">>
   <<myModQuickStrikeEffect>>
@@ -114,7 +114,7 @@ effect: ctx => ctx.actionType === 'leftaction' ? '<<myModLeftGuardEffect>>' : '<
 
 框架会自动为 `effect` 外层包上动作判断，并把对应动作变量设回 `0`，同时更新默认动作：
 
-```twine
+```text
 <<set $leftaction to 0>>
 <<set $leftactiondefault to "动作 value">>
 ```
@@ -156,7 +156,7 @@ maplebirch.combat.CombatAction.reg({
 });
 ```
 
-```twine
+```text
 :: My Mod Combat Effects [widget]
 <<widget "myModMoonlightHealEffect">>
   <span class="green">Moonlight gathers across your chest.</span>

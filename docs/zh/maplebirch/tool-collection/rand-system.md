@@ -208,4 +208,4 @@ function generateLoot(seed) {
 - `seed` 改变后会重新开始随机序列。
 - `int(max)` 和 `percent()` 每调用一次都会推进随机指针。
 - `back()` 与 `forward()` 只移动历史指针，不会直接产生随机值。
-- 只需要普通随机时，优先考虑 [工具函数](/maplebirch/tool-collection/utilities) 中的 `random()` 和 `either()`。
+- 只需要普通随机时，优先考虑 [工具函数](./utils) 中的 `random()` 和 `either()`。
