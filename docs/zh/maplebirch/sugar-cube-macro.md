@@ -93,6 +93,7 @@
 ```javascript
 <<lanButton "translation_key">>点击后的动作<</lanButton>>
 <<lanButton "translation_key" "样式参数">>点击后的动作<</lanButton>>
+<<lanButton "translation_key" "class:gold" "icon:image.png">>点击后的动作<</lanButton>>
 ```
 
 **参数**:
@@ -102,12 +103,14 @@
   - 格式模式：`'title'`, `'upper'`, `'lower'`, `'capitalize'`, `'camel'`, `'pascal'`, `'snake'`, `'kebab'`, `'constant'`
   - `class:样式类名`：添加 CSS 类
   - `style:内联样式`：添加内联样式
+  - `icon:图片URL`：在按钮文本前添加图标
+  - `icon-only`：仅显示图标，不显示文本（鼠标悬停时显示翻译文本作为提示）
 
 **特性**:
 
 - 按钮文本自动翻译
 - 支持文本格式转换
-- 支持自定义样式
+- 支持自定义样式和图标
 - 语言切换时自动更新按钮文本
 
 **示例**:
@@ -152,6 +155,8 @@
   - 格式模式：支持所有 `convert` 函数可用的格式
   - `class:样式类名`
   - `style:内联样式`
+  - `icon:图片URL`
+  - `icon-only`
 
 **SugarCube 链接语法兼容**:
 

@@ -90,6 +90,7 @@ Creates a multi-language button; label updates with the current language.
 ```javascript
 <<lanButton "translation_key">>Actions on click<</lanButton>>
 <<lanButton "translation_key" "style_params">>Actions on click<</lanButton>>
+<<lanButton "translation_key" "class:gold" "icon:image.png">>Actions on click<</lanButton>>
 ```
 
 **Parameters**:
@@ -98,12 +99,14 @@ Creates a multi-language button; label updates with the current language.
 - Optional: format mode `'title'`, `'upper'`, `'lower'`, `'capitalize'`, `'camel'`, `'pascal'`, `'snake'`, `'kebab'`, `'constant'`
 - `class:className`: CSS class
 - `style:inline_style`: inline style
+- `icon:image_url`: adds an icon image before the button text
+- `icon-only`: hides text, shows only the icon (hover tooltip shows translated text)
 
 **Features**:
 
 - Button label is translated automatically
 - Text format conversion
-- Custom styling
+- Custom styling and icons
 - Label updates when language changes
 
 **Example**:
@@ -141,7 +144,7 @@ Creates a multi-language link; text updates with the current language.
 
 - First argument: translation key (string)
 - Second (optional): target passage name
-- Optional: format mode (same as `convert`), `class:className`, `style:inline_style`
+- Optional: format mode (same as `convert`), `class:className`, `style:inline_style`, `icon:image_url`, `icon-only`
 
 **SugarCube link compatibility**:
 
