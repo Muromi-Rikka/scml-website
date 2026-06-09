@@ -4,7 +4,7 @@
 
 ## MaplebirchCore
 
-`MaplebirchCore` 是框架的中心对象，作为 `window.maplebirch` 的单例暴露。它在构造时实例化 6 个内置服务，并通过 `ModuleSystem` 注册 8 个功能模块。
+`MaplebirchCore` 是框架的中心对象，作为 `window.maplebirch` 的单例暴露。它在构造时实例化 8 个内置服务，并通过 `ModuleSystem` 注册 8 个功能模块。
 
 ```mermaid
 flowchart TB
@@ -16,6 +16,8 @@ flowchart TB
       EventEmitter
       IndexedDBService
       LanguageManager
+      CredentialVault
+      CloudSaveService
       ModuleSystem
       GUIControl
     end
@@ -41,8 +43,10 @@ flowchart TB
 2. `EventEmitter` — 事件总线
 3. `IndexedDBService` — 数据库服务
 4. `LanguageManager` — 国际化
-5. `ModuleSystem` — 模块注册与生命周期
-6. `GUIControl` — 设置 UI
+5. `CredentialVault` — 模组凭证与授权
+6. `CloudSaveService` — 云存档服务
+7. `ModuleSystem` — 模块注册与生命周期
+8. `GUIControl` — 设置 UI
 
 所有服务使用 `Object.seal()` 冻结，防止运行时修改。
 
@@ -87,7 +91,7 @@ graph LR
 
 ### Early Mount
 
-`addon`、`dynamic`、`tool`、`char` 被标记为 early mount 模块。这些模块在注册时就会挂载到 `maplebirch` 实例上（如果依赖已满足），而非等到预初始化阶段。
+`addon`、`dynamic`、`tool`、`char`、`npc` 被标记为 early mount 模块。这些模块在注册时就会挂载到 `maplebirch` 实例上（如果依赖已满足），而非等到预初始化阶段。
 
 ### 拓扑排序
 

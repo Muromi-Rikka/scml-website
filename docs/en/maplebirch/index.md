@@ -28,7 +28,7 @@ The framework declares the following hard dependencies, all of which must be loa
 | BeautySelectorAddon | >=2.0.0         | BSA image pipeline (NPC sidebar)               |
 | ReplacePatcher      | >=1.0.0         | Passage content replacement                    |
 | TweeReplacer        | >=1.0.0         | Twee passage replacement                       |
-| GameVersion         | >=0.5.9.7       | Game version detection                         |
+| GameVersion         | >=0.5.10.8      | Game version detection                         |
 
 ## Core Capabilities
 
@@ -48,6 +48,10 @@ The framework provides the following core modules:
 - **Persistent Storage** — IndexedDB settings persistence
 - **Credentials & protection** — `CredentialVault` (`maplebirch.credential`) for mod auth / unlock flows (see [Mod protection & credentials](./mod-protection))
 - **Logging System** — Leveled logging (DEBUG / INFO / WARN / ERROR)
+- **NPC Pregnancy** — Custom pregnancy species registration, NPC pregnancy config, child birth system
+- **NPC Transformation** — Lightweight appearance and identity layer for named NPCs
+- **NPC Fluids** — Sidebar fluid layer rendering
+- **Cloud Save** — Cloud save client with multi-backend support (Go+SQLite / Cloudflare R2)
 
 ## Global Access Paths
 
@@ -67,6 +71,7 @@ All features are accessed through the `window.maplebirch` singleton:
 | `maplebirch.lang`       | LanguageManager  | Internationalization and translation                      |
 | `maplebirch.idb`        | IndexedDBService | IndexedDB storage                                         |
 | `maplebirch.credential` | CredentialVault  | Mod credentials, auth guard, unlock helpers               |
+| `maplebirch.cloud`      | CloudSaveService | Cloud save management                                     |
 | `maplebirch.logger`     | Logger           | Logging service                                           |
 | `maplebirch.tracer`     | EventEmitter     | Event bus                                                 |
 
@@ -90,6 +95,7 @@ The following convenience properties are also exposed:
 - [**Module System**](./module-system) — Module registration and lifecycle API
 - [**SugarCube Macros**](./sugar-cube-macro) — Multi-language and stat/grace macros
 - **Combat** ([actions](./combat/actions); [reaction](./combat/reaction) / [speech](./combat/speech) are v3.2.5 removal notes)
+- **Named NPC** ([Registration](./named-npc), [Stats](./named-npc/npc-stats), [Schedule](./named-npc/npc-schedule), [Clothing](./named-npc/npc-clothes), [Sidebar](./named-npc/npc-sidebar), [Pregnancy](./named-npc/npc-pregnancy), [Transformation](./named-npc/npc-transformation), [Fluids](./named-npc/npc-fluids))
 - **Dynamic Events** ([Dynamic Events](./dynamic/index))
   - [State Events](./dynamic/state-events)
   - [Time Events](./dynamic/time-events)
@@ -105,6 +111,7 @@ The following convenience properties are also exposed:
   - [Bodywriting](./tool-collection/bodywriting)
 - [**GUI Control**](./gui-settings) — AngularJS settings panel and module toggles
 - [**Mod protection & credentials**](./mod-protection) — `CredentialVault` and companion tooling
+- [**Cloud Save**](./cloud-save) — Cloud save client with server and WebDAV backend support
 
 ## Feature highlights
 

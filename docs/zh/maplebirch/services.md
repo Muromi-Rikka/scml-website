@@ -1,6 +1,6 @@
 # 核心服务
 
-本文介绍 maplebirchFramework 的三个核心服务：EventEmitter 事件总线、Logger 日志服务和 LanguageManager 国际化服务。
+本文介绍 maplebirchFramework 的核心服务：EventEmitter 事件总线、Logger 日志服务、LanguageManager 国际化服务，以及 CloudSaveService 云存档服务。
 
 ## EventEmitter 事件总线
 
@@ -200,3 +200,88 @@ maplebirch.Language = "EN"; // 切换到英文
 - `language-text_index` — 文本反向索引（用于 `auto()` 查找）
 
 翻译文件在导入时会计算 SHA-256 哈希，如果文件未变更则跳过导入。
+
+## CloudSaveService 云存档服务
+
+`CloudSaveService`（通过 `maplebirch.cloudSave` 访问）提供云存档管理功能，支持自建服务器（Go+SQLite）和 WebDAV 后端（如 Cloudflare R2）两种存储模式。存档数据使用 AES-256-GCM 加密，密钥通过 PBKDF2 派生。
+
+### 后端模式
+
+| 模式       | 认证方式               | 说明                           |
+| ---------- | ---------------------- | ------------------------------ |
+| `server`   | 用户名/密码 + Bearer Token | 自建 Go+SQLite 服务端       |
+| `webdav`   | Basic Auth             | 通用 WebDAV（如 Cloudflare R2） |
+
+连接时自动探测：先向 `/health` 发起请求，若返回 JSON 则使用 `server` 模式，否则回退到 `webdav`。
+
+### 配置
+
+```js
+maplebirch.cloudSave.configure({
+  mode: 'server',       // 可选，连接时自动检测
+  endpoint: 'https://your-server.example.com',
+  username: 'user',
+  password: 'pass',
+  passphrase: 'pass'    // 加密口令，可选（默认与密码相同）
+});
+```
+
+### 账户管理（server 模式）
+
+| 方法                                | 签名                                                         | 说明                 |
+| ----------------------------------- | ------------------------------------------------------------ | -------------------- |
+| `register`                          | `register(username, password, passphrase?)`                  | 注册新账户           |
+| `login`                             | `login(username, password, passphrase?)`                     | 登录                 |
+| `deleteAccount`                     | `deleteAccount(password)`                                    | 删除账户             |
+
+### 存档槽操作
+
+| 方法          | 签名                                    | 说明                                      |
+| ------------- | --------------------------------------- | ----------------------------------------- |
+| `exportSlot`  | `exportSlot(slot)`                      | 从原版 IndexedDB 导出本地存档槽           |
+| `importSlot`  | `importSlot(record, targetSlot?)`       | 将云端记录写回原版 IndexedDB              |
+| `upload`      | `upload(slot)`                          | 加密并上传本地槽到云端                    |
+| `download`    | `download(slot, targetSlot?)`           | 从云端下载并解密到本地槽                  |
+| `listRemote`  | `listRemote()`                          | 列出云端所有存档槽                        |
+| `deleteRemote`| `deleteRemote(slot)`                    | 删除云端存档槽                            |
+
+### 存档码操作
+
+| 方法             | 签名                        | 说明                                   |
+| ---------------- | --------------------------- | -------------------------------------- |
+| `exportCode`     | `exportCode()`              | 导出当前 SugarCube 存档码              |
+| `exportSlotCode` | `exportSlotCode(slot)`      | 将本地槽转为可复制的存档码             |
+| `importCode`     | `importCode(code)`          | 从存档码导入存档                       |
+| `uploadCode`     | `uploadCode(code?)`         | 上传存档码到云端                       |
+| `downloadCode`   | `downloadCode()`            | 从云端下载存档码                       |
+
+### 面板集成
+
+| 方法           | 签名                                  | 说明                                     |
+| -------------- | ------------------------------------- | ---------------------------------------- |
+| `mountPanel`   | `mountPanel()`                        | 挂载云存档 UI 面板，恢复上次配置         |
+| `panelAction`  | `panelAction(action, slot?)`          | 执行面板操作（connectRemote、uploadSlot 等） |
+
+面板支持的操作（`PanelAction`）：
+
+| 操作                 | 说明                     |
+| -------------------- | ------------------------ |
+| `connectRemote`      | 连接远程服务             |
+| `registerServer`     | 在服务器注册             |
+| `deleteServerAccount`| 删除服务器账户           |
+| `uploadSlot`         | 上传存档槽               |
+| `downloadSlot`       | 下载存档槽               |
+| `refreshRemoteList`  | 刷新远程列表             |
+| `deleteRemoteSlot`   | 删除远程槽               |
+| `exportCurrentCode`  | 导出当前存档码           |
+| `exportSlotCode`     | 导出槽存档码             |
+| `uploadCode`         | 上传存档码               |
+| `downloadCode`       | 下载存档码               |
+| `importCode`         | 导入存档码               |
+
+### 加密机制
+
+- 算法：AES-256-GCM
+- 密钥派生：PBKDF2（150,000 次迭代，SHA-256）
+- 压缩：gzip（仅当压缩后体积更小时生效）
+- 每次加密使用随机 salt 和 IV

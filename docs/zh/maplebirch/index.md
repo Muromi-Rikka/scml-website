@@ -28,7 +28,7 @@ graph LR
 | BeautySelectorAddon | >=2.0.0   | BSA 图片管线（NPC 侧边栏）    |
 | ReplacePatcher      | >=1.0.0   | Passage 内容替换              |
 | TweeReplacer        | >=1.0.0   | Twee Passage 替换             |
-| GameVersion         | >=0.5.9.7 | 游戏版本检测                  |
+| GameVersion         | >=0.5.10.8 | 游戏版本检测                  |
 
 ## 核心能力
 
@@ -48,6 +48,10 @@ graph LR
 - **持久化存储** — IndexedDB 设置持久化
 - **凭证与保护** — `CredentialVault`（`maplebirch.credential`）与模组授权/解密流程配合（参见 [模组保护与凭证](./mod-protection)）
 - **日志系统** — 分级日志（DEBUG / INFO / WARN / ERROR）
+- **NPC 怀孕** — 自定义怀孕种族注册、NPC 怀孕配置、孩子出生系统
+- **NPC 转化** — 命名 NPC 的轻量外观与身份层
+- **NPC 体液** — 侧边栏体液图层渲染
+- **云存档** — 云存档客户端与多后端服务（Go+SQLite / Cloudflare R2）
 
 ## 全局访问路径
 
@@ -67,6 +71,7 @@ graph LR
 | `maplebirch.lang`       | LanguageManager  | 国际化翻译                             |
 | `maplebirch.idb`        | IndexedDBService | IndexedDB 存储                         |
 | `maplebirch.credential` | CredentialVault  | 模组凭证、授权校验与解密协作           |
+| `maplebirch.cloud`      | CloudSaveService | 云存档管理                             |
 | `maplebirch.logger`     | Logger           | 日志服务                               |
 | `maplebirch.tracer`     | EventEmitter     | 事件总线                               |
 
@@ -91,7 +96,7 @@ graph LR
 - [**SugarCube 宏**](./sugar-cube-macro) — 多语言宏扩展
 - [**音频管理**](./audio) — 背景音乐、音效与播放列表
 - **角色管理**（[侧边栏图层](./character/)、[转化管理](./character/transformation)）
-- **NPC 管理**（[NPC 注册](./named-npc/)、[NPC 状态](./named-npc/npc-stats)、[NPC 日程](./named-npc/npc-schedule)、[NPC 服装](./named-npc/npc-clothes)、[NPC 侧边栏](./named-npc/npc-sidebar)）
+- **NPC 管理**（[NPC 注册](./named-npc/)、[NPC 状态](./named-npc/npc-stats)、[NPC 日程](./named-npc/npc-schedule)、[NPC 服装](./named-npc/npc-clothes)、[NPC 侧边栏](./named-npc/npc-sidebar)、[NPC 怀孕](./named-npc/npc-pregnancy)、[NPC 转化](./named-npc/npc-transformation)、[NPC 体液](./named-npc/npc-fluids)）
 - **战斗管理**（[战斗按钮](./combat/actions)；[战斗反应](./combat/reaction)、[战斗对话](./combat/speech) 为 v3.2.5 移除说明）
 - **动态事件**（[动态事件](./dynamic/index)）
   - [状态事件](./dynamic/state-events)
@@ -108,6 +113,7 @@ graph LR
   - [纹身注册](./tool-collection/bodywriting)
 - [**GUI 控制**](./gui-settings) — AngularJS 设置面板与模块启禁
 - [**模组保护与凭证**](./mod-protection) — `CredentialVault` 与配套工具链
+- [**云存档**](./cloud-save) — 云存档客户端、服务器与 WebDAV 后端支持
 
 ## 功能要点
 

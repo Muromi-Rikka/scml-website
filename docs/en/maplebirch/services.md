@@ -1,6 +1,6 @@
 # Core Services
 
-This document introduces the three core services of maplebirchFramework: EventEmitter event bus, Logger logging service, and LanguageManager internationalization service.
+This document introduces the core services of maplebirchFramework: EventEmitter event bus, Logger logging service, LanguageManager internationalization service, and CloudSaveService cloud save service.
 
 ## EventEmitter Event Bus
 
@@ -200,3 +200,88 @@ Translation data is stored in IndexedDB:
 - `language-text_index` — Text reverse index (for `auto()` lookup)
 
 Translation files compute SHA-256 hash on import; import is skipped if file unchanged.
+
+## CloudSaveService Cloud Save
+
+`CloudSaveService` (accessible via `maplebirch.cloudSave`) provides cloud save management with two backend modes: self-hosted server (Go+SQLite) and WebDAV (e.g. Cloudflare R2). Save data is encrypted with AES-256-GCM, with keys derived via PBKDF2.
+
+### Backend Modes
+
+| Mode     | Auth Method                    | Description                           |
+| -------- | ------------------------------ | ------------------------------------- |
+| `server` | Username/password + Bearer Token | Self-hosted Go+SQLite server        |
+| `webdav` | Basic Auth                     | Generic WebDAV (e.g. Cloudflare R2)   |
+
+Auto-detection on connect: sends a request to `/health`; if JSON is returned, uses `server` mode, otherwise falls back to `webdav`.
+
+### Configuration
+
+```js
+maplebirch.cloudSave.configure({
+  mode: 'server',       // optional, auto-detected on connect
+  endpoint: 'https://your-server.example.com',
+  username: 'user',
+  password: 'pass',
+  passphrase: 'pass'    // encryption passphrase, optional (defaults to password)
+});
+```
+
+### Account Management (server mode)
+
+| Method         | Signature                                              | Description            |
+| -------------- | ------------------------------------------------------ | ---------------------- |
+| `register`     | `register(username, password, passphrase?)`            | Register a new account |
+| `login`        | `login(username, password, passphrase?)`               | Log in                 |
+| `deleteAccount`| `deleteAccount(password)`                              | Delete account         |
+
+### Save Slot Operations
+
+| Method         | Signature                                   | Description                                      |
+| -------------- | ------------------------------------------- | ------------------------------------------------ |
+| `exportSlot`   | `exportSlot(slot)`                          | Export local slot from vanilla IndexedDB         |
+| `importSlot`   | `importSlot(record, targetSlot?)`           | Write cloud record back to vanilla IndexedDB     |
+| `upload`       | `upload(slot)`                              | Encrypt and upload local slot to cloud           |
+| `download`     | `download(slot, targetSlot?)`               | Download and decrypt from cloud to local slot    |
+| `listRemote`   | `listRemote()`                              | List all remote save slots                       |
+| `deleteRemote` | `deleteRemote(slot)`                        | Delete a remote save slot                        |
+
+### Save Code Operations
+
+| Method           | Signature                   | Description                                |
+| ---------------- | --------------------------- | ------------------------------------------ |
+| `exportCode`     | `exportCode()`              | Export current SugarCube save code         |
+| `exportSlotCode` | `exportSlotCode(slot)`      | Convert local slot to a copyable save code |
+| `importCode`     | `importCode(code)`          | Import save from save code                 |
+| `uploadCode`     | `uploadCode(code?)`         | Upload save code to cloud                  |
+| `downloadCode`   | `downloadCode()`            | Download save code from cloud              |
+
+### Panel Integration
+
+| Method        | Signature                              | Description                                    |
+| ------------- | -------------------------------------- | ---------------------------------------------- |
+| `mountPanel`  | `mountPanel()`                         | Mount cloud save UI panel, restores last config|
+| `panelAction` | `panelAction(action, slot?)`           | Execute a panel action (connectRemote, etc.)   |
+
+Supported panel actions (`PanelAction`):
+
+| Action                  | Description                      |
+| ----------------------- | -------------------------------- |
+| `connectRemote`         | Connect to remote service        |
+| `registerServer`        | Register on server               |
+| `deleteServerAccount`   | Delete server account            |
+| `uploadSlot`            | Upload save slot                 |
+| `downloadSlot`          | Download save slot               |
+| `refreshRemoteList`     | Refresh remote list              |
+| `deleteRemoteSlot`      | Delete remote slot               |
+| `exportCurrentCode`     | Export current save code         |
+| `exportSlotCode`        | Export slot save code            |
+| `uploadCode`            | Upload save code                 |
+| `downloadCode`          | Download save code               |
+| `importCode`            | Import save code                 |
+
+### Encryption
+
+- Algorithm: AES-256-GCM
+- Key derivation: PBKDF2 (150,000 iterations, SHA-256)
+- Compression: gzip (only when compressed size is smaller)
+- Random salt and IV per encryption

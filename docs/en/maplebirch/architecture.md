@@ -4,7 +4,7 @@ This document introduces the internal architecture of maplebirchFramework, inclu
 
 ## MaplebirchCore
 
-`MaplebirchCore` is the central object of the framework, exposed as a singleton via `window.maplebirch`. It instantiates 6 built-in services during construction and registers 8 functional modules through `ModuleSystem`.
+`MaplebirchCore` is the central object of the framework, exposed as a singleton via `window.maplebirch`. It instantiates 8 built-in services during construction and registers 8 functional modules through `ModuleSystem`.
 
 ```mermaid
 flowchart TB
@@ -16,6 +16,8 @@ flowchart TB
       EventEmitter
       IndexedDBService
       LanguageManager
+      CredentialVault
+      CloudSaveService
       ModuleSystem
       GUIControl
     end
@@ -41,8 +43,10 @@ Services are created in the following order within the constructor:
 2. `EventEmitter` — Event bus
 3. `IndexedDBService` — Database service
 4. `LanguageManager` — Internationalization
-5. `ModuleSystem` — Module registration and lifecycle
-6. `GUIControl` — Settings UI
+5. `CredentialVault` — Mod credentials and auth
+6. `CloudSaveService` — Cloud save service
+7. `ModuleSystem` — Module registration and lifecycle
+8. `GUIControl` — Settings UI
 
 All services are frozen with `Object.seal()` to prevent runtime modification.
 
@@ -87,7 +91,7 @@ graph LR
 
 ### Early Mount
 
-`addon`, `dynamic`, `tool`, and `char` are marked as early mount modules. These modules are mounted to the `maplebirch` instance at registration time (if dependencies are satisfied), rather than waiting until the pre-initialization phase.
+`addon`, `dynamic`, `tool`, `char`, and `npc` are marked as early mount modules. These modules are mounted to the `maplebirch` instance at registration time (if dependencies are satisfied), rather than waiting until the pre-initialization phase.
 
 ### Topological Sort
 
