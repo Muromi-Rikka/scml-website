@@ -263,6 +263,34 @@ post: (options) => {
 }
 ```
 
+### 画布模型定向 (target)
+
+默认情况下，转化的渲染钩子（`pre`、`post`、`layers`）只作用于原版 `main` 模型。如果需要让同一转化也出现在其它画布模型上，传入 `target`。
+
+`target` 支持三种写法：
+
+| 写法 | 说明 |
+| :--- | :--- |
+| `'main'` | 指定单个模型 |
+| `['main', 'combat']` | 指定多个模型 |
+| `(name, modelOrOptions) => boolean` | 按模型名和模型/选项动态判断 |
+
+```javascript
+maplebirch.char.transformation.add('fairy', 'physical', {
+  target: ['main', 'combat'],
+  parts: [{ name: 'wings', tfRequired: 1 }],
+  pre(options) {
+    options.fairy_glow = true;
+  },
+  layers: {
+    fairy_wings: {
+      srcfn: () => 'img/transformations/fairy/wings.png',
+      showfn: () => V.maplebirch.transformation.fairy.level >= 1
+    }
+  }
+});
+```
+
 ---
 
 ## 转化数据存储

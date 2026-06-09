@@ -11,6 +11,33 @@
 `use` 方法是扩展和自定义角色渲染的核心接口，支持三种调用方式：
 
 ```javascript
+maplebirch.char.use(layerMap);
+maplebirch.char.use(layerMap, target);
+maplebirch.char.use('pre', handler);
+maplebirch.char.use('post', handler);
+maplebirch.char.use('pre', handler, target);
+maplebirch.char.use('post', handler, target);
+```
+
+`use()` 支持链式调用：
+
+```javascript
+maplebirch.char.use(layers).use('pre', preHandler);
+```
+
+### target 参数（画布模型定向）
+
+默认情况下，`use()` 只作用于原版 `main` 模型。需要修改其它画布模型时，传入 `target`。
+
+| 写法 | 说明 |
+| :--- | :--- |
+| `'main'` | 指定单个模型 |
+| `['main', 'clothes']` | 指定多个模型 |
+| `(name, modelOrOptions) => boolean` | 按模型名和模型/选项动态判断 |
+
+常见模型名来自原版 `Renderer.CanvasModels`，例如 `main`、`lighting` 等。
+
+```javascript
 // 1. 添加预处理/后处理函数
 maplebirch.char.use("pre", preprocessFunction); // 在渲染前执行
 maplebirch.char.use("post", postprocessFunction); // 在渲染后执行
@@ -38,6 +65,21 @@ maplebirch.char.use("pre", (options) => {
   }
 });
 ```
+
+指定模型：
+
+```javascript
+maplebirch.char.use(
+  "pre",
+  (options, model) => {
+    options.myMod ??= {};
+    options.myMod.modelName = model?.name;
+  },
+  ["main", "lighting"]
+);
+```
+
+`handler` 的第二个参数是当前 `CanvasModel` 实例。只需要读写渲染选项时可以忽略它。
 
 #### 后处理函数 (post)
 
@@ -83,6 +125,32 @@ maplebirch.char.use({
     animation: "idle",
   },
 });
+```
+
+#### 指定模型
+
+```javascript
+maplebirch.char.use(
+  {
+    my_mod_overlay: {
+      srcfn: () => "img/myMod/overlay.png",
+      showfn: () => true,
+    },
+  },
+  "main"
+);
+```
+
+匹配多个模型：
+
+```javascript
+maplebirch.char.use(layers, ["main", "lighting"]);
+```
+
+动态匹配：
+
+```javascript
+maplebirch.char.use(layers, (name) => name.startsWith("main"));
 ```
 
 ---
@@ -136,6 +204,30 @@ img/face/
 
 ---
 
+## Pet 模型
+
+框架支持为 PC 派生一个独立的 `pet` 画布模型，用于在侧边栏旁边显示缩小版角色。`pet` 模型只保留角色本身体相关图层（基础、面部、头发、肢体等），不包含服装和装备。
+
+Pet 模型通过 `maplebirch.char.pet` 命名空间管理，支持以下配置：
+
+- `mask`：遮罩参数
+- `rotation`：旋转角度
+- `animated`：是否播放动画
+- `floating`：是否浮动显示
+- `scale`：缩放比例（范围 0.5 ~ 1.0）
+
+详见 Pet API 文档。
+
+---
+
+## 转化系统
+
+转化系统允许模组制作者为角色添加自定义形态变化（如兽化、神圣化等）。通过 `maplebirch.char.transformation.add` 注册转化，可定义部件、特质、等级、消息和渲染图层。
+
+详见 [转化系统](./transformation)。
+
+---
+
 ## 内置辅助函数
 
 ### faceStyleSrcFn
@@ -177,3 +269,13 @@ maplebirch.char.mask(0);
 // 向右偏移 50px，旋转 45°，反向遮罩
 maplebirch.char.mask(50, 45, true);
 ```
+
+---
+
+## 补充说明
+
+- 图层名称建议带模组名前缀，避免与原版或其它模组冲突。
+- 不传 `target` 时默认只修改 `main`，避免意外影响其它画布模型。
+- 如果要修改多个模型，优先使用数组；只有需要规则匹配时再使用函数。
+- `showfn` 只负责判断是否显示，不建议在里面修改游戏变量。
+- 面部样式图片路径大小写应保持一致。

@@ -6,6 +6,18 @@ The Character module is responsible for PC (Player Character) rendering enhancem
 
 The framework intercepts the game's `Renderer.CanvasModels.main` model and deep-merges custom layers with the original layers.
 
+### Canvas Model Target
+
+By default, `use()` targets the vanilla `main` model only. Pass `target` when a mod needs to patch another canvas model.
+
+`target` accepts:
+
+| Form | Purpose |
+| :--- | :--- |
+| `'main'` | One model |
+| `['main', 'lighting']` | Multiple models |
+| `(name, modelOrOptions) => boolean` | Dynamic matching |
+
 ### Built-in Layers
 
 The framework provides the following layer overrides:
@@ -44,6 +56,32 @@ maplebirch.char.use({
 });
 ```
 
+Target a specific model:
+
+```js
+maplebirch.char.use(
+  {
+    my_mod_overlay: {
+      srcfn: () => "img/myMod/overlay.png",
+      showfn: () => true,
+    },
+  },
+  "main"
+);
+```
+
+Target multiple models:
+
+```js
+maplebirch.char.use(layers, ["main", "lighting"]);
+```
+
+Dynamic target:
+
+```js
+maplebirch.char.use(layers, (name) => name.startsWith("main"));
+```
+
 Layer configuration supports the following properties:
 
 | Property    | Type                    | Description                         |
@@ -71,6 +109,21 @@ maplebirch.char.use("post", (options) => {
   // Process after rendering
 });
 ```
+
+Target specific canvas models for handlers:
+
+```js
+maplebirch.char.use(
+  "pre",
+  (options, model) => {
+    options.myMod ??= {};
+    options.myMod.modelName = model?.name;
+  },
+  ["main", "lighting"]
+);
+```
+
+The second handler argument is the active `CanvasModel` instance. Ignore it when only the render options are needed.
 
 The framework's built-in preprocessing functions will:
 
@@ -133,6 +186,20 @@ The Transformation system allows mod authors to add custom form changes (e.g. be
 maplebirch.char.transformation.add("dragon", "physical", { ... });
 ```
 
+## Pet Model
+
+The framework supports deriving a standalone `pet` canvas model from the PC, used to display a miniature character alongside the sidebar. The `pet` model retains only body-related layers (base, face, hair, limbs, etc.) and excludes clothing and equipment.
+
+The Pet model is managed via the `maplebirch.char.pet` namespace and supports the following configuration:
+
+- `mask`: mask parameter
+- `rotation`: rotation angle
+- `animated`: whether to play animations
+- `floating`: whether to float
+- `scale`: scale factor (range 0.5 -- 1.0)
+
+See the Pet API documentation for details.
+
 ## Z-Index Reference
 
 Access Z-Index constants for character rendering via `maplebirch.char.ZIndices`:
@@ -141,3 +208,9 @@ Access Z-Index constants for character rendering via `maplebirch.char.ZIndices`:
 const z = maplebirch.char.ZIndices;
 // z.backhair, z.hairforwards, z.front_hair, ...
 ```
+
+## Notes
+
+- Omit `target` to patch only `main`.
+- Use an array for a known list of models; use a predicate only for rule-based matching.
+- Prefix custom layer names with your mod name to avoid collisions.

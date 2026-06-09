@@ -263,6 +263,34 @@ post: (options) => {
 }
 ```
 
+### Canvas Model Target
+
+By default, transformation rendering hooks (`pre`, `post`, `layers`) are applied to the vanilla `main` model only. If a mod needs the same transformation to appear on another canvas model, pass `target`.
+
+`target` accepts:
+
+| Form | Purpose |
+| :--- | :--- |
+| `'main'` | One model |
+| `['main', 'combat']` | Multiple models |
+| `(name, modelOrOptions) => boolean` | Dynamic matching |
+
+```javascript
+maplebirch.char.transformation.add('fairy', 'physical', {
+  target: ['main', 'combat'],
+  parts: [{ name: 'wings', tfRequired: 1 }],
+  pre(options) {
+    options.fairy_glow = true;
+  },
+  layers: {
+    fairy_wings: {
+      srcfn: () => 'img/transformations/fairy/wings.png',
+      showfn: () => V.maplebirch.transformation.fairy.level >= 1
+    }
+  }
+});
+```
+
 ---
 
 ## Transformation Data Storage
