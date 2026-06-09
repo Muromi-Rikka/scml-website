@@ -15,26 +15,26 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
-    "@rspress/core": "^2.0.11",
+    "@rspress/core": "^2.0.14",
     "beautiful-mermaid": "^1.1.3",
     "elkjs": "^0.11.1",
     "rspress-plugin-reading-time": "^1.0.0"
   },
   "devDependencies": {
-    "@rspress/plugin-llms": "^2.0.11",
-    "@rspress/plugin-sitemap": "^2.0.11",
+    "@rspress/plugin-llms": "^2.0.14",
+    "@rspress/plugin-sitemap": "^2.0.14",
     "@types/bun": "^1.3.14",
-    "@types/node": "^25.9.0",
-    "@types/react": "^19.2.14",
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "oxfmt": "^0.50.0",
-    "oxlint": "^1.65.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "oxfmt": "^0.54.0",
+    "oxlint": "^1.69.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "rspress-plugin-devkit": "^1.0.0",
     "rspress-plugin-file-tree": "^1.0.5",
-    "taze": "^19.12.0",
-    "wrangler": "^4.92.0"
+    "taze": "^19.14.1",
+    "wrangler": "^4.98.0"
   },
   "packageManager": "bun@1.3.14"
 }
