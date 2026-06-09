@@ -1,209 +1,173 @@
 # Combat Actions
 
-## Overview
+## Purpose
 
-The combat action system lets mod authors add custom combat actions to the combat UI: attacks, defence, special skills, and interactions. Each action can have its own display condition, effect, colour, and difficulty hint.
+`maplebirch.combat.CombatAction` adds modded action buttons to vanilla combat action lists, and can also attach the matching combat reaction text.
 
-_Register via **`maplebirch.combat.CombatAction.reg`**._
+The button itself is shown through the vanilla `generateCombatAction` flow. When the action is selected, the framework injects the configured `effect` into the matching action section of vanilla `effectsman`.
 
----
+See [Combat Reactions](./reaction) and [Combat Speech](./speech) for more on reactions and dialogue.
 
-## Constraints
-
-### actionType
-
-`actionType` must be one of these presets:
-
-| Type           | Description | Slot       |
-| -------------- | ----------- | ---------- |
-| `leftaction`   | Left hand   | Left hand  |
-| `rightaction`  | Right hand  | Right hand |
-| `feetaction`   | Feet        | Feet       |
-| `mouthaction`  | Mouth       | Mouth      |
-| `penisaction`  | Penis       | Penis      |
-| `vaginaaction` | Vagina      | Vagina     |
-| `anusaction`   | Anus        | Anus       |
-| `chestaction`  | Chest       | Chest      |
-| `thighaction`  | Thighs      | Thighs     |
-
-`actionType` can be a **single string** or an **array** (e.g. `['leftaction','rightaction']`); the same action is then shown in multiple slots.
-
-### combatType
-
-`combatType` must be one of:
-
-| Type       | Description                     |
-| ---------- | ------------------------------- |
-| `Default`  | Default combat                  |
-| `Self`     | Self combat (e.g. masturbation) |
-| `Struggle` | Struggle                        |
-| `Swarm`    | Swarm                           |
-| `Vore`     | Vore                            |
-| `Machine`  | Machine                         |
-| `Tentacle` | Tentacle                        |
-
----
-
-## Registering Actions
-
-### Basic Syntax
+## Entry Point
 
 ```javascript
-// Single action
-maplebirch.combat.CombatAction.reg({
-  id: "custom_attack",
-  actionType: "leftaction",
-  cond: (ctx) => V.player.health > 0 && V.player.hasWeapon,
-  display: (ctx) => (V.player.weaponType === "sword" ? "Strike" : "Attack"),
-  value: "customAttack",
-  color: "white",
-  difficulty: "Easy",
-  combatType: "Default",
-  order: 0,
-});
-
-// Same button in multiple slots: use array for actionType
-maplebirch.combat.CombatAction.reg({
-  id: "dual_strike",
-  actionType: ["leftaction", "rightaction"],
-  cond: (ctx) => V.player.health > 0,
-  display: "Dual Strike",
-  value: "dualStrike",
-  color: "red",
-  difficulty: "Attack with both hands",
-  combatType: "Default",
-  order: 0,
-});
-
-// Multiple actions
-maplebirch.combat.CombatAction.reg(
-  {
-    id: "defensive_stance",
-    actionType: "rightaction",
-    cond: (ctx) => V.player.stamina >= 20,
-    display: "Defensive Stance",
-    value: "defensiveStance",
-    color: "blue",
-    difficulty: "Medium",
-    combatType: "Default",
-  },
-  {
-    id: "healing_potion",
-    actionType: "mouthaction",
-    cond: (ctx) => V.player.inventory.healing_potion > 0,
-    display: (ctx) => `Healing Potion (${V.player.inventory.healing_potion} left)`,
-    value: "useHealingPotion",
-    color: "green",
-    difficulty: "Easy",
-    combatType: "Default",
-  },
-);
+maplebirch.combat.CombatAction.reg(config);
 ```
 
-### Config Shape
+You can register multiple actions at once:
 
 ```javascript
-{
-  id: string,                          // Unique id
-  actionType: string | string[],      // Preset(s); array = show in multiple slots
-  cond: (ctx) => boolean,             // When to show
-  display: string | (ctx) => string,   // Label
-  value: any,                         // Value passed when chosen
-  color?: string | (ctx) => string,    // Colour
-  difficulty?: string | (ctx) => string, // Difficulty hint
-  combatType?: string | (ctx) => string, // Must be a preset combatType
-  order?: number | (ctx) => number    // Sort order
-}
+maplebirch.combat.CombatAction.reg(configA, configB, configC);
 ```
 
-### CombatAction Helpers
-
-| Method                                         | Description                                         |
-| ---------------------------------------------- | --------------------------------------------------- |
-| `action(optionsTable, actionType, combatType)` | Inject custom actions into the combat options table |
-| `difficulty(action, combatType)`               | Return the difficulty hint macro for custom actions |
-| `color(action, encounterType)`                 | Return the colour for custom actions                |
-
----
-
-## Colours
-
-### Built-in
-
-- `white`, `red`, `green`, `blue`, `yellow`, `orange`, `purple`, `pink`
-- `gray`, `silver`, `gold`
-- `def` (defence), `meek`, `sub`, `brat`
-
-### Dynamic Colour
+## Minimal Example
 
 ```javascript
 maplebirch.combat.CombatAction.reg({
-  id: "desperate_escape",
-  actionType: "anusaction",
-  cond: (ctx) => V.player.health <= 30,
-  display: "Desperate Escape",
-  value: "desperateEscape",
-  color: (ctx) => {
-    if (V.player.health <= 10) return "red";
-    if (V.player.health <= 20) return "orange";
-    return "yellow";
-  },
-  difficulty: "Higher success at lower health",
-  combatType: "Default",
-  order: 0,
+  id: 'myMod.quickStrike',
+  actionType: 'leftaction',
+  cond: () => V.stamina >= 20,
+  display: () => 'Quick strike',
+  value: () => 'myModQuickStrike',
+  color: 'brat',
+  difficulty: () => '<span class="green">(Easy)</span>',
+  effect: '<<myModQuickStrikeEffect>>'
 });
 ```
 
----
+Then define a normal Twine widget for the text and effects:
 
-## Combat Buttons (Framework)
+```twine
+:: My Mod Combat Effects [widget]
+<<widget "myModQuickStrikeEffect">>
+  You strike with your left hand.
+  <<stamina -20>>
+<</widget>>
+```
 
-The framework registers `generateCombatAction` and `combatButtonAdjustments` macros:
+When the player selects this action, `$leftaction` becomes `myModQuickStrike`. During `effectsman`, the framework generates and runs a block similar to:
 
-- Supports list mode (`lists`, `limitedLists`) and radio mode (`radio`, `columnRadio`)
-- Colour highlighting for custom actions
-- Difficulty hint updates when selecting from dropdowns
+```twine
+<<if $leftaction is "myModQuickStrike">>
+  <<set $leftaction to 0>><<set $leftactiondefault to "myModQuickStrike">>
+  <<myModQuickStrikeEffect>>
+<</if>>
+```
 
----
+## Config
 
-## Example: Mage Actions
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| `id` | Yes | Unique action id; a mod prefix is recommended |
+| `actionType` | Yes | Target action list |
+| `cond(ctx)` | Yes | Button visibility |
+| `display(ctx)` | Yes | Text shown on the button/list option |
+| `value(ctx)` | Yes | Value written into `$leftaction`, `$rightaction`, etc. |
+| `effect` | No | Twine text or function executed in `effectsman` |
+| `color` | No | Button/list color, default `white` |
+| `difficulty` | No | Difficulty or hint text shown near the action |
+| `combatType` | No | Combat type filter, default `Default` |
+| `order` | No | Sort value, default `-4`; lower values appear earlier |
+
+Most fields except `id` and `actionType` may be functions. Functions receive a `ctx` object.
+
+## actionType
+
+| Value | Meaning |
+| :--- | :--- |
+| `leftaction` | Left hand |
+| `rightaction` | Right hand |
+| `feetaction` | Feet |
+| `mouthaction` | Mouth |
+| `penisaction` | Penis |
+| `vaginaaction` | Vagina |
+| `anusaction` | Anus |
+| `chestaction` | Chest |
+| `thighaction` | Thighs |
+
+The same action can be registered to multiple lists:
 
 ```javascript
-maplebirch.tool.onInit(() => {
-  maplebirch.combat.CombatAction.reg({
-    id: "fireball",
-    actionType: "rightaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 25,
-    display: (ctx) => `Fireball (25 mana)`,
-    value: "fireball",
-    color: (ctx) => (V.player.mana >= 25 ? "orange" : "gray"),
-    difficulty: "High fire damage to one enemy",
-    combatType: "Default",
-    order: 1,
-  });
-
-  maplebirch.combat.CombatAction.reg({
-    id: "frost_nova",
-    actionType: "leftaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 40,
-    display: (ctx) => `Frost Nova (40 mana)`,
-    value: "frostNova",
-    color: (ctx) => (V.player.mana >= 40 ? "lightblue" : "gray"),
-    difficulty: "Freeze all enemies for one turn",
-    combatType: "Default",
-    order: 2,
-  });
-
-  maplebirch.combat.CombatAction.reg({
-    id: "magic_shield",
-    actionType: "chestaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 20,
-    display: (ctx) => `Magic Shield (20 mana)`,
-    value: "magicShield",
-    color: (ctx) => (V.player.mana >= 20 ? "blue" : "gray"),
-    difficulty: "Absorb damage from the next three attacks",
-    combatType: "Default",
-    order: 0,
-  });
+maplebirch.combat.CombatAction.reg({
+  id: 'myMod.guard',
+  actionType: ['leftaction', 'rightaction'],
+  cond: () => V.stamina >= 10,
+  display: () => 'Guard',
+  value: () => 'myModGuard',
+  effect: '<<myModGuardEffect>>'
 });
 ```
+
+## effect
+
+`effect` is the Twine content that runs after the action is selected. The recommended form is a widget call:
+
+```javascript
+effect: '<<myModGuardEffect>>'
+```
+
+It can also be a function:
+
+```javascript
+effect: ctx => ctx.actionType === 'leftaction' ? '<<myModLeftGuardEffect>>' : '<<myModRightGuardEffect>>'
+```
+
+The framework wraps the `effect` in an action check, resets the corresponding action variable to `0`, and updates the default action:
+
+```twine
+<<set $leftaction to 0>>
+<<set $leftactiondefault to "action value">>
+```
+
+Put more complex default-action handling, targeting, skill cost, or branching text inside your own effect widget.
+
+## Injection Position
+
+Vanilla combat reaction text is hardcoded in `effectsman`, but actions are roughly grouped by body/action section. The framework injects mod effects into the matching section:
+
+- `leftaction` / `rightaction`: hand action section
+- `feetaction`: feet action section
+- `mouthaction`: mouth action section
+- `vaginaaction`: vagina action section
+- `anusaction`: anus action section
+- `thighaction`: thigh action section
+- `penisaction`: penis action section
+- `chestaction`: chest action section
+
+This keeps a left-hand action reaction near the hand-action text instead of appending it to the end of the whole combat output.
+
+## Full Example
+
+```javascript
+maplebirch.combat.CombatAction.reg({
+  id: 'myMod.moonlightHeal',
+  actionType: 'chestaction',
+  combatType: 'Default',
+  cond: () => {
+    const hour = Time.hour;
+    return V.myMod?.moonBlessing && (hour >= 18 || hour <= 6);
+  },
+  display: () => Time.hour >= 0 && Time.hour <= 3 ? 'Moonlight heal (strong)' : 'Moonlight heal',
+  value: () => 'myModMoonlightHeal',
+  color: 'green',
+  difficulty: () => '<span class="green">(Safe)</span>',
+  effect: '<<myModMoonlightHealEffect>>',
+  order: 2
+});
+```
+
+```twine
+:: My Mod Combat Effects [widget]
+<<widget "myModMoonlightHealEffect">>
+  <span class="green">Moonlight gathers across your chest.</span>
+  <<health 5>>
+  <<pain -2>>
+<</widget>>
+```
+
+## Notes
+
+- `value` should not collide with vanilla actions or other mods. A mod prefix is recommended.
+- Keep `cond` lightweight and avoid changing game state inside it.
+- `effect` may output text, call macros, update variables, spend stamina, or change NPC state.
+- Set `combatType` if the action is only valid in a specific combat type.

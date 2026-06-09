@@ -1,193 +1,173 @@
 # 战斗按钮
 
-## 基本介绍
+## 用途
 
-战斗按钮系统允许模组制作者在战斗界面中添加自定义的战斗动作，包括攻击、防御、特殊技能、互动选项等。每个按钮可以有自己的显示条件、效果、颜色和难度提示。
+`maplebirch.combat.CombatAction` 用于向原版战斗动作列表添加模组按钮，并为按钮补充对应的战斗反应文本。
 
-_可通过 **`maplebirch.combat.CombatAction.reg`** 注册战斗按钮。_
+按钮本身会通过原版的 `generateCombatAction` 显示；动作被选择后，框架会把 `effect` 注入到原版 `effectsman` 的对应动作区域中执行。
 
----
+如需了解战斗反应和战斗对话，请参阅 [战斗反应](./reaction) 和 [战斗对话](./speech)。
 
-## 重要限制
-
-### actionType 限制
-
-actionType 只能是以下预设值之一：
-
-| 类型           | 说明     | 对应部位 |
-| -------------- | -------- | -------- |
-| `leftaction`   | 左手动作 | 左手     |
-| `rightaction`  | 右手动作 | 右手     |
-| `feetaction`   | 脚部动作 | 脚       |
-| `mouthaction`  | 嘴部动作 | 嘴       |
-| `penisaction`  | 阴茎动作 | 阴茎     |
-| `vaginaaction` | 阴道动作 | 阴道     |
-| `anusaction`   | 肛门动作 | 肛门     |
-| `chestaction`  | 胸部动作 | 胸部     |
-| `thighaction`  | 大腿动作 | 大腿     |
-
-`actionType` 可为**单个字符串**或**字符串数组**（如 `['leftaction','rightaction']`），同一配置会在多个部位显示同一按钮。
-
-### combatType 限制
-
-combatType 只能是以下预设值之一：
-
-| 类型       | 说明             |
-| ---------- | ---------------- |
-| `Default`  | 默认战斗类型     |
-| `Self`     | 自我战斗(自慰等) |
-| `Struggle` | 挣扎战斗         |
-| `Swarm`    | 群战             |
-| `Vore`     | 吞噬战斗         |
-| `Machine`  | 机械战斗         |
-| `Tentacle` | 触手战斗         |
-
----
-
-## 注册战斗按钮
-
-### 基本语法
+## 入口
 
 ```javascript
-// 注册单个战斗按钮
-maplebirch.combat.CombatAction.reg({
-  id: "custom_attack",
-  actionType: "leftaction",
-  cond: (ctx) => V.player.health > 0 && V.player.hasWeapon,
-  display: (ctx) => (V.player.weaponType === "sword" ? "剑击" : "攻击"),
-  value: "customAttack",
-  color: "white",
-  difficulty: "简单",
-  combatType: "Default",
-  order: 0,
-});
-
-// 同一按钮在多个部位显示：actionType 使用数组
-maplebirch.combat.CombatAction.reg({
-  id: "dual_strike",
-  actionType: ["leftaction", "rightaction"],
-  cond: (ctx) => V.player.health > 0,
-  display: "双手斩击",
-  value: "dualStrike",
-  color: "red",
-  difficulty: "双手同时攻击",
-  combatType: "Default",
-  order: 0,
-});
-
-// 注册多个战斗按钮
-maplebirch.combat.CombatAction.reg(
-  {
-    id: "defensive_stance",
-    actionType: "rightaction",
-    cond: (ctx) => V.player.stamina >= 20,
-    display: "防御姿态",
-    value: "defensiveStance",
-    color: "blue",
-    difficulty: "中等",
-    combatType: "Default",
-  },
-  {
-    id: "healing_potion",
-    actionType: "mouthaction",
-    cond: (ctx) => V.player.inventory.healing_potion > 0,
-    display: (ctx) => `治疗药水 (剩余: ${V.player.inventory.healing_potion})`,
-    value: "useHealingPotion",
-    color: "green",
-    difficulty: "容易",
-    combatType: "Default",
-  },
-);
+maplebirch.combat.CombatAction.reg(config);
 ```
 
-### 按钮配置结构
+可以一次注册多个：
 
 ```javascript
-{
-  id: string,                          // 唯一标识符
-  actionType: string | string[],      // 预设的 actionType，或数组以在多个部位显示
-  cond: (ctx) => boolean,              // 显示条件函数
-  display: string | (ctx) => string,   // 显示文本
-  value: any,                          // 按钮对应的值
-  color?: string | (ctx) => string,    // 颜色
-  difficulty?: string | (ctx) => string, // 难度提示
-  combatType?: string | (ctx) => string, // 必须是预设的 combatType
-  order?: number | (ctx) => number     // 显示顺序
-}
+maplebirch.combat.CombatAction.reg(configA, configB, configC);
 ```
 
----
-
-## 颜色系统
-
-### 内置颜色
-
-- `white`, `red`, `green`, `blue`, `yellow`, `orange`, `purple`, `pink`
-- `gray`, `silver`, `gold`
-- `def`: 防御色, `meek`: 温和色, `sub`: 服从色, `brat`: 顽皮色
-
-### 动态颜色
+## 最小示例
 
 ```javascript
 maplebirch.combat.CombatAction.reg({
-  id: "desperate_escape",
-  actionType: "anusaction",
-  cond: (ctx) => V.player.health <= 30,
-  display: "绝望逃脱",
-  value: "desperateEscape",
-  color: (ctx) => {
-    if (V.player.health <= 10) return "red";
-    if (V.player.health <= 20) return "orange";
-    return "yellow";
-  },
-  difficulty: "生命值越低成功率越高",
-  combatType: "Default",
-  order: 0,
+  id: 'myMod.quickStrike',
+  actionType: 'leftaction',
+  cond: () => V.stamina >= 20,
+  display: () => '快速打击',
+  value: () => 'myModQuickStrike',
+  color: 'brat',
+  difficulty: () => '<span class="green">(Easy)</span>',
+  effect: '<<myModQuickStrikeEffect>>'
 });
 ```
 
----
+再写一个普通 Twine widget 处理实际文本和效果：
+
+```twine
+:: My Mod Combat Effects [widget]
+<<widget "myModQuickStrikeEffect">>
+  You strike with your left hand.
+  <<stamina -20>>
+<</widget>>
+```
+
+当玩家选中这个按钮后，`$leftaction` 会变成 `myModQuickStrike`。进入 `effectsman` 时，框架会在手部动作区生成并执行类似这样的片段：
+
+```twine
+<<if $leftaction is "myModQuickStrike">>
+  <<set $leftaction to 0>><<set $leftactiondefault to "myModQuickStrike">>
+  <<myModQuickStrikeEffect>>
+<</if>>
+```
+
+## 配置字段
+
+| 字段 | 必填 | 说明 |
+| :--- | :--- | :--- |
+| `id` | 是 | 动作唯一标识，建议带模组名前缀 |
+| `actionType` | 是 | 要添加到哪个动作列表 |
+| `cond(ctx)` | 是 | 返回 `true` 时显示按钮 |
+| `display(ctx)` | 是 | 按钮显示文本 |
+| `value(ctx)` | 是 | 选中后写入 `$leftaction` 等动作变量的值 |
+| `effect` | 否 | 选中该动作后在 `effectsman` 中执行的 Twine 文本或函数 |
+| `color` | 否 | 按钮/列表颜色，默认 `white` |
+| `difficulty` | 否 | 按钮旁边的难度或提示文本 |
+| `combatType` | 否 | 限定战斗类型，默认 `Default` |
+| `order` | 否 | 排序值，默认 `-4`，越小越靠前 |
+
+除 `id`、`actionType` 外，多数字段都支持函数。函数会收到 `ctx` 参数。
+
+## actionType
+
+| 值 | 说明 |
+| :--- | :--- |
+| `leftaction` | 左手动作 |
+| `rightaction` | 右手动作 |
+| `feetaction` | 脚部动作 |
+| `mouthaction` | 嘴部动作 |
+| `penisaction` | 阴茎动作 |
+| `vaginaaction` | 阴道动作 |
+| `anusaction` | 肛门动作 |
+| `chestaction` | 胸部动作 |
+| `thighaction` | 大腿动作 |
+
+同一动作可以注册到多个动作列表：
+
+```javascript
+maplebirch.combat.CombatAction.reg({
+  id: 'myMod.guard',
+  actionType: ['leftaction', 'rightaction'],
+  cond: () => V.stamina >= 10,
+  display: () => '格挡',
+  value: () => 'myModGuard',
+  effect: '<<myModGuardEffect>>'
+});
+```
+
+## effect
+
+`effect` 用于填写动作被选中后要执行的 Twine 内容。推荐写成一个 widget：
+
+```javascript
+effect: '<<myModGuardEffect>>'
+```
+
+也可以写成函数：
+
+```javascript
+effect: ctx => ctx.actionType === 'leftaction' ? '<<myModLeftGuardEffect>>' : '<<myModRightGuardEffect>>'
+```
+
+框架会自动为 `effect` 外层包上动作判断，并把对应动作变量设回 `0`，同时更新默认动作：
+
+```twine
+<<set $leftaction to 0>>
+<<set $leftactiondefault to "动作 value">>
+```
+
+如果需要更复杂的默认动作、目标处理、技能消耗或文本分支，请放进你自己的 effect widget 中。
+
+## 注入位置
+
+原版的战斗反应集中写在 `effectsman` 中，但不同部位的动作大致分区。框架会把模组动作注入到对应大区：
+
+- `leftaction` / `rightaction`：手部动作区
+- `feetaction`：脚部动作区
+- `mouthaction`：嘴部动作区
+- `vaginaaction`：阴道动作区
+- `anusaction`：肛门动作区
+- `thighaction`：大腿动作区
+- `penisaction`：阴茎动作区
+- `chestaction`：胸部动作区
+
+这样左手动作的反应不会被丢到整段战斗文本末尾。
 
 ## 完整示例
 
-### 魔法师战斗按钮
-
 ```javascript
-maplebirch.tool.onInit(() => {
-  maplebirch.combat.CombatAction.reg({
-    id: "fireball",
-    actionType: "rightaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 25,
-    display: (ctx) => `火球术 (消耗 25 魔力)`,
-    value: "fireball",
-    color: (ctx) => (V.player.mana >= 25 ? "orange" : "gray"),
-    difficulty: "对单个敌人造成高额火焰伤害",
-    combatType: "Default",
-    order: 1,
-  });
-
-  maplebirch.combat.CombatAction.reg({
-    id: "frost_nova",
-    actionType: "leftaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 40,
-    display: (ctx) => `冰霜新星 (消耗 40 魔力)`,
-    value: "frostNova",
-    color: (ctx) => (V.player.mana >= 40 ? "lightblue" : "gray"),
-    difficulty: "冻结所有敌人一回合",
-    combatType: "Default",
-    order: 2,
-  });
-
-  maplebirch.combat.CombatAction.reg({
-    id: "magic_shield",
-    actionType: "chestaction",
-    cond: (ctx) => V.player.class === "mage" && V.player.mana >= 20,
-    display: (ctx) => `魔法护盾 (消耗 20 魔力)`,
-    value: "magicShield",
-    color: (ctx) => (V.player.mana >= 20 ? "blue" : "gray"),
-    difficulty: "吸收下三次攻击的伤害",
-    combatType: "Default",
-    order: 0,
-  });
+maplebirch.combat.CombatAction.reg({
+  id: 'myMod.moonlightHeal',
+  actionType: 'chestaction',
+  combatType: 'Default',
+  cond: () => {
+    const hour = Time.hour;
+    return V.myMod?.moonBlessing && (hour >= 18 || hour <= 6);
+  },
+  display: () => Time.hour >= 0 && Time.hour <= 3 ? '月光治疗（强）' : '月光治疗',
+  value: () => 'myModMoonlightHeal',
+  color: 'green',
+  difficulty: () => '<span class="green">(Safe)</span>',
+  effect: '<<myModMoonlightHealEffect>>',
+  order: 2
 });
 ```
+
+```twine
+:: My Mod Combat Effects [widget]
+<<widget "myModMoonlightHealEffect">>
+  <span class="green">Moonlight gathers across your chest.</span>
+  <<health 5>>
+  <<pain -2>>
+<</widget>>
+```
+
+## 注意事项
+
+- `value` 不要和原版动作或其他模组动作重复，建议带模组名前缀。
+- `cond` 只建议做显示判断，不要在里面修改游戏状态。
+- `effect` 中可以写文本，也可以调用宏、修改变量、消耗体力、改变 NPC 状态。
+- 如果动作只适用于特殊战斗，请设置 `combatType`。
