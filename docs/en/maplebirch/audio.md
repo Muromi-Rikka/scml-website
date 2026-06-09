@@ -1,198 +1,136 @@
-# Audio Management (AudioManager)
+# Audio Manager
 
-## Overview
+**`maplebirch.audio`** imports, caches, and plays mod audio. Audio data is stored in IndexedDB, then decoded and played through the framework with playlist, volume, play mode, and progress support.
 
-`AudioManager` is the framework's audio management system, allowing mod authors to manage background music, sound effects, and other audio resources in-game. It supports multiple audio formats, playlists, playback modes, volume control, and integrates IndexedDB storage for fast loading and caching of audio.
+Supported formats: **`.mp3`**, **`.wav`**, **`.ogg`**, **`.m4a`**, **`.flac`**, **`.webm`**.
 
----
+## Importing From boot.json
 
-## Configuring Audio Import in boot.json
-
-In addition to importing audio via the JavaScript API, the framework supports batch importing audio files through the `addonPlugin` configuration in the `boot.json` file.
-
-### Configuration Structure
+Audio files must be listed in **`additionFile`** so ModLoader can provide them. Then declare the folders to import in the `maplebirchAddon` params.
 
 ```json
 {
   "modName": "maplebirch",
   "addonName": "maplebirchAddon",
-  "modVersion": "^3.1.0",
+  "modVersion": "^required framework version",
   "params": {
-    "audio": true
+    "audio": ["audio"]
   }
 }
 ```
 
-### Configuration Options
-
-- Paths to load for audio must be listed in `additionFile` in the `boot.json` file
-- `audio: true` — Import all audio files from the mod's default path (the `audio/` folder)
-- `audio: ["path1", "path2"]` — Import audio files from the specified paths
-
-### Supported File Formats
-
-- MP3 (`.mp3`)
-- WAV (`.wav`)
-- OGG (`.ogg`)
-- M4A (`.m4a`)
-- FLAC (`.flac`)
-- WebM (`.webm`)
-
-### Configuration Examples
+Multiple folders:
 
 ```json
 {
   "params": {
-    "audio": true
+    "audio": ["audio/bgm", "audio/se"]
   }
 }
 ```
 
-```json
-{
-  "params": {
-    "audio": ["bgm", "sfx/weapons", "sfx/ui"]
-  }
-}
-```
-
----
-
-## JavaScript API Usage
-
-### Audio Manager Instance
+## Playback
 
 ```javascript
-// Get the audio manager instance
-const audioManager = maplebirch.audio;
+await maplebirch.audio.playFromMod('myMod', 'battle_theme');
+await maplebirch.audio.playFromMod('myMod'); // Play the first track in the mod playlist
+
+maplebirch.audio.pause();
+maplebirch.audio.resume();
+maplebirch.audio.stop();
+maplebirch.audio.togglePlayPause();
+
+await maplebirch.audio.previous();
+await maplebirch.audio.next();
 ```
 
-### Playback Control
-
-#### Playing Audio
+Seeking:
 
 ```javascript
-// Play audio for a specific mod
-await audioManager.modPlay("myMod", "background_music");
-
-// Play a specific track
-await audioManager.modPlay("myMod", "battle_bgm");
+maplebirch.audio.seek(50); // Percent
+maplebirch.audio.seekTo(30); // Seconds
 ```
 
-#### Play / Pause Control
+## Importing And Removing
 
 ```javascript
-// Play
-await audioManager.play(track);
+await maplebirch.audio.import('myMod', 'audio');
+await maplebirch.audio.import('myMod', 'audio/bgm');
 
-// Pause
-audioManager.pause();
-
-// Resume
-audioManager.resume();
-
-// Stop
-audioManager.stop();
-
-// Toggle play/pause
-audioManager.togglePlayPause();
+await maplebirch.audio.addFile(file, 'customMod');
+await maplebirch.audio.delete('myMod', 'battle_theme');
+await maplebirch.audio.clearAudio('myMod');
 ```
 
-#### Playlist Control
+## Playlists
 
 ```javascript
-// Next track
-await audioManager.next();
+const playlist = await maplebirch.audio.getPlaylist('myMod');
+const cached = maplebirch.audio.playlist('myMod');
 
-// Previous track
-await audioManager.previous();
-
-// Seek to position (percentage)
-audioManager.seek(50); // Seek to 50%
-
-// Seek to time (seconds)
-audioManager.seekTo(30); // Seek to 30 seconds
-```
-
-### Volume Control
-
-```javascript
-// Get current volume
-const currentVolume = audioManager.Volume; // 0.0 - 1.0
-
-// Set volume
-audioManager.Volume = 0.8; // Set volume to 80%
-
-// Toggle mute
-audioManager.Mute = true; // Mute
-audioManager.Mute = false; // Unmute
-```
-
-### Playback Mode
-
-```javascript
-// Playback mode constants
-const PlayMode = {
-  SEQUENTIAL: "sequential", // Play in order
-  LOOP_ALL: "loop_all", // Loop playlist
-  LOOP_ONE: "loop_one", // Loop single track
-  SHUFFLE: "shuffle", // Shuffle
-};
-
-// Set playback mode
-audioManager.PlayMode = PlayMode.SHUFFLE;
-```
-
-### Audio Import Management
-
-```javascript
-// Import mod audio
-await audioManager.importAllAudio("myMod");
-await audioManager.importAllAudio("myMod", "custom/audio/path");
-
-// Import audio from file
-const fileInput = document.getElementById("audioFile");
-const file = fileInput.files[0];
-await audioManager.addAudioFromFile(file, "customMod");
-
-// Delete audio
-await audioManager.deleteAudio("track_key", "modName");
-
-// Clear all mod audio
-await audioManager.modAudioClearAll("modName");
-```
-
-### Playlist Management
-
-```javascript
-// Get mod playlist
-const playlist = await audioManager.modPlaylist("myMod");
-
-// Add track to playlist
-playlist.add(
-  new Track("new_track", "myMod", {
-    title: "New Track",
-    artist: "Composer",
-  }),
-);
-
-// Remove track
-playlist.remove(0); // Remove first track
-
-// Clear playlist
 playlist.clear();
-
-// Set playback mode
-playlist.mode(PlayMode.SHUFFLE);
+playlist.remove('battle_theme');
+playlist.setMode('shuffle');
 ```
 
-## Audio Manager Properties
+Play modes:
 
-| Property       | Type    | Description                      |
-| -------------- | ------- | -------------------------------- |
-| `Volume`       | number  | Current volume (0.0–1.0)         |
-| `Mute`         | boolean | Whether muted                    |
-| `PlayMode`     | string  | Current playback mode            |
-| `currentTime`  | number  | Current playback time (seconds)  |
-| `duration`     | number  | Current track duration (seconds) |
-| `currentTrack` | Track   | Currently playing track          |
+| Value        | Meaning                |
+| :----------- | :--------------------- |
+| `sequential` | Play in order          |
+| `loop_all`   | Loop the playlist      |
+| `loop_one`   | Loop the current track |
+| `shuffle`    | Shuffle playback       |
+
+```javascript
+maplebirch.audio.PlayMode = 'loop_all';
+maplebirch.audio.cyclePlayMode();
+```
+
+## State And Progress
+
+```javascript
+const track = maplebirch.audio.CurrentTrack;
+const state = maplebirch.audio.State;
+const progress = maplebirch.audio.progress;
+const snapshot = maplebirch.audio.snapshot;
+
+maplebirch.audio.formatTime(progress.currentTime);
+```
+
+Common properties:
+
+| Property         | Description                                          |
+| :--------------- | :--------------------------------------------------- |
+| `Volume`         | Volume from `0` to `1`                               |
+| `Mute`           | Whether playback is muted                            |
+| `PlayMode`       | Current play mode                                    |
+| `State`          | `idle`, `loading`, `playing`, `paused`, or `stopped` |
+| `CurrentTrack`   | Current track                                        |
+| `ActivePlaylist` | Current playlist                                     |
+| `currentTime`    | Current playback position in seconds                 |
+| `duration`       | Current track duration in seconds                    |
+| `progress`       | `{ currentTime, duration, percent }`                 |
+| `snapshot`       | Current player state snapshot                        |
+
+### Binding A Progress Bar
+
+```html
+<input id="music-progress" type="range" min="0" max="100" step="0.1" /> <span id="music-time"></span>
+```
+
+```javascript
+maplebirch.audio.bindProgress('music-progress', 'music-time');
+maplebirch.audio.unbindProgress('music-progress', 'music-time');
+```
+
+## Internal Structure
+
+The public module entry remains **`src/modules/Audio.ts`**, registered as **`maplebirch.audio`**. Supporting classes live in **`src/modules/AudioAddon/`**:
+
+| File                              | Purpose                                              |
+| :-------------------------------- | :--------------------------------------------------- |
+| `Audio.ts`                        | `AudioManager`, IndexedDB, cache, events, public API |
+| `AudioAddon/Track.ts`             | Track data object                                    |
+| `AudioAddon/Playlist.ts`          | Playlist, play modes, previous/next/shuffle logic    |
+| `AudioAddon/AudioBufferPlayer.ts` | WebAudio playback, pause, seek, and release          |
