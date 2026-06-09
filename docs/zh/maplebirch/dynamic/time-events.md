@@ -10,6 +10,18 @@ _请使用 **`maplebirch.dynamic.regTimeEvent`**（底层管理器为 **`maplebi
 
 :::
 
+:::info v4.0.2 时间系统改进
+
+v4.0.2 重写了时间推进与时间旅行的底层逻辑，主要变更：
+
+- **减少时间推进冲突**：`handleTimePass` 不再自行保存原始 `Time.pass`，改为由 `Time` 模块统一管理 `vanillaTime` 引用，避免与 `DoLTimeWrapperAddon` 等插件互相覆盖。
+- **新增 `MIN_DATE` 校验**：`handleTimePass` 和 `handleTimeTravel` 均会校验目标时间戳是否在 `[MIN_DATE, MAX_DATE]` 范围内；`timeTravel` 在目标无效时会抛出错误而非静默失败。
+- **暴露手动 Patch 方法**：`TimeManager` 新增 `patchDateTime(DateTimeClass)` 和 `patchTime(TimeObject)` 公开方法，允许高级用例自行控制 DateTime / Time 的 patch 时机。
+- **`TimeConstants` 公开**：`maplebirch.dynamic.Time.TimeConstants` 现在可在外部访问，包含 `MAX_DATE` 和 `MIN_DATE` 等常量。
+- **跨段落时间回退改善**：`handleTimeTravel` 不再调用原始 `timeTravel`，直接设置目标日期后再触发事件，减少与 DoL 内置时间旅行逻辑的冲突。
+
+:::
+
 ## 核心 API
 
 ### regTimeEvent(type, eventId, options)

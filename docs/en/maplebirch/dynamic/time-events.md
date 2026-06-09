@@ -10,6 +10,18 @@ The framework pins **`GameVersion` to `>=0.5.9.7`**. **v3.2.5** includes time-ev
 
 :::
 
+:::info v4.0.2 Time System Improvements
+
+v4.0.2 rewrote portions of the time-advance and time-travel logic:
+
+- **Reduced time-advance conflicts**: `handleTimePass` no longer saves the original `Time.pass` locally. The `Time` module now owns `vanillaTime` references, preventing conflicts with addons like `DoLTimeWrapperAddon`.
+- **`MIN_DATE` validation**: Both `handleTimePass` and `handleTimeTravel` now validate that the target timestamp falls within `[MIN_DATE, MAX_DATE]`. `timeTravel` throws an error on invalid targets instead of silently failing.
+- **Exposed manual patch methods**: `TimeManager` now exposes `patchDateTime(DateTimeClass)` and `patchTime(TimeObject)`, letting advanced use-cases control when DateTime/Time are patched.
+- **`TimeConstants` public**: `maplebirch.dynamic.Time.TimeConstants` is now accessible externally, including `MAX_DATE` and `MIN_DATE`.
+- **Cross-passage time rollback**: `handleTimeTravel` no longer calls the vanilla `timeTravel`; it sets the target date directly and then fires events, reducing conflicts with DoL’s built-in time-travel logic.
+
+:::
+
 ## Core API
 
 ### regTimeEvent(type, eventId, options)
