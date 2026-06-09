@@ -1,250 +1,429 @@
 # Utilities
 
-## Overview
+Utilities are shared APIs for mod scripts. They reduce repeated code around:
 
-The framework provides a complete set of utility functions, globally mounted on `window`, available anywhere in mod development.  
-These functions cover data handling, random generation, conditionals, string conversion, numeric clamping, image loading, and more, to reduce boilerplate and improve mod development efficiency.
+- Cloning, comparing, and merging objects or arrays.
+- Checking containment in arrays, objects, `Set`, `Map`, and strings.
+- Picking random array items, including weighted choices.
+- Converting string case.
+- Clamping numbers.
+- Checking image resources.
+- Handling text, JSON, bytes, Base64, and paths.
 
-All utilities can be called directly:
+The framework installs prototype/static helpers during initialization, and also exposes common helpers globally.
+
+## Preferred Style
+
+Use prototype methods when operating on an existing value:
 
 ```javascript
-const result = clone({ a: 1 });
-const value = number("12.5");
-const text = convert("Hello World", "snake");
+const copy = source.clone();
+const same = oldData.equal(newData);
+const ok = tags.contains('beast');
+const key = 'My Text'.convert('snake');
 ```
 
----
-
-## Function List
-
-| Function     | Category    | Description                                      |
-| :----------- | :---------- | :----------------------------------------------- |
-| `clone`      | Data        | Deep clone objects, supports multiple data types |
-| `equal`      | Data        | Deep compare two values                          |
-| `merge`      | Data        | Recursively merge objects, supports merge modes  |
-| `contains`   | Array       | Check if array contains element(s)               |
-| `random`     | Random      | Generate random numbers (int or float)           |
-| `either`     | Random      | Randomly pick from options, supports weights     |
-| `SelectCase` | Conditional | Chainable conditional selector API               |
-| `convert`    | String      | Convert string to specified format               |
-| `number`     | Numeric     | Clamp input to valid number; range, round, step  |
-| `loadImage`  | Resource    | Check and load image resources                   |
-
----
-
-## Data Utilities
-
-### Deep Clone (clone)
-
-Deep clones common objects, including:
-
-- Plain objects, arrays
-- `Date`, `RegExp`
-- `Map`, `Set`
-- `ArrayBuffer`, `DataView`, TypedArray
-
-**Params**: `source`, `opt.deep` (default `true`), `opt.proto` (default `true`)
-
-**Returns**: Cloned object
+Use static methods when creating a new object or array:
 
 ```javascript
-const original = { a: 1, b: { c: 2 } };
-const cloned = clone(original);
-// Shallow clone array
-const shallowArr = clone(arr, { deep: false });
+const options = Object.merge(defaultOptions, userOptions);
+const list = Array.append(baseList, modList);
 ```
 
----
-
-### Deep Compare (equal)
-
-Deep compares two values; uses lodash deep-equal logic internally.
-
-**Params**: `a`, `b`
-
-**Returns**: `true` or `false`
+Number helpers live on `Math`:
 
 ```javascript
-equal({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }); // true
-equal([1, 2], [1, 2]); // true
+const value = Math.clamp(input, 0, 100);
 ```
 
----
+## Prototype vs Static Methods
 
-### Recursive Merge (merge)
-
-Mutates the target object and recursively merges sources.
-
-**Modes**: `replace` (replace arrays, default), `concat` (concatenate arrays), `merge` (merge by index)
-
-**Params**: `target`, `...sources`, `mode`, `filterFn`
-
-**Returns**: Merged `target`
+Prototype merge methods mutate the receiver:
 
 ```javascript
-const target = { a: 1 };
-merge(target, { b: 2 }, { c: 3 }); // { a: 1, b: 2, c: 3 }
-merge(target, source, "concat"); // concat arrays when merging
+target.merge(source);
+target.append(source);
+target.cover(source);
 ```
 
----
-
-### Array Contains (contains)
-
-Supports single/multiple values, deep compare, case-insensitive, custom comparator.
-
-**Modes**: `all` (all exist), `any` (any exists), `none` (none exist)
-
-**Params**: `arr`, `value` (single value or array), `mode`, `opt.case`, `opt.compare`, `opt.deep`
-
-**Returns**: Boolean
+Static methods create a new object or array:
 
 ```javascript
-contains([1, 2, 3], 2); // true
-contains([1, 2, 3], [1, 2], "all"); // true
-contains([1, 2, 3], [1, 4], "any"); // true
-contains([1, 2, 3], [4, 5], "none"); // true
-contains([1, 2, 3], 4, "none"); // true
+const next = Object.merge(defaults, current);
+const list = Array.append(base, extra);
 ```
 
----
+Prefer `Object.merge()`, `Object.append()`, `Object.cover()`, `Array.merge()`, `Array.append()`, and `Array.cover()` when you do not want to mutate existing data.
 
-## Random Utilities
+## Common Methods
 
-### Random Number (random)
+| Method | Description |
+| :--- | :--- |
+| `value.clone(deep, proto)` | Clone a value |
+| `value.equal(other)` | Deep equality check |
+| `target.merge(...sources)` | Recursive merge; arrays merge by index |
+| `target.append(...sources)` | Recursive merge; arrays append |
+| `target.cover(...sources)` | Recursive merge; arrays replace |
+| `target.mergefn(fn, ...sources)` | Filtered `merge` |
+| `target.appendfn(fn, ...sources)` | Filtered `append` |
+| `target.coverfn(fn, ...sources)` | Filtered `cover` |
+| `Object.merge(...sources)` | Create a new object and merge |
+| `Object.append(...sources)` | Create a new object and append |
+| `Object.cover(...sources)` | Create a new object and cover |
+| `Array.merge(...sources)` | Create a new array and merge |
+| `Array.append(...sources)` | Create a new array and append |
+| `Array.cover(...sources)` | Create a new array and cover |
+| `value.contains(value, mode, opt)` | Containment check |
+| `array.random()` | Pick a random array item |
+| `array.either(weights, allowNull)` | Pick a random item, optionally weighted |
+| `string.convert(mode, opt)` | Convert string case |
+| `Math.random(max)` | Integer from `0` to `max` |
+| `Math.random(min, max, float)` | Random number between `min` and `max` |
+| `Math.clamp(value, min, max, fallback)` | Clamp a number |
+| `loadImage(src)` | Check or load an image resource |
 
-Generates random integers or floats.
-
-**Params**: `min`, `max`, `float`; or config object `{ min, max, float }`
-
-**Returns**: Random number
+## clone
 
 ```javascript
-random(); // 0-1 float
-random(10); // 0-10 integer
-random(5, 10); // 5-10 integer
-random({ min: 5, max: 10, float: true }); // config object
+const deepCopy = source.clone();
+const shallowCopy = source.clone(false);
+const plainCopy = source.clone(true, false);
 ```
 
----
+Arguments:
 
-### Random Pick (either)
+| Argument | Default | Description |
+| :--- | :--- | :--- |
+| `deep` | `true` | Deep clone |
+| `proto` | `true` | Preserve prototypes |
 
-Supports array/args form, weights, and `null` option.
+Supports plain objects, arrays, `Date`, `RegExp`, `Map`, `Set`, `ArrayBuffer`, `DataView`, and TypedArray values.
 
-**Params**: `itemsOrA` (array or first item), `...rest`, `weights`, `null` (allow null)
+`clone()` handles circular references. Non-enumerable properties are not copied.
 
-**Returns**: Randomly selected value
+## equal
 
 ```javascript
-either(["A", "B", "C"]); // random one
-either("A", "B", "C"); // args form
-either(["A", "B"], { weights: [0.8, 0.2] }); // 80% chance 'A'
-either(["A", "B"], { null: true }); // ~1/(length+1) chance null
+const same = dataA.equal(dataB);
 ```
 
----
+`equal()` performs deep comparison, which is useful for objects, arrays, and nested structures.
 
-## Conditional Utilities
+## merge / append / cover
 
-### SelectCase
-
-For multi-branch conditions, range matching, regex, and custom predicates.
-
-**Methods**: `.case()`, `.casePredicate()`, `.caseRange()`, `.caseIn()`, `.caseIncludes()`, `.caseRegex()`, `.caseCompare()`, `.else()`, `.match()`
-
-**Returns**: `match()` returns first matching result; otherwise `else()` default
+These methods recursively merge objects. Their main difference is array handling.
 
 ```javascript
-const selector = new SelectCase()
-  .case(1, "One")
-  .case(2, "Two")
-  .caseRange(3, 5, "Three to Five")
-  .caseIn(["admin", "root"], "Admin")
-  .caseIncludes(["error", "fail"], "Error state")
-  .caseRegex(/^\d+$/, "Digits only")
-  .casePredicate((x) => x > 10, ">10")
-  .else("Unknown");
-
-selector.match(3); // 'Three to Five'
-selector.match("admin"); // 'Admin'
-selector.match("test"); // 'Unknown'
+({ list: [1, 2] }).merge({ list: [3] });  // { list: [3, 2] }
+({ list: [1, 2] }).append({ list: [3] }); // { list: [1, 2, 3] }
+({ list: [1, 2] }).cover({ list: [3] });  // { list: [3] }
 ```
 
----
-
-## String Utilities
-
-### Convert (convert)
-
-Supports common naming style conversion; `title` mode can preserve acronyms.
-
-**Modes**: `lower`, `upper`, `capitalize`, `title`, `camel`, `pascal`, `snake`, `kebab`, `constant`
-
-**Params**: `str`, `mode` (default `'lower'`), `opt.delimiter`, `opt.acronym`
-
-**Returns**: Converted string
+Objects are merged recursively:
 
 ```javascript
-convert("Hello World", "snake"); // 'hello_world'
-convert("Hello World", "kebab"); // 'hello-world'
-convert("Hello World", "camel"); // 'helloWorld'
-convert("HTTP API", "title", { acronym: true }); // 'HTTP API'
-convert("HTTP API", "title", { acronym: false }); // 'Http Api'
+const result = Object.merge(
+  { npc: { enabled: true, count: 2 } },
+  { npc: { count: 4 } }
+);
+// { npc: { enabled: true, count: 4 } }
 ```
 
----
-
-## Numeric Utilities
-
-### Clamp / Round (number)
-
-Converts any input to a valid number with:
-
-- Fallback for invalid values
-- Min/max range
-- Rounding modes (floor, ceil, round, trunc)
-- Step snapping
-- Percent output
-- Loop/cyclic range
-
-**Params**: `value`, `fallback` (default `0`), `min`, `max`, `mode`, `opt.step`, `opt.percent`, `opt.loop`
-
-**Returns**: Clamped number; when `opt.percent` is true, returns 0–100 percent
+Multiple sources are applied in order; later sources win:
 
 ```javascript
-number("12.5"); // 12.5
-number(undefined, 10); // 10
-number(120, 0, 0, 100); // 100
-number(5.8, 0, 0, 10, "floor"); // 5
-number(17, 0, 0, 100, "round", { step: 5 }); // 15
-number(370, 0, 0, 360, "none", { loop: true }); // 10
-number(75, 0, 0, 200, "none", { percent: true }); // 37.5
+const options = Object.merge(defaults, modDefaults, playerOptions);
 ```
 
----
+## mergefn / appendfn / coverfn
 
-## Resource Utilities
-
-### Load Image (loadImage)
-
-Checks if image exists and returns loadable result.
-
-**Params**: `src` (image path)
-
-**Returns**: Sync: `string` or `boolean`; async: `Promise`
+Filtered variants call a filter before each field is merged.
 
 ```javascript
-// Sync check
-const exists = loadImage("character.png");
-if (exists) {
-  // use exists
+target.mergefn((key, value, depth, targetValue) => targetValue === undefined, source);
+```
+
+Filter arguments:
+
+| Argument | Description |
+| :--- | :--- |
+| `key` | Current field name |
+| `value` | Source value |
+| `depth` | Recursion depth, starting at `1` |
+| `targetValue` | Existing target value |
+
+Examples:
+
+```javascript
+target.mergefn((_key, _value, _depth, targetValue) => targetValue === undefined, source);
+target.mergefn((_key, _value, depth) => depth <= 2, source);
+target.mergefn((_key, value) => value != null, source);
+```
+
+## contains
+
+Arrays:
+
+```javascript
+[1, 2, 3].contains(2); // true
+[1, 2, 3].contains([1, 2], 'all'); // true
+[1, 2, 3].contains([2, 4], 'any'); // true
+[1, 2, 3].contains([4, 5], 'none'); // true
+```
+
+Objects, `Set`, and `Map` check their values:
+
+```javascript
+({ a: 1, b: 2 }).contains(2); // true
+new Set(['a', 'b']).contains('a'); // true
+new Map([['key', 'value']]).contains('value'); // true
+```
+
+Strings:
+
+```javascript
+'Hello World'.contains('World'); // true
+'Hello World'.contains('hello', { case: false }); // true
+```
+
+Modes:
+
+| Mode | Description |
+| :--- | :--- |
+| `all` | Every provided value must exist |
+| `any` | At least one value must exist |
+| `none` | No provided value may exist |
+
+Options:
+
+| Option | Default | Description |
+| :--- | :--- | :--- |
+| `case` | `true` | Case-sensitive string comparison |
+| `deep` | `false` | Use deep equality |
+| `compare` | None | Custom comparison function |
+
+```javascript
+const list = [{ id: 1 }, { id: 2 }];
+list.contains({ id: 1 }, 'any', { deep: true }); // true
+list.contains(2, 'any', { compare: (item, value) => item.id === value }); // true
+```
+
+## random / either
+
+`Math.random()` keeps native behavior when called without arguments:
+
+```javascript
+Math.random(); // Float from 0 to 1
+```
+
+With arguments, framework overloads apply:
+
+```javascript
+Math.random(10); // Integer from 0 to 10
+Math.random(5, 10); // Integer from 5 to 10
+Math.random(5, 10, true); // Float from 5 to 10
+```
+
+Array random:
+
+```javascript
+['a', 'b', 'c'].random();
+```
+
+Weighted choice:
+
+```javascript
+['rare', 'normal'].either([0.1, 0.9]);
+```
+
+Allow `null`:
+
+```javascript
+['a', 'b'].either(undefined, true);
+```
+
+For reproducible random sequences, use [randSystem](ToolCollection/randSystem.md).
+
+## convert
+
+```javascript
+'Hello World'.convert('snake'); // hello_world
+'Hello World'.convert('kebab'); // hello-world
+'hello world'.convert('pascal'); // HelloWorld
+'hello world'.convert('camel'); // helloWorld
+```
+
+Supported modes:
+
+| Mode | Example |
+| :--- | :--- |
+| `lower` | `hello world` |
+| `upper` | `HELLO WORLD` |
+| `capitalize` | `Hello world` |
+| `title` | `Hello World` |
+| `camel` | `helloWorld` |
+| `pascal` | `HelloWorld` |
+| `snake` | `hello_world` |
+| `kebab` | `hello-world` |
+| `constant` | `HELLO_WORLD` |
+
+Options:
+
+| Option | Default | Description |
+| :--- | :--- | :--- |
+| `delimiter` | Space | Preferred word delimiter |
+| `acronym` | `true` | Preserve all-caps acronyms in `title` mode |
+
+```javascript
+'NPC name'.convert('title'); // NPC Name
+'NPC name'.convert('title', { acronym: false }); // Npc Name
+```
+
+## Math.clamp
+
+```javascript
+Math.clamp('12.5', 0, 100); // 12.5
+Math.clamp(120, 0, 100); // 100
+Math.clamp(undefined, 0, 100, 10); // 10
+```
+
+`fallback` is used only when the input cannot become a finite number. If omitted, the lower bound is used.
+
+`min` and `max` may be passed in reverse order:
+
+```javascript
+Math.clamp(5, 10, 0); // 5
+```
+
+## loadImage
+
+```javascript
+const result = await loadImage('img/myMod/icon.png');
+
+if (result) {
+  console.log('Image is available');
 }
-
-// Async load
-loadImage("character.png").then((data) => {
-  if (typeof data === "string") {
-    document.getElementById("avatar").src = data;
-  }
-});
 ```
+
+`loadImage()` first asks ModLoader for the image. If that fails, it checks the path directly.
+
+Possible return values:
+
+| Return | Description |
+| :--- | :--- |
+| `string` | Available image path |
+| `true` | Image exists |
+| `false` | Image unavailable |
+| `Promise<string \| boolean>` | Async result |
+
+Use `await` in async flows.
+
+## Bytes and Base64
+
+These helpers are useful for cloud saves, import/export, compression, and network requests.
+
+```javascript
+const bytes = textToBytes('hello');
+const text = bytesToText(bytes);
+
+const jsonBytes = jsonToBytes({ ok: true });
+const data = bytesToJson(jsonBytes);
+
+const base64 = bytesToBase64(bytes);
+const bytesAgain = base64ToBytes(base64);
+const buffer = base64ToArrayBuffer(base64);
+```
+
+| Function | Description |
+| :--- | :--- |
+| `textToBytes(text)` | Convert string to `Uint8Array` |
+| `bytesToText(bytes)` | Convert `Uint8Array` / `ArrayBuffer` to string |
+| `jsonToBytes(value)` | Convert JSON data to bytes |
+| `bytesToJson(bytes)` | Convert bytes to JSON data |
+| `toArrayBuffer(bytes)` | Slice an exact `ArrayBuffer` from `Uint8Array` |
+| `bytesToBase64(bytes)` | Convert bytes to Base64 |
+| `base64ToBytes(base64)` | Convert Base64 to bytes |
+| `base64ToArrayBuffer(base64)` | Convert Base64 to `ArrayBuffer` |
+| `normalizeBase64(base64)` | Normalize URL-safe Base64 and padding |
+
+## Path and Text Helpers
+
+```javascript
+trimSlashes('/a/b/'); // a/b
+joinPath('/cloud/', '/slot/', '1'); // cloud/slot/1
+joinEncodedPath('user name', 'slot 1'); // user%20name/slot%201
+escapeHtmlText('<b>text</b>'); // &lt;b&gt;text&lt;/b&gt;
+```
+
+| Function | Description |
+| :--- | :--- |
+| `basicAuth(username, password)` | Generate the Base64 credential part for Basic Auth |
+| `trimSlashes(value)` | Remove leading and trailing path slashes |
+| `joinPath(...parts)` | Join plain path parts |
+| `joinEncodedPath(...parts)` | Join and encode path parts |
+| `escapeHtmlText(value)` | Escape HTML text |
+
+## widgets
+
+`widgets()` cleans a `.twee` import by removing the outer passage declaration.
+
+```javascript
+import Options from '@/twee/Options.twee';
+
+const content = widgets(Options);
+```
+
+Passing multiple contents returns an array:
+
+```javascript
+const list = widgets(Options, Cheats);
+```
+
+## SelectCase
+
+`SelectCase` is useful for writing chained condition/result tables.
+
+```javascript
+const result = new SelectCase()
+  .case('wolf', 'Wolf')
+  .caseIn(['cat', 'dog'], 'Animal')
+  .caseRange(0, 10, 'Low')
+  .caseIncludes('NPC', 'Character')
+  .caseRegex(/^mod:/, 'Mod')
+  .else('Unknown')
+  .match(value);
+```
+
+Common methods:
+
+| Method | Description |
+| :--- | :--- |
+| `case(value, result)` | Exact match |
+| `case(fn, result)` | Predicate function |
+| `caseRange(min, max, result)` | Numeric range |
+| `caseIn(values, result)` | Value exists in an array |
+| `caseIncludes(text, result)` | String contains text |
+| `caseRegex(regex, result)` | Regex match |
+| `caseCompare(op, value, result)` | Numeric comparison |
+| `else(result)` | Default result |
+| `match(value, meta)` | Execute matching |
+
+## Global Functions
+
+Common helpers are also available globally:
+
+```javascript
+clone(source);
+equal(a, b);
+merge(target, source);
+append(target, source);
+cover(target, source);
+contains(list, value);
+random(1, 10);
+either(list);
+convert('Hello World', 'snake');
+clamp(value, 0, 100);
+loadImage(src);
+```
+
+New code should prefer prototype/static style because it makes the operated value clearer.
