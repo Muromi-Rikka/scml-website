@@ -17,6 +17,7 @@
   { "type": "dir", "name": "tool-collection", "label": "Tool Collection" },
   "gui-settings",
   "mod-protection",
+  "cloud-save",
   "services",
   "build-system"
 ]
