@@ -17,7 +17,7 @@ When starting a new game (`Start2` Passage), `V.maplebirch` is initialized as:
   },
   npc: {},
   transformation: {},
-  version: "3.2.5"
+  version: "4.1.7"
 }
 ```
 

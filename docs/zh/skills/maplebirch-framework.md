@@ -46,13 +46,13 @@ MyMaplebirchMod/
   "additionFile": [],
   "dependenceInfo": [
     { "modName": "GameVersion", "version": ">=0.5.9.7" },
-    { "modName": "maplebirch", "version": ">=3.2.5" }
+    { "modName": "maplebirch", "version": ">=4.1.0" }
   ],
   "addonPlugin": [
     {
       "modName": "maplebirch",
       "addonName": "maplebirchAddon",
-      "modVersion": "^3.2.0",
+      "modVersion": "^4.1.0",
       "params": {
         "script": ["mymod.js"],
         "language": true
@@ -217,7 +217,7 @@ boot.json 配置：`"audio": true`（导入 `audio/` 目录）或 `"audio": ["bg
   player: { clothing: {} },  // V.worn 的只读代理
   npc: {},
   transformation: {},
-  version: "3.2.5"
+  version: "4.1.7"
 }
 ```
 

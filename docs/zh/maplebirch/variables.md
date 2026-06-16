@@ -17,7 +17,7 @@ Variables 模块管理框架在 SugarCube2 存档系统中的数据存储，包�
   },
   npc: {},
   transformation: {},
-  version: "3.2.5"
+  version: "4.1.7"
 }
 ```
 

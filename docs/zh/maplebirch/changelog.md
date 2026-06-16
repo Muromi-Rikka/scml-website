@@ -1,6 +1,57 @@
 # 版本历史
 
-本站文档以 **[maplebirch-release-v4.0.2](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.0.2)** 为当前推荐最低框架版本。完整历史见上游 [UPDATE.md](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/blob/main/UPDATE.md)。
+本站文档以 **[maplebirch-release-v4.1.7](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.7)** 为当前推荐最低框架版本。完整历史见上游 [UPDATE.md](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/blob/main/UPDATE.md)。
+
+## v4.1.7
+
+发布标签：[maplebirch-release-v4.1.7](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.7)
+推荐资产：`maplebirch-0.5.10.8-v4.1.7.modpack`
+
+### 主要变更
+
+**faceStyle**
+- 修复 `faceStyle` 中 `basehead.png` 的图层兼容，0.5.8.10 遵守 `basehead.png`，0.5.9.8 遵守 `base-head.png`
+
+## v4.1.6
+
+发布标签：[maplebirch-release-v4.1.6](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.6)
+推荐资产：`maplebirch-0.5.10.8-v4.1.6.modpack`
+
+### 主要变更
+
+**类型包**
+- 优化 `@scml-maplebirch/types` 类型包，补充并修正框架公开接口、SugarCube/全局对象与部分模块声明
+
+**桌宠**
+- 修复桌宠显示与渲染问题
+
+**时间旅行作弊**
+- 修复跳转后的天气刷新问题，跳转后会重新结算当前天气并触发天气事件刷新，避免日蚀等特殊天空状态不生效
+
+**图片兼容**
+- 修复原版 `0.5.10.x` 版本中部分图片路径变化导致的显示异常
+
+**faceStyle**
+- 支持通过 `img/face/<facestyle>/base-head.png` 替换 PC 头部底图，找不到时回退到原版 `img/body/base-head.png`
+
+## v4.1.0
+
+发布标签：[maplebirch-release-v4.1.0](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.0)
+推荐资产：`maplebirch-0.5.10.8-v4.1.0.modpack`
+
+### 主要变更
+
+**DOLP 转化兼容**
+- 修复 DOLP 转化兼容相关问题，减少 NPC/PC 转化状态读取时可能出现的异常
+- 优化 NPC 转化与相关状态读取逻辑，修复部分转化数据未初始化或字段缺失时可能导致的强制报错
+
+**存档系统**
+- 优化存档读取与初始化流程，减少读档后旧变量残留、重复初始化和页面渲染异常
+- 移除旧的 `:onLoadSave` 事件，统一使用 `:onSave` 与 `:onLoad` 处理存档相关逻辑
+- 优化开局界面读档后的刷新处理，降低旧存档残留数据造成异常的概率
+
+**时间旅行作弊**
+- 优化响应式 UI 布局，改善年月日时分输入框与确认按钮在不同宽度下的排列效果
 
 ## v4.0.2
 

@@ -124,7 +124,7 @@ The following convenience properties are also exposed:
 
 ## Next Steps
 
-- [Changelog](./changelog) — v3.2.5 and earlier release summaries
+- [Changelog](./changelog) — v4.1.7 and earlier release summaries
 - [Getting Started](./getting-started) — How to add framework dependency to your Mod and use it
 - [Core Architecture](./architecture) — Deep dive into MaplebirchCore and module system
 - [AddonPlugin System](./addon-plugin) — Lifecycle hooks and configuration loading in detail

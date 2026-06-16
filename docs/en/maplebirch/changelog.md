@@ -1,6 +1,57 @@
 # Changelog
 
-This site documents **[maplebirch-release-v4.0.2](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.0.2)** as the current recommended minimum framework version. Full history lives in upstream [UPDATE.md](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/blob/main/UPDATE.md).
+This site documents **[maplebirch-release-v4.1.7](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.7)** as the current recommended minimum framework version. Full history lives in upstream [UPDATE.md](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/blob/main/UPDATE.md).
+
+## v4.1.7
+
+Release tag: [maplebirch-release-v4.1.7](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.7)
+Recommended asset: `maplebirch-0.5.10.8-v4.1.7.modpack`
+
+### Highlights
+
+**faceStyle**
+- Fixed `faceStyle` layer compatibility for `basehead.png`: 0.5.8.10 follows `basehead.png`, 0.5.9.8 follows `base-head.png`
+
+## v4.1.6
+
+Release tag: [maplebirch-release-v4.1.6](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.6)
+Recommended asset: `maplebirch-0.5.10.8-v4.1.6.modpack`
+
+### Highlights
+
+**Types Package**
+- Optimized `@scml-maplebirch/types` package, supplemented and corrected framework public interfaces, SugarCube/global objects, and module declarations
+
+**Desktop Pet**
+- Fixed desktop pet display and rendering issues
+
+**Time Travel Cheats**
+- Fixed weather refresh after time jump — weather is now recalculated and weather events re-triggered, preventing issues like eclipses not activating
+
+**Image Compatibility**
+- Fixed display anomalies caused by image path changes in vanilla 0.5.10.x
+
+**faceStyle**
+- Added support for `img/face/<facestyle>/base-head.png` to replace PC head base image; falls back to vanilla `img/body/base-head.png` when not found
+
+## v4.1.0
+
+Release tag: [maplebirch-release-v4.1.0](https://github.com/MaplebirchLeaf/SCML-DOL-maplebirchFramework/releases/tag/maplebirch-release-v4.1.0)
+Recommended asset: `maplebirch-0.5.10.8-v4.1.0.modpack`
+
+### Highlights
+
+**DOLP Transformation Compatibility**
+- Fixed DOLP transformation compatibility issues, reducing anomalies when reading NPC/PC transformation state
+- Optimized NPC transformation and state reading logic, fixing forced errors when transformation data is uninitialized or fields are missing
+
+**Save System**
+- Optimized save reading and initialization flow, reducing old variable residuals, duplicate initialization, and page rendering anomalies after loading
+- Removed legacy `:onLoadSave` event; unified to `:onSave` and `:onLoad` for save-related logic
+- Improved title-screen save-load refresh handling, lowering anomaly probability from stale save data
+
+**Time Travel Cheats**
+- Improved responsive UI layout for year/month/day/hour/minute inputs and confirm button at different widths
 
 ## v4.0.2
 
