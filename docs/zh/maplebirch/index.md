@@ -126,7 +126,7 @@ graph LR
 
 ## 下一步
 
-- [版本历史](./changelog) — v3.2.5 及更早版本变更摘要
+- [版本历史](./changelog) — v4.1.7 及更早版本变更摘要
 - [快速开始](./getting-started) — 如何让你的 Mod 依赖并使用框架
 - [核心架构](./architecture) — 深入了解 MaplebirchCore 与模块系统
 - [AddonPlugin 系统](./addon-plugin) — 生命周期钩子与配置加载详解
